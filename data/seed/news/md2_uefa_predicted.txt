@@ -1,0 +1,39 @@
+# UEFA.com "Champions League predicted line-ups: Matchday 2 team news, injuries, suspensions"
+# https://www.uefa.com/uefachampionsleague/news/02aa-21cf3c78cf12-1c26cfd9b696-1000--champions-league-predicted-line-ups-matchday-2-team-news-/
+# read 2026-10-13 18:20 IST. Format: TEAM | XI (GK first) | out | doubtful | suspended
+RCL | Risser; Ganiou, Baidoo, Antonio; Aguilar, Bulatović, Titraoui, Udol; Thauvin, Ivanović; Édouard | Gradit, Sima, Todibo | | 
+SCP | Rui Silva; Fresneda, Eduardo Quaresma, Gonçalo Inácio, Maxi Araújo; Sergi Altimira, Doumbia, Andersen; Catamo, Luis Suárez, Luis Guilherme | Debast, Zalazar | Ba | 
+SAB | Pokatilov; Zedadka, McCarthy, Dashdamirov, Puchacz; Lepinjica, Rakhmonaliev; Parris, Simić, Nwachukwu; Mickels | Aliyev | Solvet | 
+SLA | Markovič; Holeš, Vlček, Zima; Isife, Nowak, Sadílek, Suleiman; Šturm, Ayaosi; Chorý | Chaloupek, Kačor, Ouanda | Jurásek, Kubiak, Schranz | Konečný
+ARS | Raya; Timber, Konsa, Gabriel, Calafiori; Ødegaard, Rice, Bruno Guimarães; Saka, Havertz, Eze | Hincapié, Zubimendi, Tzolis, Saliba | | 
+LIL | Berke Özer; Ngoy, Nianzou, Alexsandro, Verdonk; André, Bentaleb; Bakwa, Haraldsson, Perrin; Ueda | Tiago Santos | Başar Önal, Perraud | Ethan Mbappé
+ATM | Oblak; Llorente, Marc Pubill, Hancko, Grimaldo; Giuliano Simeone, Barrios, Koke, Lookman; Jonathan David, Álex Baena | | | 
+MUN | Lammens; Yoro, Maguire, Lisandro Martínez, Dalot; Baleba, Tielemans; Mbeumo, Bruno Fernandes, Rashford; Matheus Cunha | Dorgu, Heaton, Mainoo, Mazraoui, Shaw, Ugarte | De Ligt, Šeško | 
+INT | Josep Martínez; Bisseck, Akanji, Bastoni; Diouf, Barella, Hakan Çalhanoğlu, Zieliński, Dimarco; Lautaro Martínez, Thuram | Jones, Stones | | 
+CLB | Sommer; Sabbe, Mechele, Spileers, Seys; Potts, Vanaken; Carlos Forbs, Vetlesen, Virgili; Tresoldi | Ordoñez | Carlos Forbs | 
+GAL | Uğurcan Çakır; Sallai, Sánchez, Abdülkerim Bardakçı, Jakobs; Torreira, Lemina; Barış Alper Yılmaz, Batrakov, Yunus Akgün; Osimhen | Singo | | 
+BAR | Joan García; Koundé, Cubarsí, Gerard Martín, João Cancelo; Rodri, Pedri; Lamine Yamal, Dani Olmo, Gordon; Gabriel Jesus | Raphinha, De Jong, Christensen | | 
+RBL | Vandevoordt; Baku, Orbán, Lukeba, Raum; El Aynaoui, Banzuzi; Gruda, Nkunku, Nusa; Cardoso | Baumgartner, Guiu, Ouédraogo | | 
+PSV | Kovář; Dest, Geertruida, Obispo, Mauro Júnior; Sano, Fernandez; Til; Perišić, Mijnans, Van Bommel | Lammers, Ouaissa, Pepi, Sildillia, Wanner | | 
+VIK | Østbø; Heggheim, Falchener, Stensness, Haugen; Tripić, Askildsen, Bell, Bjørdal; Botheim, Christiansen | Baertelsen, Berisha, Bjørshol, D'Agostino, Roseth | | 
+BAY | Urbig; Laimer, Upamecano, Tah, Davies; Kimmich, Pavlović; Olise, Saibari, Luis Díaz; Kane | Musiala | Neuer | 
+VIL | Gulácsi; Freeman, Pau Navarro, Renato Veiga, Carlos Romero; Santi Comesaña, Saliba, Gueye, Alberto Moleiro; Gerard Moreno, Mikautadze | Buchanan, Pépé | | 
+NAP | Milinković-Savić; Di Lorenzo, Rrahmani, Rafa Marín, Spinazzola; Gilmour, Lobotka, De Bruyne; Neres, Højlund, Politano | Alisson Santos, Anguissa, Olivera, Vergara | | 
+FEY | Ernst; Read, St. Juste, Mármol, Javi López; Zechiël, Vanhoutte, Targhalline; Hadj Moussa, Ferri, Valente | Gonçalo Borges, Bos, Moder, Nelson, Nieuwkoop, Smal, Van Persie | Watanabe | 
+COM | Butez; Yan Couto, Ramón, Chalobah, Valle; Milla, Da Cunha; Diao, Nico Paz, Baturina; Douvikas | | Kean | 
+LAS | Jungwirth; Mbuyamba, Tornich, Andrade; Jørgensen, Daněk, Bogarde, Horvath, Dibango; Kalajdzic, Lang | Usor, Bello | | 
+LIV | Alisson; Araújo, Jacquet, Van Dijk, Kerkez; Gravenberch, Mac Allister; Barcola, Wirtz, Ngumoha; Koumas | Bradley, Ekitiké, Leoni | Isak, Gakpo, Szoboszlai | 
+ROM | Gollini; Mancini, Balerdi, N'Dicka; Molina, De Roon, Koné, Wesley França; Soulé; Dybala, Malen | Cristante, Svilar | Koulierakis | 
+RMA | Courtois; Alexander-Arnold, Konaté, Huijsen, Cucurella; Valverde, Tchouaméni; Arda Güler, Bellingham, Vinícius Júnior; Mbappé | Raúl Asencio, Éder Militão, Rodrygo | | 
+AVL | Suzuki; Cash, Lindelöf, Pau Torres, Wan-Bissaka; Kamara, João Gomes; McGinn, Manzambi, Buendía; Jackson | Maatsen | Goretzka, Hemmings, Ruggeri | 
+FEN | Ederson; Nélson Semedo, Škriniar, Aké, Brown; Guendouzi, Kanté; Greenwood, Asensio, Kerem Aktürkoğlu; Muriqi | Mert Müldür | | 
+SHA | Riznyk; Vinícius Tobias, Bondar, Matviyenko, Pedro Henrique; Ocheretko; Alisson Santana, Pedrinho, Marlon Gomes, Mendoza; Kauã Elias | Eguinaldo, Azarov | Marlon Santos | 
+AEK | Brignoli; Rota, Moukoudi, Filipe Relvas, Pilios; Majer, Marin, Vitális, Koita; Jović, Zini | Strakosha | Varga | 
+BOD | Haikin; Sjøvold, Aleesami, Gundersen, Bjørkan; Auklend, Berg, Brunstad Fet; Blomberg, Helmersen, Hauge | Evjen, Riisnæs, Mikkelsen | | Bjørtuft
+BVB | Kobel; Gadou, Anton, Schlotterbeck; Sabitzer, Veerman, Nmecha, Svensson; Jobe Bellingham, Beier; Guirassy | | Ryerson, Chukwuemeka | 
+MCI | Donnarumma; Matheus Nunes, Guéhi, Rúben Dias, Gvardiol; Enzo Fernández, Anderson; Semenyo, Foden, Cherki; Haaland | | | 
+PSG | Safonov; Hakimi, Marquinhos, Pacho, Nuno Mendes; João Neves, Vitinha, Fabián Ruiz; Doué, Dembélé, Kvaratskhelia | Mayulu | | 
+BET | Álvaro Vallés; Bellerín, Bartra, Natan, Fran García; Bernal, Dani Ceballos; Rodrigo Riquelme, Isco, Abde Ezzalzouli; Parrott | Junior Firpo | Aitor Ruibal | 
+POR | Diogo Costa; Alberto Costa, Nehuén Pérez, Kiwior, Francisco Moura; Gabriel Veiga, Rosário, Froholdt; Pepê, André Silva, Pietuszewski | William Gomes | Sanusi | Bednarek
+SLO | Takáč; Blackman, Bajrić, Marković, Sandro Cruz; Martínez, Pokorný, Ibrahim; Barseghyan, Šporar, Suleiman Camara | | | 
+VFB | Seimen; Vagnoman, Jeltsch, Chabot, Mittelstädt; Prömel, Stiller; El Khannouss, Undav, Führich; Demirović | Nartey, Tiago Tomás, Al-Dakhil, Luca Jaquez | Chabot, Mittelstädt | 

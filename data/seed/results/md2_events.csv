@@ -1,0 +1,201 @@
+md,home,away,team,player,event,minute,note,source
+2,RCL,SCP,SCP,Luis Suárez,goal,22,,uefa.com Tuesday round-up; maisfutebol
+2,RCL,SCP,SCP,Irankunda,assist,22,first-time cross from the left,maisfutebol crónica
+2,RCL,SCP,SCP,Silas Andersen,sub_on,73,,maisfutebol crónica
+2,RCL,SCP,SCP,Jesse Derry,sub_on,73,,maisfutebol crónica
+2,RCL,SCP,SCP,Issa Doumbia,goal,74,,uefa.com Tuesday round-up
+2,RCL,SCP,SCP,Silas Andersen,assist,74,through ball,uefa.com Tuesday round-up; maisfutebol
+2,RCL,SCP,SCP,Kaique Pereira,saves,6,6 saves (Sofascore via maisfutebol),maisfutebol crónica
+2,RCL,SCP,SCP,Luis Suárez,potm,,,uefa.com Tuesday round-up
+2,SAB,SLA,SAB,Veljko Simić,yellow,14,,totalfootballanalysis live
+2,SAB,SLA,SAB,Kaheem Parris,goal,49,assist not reported,uefa.com Tuesday round-up
+2,SAB,SLA,SAB,Joy-Lance Mickels,goal,88,long-range; keeper error; assist not reported,uefa.com Tuesday round-up
+2,SAB,SLA,SAB,Joy-Lance Mickels,potm,,,uefa.com Tuesday round-up
+2,ARS,LIL,ARS,Mikel Merino,yellow,29,,Fox Sports box score
+2,ARS,LIL,ARS,Jurriën Timber,goal,64,,Fox Sports box score
+2,ARS,LIL,ARS,Noni Madueke,assist,64,,Fox Sports box score
+2,ARS,LIL,ARS,Mikel Merino,sub_off,64,,Fox Sports box score
+2,ARS,LIL,ARS,Noni Madueke,sub_off,64,,Fox Sports box score
+2,ARS,LIL,ARS,Viktor Gyökeres,sub_off,64,,Fox Sports box score
+2,ARS,LIL,ARS,Martin Ødegaard,sub_on,65,,Fox Sports box score
+2,ARS,LIL,ARS,Bukayo Saka,sub_on,65,,Fox Sports box score
+2,ARS,LIL,ARS,Kai Havertz,sub_on,65,,Fox Sports box score
+2,ARS,LIL,ARS,Eberechi Eze,goal,67,,Fox Sports box score
+2,ARS,LIL,ARS,Bukayo Saka,assist,67,cross,uefa.com Tuesday round-up
+2,ARS,LIL,ARS,Bukayo Saka,goal,71,,Fox Sports box score
+2,ARS,LIL,ARS,Kai Havertz,assist,71,,uefa.com Tuesday round-up
+2,ARS,LIL,LIL,Bentaleb,sub_off,71,,Fox Sports box score
+2,ARS,LIL,LIL,Ngal'ayel Mukau,sub_off,71,,Fox Sports box score
+2,ARS,LIL,LIL,Osame Sahraoui,sub_on,72,,Fox Sports box score
+2,ARS,LIL,LIL,Maurits Kjaergaard,sub_on,72,,Fox Sports box score
+2,ARS,LIL,ARS,Jurriën Timber,sub_off,77,,Fox Sports box score
+2,ARS,LIL,ARS,Ben White,sub_on,78,,Fox Sports box score
+2,ARS,LIL,LIL,Romain Perraud,sub_off,77,,Fox Sports box score
+2,ARS,LIL,LIL,Ueda,sub_off,77,,Fox Sports box score
+2,ARS,LIL,LIL,Olivier Giroud,sub_on,78,,Fox Sports box score
+2,ARS,LIL,LIL,Calvin Verdonk,sub_on,78,,Fox Sports box score
+2,ARS,LIL,LIL,Goffi,yellow,81,,Fox Sports box score
+2,ARS,LIL,LIL,Bakwa,sub_off,81,,Fox Sports box score
+2,ARS,LIL,LIL,Soriba Diaoune,sub_on,81,,Fox Sports box score
+2,ARS,LIL,ARS,Eberechi Eze,sub_off,84,,Fox Sports box score
+2,ARS,LIL,ARS,Max Dowman,sub_on,85,,Fox Sports box score
+2,ARS,LIL,ARS,Kai Havertz,yellow,91,90+1,Fox Sports box score
+2,ARS,LIL,LIL,Berke Özer,saves,5,,Fox Sports box score
+2,ARS,LIL,ARS,Jurriën Timber,potm,,,uefa.com Tuesday round-up
+2,ATM,MUN,ATM,Barrios,goal,1,inside the first minute,teleprensa crónica; uefa.com
+2,ATM,MUN,ATM,Álex Baena,assist,1,,teleprensa crónica
+2,ATM,MUN,MUN,Marcus Rashford,yellow,52,,teleprensa crónica
+2,ATM,MUN,ATM,Barrios,sub_off,60,,teleprensa crónica
+2,ATM,MUN,ATM,Marc Pubill,sub_on,60,,teleprensa crónica
+2,ATM,MUN,ATM,Lee Kang-in,sub_off,60,,teleprensa crónica
+2,ATM,MUN,ATM,Jonathan David,sub_on,60,,teleprensa crónica
+2,ATM,MUN,MUN,Carlos Baleba,sub_off,66,,teleprensa crónica
+2,ATM,MUN,MUN,Mason Mount,sub_on,66,,teleprensa crónica
+2,ATM,MUN,MUN,Marcus Rashford,sub_off,66,,teleprensa crónica
+2,ATM,MUN,MUN,Amad Diallo,sub_on,66,,teleprensa crónica
+2,ATM,MUN,MUN,Youri Tielemans,sub_off,66,,teleprensa crónica
+2,ATM,MUN,MUN,Joshua Zirkzee,sub_on,66,,teleprensa crónica
+2,ATM,MUN,ATM,Álex Baena,sub_off,71,,teleprensa crónica
+2,ATM,MUN,ATM,Morten Hjulmand,sub_on,71,,teleprensa crónica
+2,ATM,MUN,ATM,Julián Álvarez,sub_off,71,,teleprensa crónica
+2,ATM,MUN,ATM,Lookman,sub_on,71,,teleprensa crónica
+2,ATM,MUN,MUN,Leny Yoro,red,74,straight red after VAR review (one source says two bookings),teleprensa crónica; thesportsencounter
+2,ATM,MUN,ATM,Lookman,goal,79,rebound after Lammens saved Jonathan David's shot; no assist credited in reports,teleprensa crónica
+2,ATM,MUN,MUN,Ayden Heaven,sub_off,80,,teleprensa crónica
+2,ATM,MUN,MUN,Harry Maguire,sub_on,80,,teleprensa crónica
+2,ATM,MUN,MUN,Bruno Fernandes,sub_off,81,,teleprensa crónica
+2,ATM,MUN,MUN,Matheus Cunha,sub_on,81,,teleprensa crónica
+2,ATM,MUN,ATM,Giuliano Simeone,sub_off,88,,teleprensa crónica
+2,ATM,MUN,ATM,Robin Le Normand,sub_on,88,,teleprensa crónica
+2,ATM,MUN,ATM,Robin Le Normand,yellow,89,,teleprensa crónica
+2,ATM,MUN,ATM,Álex Baena,potm,,,uefa.com Tuesday round-up
+2,INT,CLB,INT,Hakan Çalhanoğlu,yellow,29,,Goal.com Inter ratings
+2,INT,CLB,INT,Hakan Çalhanoğlu,pen_conceded,30,foul on Carlos Forbs,africasoccer.com
+2,INT,CLB,CLB,Carlos Forbs,pen_won,30,,africasoccer.com
+2,INT,CLB,CLB,Nicolò Tresoldi,pen_goal,30,29' in one source,thesportsencounter; telecomasia
+2,INT,CLB,INT,Akanji,yellow,39,,Goal.com Inter ratings
+2,INT,CLB,INT,Lautaro Martínez,goal,44,,Goal.com Inter ratings
+2,INT,CLB,INT,Federico Dimarco,assist,44,,Goal.com Inter ratings; africasoccer.com
+2,INT,CLB,CLB,Nicolò Tresoldi,goal,63,Josep Martínez missed a long ball; passer not reported,africasoccer.com
+2,INT,CLB,INT,Thuram,sub_off,67,,Goal.com Inter ratings
+2,INT,CLB,INT,Francesco Pio Esposito,sub_on,67,,Goal.com Inter ratings
+2,INT,CLB,INT,Hakan Çalhanoğlu,sub_off,67,,Goal.com Inter ratings
+2,INT,CLB,INT,Petar Sučić,sub_on,67,,Goal.com Inter ratings
+2,INT,CLB,CLB,Nicolò Tresoldi,goal,74,rebound after Virgili hit the post,africasoccer.com
+2,INT,CLB,INT,Federico Dimarco,sub_off,78,,Goal.com Inter ratings
+2,INT,CLB,INT,Barella,sub_off,78,,Goal.com Inter ratings
+2,INT,CLB,INT,Ange-Yoan Bonny,sub_on,78,minute assumed from Dimarco/Barella exits,Goal.com Inter ratings
+2,INT,CLB,INT,Aleksandar Stanković,sub_on,78,minute assumed from Dimarco/Barella exits,Goal.com Inter ratings
+2,INT,CLB,INT,Lautaro Martínez,goal,81,,Goal.com Inter ratings
+2,INT,CLB,INT,Petar Sučić,assist,81,shot saved by Sommer and Lautaro scored the rebound; Goal.com credits Sučić,Goal.com Inter ratings
+2,INT,CLB,CLB,Romeo Vermant,goal,87,substitute,thesportsencounter; telecomasia
+2,INT,CLB,CLB,Carlos Forbs,assist,87,,africasoccer.com
+2,INT,CLB,INT,Zieliński,sub_off,88,,Goal.com Inter ratings
+2,INT,CLB,INT,Djed Spence,sub_on,88,,Goal.com Inter ratings
+2,INT,CLB,INT,Ange-Yoan Bonny,goal,93,90+3,telecomasia; Goal.com Inter ratings
+2,INT,CLB,INT,Aleksandar Stanković,assist,93,,Goal.com Inter ratings
+2,INT,CLB,CLB,Nicolò Tresoldi,potm,,,uefa.com Tuesday round-up
+2,GAL,BAR,GAL,Batrakov,goal,28,deflected,uefa.com Tuesday round-up; bulinews
+2,GAL,BAR,GAL,Rafael Leão,assist,28,,earlier read (14 Oct morning)
+2,GAL,BAR,BAR,João Cancelo,goal,43,,bulinews; uefa.com
+2,GAL,BAR,BAR,Dani Olmo,assist,43,,earlier read (14 Oct morning)
+2,GAL,BAR,BAR,Fermín López,goal,50,header,bulinews; uefa.com
+2,GAL,BAR,BAR,Lamine Yamal,assist,50,,uefa.com Tuesday round-up
+2,GAL,BAR,BAR,Anthony Gordon,goal,53,,bulinews; uefa.com
+2,GAL,BAR,BAR,Lamine Yamal,assist,53,,uefa.com Tuesday round-up; telecomasia
+2,GAL,BAR,GAL,Batrakov,sub_off,58,,bulinews
+2,GAL,BAR,GAL,Gabriel Sara,sub_on,58,listed as 'Gabriel',bulinews
+2,GAL,BAR,GAL,Lemina,sub_off,58,,bulinews
+2,GAL,BAR,GAL,Chimuanya Ugochukwu,sub_on,58,,bulinews
+2,GAL,BAR,BAR,Dani Olmo,sub_off,58,,bulinews
+2,GAL,BAR,BAR,Gabriel Jesus,sub_on,58,,bulinews
+2,GAL,BAR,BAR,Anthony Gordon,sub_off,59,,bulinews
+2,GAL,BAR,BAR,Karim Adeyemi,sub_on,59,,bulinews
+2,GAL,BAR,GAL,Rafael Leão,sub_off,64,replacement not named,bulinews
+2,GAL,BAR,BAR,Karim Adeyemi,goal,65,,bulinews; uefa.com
+2,GAL,BAR,BAR,Gabriel Jesus,assist,65,,earlier read (14 Oct morning)
+2,GAL,BAR,GAL,Barış Alper Yılmaz,sub_off,67,,bulinews
+2,GAL,BAR,GAL,Sallai,sub_on,67,,bulinews
+2,GAL,BAR,BAR,Eric García,sub_off,73,,bulinews
+2,GAL,BAR,BAR,Marc Bernal,sub_on,73,,bulinews
+2,GAL,BAR,BAR,Pedri,sub_off,73,,bulinews
+2,GAL,BAR,BAR,Koundé,sub_on,73,,bulinews
+2,GAL,BAR,GAL,Torreira,sub_off,81,,bulinews
+2,GAL,BAR,GAL,Sam Nhaga,sub_on,81,Renato Nhaga,bulinews
+2,GAL,BAR,BAR,Fermín López,sub_off,82,,bulinews
+2,GAL,BAR,BAR,Gavi,sub_on,82,,bulinews
+2,GAL,BAR,BAR,Lamine Yamal,potm,,,uefa.com Tuesday round-up
+2,RBL,PSV,RBL,Ridle Baku,pen_conceded,19,handball,bundesliga.com report
+2,RBL,PSV,PSV,Perišić,pen_miss,19,saved,bundesliga.com report; uefa.com
+2,RBL,PSV,RBL,Vandevoordt,pen_save,19,,bundesliga.com report; uefa.com
+2,RBL,PSV,RBL,Gruda,goal,75,edge of the area after a cleared corner; no assist,bundesliga.com report
+2,RBL,PSV,RBL,Gruda,potm,,,uefa.com Tuesday round-up
+2,VIK,BAY,VIK,Gianni Stensness,goal,2,header from a corner,FC Bayern report; Sofascore
+2,VIK,BAY,VIK,Zlatko Tripić,assist,2,corner,Sofascore
+2,VIK,BAY,VIK,Christiansen,goal,38,,FC Bayern report; Sofascore
+2,VIK,BAY,VIK,Botheim,assist,38,,Sofascore
+2,VIK,BAY,BAY,Tah,sub_off,45,,FC Bayern report
+2,VIK,BAY,BAY,Dayot Upamecano,sub_on,46,,FC Bayern report
+2,VIK,BAY,BAY,Nathaniel Brown,sub_off,45,,FC Bayern report
+2,VIK,BAY,BAY,Davies,sub_on,46,,FC Bayern report
+2,VIK,BAY,BAY,Lennart Karl,sub_off,45,,FC Bayern report
+2,VIK,BAY,BAY,Ismael Saibari,sub_on,46,,FC Bayern report
+2,VIK,BAY,BAY,Laimer,pen_won,54,,FC Bayern report
+2,VIK,BAY,BAY,Harry Kane,pen_goal,54,53' in one source,FC Bayern report
+2,VIK,BAY,VIK,Kristoffer Haugen,sub_off,59,,FC Bayern report
+2,VIK,BAY,VIK,Jesper Daland,sub_on,59,,FC Bayern report
+2,VIK,BAY,BAY,Harry Kane,goal,60,header,FC Bayern report
+2,VIK,BAY,BAY,Kimmich,assist,60,cross,FC Bayern report; Sofascore
+2,VIK,BAY,BAY,Luis Díaz,goal,71,,FC Bayern report
+2,VIK,BAY,BAY,Laimer,assist,71,,FC Bayern report; Sofascore
+2,VIK,BAY,VIK,Bjørdal,sub_off,72,,FC Bayern report
+2,VIK,BAY,VIK,Herman Haugen,sub_on,72,,FC Bayern report
+2,VIK,BAY,BAY,Michael Olise,second_yellow,73,yellow-red,FC Bayern report; Sofascore
+2,VIK,BAY,BAY,Luis Díaz,sub_off,77,,FC Bayern report
+2,VIK,BAY,BAY,Josip Stanišić,sub_on,77,,FC Bayern report
+2,VIK,BAY,BAY,Hiroki Ito,sub_on,83,report text says for Saibari; line-up says for Karl,FC Bayern report
+2,VIK,BAY,VIK,Henrik Heggheim,sub_off,85,,FC Bayern report
+2,VIK,BAY,VIK,Viljar Vevatne,sub_on,85,,FC Bayern report
+2,VIK,BAY,VIK,Bell,sub_off,85,,FC Bayern report
+2,VIK,BAY,VIK,Kvia-Egeskog,sub_on,85,,FC Bayern report
+2,VIK,BAY,VIK,Botheim,sub_off,85,,FC Bayern report
+2,VIK,BAY,VIK,Moi,sub_on,85,,FC Bayern report
+2,VIK,BAY,VIK,Herman Haugen,goal,90,header,FC Bayern report; Sofascore
+2,VIK,BAY,VIK,Zlatko Tripić,assist,90,cross,Sofascore
+2,VIK,BAY,VIK,Kristoffer Haugen,yellow,,minute not reported,FC Bayern report
+2,VIK,BAY,VIK,Jesper Daland,yellow,,minute not reported,FC Bayern report
+2,VIK,BAY,BAY,Laimer,yellow,,minute not reported,FC Bayern report
+2,VIK,BAY,BAY,Ismael Saibari,yellow,,minute not reported,FC Bayern report
+2,VIK,BAY,BAY,Harry Kane,potm,,,uefa.com Tuesday round-up
+2,VIL,NAP,NAP,Amir Rrahmani,goal,8,rebound after Luiz Júnior's save hit the bar,africasoccer.com; losfutbolitos
+2,VIL,NAP,VIL,Mikautadze,goal,23,rounded the keeper; assist not reported,losfutbolitos
+2,VIL,NAP,VIL,Santiago Mouriño,goal,26,,losfutbolitos
+2,VIL,NAP,VIL,Gerard Moreno,assist,26,,losfutbolitos
+2,VIL,NAP,VIL,Mikautadze,yellow,33,,losfutbolitos
+2,VIL,NAP,NAP,Giovane,yellow,55,,losfutbolitos
+2,VIL,NAP,NAP,Politano,sub_off,60,,losfutbolitos
+2,VIL,NAP,NAP,Neres,sub_on,60,,losfutbolitos
+2,VIL,NAP,NAP,Giovane,sub_off,60,,losfutbolitos
+2,VIL,NAP,NAP,Noa Lang,sub_on,60,,losfutbolitos
+2,VIL,NAP,NAP,Scott McTominay,sub_off,61,,losfutbolitos
+2,VIL,NAP,NAP,Leonardo Spinazzola,sub_on,61,,losfutbolitos
+2,VIL,NAP,NAP,Kevin De Bruyne,yellow,62,,losfutbolitos
+2,VIL,NAP,VIL,Mikautadze,sub_off,63,,losfutbolitos
+2,VIL,NAP,VIL,Alex Freeman,sub_on,63,,losfutbolitos
+2,VIL,NAP,VIL,Gerard Moreno,sub_off,63,,losfutbolitos
+2,VIL,NAP,VIL,Tani Oluwaseyi,sub_on,63,,losfutbolitos
+2,VIL,NAP,VIL,Saliba,yellow,67,,losfutbolitos
+2,VIL,NAP,VIL,Alberto Moleiro,sub_off,68,,losfutbolitos
+2,VIL,NAP,VIL,Juan Foyth,sub_on,68,,losfutbolitos
+2,VIL,NAP,NAP,Billy Gilmour,sub_off,72,,losfutbolitos
+2,VIL,NAP,NAP,Lobotka,sub_on,72,,losfutbolitos
+2,VIL,NAP,NAP,Rafa Marín,sub_off,72,,losfutbolitos
+2,VIL,NAP,NAP,Lorenzo Lucca,sub_on,72,,losfutbolitos
+2,VIL,NAP,VIL,Santi Comesaña,sub_off,83,,losfutbolitos
+2,VIL,NAP,VIL,Ayoze Pérez,sub_on,83,,losfutbolitos
+2,VIL,NAP,VIL,Gueye,sub_off,84,,losfutbolitos
+2,VIL,NAP,VIL,Sergi Cardona,sub_on,84,,losfutbolitos
+2,VIL,NAP,NAP,Di Lorenzo,yellow,85,,losfutbolitos
+2,VIL,NAP,VIL,Tani Oluwaseyi,goal,86,,losfutbolitos
+2,VIL,NAP,VIL,Ayoze Pérez,assist,86,,losfutbolitos
+2,VIL,NAP,VIL,Santiago Mouriño,potm,,,uefa.com Tuesday round-up; losfutbolitos

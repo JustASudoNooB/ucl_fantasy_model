@@ -1,0 +1,719 @@
+{
+ "md2_retro": {
+  "note": "Full official price list, information available before the MD2 deadline (13 Oct 18:45 CEST).",
+  "best": {
+   "formation": "3-5-2",
+   "xi": [
+    "Michael Olise",
+    "Florian Wirtz",
+    "Luis Díaz",
+    "Harry Kane",
+    "Lamine Yamal",
+    "Barcola",
+    "Virgil van Dijk",
+    "Deniz Undav",
+    "Jurriën Timber",
+    "Federico Dimarco",
+    "David Raya"
+   ],
+   "bench": [
+    "Josha Vagnoman",
+    "Vinícius Tobias",
+    "Andreas Helmersen",
+    "Ernst"
+   ],
+   "captain": "Michael Olise",
+   "ev_passive": 78.94,
+   "ev_active": 82.33,
+   "cost": 100.0
+  },
+  "published": {
+   "xi": [
+    "David Raya",
+    "Virgil van Dijk",
+    "Dayot Upamecano",
+    "Gabriel Magalhães",
+    "Michael Olise",
+    "Lamine Yamal",
+    "Dominik Szoboszlai",
+    "Bukayo Saka",
+    "Harry Kane",
+    "Deniz Undav",
+    "Ermedin Demirović"
+   ],
+   "ev_passive": 73.38,
+   "ev_active": 75.26
+  },
+  "template": {
+   "xi": [
+    "Ernst",
+    "Riccardo Calafiori",
+    "Cubarsí",
+    "Nuno Mendes",
+    "Michael Olise",
+    "Lamine Yamal",
+    "Rayan Cherki",
+    "Vitinha",
+    "Harry Kane",
+    "Kylian Mbappé",
+    "Bryan Mbeumo"
+   ],
+   "bench": [
+    "Ridle Baku",
+    "Marquinhos",
+    "Gerard Martín",
+    "Milinković-Savić"
+   ],
+   "captain": "Michael Olise",
+   "ev_passive": 61.31,
+   "ev_active": 60.5,
+   "own": [
+    null,
+    31.0,
+    22.0,
+    32.0,
+    44.0,
+    32.0,
+    16.0,
+    18.0,
+    54.0,
+    56.0,
+    12.0
+   ],
+   "note": "Most-owned legal squad among players expected to be available (ownership known for ~130 players)."
+  },
+  "overlap": {
+   "published_vs_ffs_xi": 8,
+   "published_vs_template_xi": 3,
+   "newbest_vs_published_xi": 6,
+   "newbest_vs_ffs_xi": 5,
+   "newbest_vs_template_xi": 3
+  }
+ },
+ "md3": {
+  "best": {
+   "formation": "3-5-2",
+   "xi": [
+    "Luis Suárez",
+    "Florian Wirtz",
+    "Erling Haaland",
+    "Catamo",
+    "Bruno Fernandes",
+    "Jude Bellingham",
+    "Greenwood",
+    "Joško Gvardiol",
+    "Federico Dimarco",
+    "Molina",
+    "Gianluigi Donnarumma"
+   ],
+   "bench": [
+    "F. Ioannidis",
+    "Nélson Semedo",
+    "Gianluca Mancini",
+    "Ederson"
+   ],
+   "captain": "Florian Wirtz",
+   "ev_passive": 76.02,
+   "ev_active": 77.94,
+   "cost": 100.0,
+   "rules": [
+    "If Florian Wirtz scores 5 or fewer on day 1, move the armband to Luis Suárez (day 2, expected 7.1).",
+    "If Erling Haaland scores 3 or fewer, bring on F. Ioannidis (day 2, expected 5.1).",
+    "If Greenwood scores 3 or fewer, bring on F. Ioannidis (day 2, expected 5.1)."
+   ],
+   "own": [
+    8.0,
+    1.0,
+    22.0,
+    null,
+    19.0,
+    21.0,
+    3.0,
+    null,
+    null,
+    null,
+    null
+   ]
+  },
+  "template": {
+   "xi": [
+    "Manuel Neuer",
+    "Virgil van Dijk",
+    "Nuno Mendes",
+    "Marquinhos",
+    "Lamine Yamal",
+    "Rayan Cherki",
+    "João Neves",
+    "Fermín López",
+    "Kylian Mbappé",
+    "Harry Kane",
+    "Bryan Mbeumo"
+   ],
+   "bench": [
+    "Rahim Ibrahim",
+    "Cubarsí",
+    "Riccardo Calafiori",
+    "Milinković-Savić"
+   ],
+   "captain": "Virgil van Dijk",
+   "ev_passive": 51.96,
+   "ev_active": 51.64,
+   "own": [
+    9.0,
+    13.0,
+    32.0,
+    17.0,
+    32.0,
+    16.0,
+    11.0,
+    20.0,
+    56.0,
+    54.0,
+    12.0
+   ],
+   "note": "Most-owned legal squad among players expected to be available (ownership known for ~130 players)."
+  },
+  "overlap_xi": 0,
+  "differentials": [
+   {
+    "name": "Florian Wirtz",
+    "team": "LIV",
+    "pos": "MID",
+    "price": 8.5,
+    "xpts": 6.75,
+    "own": 1.0
+   },
+   {
+    "name": "Catamo",
+    "team": "SCP",
+    "pos": "MID",
+    "price": 6.5,
+    "xpts": 6.33,
+    "own": null
+   },
+   {
+    "name": "Greenwood",
+    "team": "FEN",
+    "pos": "MID",
+    "price": 7.5,
+    "xpts": 5.9,
+    "own": 3.0
+   },
+   {
+    "name": "Enzo Fernández",
+    "team": "MCI",
+    "pos": "MID",
+    "price": 7.5,
+    "xpts": 5.55,
+    "own": 2.0
+   },
+   {
+    "name": "Joško Gvardiol",
+    "team": "MCI",
+    "pos": "DEF",
+    "price": 5.5,
+    "xpts": 5.51,
+    "own": null
+   },
+   {
+    "name": "Hakan Çalhanoğlu",
+    "team": "INT",
+    "pos": "MID",
+    "price": 7.0,
+    "xpts": 5.49,
+    "own": 1.0
+   },
+   {
+    "name": "Federico Dimarco",
+    "team": "INT",
+    "pos": "DEF",
+    "price": 5.0,
+    "xpts": 5.41,
+    "own": null
+   },
+   {
+    "name": "Molina",
+    "team": "ROM",
+    "pos": "DEF",
+    "price": 5.0,
+    "xpts": 5.4,
+    "own": null
+   },
+   {
+    "name": "Isco",
+    "team": "BET",
+    "pos": "MID",
+    "price": 6.5,
+    "xpts": 5.26,
+    "own": 1.0
+   },
+   {
+    "name": "Lautaro Martínez",
+    "team": "INT",
+    "pos": "FWD",
+    "price": 9.5,
+    "xpts": 5.24,
+    "own": 3.0
+   }
+  ]
+ },
+ "robustness": {
+  "runs": [
+   {
+    "kind": "seed",
+    "seed": 101,
+    "ev_xi": 72.3,
+    "xi_overlap": 10
+   },
+   {
+    "kind": "seed",
+    "seed": 202,
+    "ev_xi": 72.13,
+    "xi_overlap": 11
+   },
+   {
+    "kind": "seed",
+    "seed": 303,
+    "ev_xi": 72.37,
+    "xi_overlap": 11
+   },
+   {
+    "kind": "uncertainty",
+    "k": 0,
+    "ev_xi": 77.35,
+    "xi_overlap": 5
+   },
+   {
+    "kind": "uncertainty",
+    "k": 1,
+    "ev_xi": 79.51,
+    "xi_overlap": 5
+   },
+   {
+    "kind": "uncertainty",
+    "k": 2,
+    "ev_xi": 79.38,
+    "xi_overlap": 7
+   },
+   {
+    "kind": "uncertainty",
+    "k": 3,
+    "ev_xi": 77.04,
+    "xi_overlap": 7
+   },
+   {
+    "kind": "uncertainty",
+    "k": 4,
+    "ev_xi": 81.45,
+    "xi_overlap": 4
+   },
+   {
+    "kind": "uncertainty",
+    "k": 5,
+    "ev_xi": 76.58,
+    "xi_overlap": 4
+   },
+   {
+    "kind": "uncertainty",
+    "k": 6,
+    "ev_xi": 76.9,
+    "xi_overlap": 6
+   },
+   {
+    "kind": "uncertainty",
+    "k": 7,
+    "ev_xi": 75.64,
+    "xi_overlap": 7
+   },
+   {
+    "kind": "uncertainty",
+    "k": 8,
+    "ev_xi": 79.28,
+    "xi_overlap": 7
+   },
+   {
+    "kind": "uncertainty",
+    "k": 9,
+    "ev_xi": 81.24,
+    "xi_overlap": 7
+   }
+  ],
+  "replicates": 10,
+  "pick_rate": [
+   {
+    "name": "Gianluigi Donnarumma",
+    "squad": 1.0,
+    "xi": 0.9
+   },
+   {
+    "name": "Luis Suárez",
+    "squad": 0.9,
+    "xi": 0.9
+   },
+   {
+    "name": "Florian Wirtz",
+    "squad": 0.8,
+    "xi": 0.8
+   },
+   {
+    "name": "Molina",
+    "squad": 0.7,
+    "xi": 0.5
+   },
+   {
+    "name": "Federico Dimarco",
+    "squad": 0.7,
+    "xi": 0.5
+   },
+   {
+    "name": "Serhou Guirassy",
+    "squad": 0.6,
+    "xi": 0.6
+   },
+   {
+    "name": "Erling Haaland",
+    "squad": 0.6,
+    "xi": 0.5
+   },
+   {
+    "name": "Jude Bellingham",
+    "squad": 0.6,
+    "xi": 0.5
+   },
+   {
+    "name": "Virgil van Dijk",
+    "squad": 0.6,
+    "xi": 0.4
+   },
+   {
+    "name": "Barcola",
+    "squad": 0.5,
+    "xi": 0.5
+   },
+   {
+    "name": "Cucurella",
+    "squad": 0.5,
+    "xi": 0.1
+   },
+   {
+    "name": "Catamo",
+    "squad": 0.5,
+    "xi": 0.4
+   },
+   {
+    "name": "Joško Gvardiol",
+    "squad": 0.5,
+    "xi": 0.3
+   },
+   {
+    "name": "Greenwood",
+    "squad": 0.5,
+    "xi": 0.5
+   },
+   {
+    "name": "Khvicha Kvaratskhelia",
+    "squad": 0.4,
+    "xi": 0.4
+   },
+   {
+    "name": "Veerman",
+    "squad": 0.4,
+    "xi": 0.4
+   },
+   {
+    "name": "Ederson",
+    "squad": 0.4,
+    "xi": 0.0
+   },
+   {
+    "name": "Rui Silva",
+    "squad": 0.4,
+    "xi": 0.1
+   },
+   {
+    "name": "Dybala",
+    "squad": 0.3,
+    "xi": 0.2
+   },
+   {
+    "name": "Nélson Semedo",
+    "squad": 0.3,
+    "xi": 0.3
+   },
+   {
+    "name": "Aké",
+    "squad": 0.3,
+    "xi": 0.3
+   },
+   {
+    "name": "Škriniar",
+    "squad": 0.3,
+    "xi": 0.1
+   },
+   {
+    "name": "Eduardo Quaresma",
+    "squad": 0.3,
+    "xi": 0.1
+   },
+   {
+    "name": "F. Ioannidis",
+    "squad": 0.3,
+    "xi": 0.3
+   },
+   {
+    "name": "Rodrigo Mora",
+    "squad": 0.2,
+    "xi": 0.1
+   },
+   {
+    "name": "Vinícius Júnior",
+    "squad": 0.2,
+    "xi": 0.1
+   },
+   {
+    "name": "Bruno Fernandes",
+    "squad": 0.2,
+    "xi": 0.1
+   },
+   {
+    "name": "Di Lorenzo",
+    "squad": 0.2,
+    "xi": 0.1
+   },
+   {
+    "name": "Isco",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Grimaldo",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Gianluca Mancini",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Waldemar Anton",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Berke Özer",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Kevin De Bruyne",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Askildsen",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Maximilian Beier",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Christiansen",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Bastoni",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Enzo Fernández",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Ferran Torres",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "John McGinn",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Lookman",
+    "squad": 0.1,
+    "xi": 0.1
+   },
+   {
+    "name": "Kobel",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Hans Vanaken",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Rúben Dias",
+    "squad": 0.1,
+    "xi": 0.0
+   },
+   {
+    "name": "Gonçalo Inácio",
+    "squad": 0.1,
+    "xi": 0.1
+   }
+  ]
+ },
+ "transfers_from_published": {
+  "squad": [
+   "David Raya",
+   "Virgil van Dijk",
+   "Dayot Upamecano",
+   "Gabriel Magalhães",
+   "Michael Olise",
+   "Lamine Yamal",
+   "Dominik Szoboszlai",
+   "Bukayo Saka",
+   "Harry Kane",
+   "Deniz Undav",
+   "Ermedin Demirović",
+   "Valeriy Bondar",
+   "Mykola Matviyenko",
+   "Ridle Baku",
+   "Thomas Strakosha"
+  ],
+  "bank": 0.0,
+  "horizon": [
+   3,
+   4,
+   5
+  ],
+  "options": [
+   {
+    "free_transfers": 2,
+    "n": 3,
+    "buy": [
+     "Florian Wirtz",
+     "Bruno Fernandes",
+     "Luis Suárez"
+    ],
+    "sell": [
+     "Michael Olise",
+     "Harry Kane",
+     "Ridle Baku"
+    ],
+    "hits": 1,
+    "horizon_ev": 159.45,
+    "gain_vs_roll": 11.15,
+    "md3_ev": 58.96
+   },
+   {
+    "free_transfers": 2,
+    "n": 2,
+    "buy": [
+     "Florian Wirtz",
+     "Luis Suárez"
+    ],
+    "sell": [
+     "Michael Olise",
+     "Harry Kane"
+    ],
+    "hits": 0,
+    "horizon_ev": 158.52,
+    "gain_vs_roll": 10.22,
+    "md3_ev": 55.74
+   },
+   {
+    "free_transfers": 2,
+    "n": 1,
+    "buy": [
+     "Florian Wirtz"
+    ],
+    "sell": [
+     "Michael Olise"
+    ],
+    "hits": 0,
+    "horizon_ev": 155.23,
+    "gain_vs_roll": 6.93,
+    "md3_ev": 52.3
+   },
+   {
+    "free_transfers": 2,
+    "n": 0,
+    "buy": [],
+    "sell": [],
+    "hits": 0,
+    "horizon_ev": 148.3,
+    "gain_vs_roll": 0.0,
+    "md3_ev": 46.9
+   },
+   {
+    "free_transfers": 3,
+    "n": 3,
+    "buy": [
+     "Florian Wirtz",
+     "Bruno Fernandes",
+     "Luis Suárez"
+    ],
+    "sell": [
+     "Michael Olise",
+     "Harry Kane",
+     "Ridle Baku"
+    ],
+    "hits": 0,
+    "horizon_ev": 163.45,
+    "gain_vs_roll": 15.15,
+    "md3_ev": 58.96
+   },
+   {
+    "free_transfers": 3,
+    "n": 2,
+    "buy": [
+     "Florian Wirtz",
+     "Luis Suárez"
+    ],
+    "sell": [
+     "Michael Olise",
+     "Deniz Undav"
+    ],
+    "hits": 0,
+    "horizon_ev": 160.33,
+    "gain_vs_roll": 12.03,
+    "md3_ev": 55.9
+   },
+   {
+    "free_transfers": 3,
+    "n": 1,
+    "buy": [
+     "Florian Wirtz"
+    ],
+    "sell": [
+     "Michael Olise"
+    ],
+    "hits": 0,
+    "horizon_ev": 155.23,
+    "gain_vs_roll": 6.93,
+    "md3_ev": 52.3
+   },
+   {
+    "free_transfers": 3,
+    "n": 0,
+    "buy": [],
+    "sell": [],
+    "hits": 0,
+    "horizon_ev": 148.3,
+    "gain_vs_roll": 0.0,
+    "md3_ev": 46.9
+   }
+  ]
+ },
+ "generated_at": "2026-10-14T12:07:02.891599+05:30"
+}

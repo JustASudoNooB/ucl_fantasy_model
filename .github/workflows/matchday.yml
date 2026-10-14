@@ -1,0 +1,26 @@
+# Cloud fallback for when the laptop is off: rebuilds projections and the dashboard twice a day
+# and keeps the newest dashboard as a downloadable workflow artifact. Free for public repos.
+# Add repository secrets UFE_ODDS_API_KEY, UFE_FOOTBALL_DATA_KEY, UFE_TELEGRAM_TOKEN, UFE_TELEGRAM_CHAT.
+name: matchday
+on:
+  schedule:
+    - cron: "30 6,15 * * *"      # 12:00 and 20:30 IST
+  workflow_dispatch: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      UFE_ODDS_API_KEY: ${{ secrets.UFE_ODDS_API_KEY }}
+      UFE_FOOTBALL_DATA_KEY: ${{ secrets.UFE_FOOTBALL_DATA_KEY }}
+      UFE_TELEGRAM_TOKEN: ${{ secrets.UFE_TELEGRAM_TOKEN }}
+      UFE_TELEGRAM_CHAT: ${{ secrets.UFE_TELEGRAM_CHAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: python -m ufe schedule --once
+      - run: python -m ufe dashboard --mds 3-8
+      - uses: actions/upload-artifact@v4
+        with: { name: dashboard, path: data/runs/dashboard.html }

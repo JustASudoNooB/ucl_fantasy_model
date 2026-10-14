@@ -1,0 +1,39 @@
+# The 36 league-phase clubs. `aliases` covers names used by the data sources.
+# code = 3-letter display code; country = UEFA association.
+teams:
+  - {id: PSG, name: Paris Saint-Germain, short: PSG, country: FRA, aliases: [Paris Saint-Germain FC, Paris SG, PSG]}
+  - {id: AVL, name: Aston Villa, short: Villa, country: ENG, aliases: [Aston Villa FC, Aston Villa]}
+  - {id: ARS, name: Arsenal, short: Arsenal, country: ENG, aliases: [Arsenal FC]}
+  - {id: MCI, name: Manchester City, short: Man City, country: ENG, aliases: [Manchester City FC, Man City]}
+  - {id: MUN, name: Manchester United, short: Man Utd, country: ENG, aliases: [Manchester United FC, Man United, Man Utd]}
+  - {id: LIV, name: Liverpool, short: Liverpool, country: ENG, aliases: [Liverpool FC]}
+  - {id: INT, name: Inter, short: Inter, country: ITA, aliases: [FC Internazionale Milano, Inter Milan, Internazionale]}
+  - {id: NAP, name: Napoli, short: Napoli, country: ITA, aliases: [SSC Napoli]}
+  - {id: ROM, name: Roma, short: Roma, country: ITA, aliases: [AS Roma]}
+  - {id: COM, name: Como, short: Como, country: ITA, aliases: [Como 1907]}
+  - {id: BAR, name: Barcelona, short: Barça, country: ESP, aliases: [FC Barcelona]}
+  - {id: RMA, name: Real Madrid, short: Real Madrid, country: ESP, aliases: [Real Madrid CF]}
+  - {id: VIL, name: Villarreal, short: Villarreal, country: ESP, aliases: [Villarreal CF]}
+  - {id: ATM, name: Atlético de Madrid, short: Atleti, country: ESP, aliases: [Club Atlético de Madrid, Atletico Madrid, Atlético Madrid, Atleti]}
+  - {id: BET, name: Real Betis, short: Betis, country: ESP, aliases: [Real Betis Balompié]}
+  - {id: BAY, name: Bayern München, short: Bayern, country: GER, aliases: [FC Bayern München, Bayern Munich, Bayern]}
+  - {id: BVB, name: Borussia Dortmund, short: Dortmund, country: GER, aliases: [Dortmund, BVB]}
+  - {id: RBL, name: RB Leipzig, short: Leipzig, country: GER, aliases: [Leipzig]}
+  - {id: VFB, name: VfB Stuttgart, short: Stuttgart, country: GER, aliases: [Stuttgart]}
+  - {id: RCL, name: RC Lens, short: Lens, country: FRA, aliases: [Racing Club de Lens, Lens]}
+  - {id: LIL, name: Lille, short: Lille, country: FRA, aliases: [Lille OSC, LOSC Lille]}
+  - {id: PSV, name: PSV Eindhoven, short: PSV, country: NED, aliases: [PSV]}
+  - {id: FEY, name: Feyenoord, short: Feyenoord, country: NED, aliases: [Feyenoord Rotterdam]}
+  - {id: POR, name: FC Porto, short: Porto, country: POR, aliases: [Porto]}
+  - {id: SCP, name: Sporting CP, short: Sporting, country: POR, aliases: [Sporting Clube de Portugal, Sporting]}
+  - {id: CLB, name: Club Brugge, short: Brugge, country: BEL, aliases: [Club Brugge KV]}
+  - {id: SLA, name: Slavia Praha, short: Slavia, country: CZE, aliases: [SK Slavia Praha, Slavia Prague]}
+  - {id: GAL, name: Galatasaray, short: Galatasaray, country: TUR, aliases: [Galatasaray SK]}
+  - {id: SHA, name: Shakhtar Donetsk, short: Shakhtar, country: UKR, aliases: [FK Shakhtar Donetsk, Shakhtar]}
+  - {id: AEK, name: AEK Athens, short: AEK, country: GRE, aliases: [AEK Athen, AEK]}
+  - {id: LAS, name: LASK, short: LASK, country: AUT, aliases: [LASK Linz]}
+  - {id: VIK, name: Viking FK, short: Viking, country: NOR, aliases: [Viking]}
+  - {id: SLO, name: Slovan Bratislava, short: Slovan, country: SVK, aliases: [ŠK Slovan Bratislava]}
+  - {id: SAB, name: Sabah FK, short: Sabah, country: AZE, aliases: [Sabah]}
+  - {id: FEN, name: Fenerbahçe, short: Fenerbahçe, country: TUR, aliases: [Fenerbahçe SK, Fenerbahce]}
+  - {id: BOD, name: Bodø/Glimt, short: Bodø/Glimt, country: NOR, aliases: [FK Bodø/Glimt, Bodo/Glimt, Bodo Glimt]}

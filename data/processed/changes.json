@@ -1,0 +1,76 @@
+{
+ "version_note": "v0.12 (14 Oct, evening): match grading, half-time re-plan, team and player form. Earlier: v0.11 (14 Oct, morning).",
+ "items": [
+  {
+   "title": "Match-by-match grading",
+   "detail": "Every frozen forecast is now graded per match: result, scoreline rank, scorers, assisters, POTM and line-ups, split by the first and second evening of a matchday.",
+   "evidence": "MD2 day 1: 5/9 results; 10 of 32 goals by a player in the forecast's top 3 for his match; 158 of 198 starters predicted."
+  },
+  {
+   "title": "Half-time re-plan",
+   "detail": "After the first evening: refit on its results, refresh the second evening's forecast, score the played players, and pick the captain switch and manual subs. The refreshed forecast is frozen so day 2 is graded twice.",
+   "evidence": "Dashboard squad: 70.4 points if unchanged, 78.8 with Van Dijk as captain and Bondar, Matviyenko in."
+  },
+  {
+   "title": "Team form",
+   "detail": "30% of each match's weight now decays with a 90-day half-life on top of the long 500-day one.",
+   "evidence": "UCL RPS 0.1958 → 0.1957, domestic 0.2014 → 0.2013 over 6,092 walk-forward matches; better on all four scores."
+  },
+  {
+   "title": "Club home/away effects: tested, rejected",
+   "detail": "Club-specific home edges made UCL forecasts worse at every strength tried. One home advantage per league (and one for UEFA games) stays.",
+   "evidence": "UCL RPS 0.1960 (sd 0.05) and 0.1964 (sd 0.1) vs 0.1958 without."
+  },
+  {
+   "title": "Player domestic form",
+   "detail": "This season's league xG counts per 90 like last season's; this season's starts lead the start-rate prior.",
+   "evidence": "Premier League 2025/26 walk-forward: goal log loss −1.1%, start log loss 0.668 → 0.566."
+  },
+  {
+   "title": "Full official price list",
+   "detail": "953 players from the game's club pages (uclfantasy.com mirror, 14 Oct), replacing a 325-player list built from tipster articles. Only Slovan Bratislava's prices are not published yet.",
+   "evidence": "Article prices matched the official list for 375 of 377 players; prices estimated from FPL were wrong for 17 of 27 (Wirtz €6.5m → €8.5m)."
+  },
+  {
+   "title": "Line-up model recalibrated on real XIs",
+   "detail": "UEFA's predicted XIs named 49 of the 66 actual starters on Tuesday (74%). A calibrated logistic update replaces the Bayes rule that treated a named player as a near-certain starter.",
+   "evidence": "Leave-one-club-out log loss on 144 players: 0.678 → 0.567."
+  },
+  {
+   "title": "Start rates measured per fit match",
+   "detail": "Past start rates counted injury absences as non-starts, which underrated stars back from injury (Kvaratskhelia 0.31, Courtois 0.64). They are now per match the player was fit for.",
+   "evidence": "Kvaratskhelia's MD3 start chance 0.70 → 0.79, Saka's 0.39 → 0.65 after one benching."
+  },
+  {
+   "title": "Opta history for player shares",
+   "detail": "Shares of club xG and xA, starts, recoveries and penalties from FBref (big five leagues, 2023/24 to early 2025/26) and FPL (Premier League 2025/26), blended with the price prior by sample size.",
+   "evidence": "Season-ahead test: 20-40% less error than the price prior alone (scripts/validate_player_layer.py)."
+  },
+  {
+   "title": "Per-90 rates outside the big five",
+   "detail": "Players without Opta history (Suárez, Osimhen, Tresoldi, Vanaken…) use their goals and assists per 90 as shares of their club's domestic goal rate, at reduced weight.",
+   "evidence": "12 players; weight n/(n+25) for goals, n/(n+40) for assists."
+  },
+  {
+   "title": "Team news and suspensions",
+   "detail": "MD2 team news from UEFA.com plus Wednesday updates (Szoboszlai, Isak and Gakpo did not travel). Tuesday's XIs seed MD3 at half strength; Olise and Yoro are suspended for MD3 after red cards.",
+   "evidence": "MD3 news is provisional until UEFA's MD3 predicted line-ups (about 24h before the deadline)."
+  },
+  {
+   "title": "Tuesday's results in the team model",
+   "detail": "The nine MD2 Tuesday results are in the fit. Uncertainty in team ratings is now integrated into every scoreline matrix.",
+   "evidence": "Backtest log loss 0.8980 → 0.8970 from the uncertainty integration."
+  },
+  {
+   "title": "Live decisions compare whole plans",
+   "detail": "Captain switch, manual subs and auto-subs are compared as complete plans (any manual change switches auto-subs off), later-day starters who are ruled out can be subbed, and sent-off players stay in.",
+   "evidence": "Today's call for the dashboard squad: +7.6 expected points over doing nothing."
+  },
+  {
+   "title": "Frozen snapshots stay frozen",
+   "detail": "Rebuilding the dashboard after a deadline no longer overwrites that matchday's pre-deadline snapshot, so grading cannot see results.",
+   "evidence": ""
+  }
+ ],
+ "updated": "2026-10-14"
+}

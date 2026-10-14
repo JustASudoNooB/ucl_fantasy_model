@@ -1,0 +1,1768 @@
+<title>UCL Fantasy Engine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap">
+<style>
+/* Layout: a coach's tactics board leads (pitch, bench, marker notes) with the matchday read-out beside it;
+   fixtures, players, your team, the table race and the model's report card follow as full-width panels,
+   all driven by one sticky matchday bar. Light = whiteboard and dry-erase ink, dark = slate chalkboard. */
+:root {
+  --bg: #e7ece9; --panel: #fafcfb; --panel-2: #eef3f0; --line: #d3ddd7; --line-2: #bfcbc4;
+  --ink: #142019; --ink-2: #45584e; --muted: #687b71;
+  --board: #ffffff; --board-line: #c3d0c9; --frame: #a9b5af; --frame-2: #c9d2cd;
+  --magnet: #f0b400; --magnet-ink: #1c1606; --magnet-2: #e8edf9; --magnet-2-ink: #1d2a47;
+  --note: #c2410c; --accent: #f0b400; --accent-ink: #1c1606; --accent-text: #8a5d00;
+  --home: #2a6fd6; --away: #dc5a28; --draw: #aab6af;
+  --good: #1f8f47; --warn: #b57a00; --bad: #c4372d;
+  --heat-hi: #e39b00; --focus: #2a6fd6; --shadow: 0 1px 0 rgba(20, 32, 25, .06), 0 8px 24px -16px rgba(20, 32, 25, .35);
+  --f-display: "Sofia Sans Extra Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-note: "Kalam", "Segoe Print", "Bradley Hand", cursive;
+  --r-1: 6px; --r-2: 12px; --gutter: clamp(16px, 3.2vw, 40px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1612; --panel: #16221c; --panel-2: #1c2a23; --line: #283a31; --line-2: #33483d;
+    --ink: #e5ede7; --ink-2: #a8b9af; --muted: #7b8f84;
+    --board: #1b2c24; --board-line: #6d887a; --frame: #4a3727; --frame-2: #5e4631;
+    --magnet: #f3c443; --magnet-ink: #1b1608; --magnet-2: #24344a; --magnet-2-ink: #dbe6ff;
+    --note: #f6e49a; --accent: #f3c443; --accent-ink: #1b1608; --accent-text: #f3c443;
+    --home: #3f86e3; --away: #e0622f; --draw: #5c7268;
+    --good: #3fbf6a; --warn: #f2b233; --bad: #ef6b5d;
+    --heat-hi: #f3c443; --focus: #8db8ff; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 10px 30px -18px rgba(0, 0, 0, .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1612; --panel: #16221c; --panel-2: #1c2a23; --line: #283a31; --line-2: #33483d;
+  --ink: #e5ede7; --ink-2: #a8b9af; --muted: #7b8f84;
+  --board: #1b2c24; --board-line: #6d887a; --frame: #4a3727; --frame-2: #5e4631;
+  --magnet: #f3c443; --magnet-ink: #1b1608; --magnet-2: #24344a; --magnet-2-ink: #dbe6ff;
+  --note: #f6e49a; --accent: #f3c443; --accent-ink: #1b1608; --accent-text: #f3c443;
+  --home: #3f86e3; --away: #e0622f; --draw: #5c7268;
+  --good: #3fbf6a; --warn: #f2b233; --bad: #ef6b5d;
+  --heat-hi: #f3c443; --focus: #8db8ff; --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 10px 30px -18px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--bg); color: var(--ink); }
+body { margin: 0; font-family: var(--f-body); font-size: 15px; line-height: 1.5; font-variation-settings: "wdth" 100; }
+a { color: inherit; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.ink2 { color: var(--ink-2); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; letter-spacing: .005em; line-height: 1.02; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(30px, 4.2vw, 44px); }
+h3 { font-size: 22px; font-weight: 800; }
+p { margin: 0; }
+
+/* ---------- top bar ---------- */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.bar-in { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; padding-block: 10px; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); max-width: 1440px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 900; font-size: 26px; letter-spacing: .01em; white-space: nowrap; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+.mds { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1 1 auto; }
+.mds::-webkit-scrollbar { display: none; }
+.md-btn { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 5px 12px; cursor: pointer; white-space: nowrap; font-size: 13px; font-weight: 600; }
+.md-btn small { font-weight: 500; color: var(--muted); margin-left: 4px; }
+.md-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.md-btn[aria-pressed="true"] small { color: inherit; opacity: .75; }
+.clock { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+@media (max-width: 600px) { .clock { align-items: flex-start; } }
+.clock b { font-size: 16px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.secnav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; padding-block: 0 8px; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); max-width: 1440px; margin: 0 auto; }
+.secnav::-webkit-scrollbar { display: none; }
+.secnav a { font-size: 13px; padding: 4px 10px; border-radius: 999px; text-decoration: none; color: var(--ink-2); white-space: nowrap; }
+.secnav a:hover { background: var(--panel-2); color: var(--ink); }
+
+main { max-width: 1440px; margin: 0 auto; padding-block: 0 64px; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); display: grid; gap: 56px; }
+section { scroll-margin-top: 120px; min-width: 0; }
+.sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; margin-bottom: 18px; }
+.sec-head p { max-width: 62ch; color: var(--ink-2); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-2); box-shadow: var(--shadow); }
+.notice { display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: var(--ink-2); padding: 12px 14px; border-radius: var(--r-2);
+  background: var(--panel-2); border: 1px dashed var(--line-2); }
+.notice b { color: var(--ink); }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.seg { display: inline-flex; background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+.seg button { border: 0; background: transparent; border-radius: 999px; padding: 4px 10px; font-size: 13px; cursor: pointer; color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+
+/* ---------- check: model vs the internet ---------- */
+.check { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 980px) { .check { grid-template-columns: 1fr; } }
+.check .panel { padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.check .wide { grid-column: 1 / -1; }
+.verdict { font-family: var(--f-note); font-size: 19px; line-height: 1.3; color: var(--note); }
+.cols3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 560px) { .cols3 { grid-template-columns: 1fr; } }
+.xi-col { display: grid; gap: 3px; align-content: start; min-width: 0; }
+.xi-col h4 { margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.xi-col .r { display: flex; justify-content: space-between; gap: 6px; font-size: 13px; padding: 3px 6px; border-radius: 6px; min-width: 0; }
+.xi-col .r span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xi-col .r.same { background: color-mix(in oklab, var(--accent) 18%, transparent); }
+.xi-col .r .own { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
+.xi-col .tot { margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+.xi-col .tot b { color: var(--ink); font-size: 15px; }
+.bars { display: grid; gap: 6px; }
+.bars .b { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr) 44px; gap: 8px; align-items: center; font-size: 13px; }
+.bars .b span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bars .track { height: 10px; background: var(--panel-2); border-radius: 999px; overflow: hidden; }
+.bars .fill { height: 100%; background: var(--home); border-radius: 999px; }
+.bars .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.score td.hit { color: var(--good); font-weight: 700; }
+.score td.miss { color: var(--bad); font-weight: 700; }
+.changes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px 22px; }
+.changes div { display: grid; gap: 3px; min-width: 0; align-content: start; }
+.changes b { font-size: 14px; }
+.changes span { font-size: 13px; color: var(--ink-2); }
+.changes em { font-style: normal; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- hero: the board ---------- */
+.hero { padding-top: 28px; display: grid; gap: 22px; }
+.hero-title { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+.hero-title h1 { font-size: clamp(40px, 6.4vw, 76px); font-weight: 900; }
+.hero-title .sub { color: var(--ink-2); max-width: 58ch; }
+.board-wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+@media (max-width: 980px) { .board-wrap { grid-template-columns: 1fr; } }
+.board-frame { border-radius: 14px; padding: 10px; background: linear-gradient(160deg, var(--frame-2), var(--frame)); box-shadow: var(--shadow); }
+.board { background: var(--board); border-radius: 6px; position: relative; overflow: hidden; }
+.board::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 80% at 30% 0%, color-mix(in oklab, var(--ink) 4%, transparent), transparent 60%); }
+.board svg { display: block; width: 100%; height: auto; }
+.board-tools { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; justify-content: space-between; padding: 10px 6px 2px; }
+.board-tools .lbl { font-size: 12.5px; color: color-mix(in oklab, var(--ink) 75%, var(--frame)); }
+.plan { display: flex; gap: 8px; align-items: baseline; margin: 8px 6px 0; font-family: var(--f-note); font-size: 19px; line-height: 1.25; color: var(--note); }
+.plan i { font-style: normal; font-weight: 700; }
+.bench { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 10px 6px 4px; }
+.bench .slot { display: flex; align-items: center; gap: 8px; background: color-mix(in oklab, var(--board) 92%, var(--ink)); border-radius: 8px; padding: 6px 8px; min-width: 0; }
+.bench .ord { font-family: var(--f-note); font-weight: 700; color: var(--note); font-size: 18px; width: 16px; text-align: center; flex: none; }
+.bench .who { min-width: 0; line-height: 1.15; }
+.bench .who b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bench .who span { font-size: 11.5px; color: var(--muted); }
+
+.readout { display: grid; gap: 16px; }
+.big { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+.big .val { font-size: clamp(54px, 7vw, 84px); font-weight: 700; line-height: .9; letter-spacing: -.02em; font-variation-settings: "wdth" 88; }
+.big .cap { font-size: 13px; color: var(--ink-2); max-width: 30ch; }
+.dist { position: relative; height: 34px; }
+.dist .track { position: absolute; left: 0; right: 0; top: 14px; height: 6px; border-radius: 3px; background: var(--panel-2); }
+.dist .band { position: absolute; top: 14px; height: 6px; border-radius: 3px; background: color-mix(in oklab, var(--accent) 45%, var(--panel-2)); }
+.dist .iqr { position: absolute; top: 11px; height: 12px; border-radius: 4px; background: var(--accent); }
+.dist .tick { position: absolute; top: 25px; font-size: 11px; color: var(--muted); transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+.kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.kv > div { background: var(--panel-2); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.kv span { display: block; font-size: 12px; color: var(--muted); }
+.kv b { font-size: 20px; font-variation-settings: "wdth" 90; }
+@media (max-width: 520px) { .kv { grid-template-columns: 1fr 1fr; } }
+.notes { display: grid; gap: 8px; }
+.news-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 18px; }
+.news-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.news-row > span:last-child { grid-column: 1 / -1; font-size: 12px; }
+.note { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; font-size: 14px; }
+.note i { font-style: normal; font-family: var(--f-note); font-weight: 700; color: var(--note); font-size: 18px; line-height: 1.1; text-align: center; }
+.caps { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.caps th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12px; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.caps td { padding: 6px; border-bottom: 1px solid var(--line); }
+.caps td.r, .caps th.r { text-align: right; }
+.caps tr.pick td { background: color-mix(in oklab, var(--accent) 16%, transparent); }
+
+/* ---------- fixtures ---------- */
+.days { display: grid; gap: 26px; }
+.day-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.day-head h3 { font-size: 26px; }
+.fx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 12px; }
+.fx { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-2); padding: 12px 14px; display: grid; gap: 10px; cursor: pointer; text-align: left; width: 100%; }
+.fx:hover { border-color: var(--line-2); }
+.fx[aria-expanded="true"] { border-color: var(--ink-2); }
+.fx-top { display: flex; width: 100%; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.fx-teams { width: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.fx-teams .t { font-family: var(--f-display); font-weight: 800; font-size: 24px; line-height: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fx-teams .t.a { text-align: right; }
+.fx-teams .xg { font-size: 12px; color: var(--muted); text-align: center; white-space: nowrap; }
+.fx-teams .xg b { color: var(--ink); font-size: 15px; display: block; font-variant-numeric: tabular-nums; }
+.pbar { width: 100%; display: flex; height: 10px; gap: 2px; }
+.pbar > span { display: block; height: 100%; min-width: 2px; }
+.pbar > span:first-child { border-radius: 4px 0 0 4px; }
+.pbar > span:last-child { border-radius: 0 4px 4px 0; }
+.plabels { width: 100%; display: flex; justify-content: space-between; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.plabels span { display: inline-flex; align-items: center; gap: 5px; }
+.sw { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.fx-meta { width: 100%; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--ink-2); }
+.fx-meta b { color: var(--ink); font-weight: 600; }
+.fx-detail { grid-column: 1 / -1; background: var(--panel); border: 1px solid var(--ink-2); border-radius: var(--r-2); padding: 16px; display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .fx-detail { grid-template-columns: 1fr; } }
+.fx-detail h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.heat { display: grid; grid-template-columns: 22px repeat(6, minmax(0, 1fr)); gap: 2px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.heat .c { aspect-ratio: 1; border-radius: 3px; display: grid; place-items: center; font-size: 10.5px; }
+.heat .h { display: grid; place-items: center; color: var(--muted); }
+.mini { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mini td { padding: 4px 0; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.mini td.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 8px; }
+.mini .barcell { width: 38%; }
+.hb { height: 6px; border-radius: 3px; background: var(--panel-2); position: relative; overflow: hidden; }
+.hb > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--ink-2); }
+.lu { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.lu ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 3px; font-size: 12.5px; }
+.lu li { display: grid; grid-template-columns: 30px 1fr 40px; gap: 6px; align-items: center; }
+.lu li .pos { font-size: 10.5px; color: var(--muted); }
+.lu li .ps { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.lu li.dim { opacity: .55; }
+
+/* ---------- players ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-bottom: 12px; }
+.filters input[type="search"], .filters select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; font-size: 14px; }
+.filters input[type="search"] { min-width: 0; width: min(260px, 100%); }
+.filters label { font-size: 13px; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; }
+.scroll-x { overflow-x: auto; border-radius: var(--r-2); border: 1px solid var(--line); background: var(--panel); }
+table.pl { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 960px; }
+table.pl th { position: sticky; top: 0; background: var(--panel); text-align: right; font-weight: 600; font-size: 12px; color: var(--muted); padding: 9px 10px; border-bottom: 1px solid var(--line); cursor: pointer; white-space: nowrap; user-select: none; }
+table.pl th:first-child, table.pl td:first-child { text-align: left; }
+table.pl th[aria-sort] { color: var(--ink); }
+table.pl td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.pl tr:hover td { background: var(--panel-2); }
+.pname b { font-weight: 600; }
+.pname small { color: var(--muted); margin-left: 6px; }
+.pos-tag { display: inline-block; font-size: 10.5px; font-weight: 700; width: 30px; text-align: center; border-radius: 4px; padding: 1px 0; margin-right: 8px; background: var(--panel-2); color: var(--ink-2); }
+.range { position: relative; width: 120px; height: 14px; display: inline-block; vertical-align: middle; }
+.range .ln { position: absolute; top: 6px; height: 2px; background: var(--line-2); border-radius: 1px; }
+.range .md { position: absolute; top: 2px; width: 2px; height: 10px; background: var(--ink-2); border-radius: 1px; }
+.range .mn { position: absolute; top: 3px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--panel); }
+.src { font-size: 11px; color: var(--muted); max-width: 210px; overflow: hidden; text-overflow: ellipsis; display: inline-block; vertical-align: middle; }
+.more { margin-top: 10px; }
+.btn { border: 1px solid var(--line-2); background: var(--panel); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 13.5px; font-weight: 600; }
+.btn:hover { background: var(--panel-2); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+
+/* ---------- my team ---------- */
+.team { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 18px; align-items: start; }
+@media (max-width: 980px) { .team { grid-template-columns: 1fr; } }
+.team .panel { padding: 16px; display: grid; gap: 14px; }
+.picker { position: relative; }
+.picker input { width: 100%; background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; }
+.results { position: absolute; z-index: 5; left: 0; right: 0; top: calc(100% + 4px); background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; }
+.results button { display: grid; grid-template-columns: 36px 1fr auto auto; gap: 8px; width: 100%; text-align: left; border: 0; background: transparent; padding: 8px 12px; cursor: pointer; font-size: 13.5px; align-items: center; }
+.results button:hover, .results button:focus-visible { background: var(--panel-2); }
+.results button[disabled] { opacity: .45; cursor: not-allowed; }
+.squad { display: grid; gap: 10px; }
+.squad-row { display: grid; grid-template-columns: 38px 1fr; gap: 8px; align-items: start; }
+.squad-row > span { font-size: 12px; color: var(--muted); padding-top: 6px; }
+.squad-row .ps { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp { display: inline-flex; align-items: center; gap: 6px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 4px 3px 10px; font-size: 13px; }
+.pp small { color: var(--muted); }
+.pp button { border: 0; background: transparent; cursor: pointer; width: 22px; height: 22px; border-radius: 50%; color: var(--muted); line-height: 1; }
+.pp button:hover { background: var(--line); color: var(--ink); }
+.pp.empty { border-style: dashed; color: var(--muted); padding-right: 10px; }
+.inputs { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.inputs label { font-size: 13px; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; }
+.inputs input, .inputs select { width: 74px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.status-line { font-size: 13px; }
+.status-line.bad { color: var(--bad); }
+.status-line.good { color: var(--good); }
+.tx { display: grid; gap: 8px; }
+.tx-row { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; padding: 10px 12px; border-radius: 10px; background: var(--panel-2); }
+.tx-row .mv { font-size: 13.5px; min-width: 0; }
+.tx-row .mv .out { color: var(--ink-2); text-decoration: line-through; text-decoration-color: color-mix(in oklab, var(--bad) 70%, transparent); }
+.tx-row .gain { font-weight: 700; font-variant-numeric: tabular-nums; font-size: 16px; }
+.tx-row .gain.pos { color: var(--good); }
+.tx-row .gain.neg { color: var(--bad); }
+.tx-row small { grid-column: 1 / -1; color: var(--muted); font-size: 12px; }
+.xi-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; font-size: 13px; }
+.xi-list div { background: var(--panel-2); border-radius: 8px; padding: 6px 8px; display: flex; justify-content: space-between; gap: 6px; min-width: 0; }
+.xi-list div span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xi-list .cap { background: color-mix(in oklab, var(--accent) 28%, var(--panel-2)); font-weight: 600; }
+
+/* ---------- chips ---------- */
+.chiphm { display: grid; grid-template-columns: 92px repeat(var(--n), minmax(0, 1fr)); gap: 3px; font-size: 12.5px; }
+.chiphm .h { color: var(--muted); font-size: 12px; text-align: center; padding: 4px 0; }
+.chiphm .rl { color: var(--ink-2); display: flex; align-items: center; font-size: 13px; }
+.chiphm .c { border-radius: 6px; padding: 10px 4px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; }
+.chiphm .c.na { background: repeating-linear-gradient(135deg, var(--panel-2) 0 6px, transparent 6px 12px); color: var(--muted); font-weight: 400; }
+.chiphm .c.best { box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* ---------- race ---------- */
+.race { display: grid; gap: 4px; }
+.race-row { display: grid; grid-template-columns: 26px 150px minmax(0, 1fr) 58px; gap: 10px; align-items: center; font-size: 13px; }
+@media (max-width: 560px) { .race-row { grid-template-columns: 22px 92px minmax(0, 1fr) 46px; } }
+.race-row .rk { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.race-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.race-row .bars { display: flex; gap: 2px; height: 14px; }
+.race-row .bars span { height: 100%; }
+.race-row .bars span:first-child { border-radius: 4px 0 0 4px; }
+.race-row .bars span:last-child { border-radius: 0 4px 4px 0; }
+.race-row .ep { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.race-row.cut { border-top: 1px dashed var(--line-2); padding-top: 4px; margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+
+/* ---------- model ---------- */
+.model { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.model > * { min-width: 0; }
+.m-tiles { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-2); padding: 14px 16px; display: grid; gap: 4px; }
+.tile .l { font-size: 12.5px; color: var(--ink-2); }
+.tile .v { font-size: 34px; font-weight: 700; line-height: 1.05; font-variation-settings: "wdth" 90; }
+.tile .d { font-size: 12.5px; color: var(--muted); }
+.tile .d b { color: var(--good); font-weight: 600; }
+.m-cal { grid-column: span 5; padding: 16px; }
+.m-flow { grid-column: span 7; padding: 16px; }
+@media (max-width: 980px) { .m-cal, .m-flow { grid-column: 1 / -1; } }
+.flow { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; counter-reset: f; }
+.flow li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; font-size: 13.5px; counter-increment: f; }
+.flow li::before { content: "L" counter(f); font-family: var(--f-display); font-weight: 800; font-size: 20px; color: var(--accent-text); line-height: 1.1; }
+.flow li b { display: block; font-size: 14px; }
+.flow li span { color: var(--ink-2); }
+.m-src { grid-column: 1 / -1; padding: 16px; }
+.srcs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 8px 22px; margin-top: 10px; font-size: 13.5px; }
+.srcs div { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: baseline; }
+.st { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+.st.v { background: color-mix(in oklab, var(--good) 18%, transparent); color: var(--good); }
+.st.u { background: color-mix(in oklab, var(--warn) 18%, transparent); color: var(--warn); }
+.limits { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13.5px; color: var(--ink-2); max-width: 90ch; }
+.timeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 8px; margin-top: 12px; }
+.timeline div { background: var(--panel-2); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; display: grid; gap: 2px; }
+.timeline div b { font-size: 14px; }
+.timeline div.now { box-shadow: inset 0 0 0 2px var(--accent); }
+
+
+/* ---------- half-time ---------- */
+.ht { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 980px) { .ht { grid-template-columns: 1fr; } }
+.ht .panel { padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.ht-score { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.ht-score b { font-size: 44px; font-weight: 700; line-height: 1; font-variation-settings: "wdth" 88; }
+.ht-list { display: grid; gap: 4px; }
+.ht-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 13.5px; padding: 5px 8px; border-radius: 8px; background: var(--panel-2); min-width: 0; }
+.ht-row .pos { font-size: 10.5px; font-weight: 700; color: var(--muted); }
+.ht-row .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ht-row .nm small { color: var(--muted); margin-left: 4px; }
+.ht-row .v { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ht-row.bench { background: transparent; border: 1px dashed var(--line); }
+.ht-row.out { box-shadow: inset 3px 0 0 var(--bad); }
+.ht-row.in { box-shadow: inset 3px 0 0 var(--good); }
+.ht-row.cap .nm::after { content: " (C)"; font-weight: 700; color: var(--accent-text); }
+.plans { display: grid; gap: 6px; }
+.plans .b { display: grid; grid-template-columns: 110px minmax(0, 1fr) 54px; gap: 8px; align-items: center; font-size: 13px; }
+.plans .track { height: 12px; background: var(--panel-2); border-radius: 999px; overflow: hidden; }
+.plans .fill { height: 100%; background: var(--line-2); border-radius: 999px; }
+.plans .b.best .fill { background: var(--accent); }
+.plans .b.best span:first-child { font-weight: 700; }
+.plans .v { text-align: right; font-variant-numeric: tabular-nums; }
+.calls { display: grid; gap: 6px; }
+.calls div { font-family: var(--f-note); font-size: 19px; line-height: 1.3; color: var(--note); }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 4px; background: var(--panel-2); color: var(--ink-2); }
+.tag.good { background: color-mix(in oklab, var(--good) 18%, transparent); color: var(--good); }
+.tag.bad { background: color-mix(in oklab, var(--bad) 16%, transparent); color: var(--bad); }
+.tag.warn { background: color-mix(in oklab, var(--warn) 18%, transparent); color: var(--warn); }
+
+/* ---------- match centre ---------- */
+.mc-tools { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px; }
+.mc-days { display: grid; gap: 26px; }
+.mc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 12px; }
+.mc { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-2); padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.mc.ft { border-color: var(--line-2); }
+.mc-top { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+.mc-teams { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
+.mc-teams .t { font-family: var(--f-display); font-weight: 800; font-size: 26px; line-height: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mc-teams .t.a { text-align: right; }
+.mc-teams .sc { text-align: center; font-variant-numeric: tabular-nums; }
+.mc-teams .sc b { font-size: 26px; display: block; line-height: 1; }
+.mc-teams .sc span { font-size: 11.5px; color: var(--muted); }
+.mc-line { font-size: 12.5px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.mc-line b { color: var(--ink); }
+.mc-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .mc-cols { grid-template-columns: 1fr; } }
+.mc-cols h5 { margin: 0 0 4px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; }
+.mc-cols ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 12.5px; }
+.mc-cols li { display: flex; justify-content: space-between; gap: 6px; min-width: 0; padding: 1px 4px; border-radius: 5px; }
+.mc-cols li span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mc-cols li .p { font-variant-numeric: tabular-nums; color: var(--ink-2); flex: none; }
+.mc-cols li.hit { background: color-mix(in oklab, var(--good) 16%, transparent); }
+.mc-cols li.hit > span:first-child::before { content: "✓ "; color: var(--good); font-weight: 700; }
+.side { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+.mc-actual { border-top: 1px dashed var(--line-2); padding-top: 8px; display: grid; gap: 4px; font-size: 12.5px; }
+.mc-actual div { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 6px; }
+.mc-actual div > span:first-child { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; padding-top: 1px; }
+.mc-actual i { font-style: normal; color: var(--muted); }
+
+/* ---------- accuracy ---------- */
+.acc { display: grid; gap: 16px; }
+.acc-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.acc-tiles .tile .v small { font-size: 16px; color: var(--muted); font-weight: 600; }
+.acc table td.good { color: var(--good); font-weight: 700; }
+.acc table td.bad { color: var(--bad); font-weight: 700; }
+
+/* ---------- form ---------- */
+.form-wrap { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1100px) { .form-wrap { grid-template-columns: 1fr; } }
+.form-wrap .panel { padding: 16px; display: grid; gap: 10px; min-width: 0; }
+.tbl-scroll { overflow: auto; max-height: 560px; border: 1px solid var(--line); border-radius: 10px; }
+table.ft { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.ft th { position: sticky; top: 0; background: var(--panel); text-align: right; font-size: 11.5px; color: var(--muted); font-weight: 600; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; cursor: pointer; }
+table.ft th:first-child, table.ft td:first-child { text-align: left; }
+table.ft td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.ft td.up { color: var(--good); font-weight: 600; }
+table.ft td.dn { color: var(--bad); font-weight: 600; }
+.wdl { display: inline-flex; gap: 2px; }
+.wdl i { font-style: normal; width: 16px; height: 16px; border-radius: 3px; display: inline-grid; place-items: center; font-size: 10px; font-weight: 700; color: #fff; }
+.wdl i.W { background: var(--good); } .wdl i.D { background: var(--draw); } .wdl i.L { background: var(--bad); }
+.tests { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 12px 22px; }
+.tests div { display: grid; gap: 3px; font-size: 13px; }
+.tests b { font-size: 14px; }
+
+footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; border-top: 1px solid var(--line); }
+
+#tip { position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: var(--panel); font-size: 12.5px; padding: 6px 9px; border-radius: 6px; max-width: 260px; line-height: 1.35; opacity: 0; transform: translateY(4px); transition: opacity .12s, transform .12s; }
+#tip.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+.draw { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1.1s .35s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .draw { stroke-dashoffset: 0; } }
+</style>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="2" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="14" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="8" r="3" fill="var(--accent)"/></svg>
+      <span>UCL Fantasy Engine</span>
+    </div>
+    <div class="mds" id="mds" role="group" aria-label="Matchday"></div>
+    <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
+  </div>
+  <nav class="secnav" aria-label="Sections">
+    <a href="#board">Board</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#model">Model</a><a href="#rules">Calendar</a>
+  </nav>
+</header>
+
+<main>
+  <section id="board" class="hero" aria-labelledby="hero-h">
+    <div class="hero-title">
+      <h1 id="hero-h">Matchday <span id="hero-md">–</span></h1>
+      <p class="sub" id="hero-sub"></p>
+    </div>
+    <div class="notice" id="pool-notice"></div>
+    <div class="board-wrap">
+      <div>
+        <div class="board-frame">
+          <div class="board" id="board-svg"></div>
+          <p class="plan" id="board-plan" hidden></p>
+          <div class="bench" id="bench"></div>
+          <div class="board-tools">
+            <span class="lbl" id="board-caption"></span>
+            <div class="seg" id="board-mode" role="group" aria-label="Board view"></div>
+          </div>
+        </div>
+        <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+          <span class="muted" style="font-size:13px;">Formation</span>
+          <div class="seg" id="formations" role="group" aria-label="Formation"></div>
+        </div>
+      </div>
+      <div class="readout">
+        <div class="big">
+          <div><div class="val" id="ev-big">–</div></div>
+          <div class="cap" id="ev-cap"></div>
+        </div>
+        <div>
+          <div class="dist" id="dist" aria-label="Range of likely team scores"></div>
+        </div>
+        <div class="kv" id="kv"></div>
+        <div class="panel" style="padding:14px 16px; display:grid; gap:10px;">
+          <h3>Coach's notes</h3>
+          <div class="notes" id="notes"></div>
+        </div>
+        <div class="panel" id="checks-panel" style="padding:14px 16px; display:grid; gap:8px;" hidden>
+          <h3>Prices to check in the app</h3>
+          <div style="overflow-x:auto;"><table class="caps" id="checks"></table></div>
+          <p class="muted" style="font-size:12.5px;" id="checks-alt"></p>
+        </div>
+        <div class="panel" style="padding:14px 16px; display:grid; gap:8px;">
+          <h3>Captain options</h3>
+          <div style="overflow-x:auto;"><table class="caps" id="caps"></table></div>
+          <p class="muted" style="font-size:12.5px;">Captain value counts the switch option: an early-kickoff captain can hand the armband to a later player if he blanks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="halftime" aria-labelledby="ht-h" hidden>
+    <div class="sec-head">
+      <h2 id="ht-h">Half-time re-plan</h2>
+      <p id="ht-sub">After the first evening's games: real points for the players who have played, a refreshed forecast for the rest, and the captain switch and manual subs that add the most.</p>
+    </div>
+    <div class="ht">
+      <div class="panel" id="ht-server"></div>
+      <div class="panel" id="ht-mine"></div>
+    </div>
+  </section>
+
+  <section id="matches" aria-labelledby="mc-h">
+    <div class="sec-head">
+      <h2 id="mc-h">Match centre</h2>
+      <p>Every match of the matchday: result chances, likeliest scorelines, the most likely scorers, assisters and Player of the Match. Played matches show what happened next to what the frozen forecast said.</p>
+    </div>
+    <div class="mc-tools">
+      <span class="muted" style="font-size:13px;">Forecast shown for played matches</span>
+      <div class="seg" id="mc-ver" role="group" aria-label="Forecast version"></div>
+    </div>
+    <p class="muted" style="font-size:12.5px; margin:-4px 0 12px;" id="mc-note"></p>
+    <div class="mc-days" id="mc-days"></div>
+  </section>
+
+  <section id="accuracy" aria-labelledby="ac-h" hidden>
+    <div class="sec-head">
+      <h2 id="ac-h">How did the forecasts do?</h2>
+      <p>Each forecast is frozen before kick-off and graded after the final whistle, separately for the first and second evening of the matchday, so the half-time re-plan can be judged against the pre-deadline call.</p>
+    </div>
+    <div class="acc">
+      <div class="acc-tiles" id="ac-tiles"></div>
+      <div class="panel" style="padding:16px; display:grid; gap:10px;">
+        <h3>Every version, side by side</h3>
+        <div style="overflow-x:auto;"><table class="caps" id="ac-table"></table></div>
+        <p class="muted" style="font-size:12.5px;" id="ac-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" aria-labelledby="fm-h">
+    <div class="sec-head">
+      <h2 id="fm-h">Domestic form and home/away</h2>
+      <p>This season's league numbers for each player next to what the model expected from earlier seasons, and every club's home and away record. What the model does with them was decided by walk-forward tests, below.</p>
+    </div>
+    <div class="form-wrap">
+      <div class="panel">
+        <h3>Players: this season in the league</h3>
+        <div class="filters" style="margin:0;">
+          <select id="fm-team" aria-label="Club"></select>
+          <input type="search" id="fm-search" placeholder="Search a player" aria-label="Search form table">
+        </div>
+        <div class="tbl-scroll"><table class="ft" id="fm-table"></table></div>
+        <p class="muted" style="font-size:12px;" id="fm-note"></p>
+      </div>
+      <div class="panel">
+        <h3>Clubs: home and away</h3>
+        <div class="tbl-scroll"><table class="ft" id="hr-table"></table></div>
+        <p class="muted" style="font-size:12px;" id="hr-note"></p>
+      </div>
+    </div>
+    <div class="panel" style="padding:16px; display:grid; gap:10px; margin-top:16px;">
+      <h3>What the tests decided</h3>
+      <div class="tests" id="fm-tests"></div>
+    </div>
+  </section>
+
+  <section id="check" aria-labelledby="ck-h" hidden>
+    <div class="sec-head">
+      <h2 id="ck-h">Copy or model?</h2>
+      <p>The MD2 pick looked like the lineups circulating online. Here it is checked three ways: against the tipsters, against the most-owned team, and against itself under uncertainty.</p>
+    </div>
+    <div class="check">
+      <div class="panel">
+        <h3>MD2: three teams side by side</h3>
+        <p class="verdict" id="ck-md2-v"></p>
+        <div class="cols3" id="ck-md2"></div>
+        <p class="muted" style="font-size:12.5px;" id="ck-md2-note"></p>
+      </div>
+      <div class="panel">
+        <h3>MD3: the model against the crowd</h3>
+        <p class="verdict" id="ck-md3-v"></p>
+        <div class="cols2" id="ck-md3"></div>
+        <p class="muted" style="font-size:12.5px;" id="ck-md3-note"></p>
+      </div>
+      <div class="panel">
+        <h3>How sure is the MD3 pick?</h3>
+        <p class="muted" style="font-size:13px;" id="ck-rob-sub"></p>
+        <div class="bars" id="ck-rob" role="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Tuesday's scorecard</h3>
+        <p class="muted" style="font-size:13px;" id="ck-grade-sub"></p>
+        <div style="overflow-x:auto;"><table class="caps score" id="ck-grade"></table></div>
+      </div>
+      <div class="panel wide">
+        <h3>What changed in the model</h3>
+        <div class="changes" id="ck-changes"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fixtures" aria-labelledby="fx-h">
+    <div class="sec-head">
+      <h2 id="fx-h">Fixtures</h2>
+      <p>Win, draw and loss chances, expected goals and clean-sheet odds for every match. Open a card for the scoreline grid, likely scorers, Player of the Match candidates and the predicted line-ups.</p>
+    </div>
+    <div class="panel" id="news-panel" style="padding:14px 16px; display:grid; gap:8px; margin-bottom:16px;" hidden>
+      <h3>Team news that moved the model</h3>
+      <p class="muted" style="font-size:12.5px;" id="news-src"></p>
+      <div class="news-list" id="news-list"></div>
+    </div>
+    <div class="days" id="days"></div>
+  </section>
+
+  <section id="players" aria-labelledby="pl-h">
+    <div class="sec-head">
+      <h2 id="pl-h">Player projections</h2>
+      <p>Expected points from the joint match simulation. The range bar shows the 10th to 90th percentile, the tick the median, the dot the mean.</p>
+    </div>
+    <div class="filters">
+      <div class="seg" id="pos-filter" role="group" aria-label="Position"></div>
+      <input type="search" id="pl-search" placeholder="Search a player or club" aria-label="Search players">
+      <select id="pl-team" aria-label="Club"></select>
+      <label for="pl-price">Max price <input type="range" id="pl-price" min="4" max="11" step="0.5" value="11"><span id="pl-price-v" class="num">€11.0m</span></label>
+      <label><input type="checkbox" id="pl-starters"> Likely starters only</label>
+    </div>
+    <div class="scroll-x"><table class="pl" id="pl-table"></table></div>
+    <div class="more"><button class="btn" id="pl-more">Show more</button></div>
+  </section>
+
+  <section id="team" aria-labelledby="tm-h">
+    <div class="sec-head">
+      <h2 id="tm-h">My team</h2>
+      <p>Enter your 15. The planner finds your best XI, captain plan and the transfers that add the most expected points over the next matchdays, after hits. Your squad stays in this browser.</p>
+    </div>
+    <div class="team">
+      <div class="panel">
+        <div class="picker">
+          <input type="search" id="tm-search" placeholder="Add a player: type a name or club" aria-label="Add a player" autocomplete="off">
+          <div class="results" id="tm-results" hidden></div>
+        </div>
+        <div class="squad" id="tm-squad"></div>
+        <div class="inputs">
+          <label for="tm-bank">Bank €m <input type="number" id="tm-bank" step="0.1" min="0" value="0"></label>
+          <label for="tm-ft">Free transfers <input type="number" id="tm-ft" min="0" max="5" value="2"></label>
+          <label for="tm-horizon">Plan over <select id="tm-horizon"><option value="1">1 MD</option><option value="2">2 MDs</option><option value="3" selected>3 MDs</option><option value="4">4 MDs</option></select></label>
+        </div>
+        <div class="status-line" id="tm-status"></div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" id="tm-example">Load example squad</button>
+          <button class="btn" id="tm-clear">Clear squad</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <h3 id="tm-xi-h">Best XI</h3>
+          <p class="muted" id="tm-xi-sub" style="font-size:13px;"></p>
+        </div>
+        <div class="xi-list" id="tm-xi"></div>
+        <div class="notes" id="tm-notes"></div>
+        <div>
+          <h3>Transfers</h3>
+          <p class="muted" style="font-size:13px;" id="tm-tx-sub"></p>
+        </div>
+        <div class="tx" id="tm-tx"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chips" aria-labelledby="ch-h">
+    <div class="sec-head">
+      <h2 id="ch-h">Chips</h2>
+      <p>Expected points each chip adds on each matchday for the squad in My team. Limitless compares a one-week dream squad with your best XI; Wildcard compares the best €100m squad over the next three matchdays with keeping yours.</p>
+    </div>
+    <div class="panel" style="padding:16px; display:grid; gap:14px;">
+      <div style="overflow-x:auto;"><div class="chiphm" id="chiphm"></div></div>
+      <div class="notes" id="chip-notes"></div>
+    </div>
+  </section>
+
+  <section id="race" aria-labelledby="rc-h">
+    <div class="sec-head">
+      <h2 id="rc-h">League-phase race</h2>
+      <p>Simulated final standings after MD8. Top 8 go straight to the round of 16, so their players blank in the play-off matchdays (MD9 and MD10). Clubs in 9 to 24 play both play-off legs.</p>
+    </div>
+    <div class="legend" id="race-legend"></div>
+    <div class="panel" style="padding:14px 16px;"><div class="race" id="race-rows"></div></div>
+  </section>
+
+  <section id="model" aria-labelledby="md-h">
+    <div class="sec-head">
+      <h2 id="md-h">How good is the model?</h2>
+      <p>Walk-forward backtests on the last two Champions League seasons: before every round the team model was refitted on matches played up to that day only, then scored on what happened.</p>
+    </div>
+    <div class="model">
+      <div class="m-tiles" id="m-tiles"></div>
+      <div class="panel m-cal">
+        <h3>Calibration</h3>
+        <p class="muted" style="font-size:13px; margin-top:4px;">When the model says 60%, does it happen 60% of the time? Dots on the diagonal mean yes.</p>
+        <div class="seg" id="cal-pick" role="group" aria-label="Calibration chart" style="margin-top:10px;"></div>
+        <div id="cal-chart" style="margin-top:8px;"></div>
+      </div>
+      <div class="panel m-flow">
+        <h3>What runs each matchday</h3>
+        <ol class="flow">
+          <li><div><b>Ingest</b><span>Fixtures and results, the official game feed (prices, positions, points), odds, Understat xG, team news. Every row keeps its source and fetch time.</span></div></li>
+          <li><div><b>Team model</b><span>Hierarchical Dixon–Coles model over ~11,000 matches in 13 leagues and three European seasons, time-decayed and tuned by backtest; blends in bookmaker odds when available.</span></div></li>
+          <li><div><b>Line-ups and minutes</b><span>Start probability per player from roles, prices and history; news cuts it, confirmed line-ups replace it about an hour before kick-off.</span></div></li>
+          <li><div><b>Player events</b><span>Shares of team xG and xA, ball recoveries, saves, cards, penalties and own goals, each with its own rate.</span></div></li>
+          <li><div><b>Joint simulation</b><span>Every match played thousands of times, goal by goal, so a keeper's clean sheet and his striker's goals move together.</span></div></li>
+          <li><div><b>Decisions</b><span>Integer programming for squad, XI and transfers; an in-matchday policy for captain switches and manual subs; chip timing.</span></div></li>
+          <li><div><b>Learning loop</b><span>After each matchday: score the frozen pre-deadline predictions, update recovery calibration and per-player rates, refit, log the version.</span></div></li>
+        </ol>
+      </div>
+      <div class="panel m-src">
+        <h3>Data behind this run</h3>
+        <div class="srcs" id="srcs"></div>
+        <h3 style="margin-top:18px;">Known limits of this run</h3>
+        <ul class="limits" id="limits"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" aria-labelledby="ru-h">
+    <div class="sec-head">
+      <h2 id="ru-h">Calendar</h2>
+      <p>Every deadline in Indian time. Team lock is the first kick-off of the matchday.</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+</main>
+
+<footer id="foot"></footer>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const D = /*__UFE_DATA__*/null;
+(function () {
+  "use strict";
+  if (!D) { document.querySelector("main").innerHTML = "<p style='padding:40px'>No data embedded. Run <code>python -m ufe dashboard</code>.</p>"; return; }
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const pct = (p, d = 0) => p == null ? "–" : (p * 100).toFixed(d) + "%";
+  const f1 = x => x == null ? "–" : Number(x).toFixed(1);
+  const f2 = x => x == null ? "–" : Number(x).toFixed(2);
+  const eur = x => "€" + Number(x).toFixed(1) + "m";
+  // price as the game shows it: "≈" = estimated from the FPL price, "?" = not in any price list
+  const eurP = p => !p ? "–" : p.ps === "unknown" ? "price ?" : (p.ps === "est_fpl" ? "≈" : "") + eur(p.price);
+  const T = D.teams;
+  const tShort = id => (T[id] && T[id].short) || id;
+  const P = Object.fromEntries(D.players_index.map(p => [p.id, p]));
+  const MDS = D.ev_mds;
+  const POS = ["GK", "DEF", "MID", "FWD"];
+  const FORMS = [[3, 4, 3], [3, 5, 2], [4, 3, 3], [4, 4, 2], [4, 5, 1], [5, 2, 3], [5, 3, 2], [5, 4, 1]];
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("ufe:" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem("ufe:" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
+  };
+  const surname = n => { const s = String(n).split(" "); return s.length > 1 && s[s.length - 1].length > 2 ? s.slice(1).join(" ") : n; };
+  const shortName = n => { const s = surname(n); return s.length > 13 ? s.split(" ").pop() : s; };
+  const weekday = iso => new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  const dayName = iso => iso ? new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" }) : "";
+
+  // ---------------------------------------------------------------- state
+  const now = Date.now();
+  const upcoming = MDS.find(m => Date.parse(D.matchdays[m].deadline_iso) > now) ?? MDS[MDS.length - 1];
+  let MD = store.get("md", null);
+  if (!MDS.includes(MD) || Date.parse(D.matchdays[MD].deadline_iso) < now - 7 * 864e5) MD = upcoming;
+  let boardMode = "best";
+  let formation = null;
+
+  // ---------------------------------------------------------------- tooltip
+  const tip = $("#tip");
+  document.addEventListener("pointermove", e => {
+    const el = e.target.closest("[data-tip]");
+    if (!el) { tip.classList.remove("on"); return; }
+    tip.innerHTML = el.getAttribute("data-tip");
+    tip.classList.add("on");
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+    if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  });
+  document.addEventListener("focusin", e => {
+    const el = e.target.closest("[data-tip]");
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    tip.innerHTML = el.getAttribute("data-tip"); tip.classList.add("on");
+    tip.style.left = Math.min(r.left, innerWidth - tip.offsetWidth - 8) + "px"; tip.style.top = (r.bottom + 6) + "px";
+  });
+  document.addEventListener("focusout", () => tip.classList.remove("on"));
+
+  // ---------------------------------------------------------------- matchday bar + clock
+  function renderMdBar() {
+    $("#mds").innerHTML = MDS.map(m => {
+      const b = D.matchdays[m];
+      const d = new Date(b.deadline_iso);
+      const lab = d.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" });
+      return `<button class="md-btn" aria-pressed="${m === MD}" data-md="${m}">MD${m}<small>${lab}</small></button>`;
+    }).join("");
+    $$("#mds .md-btn").forEach(b => b.addEventListener("click", () => { MD = +b.dataset.md; store.set("md", MD); formation = null; boardMode = "best"; renderAll(); }));
+  }
+  function tickClock() {
+    const b = D.matchdays[MD];
+    const ms = Date.parse(b.deadline_iso) - Date.now();
+    $("#dl-label").textContent = `MD${MD} deadline · ${b.deadline_ist.replace(/^\w+ /, "")}`;
+    if (ms <= 0) { $("#dl-count").textContent = "Locked"; return; }
+    const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
+    $("#dl-count").textContent = d > 0 ? `${d}d ${h}h ${mi}m` : `${h}h ${String(mi).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+  }
+
+  // ---------------------------------------------------------------- the board
+  const PITCH = { w: 420, h: 560 };
+  function pitchSvg(inner) {
+    const L = "var(--board-line)";
+    return `<svg viewBox="0 0 ${PITCH.w} ${PITCH.h}" role="img" aria-label="Recommended starting eleven on a tactics board">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--note)"/></marker>
+      </defs>
+      <g fill="none" stroke="${L}" stroke-width="2" stroke-linecap="round">
+        <rect x="16" y="16" width="${PITCH.w - 32}" height="${PITCH.h - 32}" rx="4"/>
+        <line x1="16" y1="${PITCH.h / 2}" x2="${PITCH.w - 16}" y2="${PITCH.h / 2}"/>
+        <circle cx="${PITCH.w / 2}" cy="${PITCH.h / 2}" r="52"/>
+        <rect x="${PITCH.w / 2 - 92}" y="16" width="184" height="78"/>
+        <rect x="${PITCH.w / 2 - 44}" y="16" width="88" height="28"/>
+        <rect x="${PITCH.w / 2 - 92}" y="${PITCH.h - 94}" width="184" height="78"/>
+        <rect x="${PITCH.w / 2 - 44}" y="${PITCH.h - 44}" width="88" height="28"/>
+        <path d="M ${PITCH.w / 2 - 34} 94 A 46 46 0 0 0 ${PITCH.w / 2 + 34} 94"/>
+        <path d="M ${PITCH.w / 2 - 34} ${PITCH.h - 94} A 46 46 0 0 1 ${PITCH.w / 2 + 34} ${PITCH.h - 94}"/>
+      </g>
+      <circle cx="${PITCH.w / 2}" cy="${PITCH.h / 2}" r="3" fill="${L}"/>
+      ${inner}
+    </svg>`;
+  }
+  function layoutXI(xi) {
+    const rows = { FWD: 96, MID: 222, DEF: 352, GK: 478 };
+    const by = { GK: [], DEF: [], MID: [], FWD: [] };
+    xi.forEach(id => by[P[id].pos].push(id));
+    const pos = {};
+    for (const k of POS) {
+      const n = by[k].length;
+      by[k].sort((a, b) => (P[a].team > P[b].team ? 1 : -1));
+      by[k].forEach((id, i) => { pos[id] = { x: 30 + (PITCH.w - 60) * (i + 0.5) / n, y: rows[k] }; });
+    }
+    return pos;
+  }
+  function magnet(id, p, opts) {
+    const pl = P[id];
+    const md = D.matchdays[MD];
+    const pr = (md.players.find(x => x.id === id) || {});
+    const xp = opts.ev != null ? opts.ev : pr.xpts;
+    const day = (D.days[MD] || {})[id];
+    const dayLab = day ? (md.fixtures.find(f => f.day === day) || {}).date : null;
+    const capRing = opts.captain ? `<circle cx="${p.x}" cy="${p.y}" r="27" fill="none" stroke="var(--note)" stroke-width="2.5"/><g transform="translate(${p.x + 19},${p.y - 21})"><circle r="9" fill="var(--note)"/><text text-anchor="middle" dy="4" font-size="11" font-weight="800" fill="var(--board)" font-family="var(--f-body)">C</text></g>` : "";
+    const tipTxt = `<b>${esc(pl.name)}</b> · ${esc(tShort(pl.team))} · ${pl.pos} · ${eurP(pl)}<br>xPts ${f1(xp)} · start ${pct(pr.p_start_sim)} · goal ${pct(pr.p_goal)}${pr.src ? "<br><span style='opacity:.75'>" + esc(pr.src) + "</span>" : ""}`;
+    return `<g class="mag" tabindex="0" data-tip="${esc(tipTxt)}">
+      ${capRing}
+      <circle cx="${p.x}" cy="${p.y + 2}" r="22" fill="rgba(0,0,0,.18)"/>
+      <circle cx="${p.x}" cy="${p.y}" r="22" fill="var(--magnet)"/>
+      <circle cx="${p.x}" cy="${p.y}" r="22" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+      <text x="${p.x}" y="${p.y + 5}" text-anchor="middle" font-size="15" font-weight="700" fill="var(--magnet-ink)" font-family="var(--f-body)" style="font-variant-numeric:tabular-nums">${f1(xp)}</text>
+      <text x="${p.x}" y="${p.y + 40}" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)" font-family="var(--f-body)">${esc(shortName(pl.name))}</text>
+      <text x="${p.x}" y="${p.y + 54}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="var(--f-body)">${esc(opts.compact ? pl.team : tShort(pl.team))}${dayLab ? " · " + dayName(dayLab) : ""}</text>
+    </g>`;
+  }
+  function currentSquad() {
+    const b = D.matchdays[MD];
+    if (boardMode === "limitless" && b.limitless) return { sol: b.limitless, label: "Limitless: no budget limit, this matchday only" };
+    if (formation && b.by_formation[formation]) return { sol: b.by_formation[formation], label: `Best €${D.rules.budget.league_phase}m squad in a ${formation}` };
+    return { sol: b.best, label: `Best €${D.rules.budget.league_phase}m squad (${b.best.formation})` };
+  }
+  function renderBoard() {
+    const b = D.matchdays[MD];
+    const { sol, label } = currentSquad();
+    const evs = Object.fromEntries(b.players.map(p => [p.id, p.xpts]));
+    const pos = layoutXI(sol.xi);
+    const perLine = {};
+    sol.xi.forEach(id => { const y = Math.round(pos[id].y); perLine[y] = (perLine[y] || 0) + 1; });
+    let inner = sol.xi.map(id => magnet(id, pos[id], { captain: id === sol.captain, ev: evs[id], compact: perLine[Math.round(pos[id].y)] >= 5 })).join("");
+    // marker arrow for the captain switch rule (recommended squad only)
+    const rule = (boardMode === "best" && !formation && b.best.policy) ? (b.best.policy.rules || []).find(r => r.kind === "captain") : null;
+    if (rule && pos[rule.captain] && pos[rule.to]) {
+      const a = pos[rule.captain], c = pos[rule.to];
+      const top = Math.min(a.y, c.y);
+      const cy = 2 * (top - 46) - 0.5 * (a.y - 26) - 0.5 * (c.y - 28);
+      const cx = (a.x + c.x) / 2;
+      const thr = Math.max(Math.ceil(rule.threshold) - 1, 0);
+      inner += `<path class="draw" d="M ${a.x} ${a.y - 26} Q ${cx} ${cy} ${c.x} ${c.y - 28}" fill="none" stroke="var(--note)" stroke-width="2.4" stroke-linecap="round" marker-end="url(#ah)"/>`;
+      $("#board-plan").innerHTML = `<i aria-hidden="true">→</i><span>${esc(shortName(P[rule.captain].name))} scores ${thr} or fewer on ${esc(dayName((b.fixtures.find(f => f.day === (D.days[MD] || {})[rule.captain]) || {}).date))}? Move the armband to ${esc(shortName(P[rule.to].name))}.</span>`;
+      $("#board-plan").hidden = false;
+    } else { $("#board-plan").hidden = true; }
+    $("#board-svg").innerHTML = pitchSvg(inner);
+    $("#bench").innerHTML = sol.bench.map((id, i) => {
+      const p = P[id];
+      const day = (D.days[MD] || {})[id];
+      const dd = day ? dayName((b.fixtures.find(f => f.day === day) || {}).date) : "";
+      return `<div class="slot" data-tip="${esc(`<b>${esc(p.name)}</b> · ${esc(tShort(p.team))} · ${p.pos} · ${eurP(p)}<br>xPts ${f1(evs[id])}`)}" tabindex="0">
+        <span class="ord">${p.pos === "GK" ? "G" : i + 1}</span>
+        <span class="who"><b>${esc(shortName(p.name))}</b><span>${esc(tShort(p.team))} · ${dd} · ${f1(evs[id])}</span></span></div>`;
+    }).join("");
+    $("#board-caption").textContent = `${label} · €${Number(sol.cost).toFixed(1)}m`;
+    const modes = [["best", "Recommended"]].concat(b.limitless ? [["limitless", "Limitless"]] : []);
+    $("#board-mode").innerHTML = modes.map(([k, l]) => `<button aria-pressed="${boardMode === k && !formation}" data-mode="${k}">${l}</button>`).join("");
+    $$("#board-mode button").forEach(x => x.addEventListener("click", () => { boardMode = x.dataset.mode; formation = null; renderBoard(); renderReadout(); renderChecks(); }));
+    $("#formations").innerHTML = Object.keys(b.by_formation).map(f => {
+      const s = b.by_formation[f];
+      return `<button aria-pressed="${formation === f}" data-f="${f}" data-tip="${esc(`${f}: XI worth ${f1(s.ev_xi)} xPts incl. captain`)}">${f}</button>`;
+    }).join("");
+    $$("#formations button").forEach(x => x.addEventListener("click", () => { formation = formation === x.dataset.f ? null : x.dataset.f; boardMode = "best"; renderBoard(); renderReadout(); renderChecks(); }));
+  }
+
+  function renderReadout() {
+    const b = D.matchdays[MD];
+    const { sol } = currentSquad();
+    const pol = (boardMode === "best" && !formation) ? b.best.policy : null;
+    const evs = Object.fromEntries(b.players.map(p => [p.id, p]));
+    const evXI = sol.ev_xi;
+    $("#ev-big").textContent = f1(pol ? pol.ev_active : evXI);
+    $("#ev-cap").innerHTML = pol
+      ? `expected points with the switch plan · <b>${f1(pol.ev_passive)}</b> if you set it and leave it`
+      : `expected points from this XI incl. the captain's double`;
+    const q = pol ? pol.dist_active : null;
+    if (q) {
+      const lo = Math.min(q[0], 20), hi = Math.max(q[4], lo + 40);
+      const X = v => ((v - lo) / (hi - lo) * 100).toFixed(2) + "%";
+      $("#dist").innerHTML = `<div class="track"></div><div class="band" style="left:${X(q[0])};width:calc(${X(q[4])} - ${X(q[0])})"></div>
+        <div class="iqr" style="left:${X(q[1])};width:calc(${X(q[3])} - ${X(q[1])})" data-tip="Middle half of outcomes: ${q[1]}–${q[3]} pts"></div>
+        <span class="tick" style="left:${X(q[0])}">${q[0]}</span><span class="tick" style="left:${X(q[2])}">${q[2]}</span><span class="tick" style="left:${X(q[4])}">${q[4]}</span>`;
+      $("#dist").hidden = false;
+    } else { $("#dist").hidden = true; }
+    const cap = P[sol.captain];
+    const days = b.days.length;
+    $("#kv").innerHTML = `
+      <div><span>Captain</span><b>${esc(shortName(cap.name))}</b></div>
+      <div><span>Squad cost</span><b>€${Number(sol.cost).toFixed(1)}m</b></div>
+      <div><span>Matchday spread</span><b>${days} day${days > 1 ? "s" : ""}</b></div>`;
+    const notes = [];
+    if (pol) {
+      const rules = pol.rules || [];
+      rules.filter(r => r.kind === "captain").forEach(r => notes.push(["→", r.text]));
+      const groups = {};
+      rules.filter(r => r.kind === "sub").forEach(r => { const k = r.into + "|" + Math.max(Math.ceil(r.threshold) - 1, 0); (groups[k] = groups[k] || []).push(r.out); });
+      Object.entries(groups).forEach(([k, outs]) => {
+        const [into, thr] = k.split("|");
+        const e = (b.players.find(p => p.id === into) || {}).xpts;
+        notes.push(["⇄", `Bring on ${shortName(P[into].name)} (${dayName((b.fixtures.find(f => f.day === (D.days[MD] || {})[into]) || {}).date)}, expects ${f1(e)}) for the first early starter who scores ${thr} or fewer: ${outs.map(o => shortName(P[o].name)).join(", ")}.`]);
+      });
+      rules.filter(r => r.kind === "autosub_cost" || r.kind === "info").forEach(r => notes.push([r.kind === "info" ? "·" : "!", r.text]));
+      if (pol.uplift > 0.05) notes.push(["+", `Following the plan adds ${f1(pol.uplift)} expected points over doing nothing after the first day.`]);
+    } else if (boardMode === "limitless") {
+      notes.push(["·", "Limitless lifts the budget for one matchday; your squad returns afterwards. Club cap still applies."]);
+    } else {
+      notes.push(["·", "Formation view: the best 15 if you commit to this shape. The switch plan is computed for the recommended squad."]);
+    }
+    $("#notes").innerHTML = notes.map(([i, t]) => `<div class="note"><i>${i}</i><span>${esc(t)}</span></div>`).join("");
+    const cp = b.best.captain_policy || [];
+    const top = b.captains.filter(c => (P[c.id] || {}).ps !== "unknown").slice(0, 8);
+    $("#caps").innerHTML = `<tr><th>Player</th><th>Day</th><th class="r">xPts</th><th class="r">Haul ≥10</th><th class="r">Team total as captain</th></tr>` +
+      top.map(c => {
+        const pc = cp.find(x => x.id === c.id);
+        const isPick = c.id === b.best.captain;
+        const dd = dayName((b.fixtures.find(f => f.day === c.day) || {}).date);
+        return `<tr class="${isPick ? "pick" : ""}"><td>${esc(c.name)} <span class="muted">${esc(tShort(c.team))}</span></td><td>${dd}</td>
+          <td class="r num">${f1(c.xpts)}</td><td class="r num">${pct(c.p_haul)}</td><td class="r num">${pc ? f1(pc.ev_policy) : '<span class="muted">not in XI</span>'}</td></tr>`;
+      }).join("");
+  }
+
+  // ---------------------------------------------------------------- fixtures
+  function fxCard(f) {
+    const done = f.status === "FT";
+    const ph = f.p_home, pd = f.p_draw, pa = f.p_away;
+    const top = f.top_scores[0];
+    return `<button class="fx" aria-expanded="false" data-id="${f.fixture_id}">
+      <span class="fx-top"><span>${esc(f.kickoff_ist)} IST</span><span>${done ? `Final ${f.home_goals}–${f.away_goals}` : f.lambda_source === "model+market" ? "model + market" : "model"}</span></span>
+      <span class="fx-teams">
+        <span class="t">${esc(tShort(f.home))}</span>
+        <span class="xg">xG<b>${f2(f.xg_home)} – ${f2(f.xg_away)}</b></span>
+        <span class="t a">${esc(tShort(f.away))}</span>
+      </span>
+      <span class="pbar" role="img" aria-label="Home ${pct(ph)}, draw ${pct(pd)}, away ${pct(pa)}">
+        <span style="flex:${ph};background:var(--home)" data-tip="${esc(T[f.home].name)} win ${pct(ph, 1)}"></span>
+        <span style="flex:${pd};background:var(--draw)" data-tip="Draw ${pct(pd, 1)}"></span>
+        <span style="flex:${pa};background:var(--away)" data-tip="${esc(T[f.away].name)} win ${pct(pa, 1)}"></span>
+      </span>
+      <span class="plabels"><span><i class="sw" style="background:var(--home)"></i>${pct(ph)}</span><span class="muted">draw ${pct(pd)}</span><span>${pct(pa)}<i class="sw" style="background:var(--away)"></i></span></span>
+      <span class="fx-meta"><span>Clean sheet <b>${pct(f.cs_home)}</b> / <b>${pct(f.cs_away)}</b></span><span>Likeliest <b>${top[0]}–${top[1]}</b> (${pct(top[2])})</span><span>Both score <b>${pct(f.btts)}</b></span></span>
+    </button>`;
+  }
+  function fxDetail(f) {
+    const g = f.grid;
+    const mx = Math.max(...g.flat());
+    let heat = `<div class="h"></div>` + [0, 1, 2, 3, 4, 5].map(a => `<div class="h">${a}</div>`).join("");
+    for (let h = 0; h < 6; h++) {
+      heat += `<div class="h">${h}</div>`;
+      for (let a = 0; a < 6; a++) {
+        const v = g[h][a], t = mx ? v / mx : 0;
+        const bg = `color-mix(in oklab, var(--heat-hi) ${Math.round(8 + 82 * t)}%, var(--panel-2))`;
+        const ink = t > 0.55 ? "var(--accent-ink)" : "var(--ink-2)";
+        heat += `<div class="c" style="background:${bg};color:${ink}" data-tip="${esc(tShort(f.home))} ${h}–${a} ${esc(tShort(f.away))}: ${pct(v, 1)}">${v >= 0.03 ? Math.round(v * 100) : ""}</div>`;
+      }
+    }
+    const sc = f.scorers.map(s => `<tr><td>${esc(s.name)} <span class="muted">${esc(tShort(s.team))}</span></td><td class="barcell"><div class="hb"><i style="width:${Math.min(100, s.p_goal * 160)}%"></i></div></td><td class="r">${pct(s.p_goal)}</td></tr>`).join("");
+    const pm = f.potm.map(s => `<tr><td>${esc(s.name)} <span class="muted">${esc(tShort(s.team))}</span></td><td class="r">${pct(s.p)}</td></tr>`).join("")
+      + `<tr><td class="muted">Players not in the price list</td><td class="r muted">${pct(f.potm_unlisted)}</td></tr>`;
+    const lu = side => (f.lineups[side] || []).slice(0, 18).map(p => `<li class="${p.p_start < 0.5 ? "dim" : ""}"><span class="pos">${p.pos}</span><span>${esc(shortName(p.name))}</span><span class="ps">${pct(p.p_start)}</span></li>`).join("");
+    return `<div class="fx-detail">
+      <div><h4>Scoreline chances (%), ${esc(tShort(f.home))} down the side</h4><div class="heat">${heat}</div></div>
+      <div><h4>Anytime scorer</h4><table class="mini">${sc}</table><h4 style="margin-top:14px;">Player of the Match</h4><table class="mini">${pm}</table></div>
+      <div><h4>Predicted line-ups (chance to start)</h4><div class="lu"><div><b style="font-size:13px">${esc(tShort(f.home))}</b><ul>${lu("home")}</ul></div><div><b style="font-size:13px">${esc(tShort(f.away))}</b><ul>${lu("away")}</ul></div></div>
+      ${newsLine(f)}
+      <p class="muted" style="font-size:12px;margin-top:8px;">Chance to start blends the model with the published predicted XI; confirmed XIs replace both about an hour before kick-off.</p></div>
+    </div>`;
+  }
+  function newsLine(f) {
+    const n = f.news || {};
+    const part = side => {
+      const x = n[side] || {}, bits = [];
+      if ((x.out || []).length) bits.push(`out: ${x.out.map(esc).join(", ")}`);
+      if ((x.susp || []).length) bits.push(`suspended: ${x.susp.map(esc).join(", ")}`);
+      if ((x.doubt || []).length) bits.push(`doubtful: ${x.doubt.map(esc).join(", ")}`);
+      return bits.length ? `<div><b style="font-size:12.5px">${esc(tShort(f[side]))}</b> <span class="muted" style="font-size:12.5px">${bits.join("; ")}</span></div>` : "";
+    };
+    const h = part("home") + part("away");
+    return h ? `<div style="display:grid;gap:4px;margin-top:10px">${h}</div>` : "";
+  }
+  function renderChecks() {
+    const b = D.matchdays[MD];
+    const all = b.price_checks || [];
+    // keep rows where the price is a live question: estimated prices in the best squad, and
+    // unpriced players who would enter at or above the price we would guess for them
+    const rows = all.filter(r => r.status === "est_fpl" ? r.in_best : (r.breakeven != null && r.breakeven >= r.price_used));
+    const box = $("#checks-panel");
+    if (!rows.length && !b.verified) { box.hidden = true; return; }
+    box.hidden = false;
+    const verdict = r => r.breakeven == null ? "Not worth a place at any price"
+      : `${r.in_best ? "Stays in the best squad" : "Belongs in the best squad"} at ${eur(r.breakeven)} or less`;
+    $("#checks").innerHTML = `<thead><tr><th>Player</th><th class="r">xPts</th><th>What the price decides</th></tr></thead><tbody>${rows.map(r => `<tr>
+      <td><b>${esc(shortName(r.name))}</b> <span class="muted">${esc(tShort(r.team))} · ${r.pos}</span><br><span class="muted" style="font-size:12px">${r.status === "est_fpl" ? "estimated " + eur(r.price_used) : "not in any price list"}</span></td>
+      <td class="r">${f1(r.xpts)}</td><td>${verdict(r)}</td></tr>`).join("")}</tbody>`;
+    const v = b.verified;
+    const hidden = all.length - rows.length;
+    $("#checks-alt").innerHTML = (v ? `Using published prices only, the best XI is ${v.xi.map(id => esc(shortName(P[id].name))).join(", ")} (${f1(v.ev_xi)} expected points against ${f1(b.best.ev_xi)}). ` : "")
+      + (hidden > 0 ? `${hidden} more player${hidden > 1 ? "s" : ""} would only enter below the price they are likely to cost.` : "");
+  }
+  function renderNews() {
+    const b = D.matchdays[MD];
+    const ch = b.news_changes || [];
+    const box = $("#news-panel");
+    if (!ch.length) { box.hidden = true; return; }
+    box.hidden = false;
+    $("#news-src").textContent = `Source: ${D.meta.news_files[String(MD)] || "team news file"} (UEFA.com predicted line-ups, injuries and suspensions). Named starters move up, players left out or doubtful move down.`;
+    const lab = n => n.includes("out") ? "out" : n.includes("susp") ? "suspended" : n.includes("doubt") ? "doubtful" : n.includes("start") ? "named to start" : "not in the predicted XI";
+    $("#news-list").innerHTML = ch.slice(0, 16).map(c => `<div class="news-row"><span><b>${esc(shortName(c.name))}</b> <span class="muted">${esc(tShort(c.team))}</span></span><span class="num">${pct(c.before)} → <b>${pct(c.after)}</b></span><span class="muted">${esc(lab(c.news))}</span></div>`).join("");
+  }
+  function renderFixtures() {
+    const b = D.matchdays[MD];
+    const byDay = {};
+    b.fixtures.forEach(f => (byDay[f.day] = byDay[f.day] || []).push(f));
+    $("#days").innerHTML = Object.keys(byDay).sort().map(d => {
+      const fx = byDay[d];
+      return `<div><div class="day-head"><h3>${weekday(fx[0].date)}</h3><span class="muted">Day ${d} · ${fx.length} matches</span></div>
+        <div class="fx-grid" data-day="${d}">${fx.map(fxCard).join("")}</div></div>`;
+    }).join("");
+    $$("#days .fx").forEach(btn => btn.addEventListener("click", () => {
+      const grid = btn.parentElement;
+      const open = btn.getAttribute("aria-expanded") === "true";
+      $$(".fx-detail", grid).forEach(x => x.remove());
+      $$(".fx", grid).forEach(x => x.setAttribute("aria-expanded", "false"));
+      if (open) return;
+      btn.setAttribute("aria-expanded", "true");
+      const f = b.fixtures.find(x => x.fixture_id === btn.dataset.id);
+      // insert after the last card in the same visual row
+      const cards = $$(".fx", grid);
+      const top = btn.offsetTop;
+      let last = btn;
+      cards.forEach(c => { if (c.offsetTop === top) last = c; });
+      last.insertAdjacentHTML("afterend", fxDetail(f));
+    }));
+  }
+
+  // ---------------------------------------------------------------- players table
+  let plSort = { key: "xpts", dir: -1 }, plPos = "ALL", plLimit = 60;
+  const COLS = [
+    ["name", "Player"], ["price", "€m"], ["xpts", "xPts"], ["range", "Range"], ["p_start_sim", "Start"], ["p_goal", "Goal"],
+    ["p_assist", "Assist"], ["xrec", "Recov."], ["p_cs", "Clean sheet"], ["p_potm", "POTM"], ["p_haul", "≥10 pts"], ["value", "xPts/€m"], ["day", "Day"], ["src", "Data"]
+  ];
+  function renderPlayers() {
+    const b = D.matchdays[MD];
+    const q = $("#pl-search").value.trim().toLowerCase();
+    const team = $("#pl-team").value;
+    const maxP = +$("#pl-price").value;
+    const starters = $("#pl-starters").checked;
+    let rows = b.players.filter(p => (plPos === "ALL" || p.pos === plPos) && (!team || p.team === team) && p.price <= maxP
+      && (!starters || p.p_start_sim >= 0.6) && (!q || p.name.toLowerCase().includes(q) || tShort(p.team).toLowerCase().includes(q) || p.team.toLowerCase() === q));
+    const k = plSort.key === "range" ? "p90" : plSort.key;
+    rows.sort((a, c) => {
+      const x = a[k], y = c[k];
+      if (typeof x === "string") return plSort.dir * x.localeCompare(y);
+      return plSort.dir * ((x ?? -1) - (y ?? -1));
+    });
+    const maxR = Math.max(16, ...b.players.map(p => p.p90));
+    const dayOfFx = d => dayName((b.fixtures.find(f => f.day === d) || {}).date);
+    const head = `<tr>${COLS.map(([key, lab]) => `<th data-k="${key}" ${plSort.key === key ? `aria-sort="${plSort.dir < 0 ? "descending" : "ascending"}"` : ""}>${lab}${plSort.key === key ? (plSort.dir < 0 ? " ↓" : " ↑") : ""}</th>`).join("")}</tr>`;
+    const body = rows.slice(0, plLimit).map(p => {
+      const X = v => (Math.max(v, 0) / maxR * 100).toFixed(1) + "%";
+      return `<tr>
+        <td class="pname"><span class="pos-tag">${p.pos}</span><b>${esc(p.name)}</b><small>${esc(tShort(p.team))}</small></td>
+        <td>${p.ps === "unknown" ? `<span class="muted" data-tip="Not in any price list yet: simulated, never picked">?</span>` : (p.ps === "est_fpl" ? `<span data-tip="Estimated from the FPL price: check in the app">≈${Number(p.price).toFixed(1)}</span>` : Number(p.price).toFixed(1))}</td><td><b>${f2(p.xpts)}</b></td>
+        <td><span class="range" data-tip="${esc(`10th pct ${p.p10} · median ${p.p50} · 90th pct ${p.p90} · mean ${f1(p.xpts)}`)}"><span class="ln" style="left:${X(p.p10)};width:calc(${X(p.p90)} - ${X(p.p10)})"></span><span class="md" style="left:${X(p.p50)}"></span><span class="mn" style="left:${X(p.xpts)}"></span></span></td>
+        <td>${pct(p.p_start_sim)}</td><td>${pct(p.p_goal)}</td><td>${pct(p.p_assist)}</td><td>${f1(p.xrec)}</td><td>${p.pos === "FWD" ? "–" : pct(p.p_cs)}</td><td>${pct(p.p_potm, 1)}</td><td>${pct(p.p_haul)}</td><td>${f2(p.value)}</td><td>${dayOfFx(p.day)}</td>
+        <td><span class="src" title="${esc(p.src)}">${esc(p.src)}</span></td></tr>`;
+    }).join("");
+    $("#pl-table").innerHTML = `<thead>${head}</thead><tbody>${body || `<tr><td colspan="${COLS.length}" style="text-align:left;padding:16px">No players match these filters. Clear the search or raise the price limit.</td></tr>`}</tbody>`;
+    $$("#pl-table th").forEach(th => th.addEventListener("click", () => {
+      const key = th.dataset.k;
+      plSort = { key, dir: plSort.key === key ? -plSort.dir : (key === "name" ? 1 : -1) };
+      renderPlayers();
+    }));
+    $("#pl-more").hidden = rows.length <= plLimit;
+    $("#pl-more").textContent = `Show ${Math.min(60, rows.length - plLimit)} more of ${rows.length - plLimit}`;
+  }
+  function setupPlayerFilters() {
+    $("#pos-filter").innerHTML = ["ALL", ...POS].map(p => `<button aria-pressed="${p === plPos}" data-p="${p}">${p === "ALL" ? "All" : p}</button>`).join("");
+    $$("#pos-filter button").forEach(b => b.addEventListener("click", () => { plPos = b.dataset.p; plLimit = 60; $$("#pos-filter button").forEach(x => x.setAttribute("aria-pressed", x === b)); renderPlayers(); }));
+    $("#pl-team").innerHTML = `<option value="">All clubs</option>` + Object.keys(T).sort((a, c) => T[a].name.localeCompare(T[c].name)).map(t => `<option value="${t}">${esc(T[t].name)}</option>`).join("");
+    ["input", "change"].forEach(ev => {
+      $("#pl-search").addEventListener(ev, () => { plLimit = 60; renderPlayers(); });
+      $("#pl-team").addEventListener(ev, () => { plLimit = 60; renderPlayers(); });
+      $("#pl-starters").addEventListener(ev, () => { plLimit = 60; renderPlayers(); });
+    });
+    $("#pl-price").addEventListener("input", () => { $("#pl-price-v").textContent = eur($("#pl-price").value); renderPlayers(); });
+    $("#pl-more").addEventListener("click", () => { plLimit += 60; renderPlayers(); });
+  }
+
+  // ---------------------------------------------------------------- my team (planner runs in the browser)
+  const LEAGUE_BUDGET = D.rules.budget.league_phase;
+  const CAP = 3;
+  let squad = store.get("squad", null);
+  const exampleSquad = () => D.matchdays[MDS.includes(upcoming) ? upcoming : MDS[0]].best.squad.slice();
+  let isExample = false;
+  if (!Array.isArray(squad) || !squad.every(id => P[id])) { squad = exampleSquad(); isExample = true; }
+  const evOf = (id, md) => { const a = D.ev[id]; const i = MDS.indexOf(md); return a && i >= 0 ? (a[i] || 0) : 0; };
+  function bestXI(ids, md) {
+    const by = { GK: [], DEF: [], MID: [], FWD: [] };
+    ids.forEach(id => by[P[id].pos].push(id));
+    for (const k of POS) by[k].sort((a, b) => evOf(b, md) - evOf(a, md));
+    let best = null;
+    for (const [d, m, f] of FORMS) {
+      if (by.GK.length < 1 || by.DEF.length < d || by.MID.length < m || by.FWD.length < f) continue;
+      const xi = [by.GK[0], ...by.DEF.slice(0, d), ...by.MID.slice(0, m), ...by.FWD.slice(0, f)];
+      let s = 0, cap = xi[0];
+      xi.forEach(id => { const e = evOf(id, md); s += e; if (e > evOf(cap, md)) cap = id; });
+      s += evOf(cap, md);
+      if (!best || s > best.ev) best = { xi, cap, ev: s, form: `${d}-${m}-${f}` };
+    }
+    return best;
+  }
+  const horizonMds = () => { const h = +$("#tm-horizon").value || 3; return MDS.filter(m => m >= MD).slice(0, h); };
+  const DECAY = 0.82;
+  function horizonEV(ids, mds) { let s = 0; mds.forEach((m, i) => { const b = bestXI(ids, m); s += (b ? b.ev : 0) * Math.pow(DECAY, i); }); return s; }
+  function squadIssues(ids) {
+    const want = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
+    const cnt = { GK: 0, DEF: 0, MID: 0, FWD: 0 }, club = {};
+    ids.forEach(id => { cnt[P[id].pos]++; club[P[id].team] = (club[P[id].team] || 0) + 1; });
+    const out = [];
+    POS.forEach(p => { if (cnt[p] !== want[p]) out.push(`${p} ${cnt[p]}/${want[p]}`); });
+    Object.entries(club).forEach(([t, n]) => { if (n > CAP) out.push(`${n} from ${tShort(t)} (max ${CAP})`); });
+    return out;
+  }
+  const cost = ids => ids.reduce((s, id) => s + P[id].price, 0);
+  function renderSquad() {
+    const by = { GK: [], DEF: [], MID: [], FWD: [] };
+    squad.forEach(id => by[P[id].pos].push(id));
+    const want = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
+    $("#tm-squad").innerHTML = POS.map(p => `<div class="squad-row"><span>${p}</span><div class="ps">${by[p].map(id => `<span class="pp">${esc(shortName(P[id].name))} <small>${esc(tShort(P[id].team))} ${Number(P[id].price).toFixed(1)}</small><button aria-label="Remove ${esc(P[id].name)}" data-rm="${id}">×</button></span>`).join("")}${Array.from({ length: Math.max(0, want[p] - by[p].length) }, () => `<span class="pp empty">empty</span>`).join("")}</div></div>`).join("");
+    $$("#tm-squad [data-rm]").forEach(b => b.addEventListener("click", () => { squad = squad.filter(x => x !== b.dataset.rm); isExample = false; saveSquad(); renderTeam(); }));
+  }
+  function saveSquad() { store.set("squad", squad); }
+  function setupPicker() {
+    const inp = $("#tm-search"), res = $("#tm-results");
+    const show = () => {
+      const q = inp.value.trim().toLowerCase();
+      if (!q) { res.hidden = true; return; }
+      const want = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
+      const cnt = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+      squad.forEach(id => cnt[P[id].pos]++);
+      const hits = D.players_index.filter(p => !squad.includes(p.id) && (p.name.toLowerCase().includes(q) || tShort(p.team).toLowerCase().includes(q) || p.team.toLowerCase() === q))
+        .sort((a, b) => evOf(b.id, MD) - evOf(a.id, MD)).slice(0, 30);
+      res.innerHTML = hits.length ? hits.map(p => {
+        const full = cnt[p.pos] >= want[p.pos];
+        return `<button data-add="${p.id}" ${full ? "disabled" : ""}><span class="pos-tag">${p.pos}</span><span>${esc(p.name)} <span class="muted">${esc(tShort(p.team))}</span></span><span class="num">${p.ps === "unknown" ? "€?" : (p.ps === "est_fpl" ? "≈" : "") + "€" + p.price.toFixed(1)}</span><span class="num muted">${f1(evOf(p.id, MD))}</span></button>`;
+      }).join("") : `<div style="padding:10px 12px" class="muted">No player matches “${esc(q)}”.</div>`;
+      res.hidden = false;
+      $$("[data-add]", res).forEach(b => b.addEventListener("click", () => {
+        if (squad.length >= 15) return;
+        squad.push(b.dataset.add); isExample = false; saveSquad(); inp.value = ""; res.hidden = true; renderTeam(); inp.focus();
+      }));
+    };
+    inp.addEventListener("input", show);
+    inp.addEventListener("focus", show);
+    document.addEventListener("click", e => { if (!e.target.closest(".picker")) res.hidden = true; });
+    $("#tm-example").addEventListener("click", () => { squad = exampleSquad(); isExample = true; saveSquad(); renderTeam(); });
+    $("#tm-clear").addEventListener("click", () => { squad = []; isExample = false; saveSquad(); renderTeam(); });
+    ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => $("#" + id).addEventListener("change", () => { store.set(id, $("#" + id).value); renderTeam(); }));
+    ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => { const v = store.get(id, null); if (v != null) $("#" + id).value = v; });
+  }
+  function transferIdeas(mds) {
+    const bank = +$("#tm-bank").value || 0, ft = Math.max(0, +$("#tm-ft").value || 0);
+    const base = horizonEV(squad, mds);
+    const club = {};
+    squad.forEach(id => club[P[id].team] = (club[P[id].team] || 0) + 1);
+    const pool = {};
+    POS.forEach(p => {
+      pool[p] = D.players_index.filter(x => x.pos === p && !squad.includes(x.id) && x.ps !== "unknown")
+        .map(x => ({ id: x.id, s: mds.reduce((a, m, i) => a + evOf(x.id, m) * Math.pow(DECAY, i), 0) }))
+        .sort((a, b) => b.s - a.s).slice(0, 40).map(x => x.id);
+    });
+    const singles = [];
+    squad.forEach(out => {
+      const p = P[out];
+      pool[p.pos].forEach(inn => {
+        const q = P[inn];
+        if (q.price > p.price + bank + 1e-9) return;
+        if (q.team !== p.team && (club[q.team] || 0) >= CAP) return;
+        const ns = squad.map(x => x === out ? inn : x);
+        singles.push({ out: [out], inn: [inn], gain: horizonEV(ns, mds) - base });
+      });
+    });
+    singles.sort((a, b) => b.gain - a.gain);
+    const bestPerOut = [];
+    const seen = new Set();
+    for (const s of singles) { const k = s.out[0] + ">" + s.inn[0]; if (!seen.has(k)) { seen.add(k); bestPerOut.push(s); } if (bestPerOut.length >= 30) break; }
+    const doubles = [];
+    for (let i = 0; i < bestPerOut.length; i++) for (let j = i + 1; j < bestPerOut.length; j++) {
+      const a = bestPerOut[i], b = bestPerOut[j];
+      if (a.out[0] === b.out[0] || a.inn[0] === b.inn[0]) continue;
+      const outs = [a.out[0], b.out[0]], ins = [a.inn[0], b.inn[0]];
+      const ns = squad.map(x => x === outs[0] ? ins[0] : x === outs[1] ? ins[1] : x);
+      if (cost(ns) > cost(squad) + bank + 1e-9) continue;
+      const cl = {}; let ok = true;
+      ns.forEach(id => { cl[P[id].team] = (cl[P[id].team] || 0) + 1; if (cl[P[id].team] > CAP) ok = false; });
+      if (!ok) continue;
+      doubles.push({ out: outs, inn: ins, gain: horizonEV(ns, mds) - base });
+    }
+    doubles.sort((a, b) => b.gain - a.gain);
+    const hit = n => Math.max(0, n - ft) * 4;
+    const pick = [];
+    const s1 = singles.find(s => true);
+    if (s1) pick.push({ ...s1, net: s1.gain - hit(1) });
+    singles.slice(1, 3).forEach(s => pick.push({ ...s, net: s.gain - hit(1) }));
+    doubles.slice(0, 3).forEach(s => pick.push({ ...s, net: s.gain - hit(2) }));
+    pick.sort((a, b) => b.net - a.net);
+    return { base, pick, ft };
+  }
+  function renderTeam() {
+    try { renderHalftime(); } catch (e) { /* half-time panel is optional */ }
+    renderSquad();
+    const issues = squadIssues(squad);
+    const c = cost(squad);
+    const st = $("#tm-status");
+    if (squad.length !== 15 || issues.length) {
+      st.className = "status-line bad";
+      st.textContent = squad.length < 15 ? `${15 - squad.length} more to add (${issues.join(", ")}).` : `Fix the squad: ${issues.join(", ")}.`;
+      $("#tm-xi").innerHTML = ""; $("#tm-notes").innerHTML = ""; $("#tm-tx").innerHTML = "";
+      $("#tm-xi-sub").textContent = "The planner starts once the squad has 2 GK, 5 DEF, 5 MID and 3 FWD.";
+      $("#tm-tx-sub").textContent = "";
+      renderChips();
+      return;
+    }
+    st.className = "status-line good";
+    st.textContent = `${isExample ? "Example squad: the engine's own pick. Replace it with yours. " : ""}Squad value €${c.toFixed(1)}m · ${15} players`;
+    const b = bestXI(squad, MD);
+    const md = D.matchdays[MD];
+    $("#tm-xi-h").textContent = `Best XI for MD${MD}`;
+    $("#tm-xi-sub").textContent = `${b.form} · ${f1(b.ev)} expected points incl. captain`;
+    $("#tm-xi").innerHTML = b.xi.map(id => `<div class="${id === b.cap ? "cap" : ""}"><span>${id === b.cap ? "© " : ""}${esc(shortName(P[id].name))}</span><span class="num">${f1(evOf(id, MD))}</span></div>`).join("");
+    // captain switch hint from day ordering
+    const dayOf = id => (D.days[MD] || {})[id] || 1;
+    const capDay = dayOf(b.cap);
+    const later = b.xi.filter(id => dayOf(id) > capDay).sort((x, y) => evOf(y, MD) - evOf(x, MD));
+    const notes = [];
+    if (later.length && md.manual_actions) {
+      const k = later[0];
+      notes.push(["→", `Captain ${shortName(P[b.cap].name)} plays first. If he scores under ${Math.max(1, Math.floor(evOf(k, MD) - 1))}, consider moving the armband to ${shortName(P[k].name)} (expects ${f1(evOf(k, MD))}). Remember a manual change switches off auto-subs.`]);
+    } else if (md.manual_actions) {
+      const early = b.xi.filter(id => dayOf(id) < capDay).sort((x, y) => evOf(y, MD) - evOf(x, MD));
+      if (early.length) notes.push(["→", `Your captain plays on the last day, so there is no switch option. Captaining ${shortName(P[early[0].toString()].name)} (earlier kick-off) keeps one open.`]);
+    } else {
+      notes.push(["·", "All MD" + MD + " games kick off together: no captain switch or manual subs."]);
+    }
+    $("#tm-notes").innerHTML = notes.map(([i, t]) => `<div class="note"><i>${i}</i><span>${esc(t)}</span></div>`).join("");
+    const mds = horizonMds();
+    const { pick, ft } = transferIdeas(mds);
+    $("#tm-tx-sub").textContent = `Gain in expected points over MD${mds[0]}${mds.length > 1 ? "–" + mds[mds.length - 1] : ""} (later matchdays count ${Math.round(DECAY * 100)}% each step), after -4 hits beyond your ${ft} free transfer${ft === 1 ? "" : "s"}.`;
+    const roll = `<div class="tx-row"><div class="mv"><b>Save the transfer</b></div><div class="gain">0.0</div><small>Rolls one free transfer (max one carried in the league phase).</small></div>`;
+    $("#tm-tx").innerHTML = pick.filter(p => p.net > -2).slice(0, 5).map(p => {
+      const n = p.out.length, hits = Math.max(0, n - ft);
+      return `<div class="tx-row"><div class="mv">${p.out.map((o, i) => `<span class="out">${esc(shortName(P[o].name))}</span> → <b>${esc(shortName(P[p.inn[i]].name))}</b> <span class="muted">${esc(tShort(P[p.inn[i]].team))} €${P[p.inn[i]].price.toFixed(1)}</span>`).join("<br>")}</div>
+        <div class="gain ${p.net > 0 ? "pos" : "neg"}">${p.net > 0 ? "+" : ""}${f1(p.net)}</div>
+        <small>${n} transfer${n > 1 ? "s" : ""}${hits ? `, ${hits} hit (-${hits * 4})` : ", free"} · raw gain ${f1(p.gain)}</small></div>`;
+    }).join("") + roll;
+    renderChips();
+  }
+
+  // ---------------------------------------------------------------- chips
+  function renderChips() {
+    const mds = MDS.filter(m => m >= MD && m <= 8);
+    const ok = squad.length === 15 && !squadIssues(squad).length;
+    const llRow = [], wcRow = [];
+    mds.forEach(m => {
+      const md = D.matchdays[m];
+      const cur = ok ? bestXI(squad, m).ev : null;
+      llRow.push(md.limitless && cur != null ? md.limitless.ev_xi - cur : null);
+      const wc = D.chips.wildcard[String(m)];
+      if (wc && ok) {
+        let curH = 0; wc.span.forEach((mm, i) => { curH += bestXI(squad, mm).ev * Math.pow(DECAY, i); });
+        wcRow.push(wc.horizon_ev - curH);
+      } else wcRow.push(null);
+    });
+    const all = [...llRow, ...wcRow].filter(v => v != null);
+    const mx = Math.max(1, ...all);
+    const bestLL = llRow.indexOf(Math.max(...llRow.filter(v => v != null)));
+    const bestWC = wcRow.indexOf(Math.max(...wcRow.filter(v => v != null)));
+    const cell = (v, best, m) => {
+      if (v == null) return `<div class="c na" data-tip="Not available for MD${m}">–</div>`;
+      const t = Math.max(0, v) / mx;
+      const bg = `color-mix(in oklab, var(--heat-hi) ${Math.round(6 + 80 * t)}%, var(--panel-2))`;
+      return `<div class="c ${best ? "best" : ""}" style="background:${bg};color:${t > 0.55 ? "var(--accent-ink)" : "var(--ink)"}" data-tip="MD${m}: +${f1(v)} expected points">${v >= 0 ? "+" : ""}${f1(v)}</div>`;
+    };
+    const el = $("#chiphm");
+    el.style.setProperty("--n", mds.length);
+    el.innerHTML = `<div></div>` + mds.map(m => `<div class="h">MD${m}</div>`).join("")
+      + `<div class="rl">Limitless</div>` + llRow.map((v, i) => cell(v, i === bestLL, mds[i])).join("")
+      + `<div class="rl">Wildcard</div>` + wcRow.map((v, i) => cell(v, i === bestWC, mds[i])).join("");
+    const notes = [];
+    if (!ok) notes.push(["·", "Complete your squad in My team to see chip values for it."]);
+    else {
+      if (bestLL >= 0) notes.push(["L", `Limitless peaks at MD${mds[bestLL]} (+${f1(llRow[bestLL])}). MD8 values exclude the switch option: every MD8 game kicks off together.`]);
+      if (bestWC >= 0) notes.push(["W", `Wildcard adds the most from MD${mds[bestWC]} (+${f1(wcRow[bestWC])} over three matchdays). Free resets at MD9 and MD11 mean a league-phase Wildcard only has to pay off by MD8.`]);
+      notes.push(["!", "Knockout matchdays (MD10, MD12-17) get values once the draw sets the fixtures; the engine recomputes them automatically."]);
+    }
+    $("#chip-notes").innerHTML = notes.map(([i, t]) => `<div class="note"><i>${i}</i><span>${esc(t)}</span></div>`).join("");
+  }
+
+  // ---------------------------------------------------------------- race
+  function renderRace() {
+    const cols = [["p_top8", "Top 8: straight to the round of 16", "var(--good)"], ["p_playoff", "9–24: knockout play-offs", "var(--warn)"], ["p_out", "25–36: eliminated", "var(--bad)"]];
+    $("#race-legend").innerHTML = cols.map(c => `<span><i class="sw" style="background:${c[2]}"></i>${c[1]}</span>`).join("") + `<span class="muted">Right column: expected points after 8 games</span>`;
+    $("#race-rows").innerHTML = D.standings.map((s, i) => `<div class="race-row ${i === 8 || i === 24 ? "cut" : ""}">
+      <span class="rk">${i + 1}</span><span class="nm">${esc(T[s.team].name)}</span>
+      <div class="bars" role="img" aria-label="${esc(T[s.team].name)}: top 8 ${pct(s.p_top8)}, play-off ${pct(s.p_playoff)}, out ${pct(s.p_out)}">${cols.map(c => s[c[0]] > 0.004 ? `<span style="flex:${s[c[0]]};background:${c[2]}" data-tip="${esc(T[s.team].name)}: ${c[1].split(":")[0]} ${pct(s[c[0]], 1)}"></span>` : "").join("")}</div>
+      <span class="ep">${f1(s.exp_points)}</span></div>`).join("");
+  }
+
+  // ---------------------------------------------------------------- model
+  let calKey = "2025-26|calibration_home";
+  function renderModel() {
+    const bt = D.backtest || {};
+    const seasons = Object.keys(bt).sort();
+    const tiles = [];
+    seasons.forEach(s => {
+      const b = bt[s];
+      tiles.push(`<div class="tile"><span class="l">${s} · ranked probability score</span><span class="v">${b.rps.toFixed(3)}</span><span class="d">vs ${b.rps_base.toFixed(3)} for base rates · <b>${(b.rps_skill_vs_base * 100).toFixed(1)}% better</b></span></div>`);
+      tiles.push(`<div class="tile"><span class="l">${s} · result picked right</span><span class="v">${(b.accuracy * 100).toFixed(1)}%</span><span class="d">${b.n} matches · exact score ${(b.exact_score_hit * 100).toFixed(1)}%</span></div>`);
+    });
+    if (seasons.length) {
+      const b = bt[seasons[seasons.length - 1]];
+      tiles.push(`<div class="tile"><span class="l">Clean-sheet calibration error</span><span class="v">${(b.cs_ece * 100).toFixed(1)} pp</span><span class="d">average gap between forecast and outcome, ${seasons[seasons.length - 1]}</span></div>`);
+    }
+    $("#m-tiles").innerHTML = tiles.join("");
+    const opts = [];
+    seasons.forEach(s => { opts.push([`${s}|calibration_home`, `${s} home win`]); opts.push([`${s}|calibration_cs`, `${s} clean sheet`]); });
+    if (!opts.find(o => o[0] === calKey) && opts.length) calKey = opts[0][0];
+    $("#cal-pick").innerHTML = opts.map(([k, l]) => `<button aria-pressed="${k === calKey}" data-k="${k}">${l}</button>`).join("");
+    $$("#cal-pick button").forEach(b => b.addEventListener("click", () => { calKey = b.dataset.k; renderModel(); }));
+    const [s, key] = calKey.split("|");
+    const pts = (bt[s] && bt[s][key]) || [];
+    const W = 320, H = 260, m = { l: 40, r: 12, t: 10, b: 34 };
+    const X = v => m.l + v * (W - m.l - m.r), Y = v => H - m.b - v * (H - m.t - m.b);
+    const maxN = Math.max(1, ...pts.map(p => p.n));
+    let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:420px;height:auto" role="img" aria-label="Reliability diagram">`;
+    [0, .25, .5, .75, 1].forEach(v => {
+      svg += `<line x1="${X(0)}" x2="${X(1)}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/>`;
+      svg += `<text x="${X(0) - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="10.5" fill="var(--muted)">${v * 100}%</text>`;
+      svg += `<text x="${X(v)}" y="${H - m.b + 16}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${v * 100}%</text>`;
+    });
+    svg += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke="var(--line-2)" stroke-width="1.5"/>`;
+    svg += `<text x="${(X(0) + X(1)) / 2}" y="${H - 4}" text-anchor="middle" font-size="11" fill="var(--ink-2)">Forecast probability</text>`;
+    svg += `<polyline fill="none" stroke="var(--home)" stroke-width="2" stroke-linejoin="round" points="${pts.map(p => `${X(p.forecast)},${Y(p.observed)}`).join(" ")}"/>`;
+    pts.forEach(p => {
+      const r = 4 + 5 * Math.sqrt(p.n / maxN);
+      svg += `<circle cx="${X(p.forecast)}" cy="${Y(p.observed)}" r="${r.toFixed(1)}" fill="var(--home)" stroke="var(--panel)" stroke-width="2" data-tip="${esc(`Forecast ${pct(p.forecast, 1)} · happened ${pct(p.observed, 1)} · ${p.n} cases`)}"/>`;
+    });
+    svg += `</svg>`;
+    $("#cal-chart").innerHTML = svg + `<p class="muted" style="font-size:12px">Dot size = number of matches in the bin. Table view: ${pts.map(p => `${pct(p.forecast)}→${pct(p.observed)} (${p.n})`).join(", ")}</p>`;
+    const meta = D.meta;
+    const src = [
+      ["v", "Fixtures, dates and kick-off times", "UEFA.com league-phase fixture list; results from Wikipedia, CBS Sports and match reports"],
+      ["v", `Team model: ${meta.team_model_matches.toLocaleString()} matches`, `openfootball results for 13 leagues and UEFA competitions, fitted through ${meta.team_model_fitted_through}`],
+      ["v", `${(meta.price_status || {}).official || 0} official prices and availability`, "Every club page of the UCL Fantasy game, mirrored by uclfantasy.com (14 Oct); matches 375 of 377 prices published in articles"],
+      ["v", "Ownership, MD1 points, per-90 stats", "uclfantasy.com rankings and ownership tables (top 100 by price, plus risers and fallers)"],
+      ["v", "Player history (Opta)", "FBref big-five leagues 2023/24 to early 2025/26 (worldfootballR archive) and the Premier League FPL archive 2025/26"],
+      ["v", "Team news and line-ups", "UEFA.com predicted line-ups, club and press team news, and Tuesday's actual XIs (used to calibrate the line-up model)"],
+      ["v", "MD2 match events", "Goals, assists, cards, subs and Player of the Match for every played game: UEFA.com round-ups, club reports, Fox Sports, Goal.com, losfutbolitos, bulinews, teleprensa, maisfutebol (data/seed/results)"],
+      ["v", "Domestic form 2026/27", "League minutes, starts, goals, assists and xG for 139 players at Liverpool, Arsenal, Man Utd, Barcelona, Real Madrid, Bayern, Inter and PSG (StatMuse, Opta data, read 14 Oct)"],
+      ["u", "Official game feed", "Adapter ready; on your laptop it replaces the mirror with the game's own feed"],
+      ["u", "Bookmaker odds, Understat xG, confirmed line-ups", "Adapters ready; switched on by free API keys or on your machine"],
+    ];
+    $("#srcs").innerHTML = src.map(([s, a, b]) => `<div><span class="st ${s}">${s === "v" ? "used" : "ready"}</span><span><b>${esc(a)}</b><br><span class="muted">${esc(b)}</span></span></div>`).join("");
+    const limits = [
+      "Prices come from a third-party mirror of the game's club pages, read on 14 Oct. A few squad players were missing from those pages (they stay in the simulation, never picked), and Slovan Bratislava's prices are not published yet. The official feed on your laptop replaces all of this.",
+      "The line-up model is calibrated on 144 players from six clubs on one matchday, right after an international break. It is refitted each matchday from the line-ups you upload (scripts/calibrate_lineups.py).",
+      "MD3 team news is provisional: Tuesday's XIs and Wednesday's predicted XIs at half strength. UEFA's MD3 predicted line-ups, about a day before the deadline, replace them.",
+      "No bookmaker odds in this run, so match probabilities are the team model alone. Its biggest MD3 call is Arsenal as favourites in Munich (43% away win). Check the market before acting on it.",
+      "Domestic results in the team model end on 20 Sep 2026 (the open data source lags). This season's player numbers cover eight clubs here; the other 28 rely on earlier seasons, UEFA matches and team news until the laptop sync (FPL and Understat) fills them in.",
+      "Ball-recovery scoring uses UEFA's definition, which counts more than Opta's. The conversion factor recalibrates when matchday results are uploaded.",
+      "Tuesday's nine results scored worse than base rates (four upsets, two of them at 11-12%). Nine games carry almost no information about accuracy; the 378-match backtest above does.",
+      "Day-1 fantasy points on the half-time panel are rebuilt from match reports (goals, assists, clean sheets, cards, POTM, minutes) plus an estimate for ball recoveries; the app's own numbers can differ by a point or two per player.",
+    ];
+    $("#limits").innerHTML = limits.map(l => `<li>${esc(l)}</li>`).join("");
+  }
+
+  function renderCheck() {
+    const V = D.verification || {};
+    const box = $("#check");
+    if (!V.md2_retro && !V.md3) { box.hidden = true; return; }
+    box.hidden = false;
+    const one = (v, d = 1) => v == null ? "–" : Number(v).toFixed(d);
+    const teamShort = c => (D.teams[c] || {}).short || c;
+    const col = (title, names, shared, tot, owns) => `<div class="xi-col"><h4>${esc(title)}</h4>${names.map((n, i) =>
+      `<div class="r ${shared && shared.has(n) ? "same" : ""}"><span>${esc(n)}</span>${owns && owns[i] != null ? `<span class="own">${one(owns[i], 0)}%</span>` : ""}</div>`).join("")}
+      ${tot ? `<div class="tot">${tot}</div>` : ""}</div>`;
+    const r2 = V.md2_retro;
+    if (r2) {
+      const pub = r2.published.xi, best = r2.best.xi;
+      const ffsIds = new Set(["Josep Martínez", "Zion Suzuki", "Gabriel Magalhães", "Dayot Upamecano", "Federico Dimarco", "Maximilian Mittelstädt", "Sergi Altimira", "Lamine Yamal", "Michael Olise", "Bukayo Saka", "Dominik Szoboszlai", "Răzvan Marin", "Harry Kane", "Serhou Guirassy", "Deniz Undav"]);
+      const ffs = [...ffsIds];
+      const pubSet = new Set(pub);
+      $("#ck-md2-v").textContent = `${r2.overlap.published_vs_ffs_xi} of the 11 published starters were Fantasy Football Scout picks. On the full price list, ${11 - r2.overlap.newbest_vs_published_xi} of them change.`;
+      $("#ck-md2").innerHTML = col("Published XI (13 Oct)", pub, ffsIds, `<b>${one(r2.published.ev_active)}</b> expected with plan`) +
+        col("FFScout MD2 picks", ffs.slice(0, 15), pubSet, "15-man shortlist, not an XI") +
+        col("Full price list, same info", best, pubSet, `<b>${one(r2.best.ev_active)}</b> expected with plan`);
+      $("#ck-md2-note").textContent = `Shaded: shared with the published XI (middle column: shared with the FFScout list). All three scored by today's model with information from before the MD2 deadline (its line-up calibration did use Tuesday's XIs, which flatters the new pick slightly). The model never read anyone's lineup; it shared the tipsters' shortlist because its player list came from their articles. The crowd's most-owned XI scores ${one(r2.template.ev_active)} in the same model.`;
+    }
+    const r3 = V.md3;
+    if (r3) {
+      const crowdSet = new Set(r3.template.xi), bestSet = new Set(r3.best.xi);
+      $("#ck-md3-v").textContent = `${r3.overlap_xi} of 11 shared. Same model, same fixtures: ${one(r3.best.ev_active)} expected for the model's XI, ${one(r3.template.ev_active)} for the crowd's.`;
+      $("#ck-md3").innerHTML = col(`Model XI (${r3.best.formation}), captain ${r3.best.captain}`, r3.best.xi, crowdSet, "", r3.best.own) +
+        col(`Most-owned XI, captain ${r3.template.captain}`, r3.template.xi, bestSet, "", r3.template.own);
+      const tp = (V.transfers_from_published || {}).options || [];
+      const t2 = tp.find(o => o.free_transfers === 2 && o.hits === 0 && o.n === 2);
+      $("#ck-md3-note").textContent = `Numbers are current ownership. The crowd's team was set for earlier matchdays, so part of the gap is MD3's fixtures (Bayern host Arsenal, Barcelona visit Paris) and Olise's suspension. The model's own figure is optimistic: it picked the players its projections rate highest, so its errors lean in its favour. Ownership is known for about 130 players.${t2 ? ` From the MD2 dashboard squad with 2 free transfers: ${t2.sell.join(" and ")} out, ${t2.buy.join(" and ")} in (+${one(t2.gain_vs_roll)} over MD3–MD5 vs rolling).` : ""}`;
+    }
+    const rob = V.robustness;
+    if (rob) {
+      const seeds = rob.runs.filter(r => r.kind === "seed"), unc = rob.runs.filter(r => r.kind === "uncertainty");
+      const ov = unc.map(r => r.xi_overlap);
+      $("#ck-rob-sub").textContent = `Re-simulated with 3 new random seeds, the XI keeps ${Math.min(...seeds.map(r => r.xi_overlap))}–${Math.max(...seeds.map(r => r.xi_overlap))} of 11 players. Redrawn ${rob.replicates} times with team ratings, player shares and start chances jittered by their uncertainty, it keeps ${Math.min(...ov)}–${Math.max(...ov)}. Bars: share of redraws in which each player starts in the best XI.`;
+      $("#ck-rob").innerHTML = rob.pick_rate.filter(r => r.xi > 0).sort((a, b) => b.xi - a.xi || b.squad - a.squad).slice(0, 16).map(r =>
+        `<div class="b" role="listitem"><span>${esc(r.name)}</span><span class="track" aria-hidden="true"><span class="fill" style="display:block;width:${(r.xi * 100).toFixed(0)}%"></span></span><span class="v">${pct(r.xi)}</span></div>`).join("");
+    }
+    const g = (D.graded || []).find(x => x.md === 2);
+    if (g) {
+      $("#ck-grade-sub").textContent = `Frozen pre-deadline predictions against the ${g.n} results so far: ${g.correct} of ${g.n} most-likely results right. Log loss ${g.log_loss} (base rates ${g.log_loss_base}), RPS ${g.rps} (${g.rps_base}). Nine games are too few to separate a good model from a bad one; the 378-match backtest below is the real test.`;
+      $("#ck-grade").innerHTML = `<thead><tr><th>Match</th><th class="r">Home</th><th class="r">Draw</th><th class="r">Away</th><th class="r">Result</th><th class="r">Chance given</th></tr></thead><tbody>${g.rows.map(r =>
+        `<tr><td>${esc(teamShort(r.home))} – ${esc(teamShort(r.away))}</td>${r.p.map(x => `<td class="r num">${pct(x)}</td>`).join("")}<td class="r num">${esc(r.score)}</td><td class="r num ${r.hit ? "hit" : "miss"}">${pct(r.p_result)}</td></tr>`).join("")}</tbody>`;
+    }
+    const ch = (D.changes || {}).items || [];
+    $("#ck-changes").innerHTML = ch.map(c => `<div><b>${esc(c.title)}</b><span>${esc(c.detail)}</span>${c.evidence ? `<em>${esc(c.evidence)}</em>` : ""}</div>`).join("");
+  }
+
+  // ---------------------------------------------------------------- half-time re-plan
+  const LINE = { GK: [1, 1], DEF: [3, 5], MID: [2, 5], FWD: [1, 3] };
+  const validXI = ids => { const c = { GK: 0, DEF: 0, MID: 0, FWD: 0 }; ids.forEach(id => c[P[id].pos]++); return POS.every(k => c[k] >= LINE[k][0] && c[k] <= LINE[k][1]); };
+  const mdHasLater = md => (D.matchdays[md] || { fixtures: [] }).fixtures.some(f => f.status !== "FT");
+  function halftimeCall(sq, xi, cap) {
+    const L = (D.live || {})[MD];
+    if (!L) return null;
+    const b = D.matchdays[MD];
+    const byId = Object.fromEntries(b.players.map(p => [p.id, p]));
+    const done = new Set(L.teams_done);
+    const later = id => !done.has(P[id].team);
+    const real = id => (L.players[id] || {}).pts ?? 0;
+    const e = {};
+    sq.forEach(id => { e[id] = later(id) ? ((byId[id] || {}).xpts || 0) : real(id); });
+    const off = new Set(sq.filter(id => (L.players[id] || {}).off));
+    const bench = sq.filter(id => !xi.includes(id));
+    let cover = 0;          // auto-subs: each later starter who does not play is covered by the bench
+    xi.filter(later).forEach(s => {
+      const q = 1 - Math.min(1, ((byId[s] || {}).p_play ?? 1));
+      const cands = bench.filter(x => (P[x].pos === "GK") === (P[s].pos === "GK") && (later(x) ? ((byId[x] || {}).p_play || 0) > 0.3 : ((L.players[x] || {}).min || 0) > 0));
+      if (q > 0 && cands.length) cover += q * Math.max(0, ...cands.map(x => e[x]));
+    });
+    const total = (x, c) => x.reduce((a, id) => a + e[id], 0) + e[c];
+    const bestCap = (x, c) => [c, ...x.filter(later)].reduce((a, id) => (e[id] > e[a] ? id : a), c);
+    let cur = xi.slice(), swaps = [], pool = bench.filter(later);
+    for (let k = 0; k < 4; k++) {
+      let best = null;
+      pool.forEach(x => cur.forEach(s => {
+        if (off.has(s) || (P[s].pos === "GK") !== (P[x].pos === "GK")) return;
+        const nx = cur.map(y => (y === s ? x : y));
+        if (!validXI(nx)) return;
+        const g = e[x] - e[s];
+        if (!best || g > best[0]) best = [g, s, x];
+      }));
+      if (!best || best[0] <= 0.25) break;
+      swaps.push(best); cur = cur.map(y => (y === best[1] ? best[2] : y)); pool = pool.filter(y => y !== best[2]);
+    }
+    const c1 = bestCap(xi, cap), c2 = bestCap(cur, cap);
+    const plans = { "No change": total(xi, cap) + cover };
+    if (c1 !== cap && later(c1)) plans["Captain only"] = total(xi, c1);
+    if (swaps.length) plans["Subs only"] = total(cur, cap);
+    if (swaps.length && c2 !== cap) plans["Subs + captain"] = total(cur, c2);
+    let choice = Object.keys(plans).reduce((a, k) => (plans[k] > plans[a] ? k : a), "No change");
+    if (choice !== "No change" && plans[choice] - plans["No change"] <= 0.25) choice = "No change";
+    const dayPts = xi.filter(id => !later(id)).reduce((a, id) => a + real(id), 0) + (later(cap) ? 0 : real(cap));
+    const newCap = choice === "Captain only" ? c1 : choice === "Subs + captain" ? c2 : cap;
+    return { e, plans, choice, swaps: choice.startsWith("Subs") ? swaps : [], cap: newCap, oldCap: cap, cover, later, off, dayPts, L, xi, bench, byId };
+  }
+  const planBars = (plans, choice) => {
+    const mx = Math.max(...Object.values(plans));
+    return `<div class="plans">${Object.entries(plans).map(([k, v]) => `<div class="b ${k === choice ? "best" : ""}"><span>${esc(k)}</span><span class="track"><span class="fill" style="display:block;width:${(v / mx * 100).toFixed(0)}%"></span></span><span class="v">${f1(v)}</span></div>`).join("")}</div>`;
+  };
+  function htRows(ids, info) {
+    return ids.map(r => {
+      const cls = [info.bench ? "bench" : "", r.out ? "out" : "", r.inn ? "in" : "", r.cap ? "cap" : ""].join(" ");
+      return `<div class="ht-row ${cls}"><span class="pos">${r.pos}</span><span class="nm">${esc(shortName(r.name))}<small>${esc(tShort(r.team))}</small></span><span class="v">${r.val}</span></div>`;
+    }).join("");
+  }
+  function renderHalftime() {
+    const L = (D.live || {})[MD];
+    const R = ((D.replan || {})[MD]) || {};
+    const rp = R[Object.keys(R).sort().pop()];
+    const box = $("#halftime");
+    if (!L && !rp) { box.hidden = true; return; }
+    box.hidden = false;
+    const b = D.matchdays[MD];
+    const later = mdHasLater(MD);
+    $("#ht-sub").textContent = later
+      ? `MD${MD}: day ${L ? L.days_done.join(", ") : 1} is over. Real points for the players who have played, a refreshed forecast for the games still to come, and the captain switch and manual subs that add the most. A manual change switches off auto-subs, so "no change" keeps that cover in its value.`
+      : `MD${MD} is complete. This is the half-time call as it was made, kept for the record.`;
+    // server-side replan (dashboard squad, full simulation)
+    if (rp) {
+      const d = rp.decisions || {};
+      const subsOut = new Set((d.actions || []).filter(a => a.kind === "sub").map(a => a.out));
+      const subsIn = new Set((d.actions || []).filter(a => a.kind === "sub").map(a => a.into));
+      const capTo = ((d.actions || []).find(a => a.kind === "captain") || {}).to;
+      const row = r => ({ pos: r.pos, name: r.name, team: r.team, out: subsOut.has(r.id), inn: subsIn.has(r.id), cap: capTo ? r.id === capTo : r.captain,
+        val: r.realised != null ? `<b>${r.realised}</b> pts${r.sent_off ? ' <span class="tag bad">red</span>' : ""}${r.detail && r.detail.potm ? ' <span class="tag good">POTM</span>' : ""}` : `exp ${f1(r.expected)} · ${pct(r.p_start)} start` });
+      const xi = rp.squad.filter(r => r.in_xi), bn = rp.squad.filter(r => !r.in_xi);
+      $("#ht-server").innerHTML = `<div><h3>Dashboard squad after day ${rp.after_day}</h3><p class="muted" style="font-size:12.5px">Full simulation, model ${esc(rp.model_version)}, refit through day ${rp.after_day} · ${new Date(rp.created_at).toLocaleString("en-GB", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })} IST · ${rp.lineups_known ? "confirmed line-ups" : "predicted line-ups"}</p></div>
+        <div class="ht-score"><b>${rp.day_points}</b><span class="muted">points on day ${rp.after_day} (captain counted twice)</span></div>
+        <div class="calls">${(d.actions || []).map(a => `<div>${a.kind === "info" ? "· " : "→ "}${esc(a.text)}</div>`).join("")}</div>
+        ${planBars(Object.fromEntries(Object.entries(d.plans || {}).map(([k, v]) => [{ "passive": "No change", "captain only": "Captain only", "subs only": "Subs only", "both": "Subs + captain" }[k] || k, v])), { "passive": "No change", "captain only": "Captain only", "subs only": "Subs only", "both": "Subs + captain" }[d.choice] || d.choice)}
+        <div class="ht-list">${htRows(xi.map(row), {})}</div>
+        <div class="ht-list">${htRows(bn.map(row), { bench: true })}</div>
+        <p class="muted" style="font-size:12px">${esc(rp.note || "")} Run it for your own squad: <code>ufe --as-of &lt;day-2 date&gt; replan --md ${rp.md} --squad my.csv --xi my_xi.csv --captain NAME</code>.</p>`;
+    } else { $("#ht-server").innerHTML = `<h3>Dashboard squad</h3><p class="muted">No re-plan saved for MD${MD}.</p>`; }
+    // in-browser call for the squad in My team
+    const mine = $("#ht-mine");
+    if (!L || !later) { mine.innerHTML = `<h3>Your squad</h3><p class="muted">The half-time call for your own squad appears here between the two evenings of a matchday.</p>`; return; }
+    if (isExample || squad.length !== 15) { mine.innerHTML = `<h3>Your squad</h3><p class="muted">Add your 15 in <a href="#team">My team</a> and this panel makes the same call for your squad, assuming you fielded the planner's XI and captain.</p>`; return; }
+    const bx = bestXI(squad, MD);
+    if (!bx) { mine.innerHTML = `<h3>Your squad</h3><p class="muted">Your squad needs a valid XI first.</p>`; return; }
+    const H = halftimeCall(squad, bx.xi, bx.cap);
+    const sw = new Map(H.swaps.map(([g, o, i]) => [o, i]));
+    const inSet = new Set(H.swaps.map(s => s[2]));
+    const v = id => H.later(id) ? `exp ${f1(H.e[id])} · ${pct((H.byId[id] || {}).p_start_sim)} start` : `<b>${f1(H.e[id]).replace(".0", "")}</b> pts${H.off.has(id) ? ' <span class="tag bad">red</span>' : ""}${(H.L.players[id] || {}).potm ? ' <span class="tag good">POTM</span>' : ""}`;
+    const mk = id => ({ pos: P[id].pos, name: P[id].name, team: P[id].team, out: sw.has(id), inn: inSet.has(id), cap: id === H.cap, val: v(id) });
+    const calls = [];
+    if (H.cap !== H.oldCap) calls.push(`Move the armband: ${shortName(P[H.oldCap].name)} → ${shortName(P[H.cap].name)} (expects ${f1(H.e[H.cap])}).`);
+    H.swaps.forEach(([g, o, i]) => calls.push(`Sub ${shortName(P[o].name)} (${H.later(o) ? "expects " + f1(H.e[o]) : f1(H.e[o]).replace(".0", "") + " pts"}) for ${shortName(P[i].name)} (expects ${f1(H.e[i])}).`));
+    if (!calls.length) calls.push(`No change: auto-sub cover (${f1(H.cover)}) is worth more than any switch.`);
+    [...H.off].filter(id => H.xi.includes(id)).forEach(id => calls.push(`${shortName(P[id].name)} was sent off, so he cannot be subbed.`));
+    mine.innerHTML = `<div><h3>Your squad (from My team)</h3><p class="muted" style="font-size:12.5px">Quick version in your browser: expected points instead of the full simulation, so the auto-sub cover is approximate. Assumes the planner's XI (${bx.form}) and captain ${esc(shortName(P[bx.cap].name))}.</p></div>
+      <div class="ht-score"><b>${f1(H.dayPts).replace(".0", "")}</b><span class="muted">points so far</span></div>
+      <div class="calls">${calls.map(c => `<div>→ ${esc(c)}</div>`).join("")}</div>
+      ${planBars(H.plans, H.choice)}
+      <div class="ht-list">${htRows(H.xi.map(mk), {})}</div>
+      <div class="ht-list">${htRows(H.bench.map(mk), { bench: true })}</div>`;
+  }
+
+  // ---------------------------------------------------------------- match centre
+  let mcVer = null;
+  function gradedFor(md) { return (D.grading || {})[md] || []; }
+  function renderMatches() {
+    const b = D.matchdays[MD];
+    const G = gradedFor(MD);
+    const vers = G.map(g => g.label);
+    if (!vers.includes(mcVer)) mcVer = vers.includes("pre-deadline") ? "pre-deadline" : vers[0] || null;
+    $("#mc-ver").innerHTML = vers.length ? vers.map(v => `<button aria-pressed="${v === mcVer}" data-v="${esc(v)}">${esc(v)}</button>`).join("") : `<button aria-pressed="true" disabled>no results yet</button>`;
+    $$("#mc-ver button[data-v]").forEach(x => x.addEventListener("click", () => { mcVer = x.dataset.v; renderMatches(); }));
+    const g = G.find(x => x.label === mcVer);
+    $("#mc-note").textContent = g ? `${g.label}: model ${g.model_version}, frozen ${new Date(g.created_at).toLocaleString("en-GB", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })} IST.${g.label.startsWith("retro") ? " A retro forecast is today's code re-run with pre-match information only; it shows whether a change would have helped and never replaces the frozen forecast." : ""} Upcoming matches show the latest forecast.` : "Upcoming matches show the latest forecast.";
+    const gm = g ? Object.fromEntries(g.matches.map(m => [m.home + "-" + m.away, m])) : {};
+    const byDay = {};
+    b.fixtures.forEach(f => (byDay[f.day] = byDay[f.day] || []).push(f));
+    $("#mc-days").innerHTML = Object.keys(byDay).sort().map(d => {
+      const fx = byDay[d];
+      const nDone = fx.filter(f => f.status === "FT").length;
+      return `<div><div class="day-head"><h3>${weekday(fx[0].date)}</h3><span class="muted">Day ${d} · ${fx.length} matches${nDone ? ` · ${nDone} played` : ""}</span></div>
+        <div class="mc-grid">${fx.map(f => mcCard(f, gm[f.home + "-" + f.away])).join("")}</div></div>`;
+    }).join("");
+  }
+  function mcList(items, key, hitKey, home) {
+    const dot = t => `<i class="side" style="background:${t === home ? "var(--home)" : "var(--away)"}"></i>`;
+    return `<ol>${items.map(s => `<li class="${s[hitKey] ? "hit" : ""}" data-tip="${esc(s.name + " · " + ((T[s.team] || {}).name || s.team))}"><span>${dot(s.team)}${esc(shortName(s.name))}</span><span class="p">${pct(s[key])}</span></li>`).join("")}</ol>`;
+  }
+  function mcCard(f, m) {
+    const done = f.status === "FT" && m;
+    const ph = done ? m.p[0] : f.p_home, pd = done ? m.p[1] : f.p_draw, pa = done ? m.p[2] : f.p_away;
+    const xg = done ? m.xg : [f.xg_home, f.xg_away];
+    const tops = done ? m.top_scores : f.top_scores;
+    let top = "", cols = "", actual = "";
+    if (done) {
+      const res = m.correct ? `<span class="tag good">result called</span>` : `<span class="tag bad">upset: ${pct(m.p_outcome)} given</span>`;
+      top = `<span>${esc(f.kickoff_ist)} IST</span><span>${res} ${m.exact ? '<span class="tag good">exact score</span>' : `<span class="tag">score #${m.score_rank ?? "–"} (${pct(m.p_score, 1)})</span>`}</span>`;
+      cols = `<div class="mc-cols"><div><h5>Goal (forecast)</h5>${mcList(m.predicted_scorers.slice(0, 4), "p", "hit", f.home)}</div><div><h5>Assist (forecast)</h5>${mcList(m.predicted_assisters.slice(0, 4), "p", "hit", f.home)}</div><div><h5>POTM (forecast)</h5>${mcList(m.predicted_potm.slice(0, 3), "p", "hit", f.home)}</div></div>`;
+      const who = arr => {
+        const agg = {};
+        arr.forEach(s => { const k = s.name; (agg[k] = agg[k] || { ...s, mins: [] }).mins.push((s.minute != null ? s.minute + "'" : "") + (s.pen ? " pen" : "")); });
+        return Object.values(agg).map(s => `${esc(shortName(s.name))} ${s.mins.filter(Boolean).join(", ")} <i>${s.in_pool ? `(${pct(s.p)}, #${s.rank})` : "(not in the forecast's list)"}</i>`).join(" · ") || "<i>none</i>";
+      };
+      const xi = Object.entries(m.xi || {}).map(([t, v]) => `${esc(tShort(t))} ${v.hits}/${v.of}`).join(" · ");
+      actual = `<div class="mc-actual">
+        <div><span>Goals</span><span>${who(m.scorers)}</span></div>
+        <div><span>Assists</span><span>${who(m.assisters)}</span></div>
+        <div><span>POTM</span><span>${m.potm ? `${esc(m.potm.name)} <i>${m.potm.in_pool ? `(${pct(m.potm.p, 1)}, #${m.potm.rank})` : "(not in the forecast's list)"}</i>` : "<i>not recorded</i>"}</span></div>
+        ${xi ? `<div><span>XI</span><span>${xi} <i>actual starters inside the predicted XI</i></span></div>` : ""}</div>`;
+    } else {
+      top = `<span>${esc(f.kickoff_ist)} IST</span><span>${f.status === "FT" ? `Final ${f.home_goals}–${f.away_goals}` : (f.lambda_source === "model+market" ? "model + market" : "model forecast")}</span>`;
+      const sc = (f.scorers || []).slice(0, 4).map(s => ({ ...s, p: s.p_goal }));
+      const as = (f.assisters || []).slice(0, 4).map(s => ({ ...s, p: s.p_assist }));
+      cols = `<div class="mc-cols"><div><h5>Most likely scorers</h5>${mcList(sc, "p", null, f.home)}</div><div><h5>Most likely assisters</h5>${mcList(as, "p", null, f.home)}</div><div><h5>Player of the Match</h5>${mcList((f.potm || []).slice(0, 3), "p", null, f.home)}</div></div>`;
+    }
+    const mid = done ? `<b>${m.score[0]}–${m.score[1]}</b><span>xG ${f2(xg[0])}–${f2(xg[1])}</span>` : `<b>${tops[0][0]}–${tops[0][1]}</b><span>likeliest · xG ${f2(xg[0])}–${f2(xg[1])}</span>`;
+    return `<article class="mc ${done ? "ft" : ""}">
+      <div class="mc-top">${top}</div>
+      <div class="mc-teams"><span class="t">${esc(tShort(f.home))}</span><span class="sc">${mid}</span><span class="t a">${esc(tShort(f.away))}</span></div>
+      <span class="pbar" role="img" aria-label="Home ${pct(ph)}, draw ${pct(pd)}, away ${pct(pa)}"><span style="flex:${ph};background:var(--home)"></span><span style="flex:${pd};background:var(--draw)"></span><span style="flex:${pa};background:var(--away)"></span></span>
+      <span class="plabels"><span><i class="sw" style="background:var(--home)"></i>${pct(ph)}</span><span class="muted">draw ${pct(pd)}</span><span>${pct(pa)}<i class="sw" style="background:var(--away)"></i></span></span>
+      <div class="mc-line"><span>Scorelines <b>${tops.slice(0, 3).map(t => `${t[0]}–${t[1]}`).join(", ")}</b> (${tops.slice(0, 3).map(t => pct(t[2])).join(", ")})</span></div>
+      ${cols}${actual}
+    </article>`;
+  }
+
+  // ---------------------------------------------------------------- accuracy
+  function renderAccuracy() {
+    const G = gradedFor(MD);
+    const box = $("#accuracy");
+    if (!G.length) { box.hidden = true; return; }
+    box.hidden = false;
+    const pre = G.find(g => g.label === "pre-deadline") || G[0];
+    const fxs = D.matchdays[MD].fixtures;
+    const days = [...new Set(fxs.map(f => f.day))].sort();
+    const tile = (l, v, d) => `<div class="tile"><span class="l">${l}</span><span class="v">${v}</span><span class="d">${d}</span></div>`;
+    const tiles = [];
+    days.forEach(day => {
+      const s = (pre.summary || {})[String(day)];
+      const dname = weekday(fxs.find(f => f.day === day).date);
+      if (!s || !s.n) { tiles.push(tile(`Day ${day} · ${dname}`, `<small>pending</small>`, `${fxs.filter(f => f.day === day).length} matches still to play; graded after the final whistle against both the pre-deadline and the half-time forecast.`)); return; }
+      tiles.push(tile(`Day ${day} · ${dname} · results`, `${s.correct}/${s.n}`, `log loss ${s.log_loss} vs ${s.log_loss_base} for base rates; RPS ${s.rps} vs ${s.rps_base}`));
+      tiles.push(tile(`Day ${day} · scorers`, `${s.scorer_top3_team}/${s.scorers}`, `goals scored by a player in the forecast's top 3 for his match; P(goal) Brier skill ${s.p_goal ? s.p_goal.skill : "–"} vs a flat rate`));
+      tiles.push(tile(`Day ${day} · line-ups and POTM`, `${s.xi_hits}/${s.xi_of}`, `actual starters inside the predicted XIs; POTM in the top 3 in ${s.potm_in_top3} of ${s.potm_n}`));
+    });
+    $("#ac-tiles").innerHTML = tiles.join("");
+    const cols = [["Results", s => `${s.correct}/${s.n}`], ["Log loss", s => s.log_loss, (s) => s.log_loss < s.log_loss_base], ["Base", s => s.log_loss_base], ["RPS", s => s.rps, s => s.rps < s.rps_base],
+      ["Exact", s => `${s.exact}/${s.n}`], ["Scorer in top 3", s => `${s.scorer_top3_team}/${s.scorers}`], ["POTM top 3", s => `${s.potm_in_top3}/${s.potm_n}`], ["XI", s => `${s.xi_hits}/${s.xi_of}`],
+      ["P(goal) skill", s => s.p_goal ? s.p_goal.skill : "–", s => s.p_goal && s.p_goal.skill > 0], ["P(assist) skill", s => s.p_assist ? s.p_assist.skill : "–", s => s.p_assist && s.p_assist.skill > 0], ["P(start) skill", s => s.p_start ? s.p_start.skill : "–", s => s.p_start && s.p_start.skill > 0]];
+    const rows = [];
+    G.forEach(g => Object.entries(g.summary || {}).forEach(([day, s]) => {
+      if (!s || !s.n || day === "all") return;
+      rows.push(`<tr><td><b>${esc(g.label)}</b><br><span class="muted" style="font-size:11.5px">${esc(g.model_version)} · day ${day}</span></td>${cols.map(([k, fn, good]) => `<td class="r num ${good ? (good(s) ? "good" : "bad") : ""}">${fn(s)}</td>`).join("")}</tr>`);
+    }));
+    $("#ac-table").innerHTML = `<thead><tr><th>Forecast</th>${cols.map(c => `<th class="r">${c[0]}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody>`;
+    $("#ac-note").textContent = "Log loss and RPS: lower is better; base = UCL home/draw/away rates (50.5/15.9/33.6%). Skill = 1 − Brier / Brier of a flat rate, over every listed player of the clubs that played (positive = better than knowing nothing about who scores). One evening is 9 matches: a single upset moves these numbers a lot, so read them next to the 378-match backtest in the Model section.";
+  }
+
+  // ---------------------------------------------------------------- form
+  let fmSort = { k: "min", dir: -1 };
+  function renderForm() {
+    const rows0 = D.form_players || [];
+    const sel = $("#fm-team");
+    if (!sel.dataset.ready) {
+      const teams = [...new Set(rows0.map(r => r.team))].sort((a, b) => tShort(a).localeCompare(tShort(b)));
+      sel.innerHTML = `<option value="">All clubs with data (${teams.length})</option>` + teams.map(t => `<option value="${t}">${esc(T[t].name)}</option>`).join("");
+      sel.dataset.ready = "1";
+      ["input", "change"].forEach(ev => { sel.addEventListener(ev, renderForm); $("#fm-search").addEventListener(ev, renderForm); });
+    }
+    const team = sel.value, q = $("#fm-search").value.trim().toLowerCase();
+    let rows = rows0.filter(r => (!team || r.team === team) && (!q || r.name.toLowerCase().includes(q)));
+    rows = rows.map(r => ({ ...r, d: r.xg90 != null && r.prev_xg90 != null ? r.xg90 - r.prev_xg90 : null }));
+    rows.sort((a, b) => fmSort.dir * (((a[fmSort.k] ?? -9) > (b[fmSort.k] ?? -9)) ? 1 : ((a[fmSort.k] ?? -9) < (b[fmSort.k] ?? -9) ? -1 : 0)));
+    const C = [["name", "Player"], ["starts", "Starts"], ["min", "Min"], ["xg", "xG"], ["a", "Ast"], ["xg90", "xG90"], ["prev_xg90", "Before"], ["d", "Δ"], ["p_start", "Start"]];
+    $("#fm-table").innerHTML = `<thead><tr>${C.map(([k, l]) => `<th data-k="${k}">${l}${fmSort.k === k ? (fmSort.dir < 0 ? " ↓" : " ↑") : ""}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>
+      <td><span class="pos-tag">${r.pos}</span>${esc(shortName(r.name))} <span class="muted">${esc(tShort(r.team))}</span></td>
+      <td>${r.starts}/${r.tm}</td><td>${r.min}</td><td>${f2(r.xg)}</td><td>${r.a}</td><td>${f2(r.xg90)}</td><td>${f2(r.prev_xg90)}</td>
+      <td class="${r.d == null ? "" : r.d > 0.1 ? "up" : r.d < -0.1 ? "dn" : ""}">${r.d == null ? "–" : (r.d > 0 ? "+" : "") + r.d.toFixed(2)}</td><td>${pct(r.p_start)}</td></tr>`).join("")}</tbody>`;
+    $$("#fm-table th").forEach(th => th.addEventListener("click", () => { const k = th.dataset.k; fmSort = { k, dir: fmSort.k === k ? -fmSort.dir : (k === "name" ? 1 : -1) }; renderForm(); }));
+    const nClubs = new Set(rows0.map(r => r.team)).size;
+    $("#fm-note").textContent = `${rows0.length} players from ${nClubs} clubs: 2026/27 league numbers (StatMuse/Opta, read 14 Oct). xG/90 before = the model's history (FBref and FPL seasons, decayed). The model now counts this season per 90 like last season for xG, half as much for assists, and lets this season's starts lead the start-rate prior. Clubs outside this list rely on earlier seasons and team news until the laptop sync fills them.`;
+    const R = D.team_records || {};
+    const rec = x => x && x.n ? `${x.w}-${x.d}-${x.l} <span class="muted">(${x.ppg.toFixed(2)})</span>` : '<span class="muted">–</span>';
+    const tr = Object.keys(R).sort((a, b) => ((R[b].home.ppg || 0) - (R[b].away.ppg || 0)) - ((R[a].home.ppg || 0) - (R[a].away.ppg || 0)));
+    $("#hr-table").innerHTML = `<thead><tr><th>Club</th><th>Home W-D-L (ppg)</th><th>Away W-D-L (ppg)</th><th>Gap</th><th>UCL H / A</th><th>Last 6</th></tr></thead><tbody>${tr.map(t => {
+      const x = R[t], gap = (x.home.ppg || 0) - (x.away.ppg || 0);
+      return `<tr><td>${esc(tShort(t))}</td><td>${rec(x.home)}</td><td>${rec(x.away)}</td><td class="${gap > 0.8 ? "up" : gap < 0 ? "dn" : ""}">${(gap > 0 ? "+" : "") + gap.toFixed(2)}</td><td>${x.ucl_home.n ? `${x.ucl_home.w}-${x.ucl_home.d}-${x.ucl_home.l}` : "–"} / ${x.ucl_away.n ? `${x.ucl_away.w}-${x.ucl_away.d}-${x.ucl_away.l}` : "–"}</td>
+        <td><span class="wdl">${x.last.map(l => `<i class="${l.res}" data-tip="${esc(`${l.date} ${l.ha === "H" ? "v" : "at"} ${l.opp} ${l.score} (${l.comp})`)}">${l.res}</i>`).join("")}</span></td></tr>`;
+    }).join("")}</tbody>`;
+    $("#hr-note").textContent = "Domestic league games in the last 12 months (open data ends 20 Sep 2026), points per game in brackets; Gap = home ppg − away ppg. Last 6 includes this season's UCL games. Hover a square for the match.";
+    const TT = (D.form_tests || {}).team || {}, PT = (D.form_tests || {}).player || {};
+    const tres = TT.results || [];
+    const base = tres.find(r => r.home_sd_team == null && r.form_mix == null) || {};
+    const fmt = r => r ? `UCL RPS ${r.ucl_rps.toFixed(4)} (base ${base.ucl_rps ? base.ucl_rps.toFixed(4) : "–"}), domestic ${r.dom_rps.toFixed(4)} (base ${base.dom_rps ? base.dom_rps.toFixed(4) : "–"})` : "";
+    const home = tres.filter(r => r.home_sd_team != null);
+    const form = tres.filter(r => r.form_mix != null);
+    const bestForm = form.find(r => r.form_mix === 0.3 && r.form_half_life === 90);
+    const rates = PT.rates || [], starts = PT.starts || [];
+    const g0 = rates.find(r => r.target === "goals" && r.w_cur === 0), g1 = rates.find(r => r.target === "goals" && r.w_cur === 1 && (r.half_life == null || !isFinite(r.half_life)));
+    const sPrev = starts.find(r => r.model === "prev season only"), sCur = starts.find(r => r.model === "both, prev=3 matches"), sRec = starts.find(r => r.model === "recent hl=3");
+    const items = [
+      ["Club home/away records: not used", home.length ? `Club-specific home edges, shrunk toward the league's home advantage, made UCL forecasts worse at every strength tested (${home.map(r => `sd ${r.home_sd_team}: ${r.ucl_rps.toFixed(4)}`).join(", ")} vs ${base.ucl_rps ? base.ucl_rps.toFixed(4) : "–"}). Most of a club's home/away gap is noise; the model keeps one home advantage per league and one for UEFA games.` : "Not tested yet."],
+      ["Team form: adopted (small gain)", bestForm ? `Giving 30% of each match's weight a 90-day half-life on top of the long one: ${fmt(bestForm)}. Better on all four scores, each by less than 0.1%.` : "Not tested yet."],
+      ["Player form, goals and assists: adopted", g0 && g1 ? `Adding this season's league xG to past seasons (equal weight per 90) cut goal log loss from ${g0.ll.toFixed(4)} to ${g1.ll.toFixed(4)} per player-match (Premier League 2025/26, walk-forward). A hot streak on top of that (recent matches weighted more) added nothing.` : "See scripts/backtest_player_form.py."],
+      ["Player form, starts: adopted", sPrev && sCur ? `This season's starts predict the next start far better than last season's rate: log loss ${sPrev.ll.toFixed(3)} → ${sCur.ll.toFixed(3)} (early season ${sPrev.ll_early.toFixed(3)} → ${sCur.ll_early.toFixed(3)}). The last three matches alone do even better (${sRec ? sRec.ll.toFixed(3) : "–"}); that needs match-by-match data, which the laptop sync provides.` : "See scripts/backtest_player_form.py."],
+    ];
+    $("#fm-tests").innerHTML = items.map(([a, b2]) => `<div><b>${esc(a)}</b><span class="ink2">${esc(b2)}</span></div>`).join("");
+  }
+
+  function renderCalendar() {
+    const nxt = D.rules.deadlines.find(d => Date.parse(d.iso) > Date.now());
+    $("#timeline").innerHTML = D.rules.deadlines.map(d => `<div class="${nxt && d.md === nxt.md ? "now" : ""}"><b>MD${d.md}</b><span>${esc(d.ist)} IST</span><span class="muted">${d.stage.replace("ko_playoff", "KO play-off").replace("league", "League phase").replace("r16", "Round of 16").replace("qf", "Quarter-final").replace("sf", "Semi-final").replace("final", "Final")}</span><span class="muted">${d.free === "unlimited" ? "Unlimited transfers" : d.free + " free transfers"}${d.chips_ok ? "" : " · no chips"}${d.manual ? "" : " · no live changes"}</span></div>`).join("");
+  }
+
+  function renderHero() {
+    const b = D.matchdays[MD];
+    $("#hero-md").textContent = MD;
+    const fx = b.fixtures;
+    const first = fx.map(f => f.date).sort()[0], last = fx.map(f => f.date).sort().pop();
+    $("#hero-sub").textContent = `${fx.length} matches, ${weekday(first)}${first !== last ? " to " + weekday(last) : ""}. Team locks ${b.deadline_ist}. ${b.manual_actions ? "Captain switches and manual subs open after each day's games." : "All games kick off together: no live changes this matchday."}`;
+    const ps = D.meta.price_status || {};
+    const nOff = ps.official || 0, nArt = ps.verified || 0, nUnk = (ps.unknown || 0) + (ps.est_fpl || 0);
+    $("#pool-notice").innerHTML = `<span aria-hidden="true">ⓘ</span><span><b>${nOff ? "Full price list." : "Before the official feed."}</b> ${D.meta.pool_size} players: ${nOff ? `${nOff} with official prices (the game's club pages, via uclfantasy.com, 14 Oct), ` : ""}${nArt} with prices from articles${nOff ? " (mostly Slovan Bratislava, whose prices are not out yet)" : ""}, ${nUnk} without a confirmed price (simulated so team-mates' numbers stay right, never picked). Model ${esc(D.meta.model_version)}, ${D.meta.n_sims.toLocaleString()} simulations per match, generated ${new Date(D.meta.generated_at).toLocaleString("en-GB", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })} IST.</span>`;
+  }
+
+  function renderFooter() {
+    $("#foot").innerHTML = `<span>UCL Fantasy Engine ${esc(D.meta.model_version)} · personal project · probabilities, not promises</span>
+      <span>Prices and ownership: <a href="https://uclfantasy.com/teams" target="_blank" rel="noopener">uclfantasy.com club pages</a> (mirror of the game). Article prices: <a href="https://www.fantasyfootballscout.co.uk/2026/09/01/ucl-fantasy-2026-27-assessing-200-budget-defenders" target="_blank" rel="noopener">FFS budget defenders</a>, <a href="https://www.fantasyfootballscout.co.uk/2026/09/07/ucl-fantasy-2026-27-premium-players-to-buy" target="_blank" rel="noopener">FFS premiums</a>, <a href="https://www.uefa.com/uefachampionsleague/news/02a9-217d95cda9ec-7fb0292e6890-1000--champions-league-fantasy-football-midfielders-for-every-b/" target="_blank" rel="noopener">UEFA midfielders</a>, <a href="https://www.uefa.com/uefachampionsleague/news/02a9-217d9b5cb493-ff69665f1047-1000--champions-league-fantasy-football-forwards-for-every-budget/" target="_blank" rel="noopener">UEFA forwards</a>, <a href="https://www.uefa.com/uefachampionsleague/news/02a9-217f0356efe9-0f65f7675eb1-1000--champions-league-fantasy-football-budget-enablers/" target="_blank" rel="noopener">UEFA enablers</a>. Fixtures: <a href="https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/" target="_blank" rel="noopener">UEFA.com</a>. Results: <a href="https://github.com/openfootball" target="_blank" rel="noopener">openfootball</a>. Player events: <a href="https://github.com/vaastav/Fantasy-Premier-League" target="_blank" rel="noopener">FPL archive</a>.</span>`;
+  }
+
+  function renderAll() {
+    renderMdBar(); renderHero(); renderBoard(); renderReadout(); renderChecks(); renderFixtures(); renderNews(); renderPlayers(); renderTeam();
+    renderHalftime(); renderMatches(); renderAccuracy(); tickClock();
+  }
+  setupPlayerFilters();
+  setupPicker();
+  renderAll();
+  renderRace();
+  renderModel();
+  renderCheck();
+  renderForm();
+  renderCalendar();
+  renderFooter();
+  setInterval(tickClock, 1000);
+})();
+</script>

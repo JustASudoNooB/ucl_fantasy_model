@@ -1,0 +1,2 @@
+# macOS / Linux: `crontab -e` and add (adjust the path):
+*/15 * * * * cd $HOME/ucl-fantasy-engine && .venv/bin/python -m ufe schedule --once >> data/processed/scheduler.log 2>&1

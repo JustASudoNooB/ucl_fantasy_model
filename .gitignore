@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/fetch_log.jsonl
+data/processed/scheduler.log
+data/my/
+.pytest_cache/

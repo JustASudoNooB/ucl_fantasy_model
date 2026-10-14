@@ -1,0 +1,221 @@
+name,team,pos,price,source,as_of,note,price_status
+Risser,RCL,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Titraoui,RCL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Ivanović,RCL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Édouard,RCL,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Rui Silva,SCP,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Andersen,SCP,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Catamo,SCP,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Luis Guilherme,SCP,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Pokatilov,SAB,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Dashdamirov,SAB,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Puchacz,SAB,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Lepinjica,SAB,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Rakhmonaliev,SAB,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Parris,SAB,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Simić,SAB,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Nwachukwu,SAB,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Mickels,SAB,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Markovič,SLA,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Isife,SLA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Sadílek,SLA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Suleiman,SLA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Šturm,SLA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Ayaosi,SLA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Chorý,SLA,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Jurriën Timber,ARS,DEF,5.5,FPL £6.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Martin Ødegaard,ARS,MID,6.0,FPL £6.6m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Declan Rice,ARS,MID,6.5,FPL £7.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Bruno Guimarães,ARS,MID,6.0,FPL £6.9m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Eberechi Eze,ARS,MID,6.0,FPL £6.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Berke Özer,LIL,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+André,LIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Bentaleb,LIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Bakwa,LIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Haraldsson,LIL,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Perrin,LIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Ueda,LIL,FWD,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Llorente,ATM,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Grimaldo,ATM,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Giuliano Simeone,ATM,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Barrios,ATM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Koke,ATM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Lookman,ATM,MID,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Jonathan David,ATM,FWD,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Senne Lammens,MUN,GK,4.5,FPL £5.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Carlos Baleba,MUN,MID,5.0,FPL £5.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Youri Tielemans,MUN,MID,5.5,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Marcus Rashford,MUN,MID,6.5,FPL £7.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Matheus Cunha,MUN,MID,7.0,FPL £8.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Akanji,INT,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Bastoni,INT,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Diouf,INT,MID,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Barella,INT,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Hakan Çalhanoğlu,INT,MID,6.5,news_md2,2026-10-13,penalty taker; price unknown (guess €6.5m shapes the share prior only),unknown
+Zieliński,INT,MID,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Thuram,INT,FWD,8.0,news_md2,2026-10-13,price unknown (guess €8.0m shapes the share prior only),unknown
+Potts,CLB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Carlos Forbs,CLB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Vetlesen,CLB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Virgili,CLB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Uğurcan Çakır,GAL,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Sallai,GAL,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Torreira,GAL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Lemina,GAL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Barış Alper Yılmaz,GAL,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Batrakov,GAL,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Yunus Akgün,GAL,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Joan García,BAR,GK,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Koundé,BAR,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Cubarsí,BAR,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+João Cancelo,BAR,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Rodri,BAR,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Pedri,BAR,MID,7.5,news_md2,2026-10-13,price unknown (guess €7.5m shapes the share prior only),unknown
+Dani Olmo,BAR,MID,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Gabriel Jesus,BAR,FWD,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Vandevoordt,RBL,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+El Aynaoui,RBL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Banzuzi,RBL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Gruda,RBL,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Nkunku,RBL,MID,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Nusa,RBL,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Cardoso,RBL,FWD,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Kovář,PSV,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Geertruida,PSV,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Sano,PSV,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Perišić,PSV,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Van Bommel,PSV,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Østbø,VIK,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Askildsen,VIK,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Bell,VIK,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Bjørdal,VIK,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Botheim,VIK,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Christiansen,VIK,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Urbig,BAY,GK,4.5,news_md2,2026-10-13,price unknown (guess €4.5m shapes the share prior only),unknown
+Laimer,BAY,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Tah,BAY,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Davies,BAY,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Kimmich,BAY,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Luis Díaz,BAY,MID,8.0,news_md2,2026-10-13,price unknown (guess €8.0m shapes the share prior only),unknown
+Gulácsi,VIL,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Santi Comesaña,VIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Saliba,VIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Gueye,VIL,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Alberto Moleiro,VIL,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Gerard Moreno,VIL,FWD,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Mikautadze,VIL,FWD,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Milinković-Savić,NAP,GK,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Di Lorenzo,NAP,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Lobotka,NAP,MID,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Neres,NAP,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Politano,NAP,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Ernst,FEY,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+St. Juste,FEY,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Mármol,FEY,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Javi López,FEY,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Zechiël,FEY,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Targhalline,FEY,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Ferri,FEY,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Valente,FEY,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Butez,COM,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Chalobah,COM,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Da Cunha,COM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Diao,COM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Jungwirth,LAS,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Mbuyamba,LAS,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Tornich,LAS,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Jørgensen,LAS,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Horvath,LAS,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Dibango,LAS,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Kalajdzic,LAS,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Lang,LAS,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Jeremy Jacquet,LIV,DEF,4.5,FPL £5.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Milos Kerkez,LIV,DEF,5.0,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Ryan Gravenberch,LIV,MID,5.5,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Mac Allister,LIV,MID,5.5,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Barcola,LIV,MID,7.5,news_md2,2026-10-13,price unknown (guess €7.5m shapes the share prior only),unknown
+Florian Wirtz,LIV,MID,6.5,FPL £7.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Rio Ngumoha,LIV,MID,5.5,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Lewis Koumas,LIV,MID,5.0,FPL £5.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Gollini,ROM,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Balerdi,ROM,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+N'Dicka,ROM,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Molina,ROM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+De Roon,ROM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Koné,ROM,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Soulé,ROM,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Dybala,ROM,FWD,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Alexander-Arnold,RMA,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Konaté,RMA,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Cucurella,RMA,DEF,5.0,news_md2,2026-10-13,price unknown (guess €5.0m shapes the share prior only),unknown
+Valverde,RMA,MID,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Tchouaméni,RMA,MID,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Arda Güler,RMA,MID,7.5,news_md2,2026-10-13,price unknown (guess €7.5m shapes the share prior only),unknown
+Aaron Wan-Bissaka,AVL,DEF,4.5,FPL £4.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Boubacar Kamara,AVL,MID,5.0,FPL £5.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+João Gomes,AVL,MID,5.5,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+John McGinn,AVL,MID,5.5,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Johan Manzambi,AVL,MID,5.5,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Emiliano Buendía,AVL,MID,5.5,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Jackson,AVL,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Ederson,FEN,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Nélson Semedo,FEN,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Škriniar,FEN,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Aké,FEN,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Brown,FEN,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Guendouzi,FEN,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Kanté,FEN,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Greenwood,FEN,MID,7.0,news_md2,2026-10-13,price unknown (guess €7.0m shapes the share prior only),unknown
+Asensio,FEN,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Kerem Aktürkoğlu,FEN,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Riznyk,SHA,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Pedrinho,SHA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Mendoza,SHA,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Kauã Elias,SHA,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Brignoli,AEK,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Vitális,AEK,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Koita,AEK,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Zini,AEK,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Haikin,BOD,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Sjøvold,BOD,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Gundersen,BOD,DEF,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Auklend,BOD,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Berg,BOD,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Brunstad Fet,BOD,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Blomberg,BOD,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Hauge,BOD,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Kobel,BVB,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Schlotterbeck,BVB,DEF,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Sabitzer,BVB,MID,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Veerman,BVB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Nmecha,BVB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Jobe Bellingham,BVB,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Matheus Nunes,MCI,DEF,5.0,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Marc Guéhi,MCI,DEF,5.0,FPL £6.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Rúben Dias,MCI,DEF,5.0,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Joško Gvardiol,MCI,DEF,5.0,FPL £5.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.4); check in the app,est_fpl
+Enzo Fernández,MCI,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Elliot Anderson,MCI,MID,6.0,FPL £6.4m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Antoine Semenyo,MCI,MID,7.5,FPL £8.5m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Phil Foden,MCI,MID,6.5,FPL £7.0m mapped,2026-10-13,UCL price estimated from FPL price (±0.6); check in the app,est_fpl
+Nuno Mendes,PSG,DEF,5.5,news_md2,2026-10-13,price unknown (guess €5.5m shapes the share prior only),unknown
+Fabián Ruiz,PSG,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Álvaro Vallés,BET,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Dani Ceballos,BET,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Rodrigo Riquelme,BET,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Isco,BET,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+Abde Ezzalzouli,BET,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Diogo Costa,POR,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Gabriel Veiga,POR,MID,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Pepê,POR,MID,6.5,news_md2,2026-10-13,price unknown (guess €6.5m shapes the share prior only),unknown
+André Silva,POR,FWD,6.0,news_md2,2026-10-13,price unknown (guess €6.0m shapes the share prior only),unknown
+Pietuszewski,POR,FWD,6.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Takáč,SLO,GK,4.0,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Martínez,SLO,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Pokorný,SLO,MID,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Barseghyan,SLO,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Šporar,SLO,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Suleiman Camara,SLO,FWD,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Seimen,VFB,GK,4.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+Stiller,VFB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown
+El Khannouss,VFB,MID,5.5,news_md2,2026-10-13,not in any price list; projected for team-mates' shares only,unknown

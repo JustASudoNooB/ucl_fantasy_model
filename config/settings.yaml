@@ -1,0 +1,109 @@
+# Engine settings. Every hyperparameter here is tuned by `ufe tune` (walk-forward backtest)
+# and the tuned values are written to data/processed/params.json, which overrides these defaults.
+paths:
+  raw: data/raw
+  processed: data/processed
+  runs: data/runs
+  seed: data/seed
+
+timezone_user: Asia/Kolkata
+timezone_uefa: Europe/Paris
+
+team_model:
+  half_life_days: 300          # time-decay of match weights
+  european_weight: 1.6         # UEFA matches are the only cross-league links; weight them up
+  current_ucl_weight: 2.0      # this season's UCL matches
+  prior_sd_team: 0.35          # team attack/defence shrinkage toward league mean (log scale)
+  prior_sd_league: 0.45        # league mean shrinkage toward 0
+  dc_rho: -0.06                # Dixon-Coles low-score correction (refit by tune)
+  max_goals: 10
+  history_seasons: ["2024-25", "2025-26", "2026-27"]
+  rating_noise_sd: 0.06        # per-simulation rating uncertainty (log scale) for tournament sims
+  predictive_sd_scale: 1.0     # match probabilities integrate over rating uncertainty (0 = point estimate)
+  # recent form: 30% of each match's weight decays with a 90-day half-life (on top of the long one).
+  # Walk-forward (scripts/backtest_form_homeaway.py): UCL RPS 0.19580 -> 0.19566, domestic 0.20138 -> 0.20129;
+  # better on all four scores (UCL/domestic x RPS/log loss), so adopted. Small, as expected.
+  form_mix: 0.3
+  form_half_life: 90
+  # club-specific home/away effects: tested at prior sd 0.05/0.1/0.2, worse on UCL matches -> off.
+  # Home advantage stays per league (and one for UEFA games); records are shown on the dashboard.
+  home_sd_team: 0.0
+
+market:
+  blend_weight: 0.65           # weight on market-implied goal rates when odds exist
+  margin_method: power         # power | shin | proportional
+
+simulation:
+  n_sims: 12000
+  seed: 20261013
+  goal_time_slope: 0.35        # goal-time density rises through the match: f(t) ~ 1 + slope * t/90
+  assist_rate: 0.86            # share of open-play goals credited with an assist
+  own_goal_share: 0.038        # PL 2025/26: 0.053 own goals per team-match
+  penalties_per_team_match: 0.11
+  penalty_conversion: 0.78
+  penalty_won_by_foul_share: 0.82   # handball pens give no "penalty won" points
+  saves_per_xgc: 2.0           # keeper saves per opponent expected goal (PL 2025/26)
+  red_card_per90: 0.0045
+  outside_box_share: {GK: 0.0, DEF: 0.10, MID: 0.20, FWD: 0.08}   # priors; refit from feed stats
+  recovery_ratio: {GK: 0.35, DEF: 1.5, MID: 1.3, FWD: 1.1}         # UEFA vs Opta definition; refit after each MD
+  others_floor: 0.08           # minimum unallocated goal share when the player pool is partial
+
+potm:
+  w_goal: 3.0
+  w_assist: 1.8
+  w_cs_def: 1.2
+  w_save3: 0.6
+  w_recov3: 0.35
+  w_win: 1.6
+  w_draw: 0.5
+  noise_scale: 1.1             # Gumbel scale; higher = less predictable POTM
+
+minutes:
+  sub_on_minute: [58, 86]
+  p_full_90_given_start: {GK: 0.96, DEF: 0.80, MID: 0.56, FWD: 0.45}
+  off_minute_range: [58, 89]
+  p_sub_given_benched: {GK: 0.01, DEF: 0.18, MID: 0.34, FWD: 0.38}
+
+optimizer:
+  bench_weight: 0.12           # value of bench EV in the squad objective (auto/manual subs)
+  horizon: 4                   # matchdays in transfer planning
+  horizon_decay: 0.82          # weight of MD h+1 relative to MD h
+  hit_margin: 1.0              # extra EV a -4 must clear (model error buffer)
+  candidates: 25               # top MILP candidates evaluated by policy simulation
+
+alerts:
+  telegram_token_env: UFE_TELEGRAM_TOKEN
+  telegram_chat_env: UFE_TELEGRAM_CHAT
+  deadline_warnings_hours: [48, 24, 6, 2]
+
+news:
+  # Predicted line-ups update start probabilities by Bayes' rule (ufe/ingest/team_news.py).
+  # lr_start = P(named | starts) / P(named | doesn't start); lr_bench = P(not named | starts) / P(not named | doesn't start).
+  # Calibrated 2026-10-14 with team_news.lr_from_counts on MD2 Tuesday: UEFA's predicted XIs named
+  # 49 of the 66 actual starters of ARS, LIL, BAY, BAR, MUN, ATM (74%) and 17 of ~90 non-starters,
+  # shrunk toward the old 93% / 10% assumption with 100 pseudo-observations each:
+  # sensitivity 0.855, false-positive rate 0.142 -> 6.0 and 0.17 (was 9.3 and 0.078).
+  lr_start: 6.0
+  lr_bench: 0.17
+  doubt_in: 0.62      # cap for a doubtful player still named in the predicted XI
+  doubt_out: 0.15     # cap for a doubtful player left out
+  p_max: 0.95         # even a named, fit regular misses ~5% of starts (late knocks, rotation); was 0.985
+  carry_forward: 0.5  # matchdays without news reuse the latest earlier news at this fraction of log-odds
+  # Start-probability model when news exists (scripts/calibrate_lineups.py, MD2 Tuesday, 144 players):
+  #   logit P(start) = a + b * logit(prior) + c * named
+  # Leave-one-club-out log loss: 0.567 with b fixed at 0.5 (0.553 with b free = 0.26) vs 0.678 for
+  # the Bayes-rule version above, which was overconfident both ways (named regulars -> 0.95,
+  # unnamed regulars -> 0.37; real rates ~0.80 and ~0.45). b is held at 0.5 until more line-ups
+  # are logged; re-run the script after each matchday.
+  model: logistic
+  logit_a: -0.94
+  logit_b: 0.5
+  logit_c: 1.86
+  strength_adjust: 0.5    # share of the missing attacking weight that replacements do not recover
+  strength_clip: [0.88, 1.06]
+
+player_form:
+  # this season's domestic-league minutes, starts, goals, assists and xG per player
+  # (data/seed/form/domestic_2026_27.csv; data/processed/domestic_form.csv from `ufe sync --form`).
+  # Weights in ufe/models/history.py, from scripts/backtest_player_form.py.
+  enabled: true

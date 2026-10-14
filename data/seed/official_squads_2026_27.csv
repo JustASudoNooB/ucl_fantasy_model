@@ -1,0 +1,954 @@
+id,name,name_official,team,pos,price,status,own_pct,pts_to_date,mins_sample,start_pct,sot90,kp90,g90,a90,pool_price,pool_status,pool_pos,pool_team,moved_from,match_score,source,as_of
+AEK-brignoli,Brignoli,A. Brignoli,AEK,GK,4.0,Available,,,,,,,,,4.0,unknown,GK,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-thomas-strakosha,Thomas Strakosha,T. Strakosha,AEK,GK,4.5,Injured,,,,,,,,,4.5,verified,GK,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-lazaros-rota,Lazaros Rota,L. Rota,AEK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-harold-moukoudi,Harold Moukoudi,H. Moukoudi,AEK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-filipe-relvas,Filipe Relvas,Filipe Relvas,AEK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-stavros-pilios,Stavros Pilios,S. Pilios,AEK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-martin-georgiev,Martin Georgiev,M. Georgiev,AEK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-razvan-marin,Răzvan Marin,R. Marin,AEK,MID,5.5,Available,,,,,,,,,5.5,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-lovro-majer,Lovro Majer,L. Majer,AEK,MID,5.0,Available,,,,,,,,,5.0,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-vitalis,Vitális,Milán Vitális,AEK,MID,4.5,Available,,,,,,,,,4.5,unknown,MID,AEK,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-mijat-gacinovic,Mijat Gaćinović,M. Gaćinović,AEK,MID,4.5,Available,,,,,,,,,4.5,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-kervin-arriaga,Kervin Arriaga,K. Arriaga,AEK,MID,4.5,Available,,,,,,,,,4.5,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-petros-mantalos,Petros Mantalos,P. Mantalos,AEK,MID,4.5,Available,,,,,,,,,4.5,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-dimitrios-kaloskamis,Dimitrios Kaloskamis,D. Kaloskamis,AEK,MID,4.5,Available,,,,,,,,,4.5,verified,MID,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-koita,Koita,A. Koita,AEK,FWD,5.0,Available,,,,,,,,,4.5,unknown,MID,AEK,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-barnabas-varga,Barnabás Varga,B. Varga,AEK,FWD,6.5,Doubtful,,,,,,,,,6.5,verified,FWD,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-luka-jovic,Luka Jović,L. Jović,AEK,FWD,6.5,Available,1.0,1.0,2806.0,85.0,1.35,0.71,0.64,0.03,6.5,verified,FWD,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-zini,Zini,Zini,AEK,FWD,5.0,Available,,,,,,,,,5.5,unknown,FWD,AEK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-david-raya,David Raya,D. Raya,ARS,GK,6.0,Available,,,,,,,,,6.0,verified,GK,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-jurrien-timber,Jurriën Timber,J. Timber,ARS,DEF,5.5,Available,,,,,,,,,5.5,est_fpl,DEF,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-ezri-konsa,Ezri Konsa,E. Konsa,ARS,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-gabriel-magalhaes,Gabriel Magalhães,Gabriel,ARS,DEF,6.0,Available,,,,,,,,,6.0,verified,DEF,ARS,,101.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-piero-hincapie,Piero Hincapié,P. Hincapié,ARS,DEF,4.5,Doubtful,,,,,,,,,4.5,verified,DEF,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-myles-lewis-skelly,Myles Lewis-Skelly,M. Lewis-Skelly,ARS,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-riccardo-calafiori,Riccardo Calafiori,R. Calafiori,ARS,DEF,4.5,Available,31.0,,,,,,,,4.5,verified,DEF,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-martin-odegaard,Martin Ødegaard,M. Ødegaard,ARS,MID,7.0,Available,5.0,11.0,2315.0,70.0,0.66,2.29,0.04,0.27,6.0,est_fpl,MID,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-bukayo-saka,Bukayo Saka,B. Saka,ARS,MID,8.5,Available,3.0,3.0,3493.0,75.0,1.29,2.81,0.28,0.23,8.5,verified,MID,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-eberechi-eze,Eberechi Eze,E. Eze,ARS,MID,7.5,Available,1.0,3.0,3117.0,69.0,0.72,1.21,0.29,0.14,6.0,est_fpl,MID,ARS,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-declan-rice,Declan Rice,D. Rice,ARS,MID,7.5,Available,7.0,3.0,4648.0,89.0,0.33,2.03,0.1,0.17,6.5,est_fpl,MID,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-bruno-guimaraes,Bruno Guimarães,Bruno Guimarães,ARS,MID,7.0,Available,1.0,1.0,3698.0,91.0,0.71,1.73,0.22,0.22,6.0,est_fpl,MID,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-kai-havertz,Kai Havertz,K. Havertz,ARS,FWD,8.0,Available,7.0,1.0,1128.0,56.0,0.88,1.52,0.56,0.4,8.0,verified,FWD,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-viktor-gyokeres,Viktor Gyökeres,V. Gyökeres,ARS,FWD,8.5,Available,3.0,2.0,3614.0,88.0,0.97,0.85,0.52,0.07,8.5,verified,FWD,ARS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-zion-suzuki,Zion Suzuki,Z. Suzuki,AVL,GK,4.0,Available,,,,,,,,,4.0,verified,GK,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-pau-torres,Pau Torres,Pau Torres,AVL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-victor-lindelof,Victor Lindelöf,V. Lindelöf,AVL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-aaron-wan-bissaka,Aaron Wan-Bissaka,A. Wan-Bissaka,AVL,DEF,4.5,Available,,,,,,,,,4.5,est_fpl,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-ian-maatsen,Ian Maatsen,I. Maatsen,AVL,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-lamare-bogarde,Lamare Bogarde,L. Bogarde,AVL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-matteo-ruggeri,Matteo Ruggeri,M. Ruggeri,AVL,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-tyrone-mings,Tyrone Mings,T. Mings,AVL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-matty-cash,Matty Cash,M. Cash,AVL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-john-mcginn,John McGinn,J. McGinn,AVL,MID,6.5,Available,1.0,10.0,3118.0,87.0,0.58,1.65,0.29,0.2,5.5,est_fpl,MID,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-emiliano-buendia,Emiliano Buendía,E. Buendía,AVL,MID,6.0,Available,,,,,,,,,5.5,est_fpl,MID,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-joao-gomes,João Gomes,Joao Gomes,AVL,MID,5.5,Available,,,,,,,,,5.5,est_fpl,MID,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-boubacar-kamara,Boubacar Kamara,B. Kamara,AVL,MID,5.0,Available,,,,,,,,,5.0,est_fpl,MID,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-jackson,Jackson,N. Jackson,AVL,FWD,7.0,Available,1.0,6.0,2323.0,60.0,1.74,1.59,0.54,0.23,6.0,unknown,FWD,AVL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-jan-oblak,Jan Oblak,J. Oblak,ATM,GK,5.5,Available,,,,,,,,,5.5,verified,GK,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-grimaldo,Grimaldo,A. Grimaldo,ATM,DEF,5.5,Available,,,,,,,,,5.5,unknown,DEF,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-marc-pubill,Marc Pubill,M. Pubill,ATM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-david-hancko,David Hancko,D. Hancko,ATM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-robin-le-normand,Robin Le Normand,R. Le Normand,ATM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-giuliano-simeone,Giuliano Simeone,G. Simeone,ATM,MID,6.5,Available,,,,,,,,,6.0,unknown,MID,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-alex-baena,Álex Baena,Álex Baena,ATM,MID,5.5,Available,,,,,,,,,5.5,verified,MID,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-llorente,Llorente,M. Llorente,ATM,MID,6.5,Available,2.0,9.0,0.0,,,,,,4.5,unknown,DEF,ATM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-lookman,Lookman,A. Lookman,ATM,MID,7.0,Available,2.0,1.0,1381.0,83.0,0.91,1.37,0.59,0.2,7.0,unknown,MID,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-koke,Koke,Koke,ATM,MID,6.0,Available,,,,,,,,,5.5,unknown,MID,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-alexander-sorloth,Alexander Sørloth,A. Sørloth,ATM,FWD,7.0,Available,1.0,0.0,2919.0,49.0,1.76,0.59,0.62,0.03,7.0,verified,FWD,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-julian-alvarez,Julián Álvarez,J. Alvarez,ATM,FWD,10.0,Available,3.0,5.0,0.0,,,,,,10.0,verified,FWD,ATM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-jonathan-david,Jonathan David,J. David,ATM,FWD,7.5,Available,1.0,1.0,3064.0,64.0,0.73,1.59,0.35,0.18,7.0,unknown,FWD,ATM,,98.0,uclfantasy.com/rankings,2026-10-14
+BVB-kobel,Kobel,G. Kobel,BVB,GK,5.0,Available,,,,,,,,,4.5,unknown,GK,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-emre-can,Emre Can,E. Can,BVB,DEF,4.5,Suspended,,,,,,,,,4.5,verified,DEF,BVB,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-waldemar-anton,Waldemar Anton,W. Anton,BVB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-ramy-bensebaini,Ramy Bensebaini,R. Bensebaini,BVB,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-schlotterbeck,Schlotterbeck,N. Schlotterbeck,BVB,DEF,5.0,Injured,,,,,,,,,4.5,unknown,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-daniel-svensson,Daniel Svensson,D. Svensson,BVB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-filippo-mane,Filippo Mane,F. Mane,BVB,DEF,4.0,Injured,,,,,,,,,4.0,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-joane-gadou,Joane Gadou,J. Gadou,BVB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-luca-reggiani,Luca Reggiani,L. Reggiani,BVB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-sabitzer,Sabitzer,M. Sabitzer,BVB,MID,6.0,Available,,,,,,,,,5.5,unknown,MID,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-veerman,Veerman,J. Veerman,BVB,MID,6.5,Available,,,,,,,,,5.5,unknown,MID,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-nmecha,Nmecha,F. Nmecha,BVB,MID,6.5,Available,,,,,,,,,5.5,unknown,MID,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-jobe-bellingham,Jobe Bellingham,Jobe Bellingham,BVB,MID,6.0,Available,,,,,,,,,6.0,unknown,MID,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-konstantinos-karetsas,Konstantinos Karetsas,K. Karetsas,BVB,MID,5.5,Available,,,,,,,,,5.5,verified,MID,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-serhou-guirassy,Serhou Guirassy,S. Guirassy,BVB,FWD,8.5,Available,9.0,13.0,4088.0,84.0,1.65,0.88,0.66,0.09,8.5,verified,FWD,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-maximilian-beier,Maximilian Beier,M. Beier,BVB,FWD,6.0,Available,,,,,,,,,6.0,verified,FWD,BVB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-joan-garcia,Joan García,Joan García,BAR,GK,5.0,Doubtful,,,,,,,,,5.0,unknown,GK,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-joao-cancelo,João Cancelo,João Cancelo,BAR,DEF,5.0,Available,,,,,,,,,5.5,unknown,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-andreas-christensen,Andreas Christensen,A. Christensen,BAR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-cubarsi,Cubarsí,P. Cubarsí,BAR,DEF,5.5,Available,22.0,,,,,,,,5.0,unknown,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-kounde,Koundé,J. Koundé,BAR,DEF,5.5,Available,,,,,,,,,5.5,unknown,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-eric-garcia,Eric García,Eric García,BAR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-alejandro-balde,Alejandro Balde,A. Balde,BAR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-hector-fort,Héctor Fort,H. Fort,BAR,DEF,4.0,Suspended,,,,,,,,,4.0,verified,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-gerard-martin,Gerard Martín,Gerard Martín,BAR,DEF,4.0,Available,9.0,,,,,,,,4.0,verified,DEF,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-raphinha,Raphinha,Raphinha,BAR,MID,9.5,Available,39.0,16.0,2045.0,85.0,1.54,3.08,0.79,0.31,9.5,verified,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-lamine-yamal,Lamine Yamal,L. Yamal,BAR,MID,10.0,Available,32.0,15.0,3828.0,94.0,1.46,2.8,0.61,0.4,10.0,verified,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-pedri,Pedri,Pedri,BAR,MID,7.5,Available,8.0,7.0,3188.0,82.0,0.37,2.34,0.06,0.34,7.5,unknown,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-rodri,Rodri,Rodri,BAR,MID,7.0,Available,6.0,2.0,2327.0,77.0,0.23,1.47,0.08,0.0,6.0,unknown,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-marc-bernal,Marc Bernal,M. Bernal,BAR,MID,4.5,Available,,,,,,,,,4.5,verified,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-dani-olmo,Dani Olmo,D. Olmo,BAR,MID,8.0,Available,2.0,1.0,2853.0,64.0,0.91,1.96,0.25,0.28,7.0,unknown,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-anthony-gordon,Anthony Gordon,A. Gordon,BAR,MID,8.0,Available,8.0,1.0,3117.0,79.0,1.27,1.36,0.52,0.14,8.0,verified,MID,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-gabriel-jesus,Gabriel Jesus,G. Jesus,BAR,FWD,6.5,Available,,,,,,,,,6.5,unknown,FWD,BAR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-manuel-neuer,Manuel Neuer,M. Neuer,BAY,GK,5.5,Available,9.0,,,,,,,,5.5,verified,GK,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-urbig,Urbig,J. Urbig,BAY,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-davies,Davies,A. Davies,BAY,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-dayot-upamecano,Dayot Upamecano,D. Upamecano,BAY,DEF,5.5,Available,13.0,,,,,,,,5.5,verified,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-tah,Tah,J. Tah,BAY,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,BAY,,93.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-laimer,Laimer,K. Laimer,BAY,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-josip-stanisic,Josip Stanišić,J. Stanišić,BAY,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-hiroki-ito,Hiroki Ito,H. Ito,BAY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BAY,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-sacha-boey,Sacha Boey,S. Boey,BAY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-kim-min-jae,Kim Min-jae,Minjae Kim,BAY,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BAY,,99.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-nathaniel-brown,Nathaniel Brown,N. Brown,BAY,DEF,4.0,Available,12.0,,,,,,,,4.0,verified,DEF,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-michael-olise,Michael Olise,M. Olise,BAY,MID,9.0,Available,44.0,21.0,4387.0,81.0,1.74,2.73,0.51,0.53,9.0,verified,MID,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-kimmich,Kimmich,J. Kimmich,BAY,MID,6.5,Available,4.0,4.0,4448.0,89.0,0.32,2.23,0.06,0.28,6.0,unknown,MID,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-aleksandar-pavlovic,Aleksandar Pavlović,A. Pavlović,BAY,MID,5.0,Available,,,,,,,,,5.0,verified,MID,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-luis-diaz,Luis Díaz,Luis Díaz,BAY,MID,8.0,Available,14.0,3.0,3975.0,94.0,1.52,2.29,0.59,0.43,8.0,unknown,MID,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-ismael-saibari,Ismael Saibari,I. Saibari,BAY,MID,6.5,Available,,,,,,,,,6.5,verified,MID,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-harry-kane,Harry Kane,H. Kane,BAY,FWD,11.0,Available,54.0,9.0,4407.0,88.0,2.43,1.51,1.31,0.16,11.0,verified,FWD,BAY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-yann-sommer,Yann Sommer,Y. Sommer,CLB,GK,4.5,Available,,,,,,,,,4.5,verified,GK,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-brandon-mechele,Brandon Mechele,B. Mechele,CLB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-joaquin-seys,Joaquin Seys,J. Seys,CLB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-lee-han-beom,Lee Han-beom,Han-beom Lee,CLB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,CLB,,99.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-hugo-siquet,Hugo Siquet,H. Siquet,CLB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-kyriani-sabbe,Kyriani Sabbe,K. Sabbe,CLB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-jorne-spileers,Jorne Spileers,J. Spileers,CLB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-joel-ordonez,Joel Ordóñez,J. Ordoñez,CLB,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-carlos-forbs,Carlos Forbs,Carlos Forbs,CLB,MID,6.0,Doubtful,,,,,,,,,5.5,unknown,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-vetlesen,Vetlesen,H. Vetlesen,CLB,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-potts,Potts,F. Potts,CLB,MID,5.5,Available,,,,,,,,,5.5,unknown,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-hans-vanaken,Hans Vanaken,H. Vanaken,CLB,MID,6.5,Available,1.0,2.0,8207.0,99.0,0.63,1.81,0.27,0.14,6.5,verified,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-virgili,Virgili,J. Virgili,CLB,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-felix-lemarechal,Félix Lemaréchal,F. Lemarechal,CLB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-cheveyo-tsawa,Cheveyo Tsawa,C. Tsawa,CLB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-lynnt-audoor,Lynnt Audoor,L. Audoor,CLB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-nicolo-tresoldi,Nicolò Tresoldi,N. Tresoldi,CLB,FWD,7.0,Available,1.0,6.0,3631.0,68.0,1.34,1.09,0.57,0.17,7.0,verified,FWD,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-mamadou-diakhon,Mamadou Diakhon,M. Diakhon,CLB,FWD,5.5,Available,,,,,,,,,5.5,verified,FWD,CLB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-butez,Butez,J. Butez,COM,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-marc-oliver-kempf,Marc Oliver Kempf,M. Kempf,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-chalobah,Chalobah,T. Chalobah,COM,DEF,5.0,Available,,,,,,,,,4.5,unknown,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-edoardo-goldaniga,Edoardo Goldaniga,E. Goldaniga,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-ignace-van-der-brempt,Ignace Van der Brempt,I. Van Der Brempt,COM,DEF,4.0,Suspended,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-ivan-smolcic,Ivan Smolčić,I. Smolčić,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-yan-couto,Yan Couto,Yan Couto,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-alex-valle,Alex Valle,A. Valle,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-jacobo-ramon,Jacobo Ramón,J. Ramón,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-andres-cuenca,Andrés Cuenca,A. Cuenca,COM,DEF,4.0,Suspended,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-kaiki-bruno,Kaiki Bruno,Kaiki Bruno,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-luis-milla,Luis Milla,L. Milla,COM,MID,4.5,Available,,,,,,,,,4.5,verified,MID,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-da-cunha,Da Cunha,L. Da Cunha,COM,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,COM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-martin-baturina,Martin Baturina,M. Baturina,COM,MID,5.5,Available,,,,,,,,,5.5,verified,MID,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-nico-paz,Nico Paz,N. Paz,COM,MID,7.0,Available,8.0,8.0,3316.0,81.0,1.52,1.55,0.35,0.19,7.0,verified,MID,COM,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-moise-kean,Moise Kean,M. Kean,COM,FWD,6.5,Available,0.0,1.0,3356.0,78.0,1.37,0.38,0.4,0.03,6.5,verified,FWD,COM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-anastasios-douvikas,Anastasios Douvikas,T. Douvikas,COM,FWD,6.5,Available,,,,,,,,,6.5,verified,FWD,COM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-haikin,Haikin,N. Haikin,BOD,GK,4.5,Available,,,,,,,,,4.0,unknown,GK,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-sjovold,Sjøvold,F. Sjøvold,BOD,DEF,4.5,Available,,,,,,,,,4.0,unknown,DEF,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-fredrik-andre-bjorkan,Fredrik André Bjørkan,F. Bjørkan,BOD,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-villads-nielsen,Villads Nielsen,V. Nielsen,BOD,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-haitam-aleesami,Haitam Aleesami,H. Aleesami,BOD,DEF,4.0,Injured,,,,,,,,,4.0,verified,DEF,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-gundersen,Gundersen,J. Gundersen,BOD,DEF,4.0,Doubtful,,,,,,,,,4.0,unknown,DEF,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-berg,Berg,P. Berg,BOD,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-auklend,Auklend,S. Auklend,BOD,MID,6.0,Available,,,,,,,,,4.5,unknown,MID,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-blomberg,Blomberg,O. Blomberg,BOD,MID,5.0,Available,,,,,,,,,5.5,unknown,FWD,BOD,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-hauge,Hauge,J. Hauge,BOD,MID,7.0,Doubtful,0.0,1.0,3392.0,93.0,0.64,2.39,0.37,0.24,5.5,unknown,FWD,BOD,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-brunstad-fet,Brunstad Fet,S. Brunstad Fet,BOD,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,BOD,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-ulrik-saltnes,Ulrik Saltnes,U. Saltnes,BOD,MID,4.5,Available,,,,,,,,,4.5,verified,MID,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-magnus-riisnaes,Magnus Riisnæs,M. Riisnæs,BOD,MID,4.5,Injured,,,,,,,,,4.5,verified,MID,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-andreas-helmersen,Andreas Helmersen,A. Helmersen,BOD,FWD,5.0,Available,,,,,,,,,5.0,verified,FWD,BOD,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-ederson,Ederson,Ederson,FEN,GK,5.0,Available,,,,,,,,,4.5,unknown,GK,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-ake,Aké,N. Aké,FEN,DEF,5.0,Available,,,,,,,,,4.5,unknown,DEF,FEN,,93.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-skriniar,Škriniar,M. Škriniar,FEN,DEF,5.0,Available,,,,,,,,,4.5,unknown,DEF,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-nelson-semedo,Nélson Semedo,Nélson Semedo,FEN,DEF,5.0,Available,,,,,,,,,4.5,unknown,DEF,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-brown,Brown,A. Brown,FEN,DEF,4.5,Available,,,,,,,,,4.5,unknown,DEF,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-asensio,Asensio,M. Asensio,FEN,MID,7.0,Doubtful,0.0,0.0,2438.0,76.0,1.26,2.29,0.44,0.48,6.5,unknown,MID,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-kante,Kanté,N. Kanté,FEN,MID,5.5,Available,,,,,,,,,5.5,unknown,MID,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-greenwood,Greenwood,M. Greenwood,FEN,MID,7.5,Available,3.0,5.0,3577.0,93.0,1.86,2.21,0.65,0.28,7.0,unknown,MID,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-guendouzi,Guendouzi,M. Guendouzi,FEN,MID,6.0,Suspended,,,,,,,,,5.5,unknown,MID,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-kerem-akturkoglu,Kerem Aktürkoğlu,Kerem Aktürkoğlu,FEN,MID,6.0,Available,,,,,,,,,6.5,unknown,MID,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-vedat-muriqi,Vedat Muriqi,V. Muriqi,FEN,FWD,6.0,Available,,,,,,,,,6.0,verified,FWD,FEN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-ernst,Ernst,T. Ernst,FEY,GK,4.0,Available,,,,,,,,,4.5,unknown,GK,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-bart-nieuwkoop,Bart Nieuwkoop,B. Nieuwkoop,FEY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-marmol,Mármol,M. Mármol,FEY,DEF,4.0,Available,,,,,,,,,4.5,unknown,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-anel-ahmedhodzic,Anel Ahmedhodžić,A. Ahmedhodžić,FEY,DEF,4.5,Suspended,,,,,,,,,4.5,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-st-juste,St. Juste,J. St. Juste,FEY,DEF,4.5,Available,,,,,,,,,4.5,unknown,DEF,FEY,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-gijs-smal,Gijs Smal,G. Smal,FEY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-givairo-read,Givairo Read,G. Read,FEY,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-tsuyoshi-watanabe,Tsuyoshi Watanabe,T. Watanabe,FEY,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-thomas-beelen,Thomas Beelen,T. Beelen,FEY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-mats-deijl,Mats Deijl,M. Deijl,FEY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-jordan-lotomba,Jordan Lotomba,J. Lotomba,FEY,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-jakub-moder,Jakub Moder,J. Moder,FEY,MID,4.5,Available,,,,,,,,,4.5,verified,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-targhalline,Targhalline,O. Targhalline,FEY,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-zechiel,Zechiël,G. Zechiel,FEY,MID,4.5,Available,,,,,,,,,5.5,unknown,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-aymen-sliti,Aymen Sliti,A. Sliti,FEY,MID,4.5,Available,,,,,,,,,4.5,verified,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-thijs-kraaijeveld,Thijs Kraaijeveld,T. Kraaijeveld,FEY,MID,4.5,Available,,,,,,,,,4.5,verified,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-charles-vanhoutte,Charles Vanhoutte,C. Vanhoutte,FEY,MID,4.5,Available,,,,,,,,,4.5,verified,MID,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-ferri,Ferri,N. Ferri,FEY,FWD,5.5,Available,,,,,,,,,6.0,unknown,FWD,FEY,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-ugurcan-cakir,Uğurcan Çakır,Uğurcan Çakır,GAL,GK,5.0,Available,,,,,,,,,4.5,unknown,GK,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-kaan-ayhan,Kaan Ayhan,Kaan Ayhan,GAL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-abdulkerim-bardakci,Abdülkerim Bardakcı,Abdülkerim Bardakcı,GAL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-sallai,Sallai,R. Sallai,GAL,DEF,5.0,Available,,,,,,,,,4.5,unknown,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-davinson-sanchez,Davinson Sánchez,D. Sánchez,GAL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-ismail-jakobs,Ismail Jakobs,I. Jakobs,GAL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-metehan-baltaci,Metehan Baltacı,Metehan Baltacı,GAL,DEF,4.0,Suspended,,,,,,,,,4.0,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-wilfried-singo,Wilfried Singo,W. Singo,GAL,DEF,4.0,Injured,,,,,,,,,4.0,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-eren-elmali,Eren Elmalı,Eren Elmalı,GAL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-yunus-akgun,Yunus Akgün,Yunus Akgün,GAL,MID,5.0,Available,,,,,,,,,6.0,unknown,MID,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-torreira,Torreira,L. Torreira,GAL,MID,6.0,Available,,,,,,,,,5.5,unknown,MID,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-lemina,Lemina,M. Lemina,GAL,MID,5.5,Injured,,,,,,,,,5.5,unknown,MID,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-baris-alper-yilmaz,Barış Alper Yılmaz,Barış Alper Yılmaz,GAL,MID,5.5,Available,,,,,,,,,6.5,unknown,MID,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-victor-osimhen,Victor Osimhen,V. Osimhen,GAL,FWD,8.0,Injured,6.0,0.0,2571.0,88.0,2.28,1.16,0.77,0.25,8.0,verified,FWD,GAL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-josep-martinez,Josep Martínez,J. Martínez,INT,GK,4.5,Available,,,,,,,,,4.5,verified,GK,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-ivan-provedel,Ivan Provedel,I. Provedel,INT,GK,4.5,Available,,,,,,,,,4.5,verified,GK,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-carlos-augusto,Carlos Augusto,Carlos Augusto,INT,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-federico-dimarco,Federico Dimarco,F. Dimarco,INT,DEF,5.0,Available,,,,,,,,,5.0,verified,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-bastoni,Bastoni,A. Bastoni,INT,DEF,5.0,Available,,,,,,,,,5.5,unknown,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-yann-bisseck,Yann Bisseck,Y. Bisseck,INT,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-akanji,Akanji,M. Akanji,INT,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-benjamin-pavard,Benjamin Pavard,B. Pavard,INT,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-barella,Barella,N. Barella,INT,MID,6.5,Available,1.0,2.0,3411.0,91.0,0.16,2.43,0.08,0.21,6.5,unknown,MID,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-diouf,Diouf,A. Diouf,INT,MID,5.0,Available,,,,,,,,,5.0,unknown,MID,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-zielinski,Zieliński,P. Zieliński,INT,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-hakan-calhanoglu,Hakan Çalhanoğlu,Hakan Çalhanoğlu,INT,MID,7.0,Available,1.0,2.0,2310.0,91.0,0.94,2.18,0.47,0.43,6.5,unknown,MID,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-lautaro-martinez,Lautaro Martínez,Lautaro Martínez,INT,FWD,9.5,Available,3.0,4.0,3465.0,88.0,1.58,1.32,0.68,0.16,9.5,verified,FWD,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-thuram,Thuram,M. Thuram,INT,FWD,7.5,Available,2.0,2.0,3077.0,81.0,1.23,1.29,0.56,0.23,8.0,unknown,FWD,INT,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-francesco-pio-esposito,Francesco Pio Esposito,P. Esposito,INT,FWD,5.0,Available,7.0,,,,,,,,6.5,verified,FWD,INT,,93.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-jungwirth,Jungwirth,L. Jungwirth,LAS,GK,4.5,Available,,,,,,,,,4.0,unknown,GK,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-tornich,Tornich,J. Tornich,LAS,DEF,4.0,Available,,,,,,,,,4.0,unknown,DEF,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-jorgensen,Jørgensen,K. Jørgensen,LAS,DEF,4.5,Available,,,,,,,,,4.5,unknown,MID,LAS,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-mbuyamba,Mbuyamba,X. Mbuyamba,LAS,DEF,4.0,Available,,,,,,,,,4.0,unknown,DEF,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-george-bello,George Bello,G. Bello,LAS,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-andres-andrade,Andrés Andrade,A. Andrade,LAS,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-dibango,Dibango,Y. Dibango,LAS,DEF,4.0,Available,,,,,,,,,4.5,unknown,MID,LAS,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-manoel-verhaeghe,Manoel Verhaeghe,M. Verhaeghe,LAS,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-melayro-bogarde,Melayro Bogarde,M. Bogarde,LAS,MID,4.5,Available,,,,,,,,,4.5,verified,MID,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-horvath,Horvath,S. Horvath,LAS,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-lang,Lang,C. Lang,LAS,MID,4.5,Available,,,,,,,,,5.5,unknown,FWD,LAS,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-krystof-danek,Kryštof Daněk,K. Daněk,LAS,MID,4.5,Available,,,,,,,,,4.5,verified,MID,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-kalajdzic,Kalajdzic,S. Kalajdzic,LAS,FWD,5.0,Available,,,,,,,,,5.5,unknown,FWD,LAS,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-vandevoordt,Vandevoordt,M. Vandevoordt,RBL,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-benjamin-henrichs,Benjamin Henrichs,B. Henrichs,RBL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-david-raum,David Raum,D. Raum,RBL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-castello-lukeba,Castello Lukeba,C. Lukeba,RBL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-lukas-klostermann,Lukas Klostermann,L. Klostermann,RBL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-maxime-esteve,Maxime Estève,M. Esteve,RBL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-max-finkgrafe,Max Finkgräfe,M. Finkgräfe,RBL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-mohamed-kone,Mohamed Koné,A. Koné,RBL,DEF,4.5,Available,,,,,,,,,4.5,verified,MID,RBL,,90.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-willi-orban,Willi Orbán,W. Orbán,RBL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-andrija-maksimovic,Andrija Maksimović,A. Maksimović,RBL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-el-aynaoui,El Aynaoui,N. El Aynaoui,RBL,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,RBL,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-ridle-baku,Ridle Baku,R. Baku,RBL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-nicolas-seiwald,Nicolas Seiwald,N. Seiwald,RBL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-nusa,Nusa,A. Nusa,RBL,MID,6.0,Available,,,,,,,,,6.5,unknown,MID,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-gruda,Gruda,B. Gruda,RBL,MID,5.0,Available,,,,,,,,,6.0,unknown,MID,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-nkunku,Nkunku,C. Nkunku,RBL,FWD,7.0,Available,0.0,4.0,1845.0,49.0,0.93,1.27,0.44,0.15,7.0,unknown,MID,RBL,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-banzuzi,Banzuzi,E. Banzuzi,RBL,FWD,5.0,Available,,,,,,,,,5.5,unknown,MID,RBL,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-cardoso,Cardoso,R. Cardoso,RBL,FWD,5.0,Available,,,,,,,,,6.0,unknown,FWD,RBL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-risser,Risser,R. Risser,RCL,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-jonathan-gradit,Jonathan Gradit,J. Gradit,RCL,DEF,4.5,Doubtful,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-ruben-aguilar,Rúben Aguilar,R. Aguilar,RCL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-samson-baidoo,Samson Baidoo,S. Baidoo,RCL,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-nidal-celik,Nidal Celik,N. Čelik,RCL,DEF,4.0,Doubtful,,,,,,,,,4.0,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-saud-abdulhamid,Saud Abdulhamid,S. Abdulhamid,RCL,DEF,4.0,Doubtful,,,,,,,,,4.0,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-ismaelo-ganiou,Ismaëlo Ganiou,I. Ganiou,RCL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-kyllian-antonio,Kyllian Antonio,K. Antonio,RCL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-jhoanner-chavez,Jhoanner Chávez,J. Chavez,RCL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-matthieu-udol,Matthieu Udol,M. Udol,RCL,DEF,4.5,Doubtful,,,,,,,,,4.5,verified,DEF,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-florian-thauvin,Florian Thauvin,F. Thauvin,RCL,MID,6.5,Available,1.0,11.0,2716.0,86.0,1.03,2.95,0.46,0.33,6.5,verified,MID,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-mickael-cuisance,Mickaël Cuisance,M. Cuisance,RCL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-michal-skoras,Michał Skóraś,M. Skóraś,RCL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-alpha-diallo,Alpha Diallo,Alpha Diallo,RCL,MID,4.5,Suspended,,,,,,,,,4.5,verified,MID,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-andrija-bulatovic,Andrija Bulatović,A. Bulatović,RCL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-edouard,Édouard,O. Édouard,RCL,FWD,6.5,Available,0.0,4.0,2129.0,88.0,1.52,1.01,0.59,0.13,6.0,unknown,FWD,RCL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-ivanovic,Ivanović,F. Ivanović,RCL,FWD,5.0,Available,,,,,,,,,5.5,unknown,MID,RCL,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-berke-ozer,Berke Özer,Berke Özer,LIL,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-tanguy-nianzou,Tanguy Nianzou,T. Nianzou,LIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-loic-sradanovic,Loïc Sradanovic,L. Srdanovic,LIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LIL,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-alexsandro,Alexsandro,Alexsandro,LIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-nathan-ngoy,Nathan Ngoy,N. Ngoy,LIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-romain-perraud,Romain Perraud,R. Perraud,LIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-calvin-verdonk,Calvin Verdonk,C. Verdonk,LIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-ousmane-toure,Ousmane Touré,O. Toure,LIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-tiago-santos,Tiago Santos,Tiago Santos,LIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-haraldsson,Haraldsson,H. Haraldsson,LIL,MID,5.5,Available,,,,,,,,,6.0,unknown,MID,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-ngal-ayel-mukau,Ngal'ayel Mukau,N. Mukau,LIL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-basar-onal,Başar Önal,Başar Önal,LIL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-andre,André,B. André,LIL,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-perrin,Perrin,G. Perrin,LIL,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-olivier-giroud,Olivier Giroud,O. Giroud,LIL,FWD,6.5,Available,1.0,0.0,2448.0,57.0,0.99,0.96,0.4,0.04,6.5,verified,FWD,LIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-ueda,Ueda,A. Ueda,LIL,FWD,7.0,Available,0.0,6.0,3585.0,93.0,1.36,0.75,0.7,0.05,6.0,unknown,FWD,LIL,,98.0,uclfantasy.com/rankings,2026-10-14
+LIV-alisson-becker,Alisson Becker,Alisson Becker,LIV,GK,6.0,Available,,,,,,,,,6.0,verified,GK,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-ronald-araujo,Ronald Araújo,Ronald Araújo,LIV,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-milos-kerkez,Milos Kerkez,M. Kerkez,LIV,DEF,5.0,Available,,,,,,,,,5.0,est_fpl,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-jeremy-jacquet,Jeremy Jacquet,J. Jacquet,LIV,DEF,5.0,Available,,,,,,,,,4.5,est_fpl,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-virgil-van-dijk,Virgil van Dijk,V. van Dijk,LIV,DEF,6.0,Available,13.0,,,,,,,,6.0,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-kostas-tsimikas,Kostas Tsimikas,K. Tsimikas,LIV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-joe-gomez,Joe Gomez,J. Gomez,LIV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-conor-bradley,Conor Bradley,C. Bradley,LIV,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-giovanni-leoni,Giovanni Leoni,G. Leoni,LIV,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-dominik-szoboszlai,Dominik Szoboszlai,D. Szoboszlai,LIV,MID,7.0,Available,14.0,13.0,4843.0,100.0,0.78,2.3,0.24,0.24,7.0,verified,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-mac-allister,Mac Allister,A. Mac Allister,LIV,MID,6.5,Available,,,,,,,,,5.5,est_fpl,MID,LIV,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-florian-wirtz,Florian Wirtz,F. Wirtz,LIV,MID,8.5,Available,1.0,4.0,3513.0,82.0,0.72,2.56,0.18,0.2,6.5,est_fpl,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-ryan-gravenberch,Ryan Gravenberch,R. Gravenberch,LIV,MID,5.0,Available,,,,,,,,,5.5,est_fpl,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-barcola,Barcola,B. Barcola,LIV,MID,7.0,Available,5.0,2.0,3446.0,69.0,1.28,2.17,0.39,0.21,7.5,unknown,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-rio-ngumoha,Rio Ngumoha,R. Ngumoha,LIV,MID,5.5,Available,,,,,,,,,5.5,est_fpl,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-wataru-endo,Wataru Endo,W. Endo,LIV,MID,4.5,Suspended,,,,,,,,,4.5,verified,MID,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-alexander-isak,Alexander Isak,A. Isak,LIV,FWD,7.5,Doubtful,13.0,5.0,1044.0,59.0,1.21,0.43,0.34,0.09,7.5,verified,FWD,LIV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-gianluigi-donnarumma,Gianluigi Donnarumma,G. Donnarumma,MCI,GK,6.0,Available,,,,,,,,,6.0,verified,GK,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-marc-guehi,Marc Guéhi,M. Guéhi,MCI,DEF,5.0,Available,9.0,,,,,,,,5.0,est_fpl,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-ruben-dias,Rúben Dias,Rúben Dias,MCI,DEF,5.5,Available,,,,,,,,,5.0,est_fpl,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-matheus-nunes,Matheus Nunes,Matheus Nunes,MCI,DEF,5.0,Available,,,,,,,,,5.0,est_fpl,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-josko-gvardiol,Joško Gvardiol,J. Gvardiol,MCI,DEF,5.5,Available,,,,,,,,,5.0,est_fpl,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-abdukodir-khusanov,Abdukodir Khusanov,A. Khusanov,MCI,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-rico-lewis,Rico Lewis,R. Lewis,MCI,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-vitor-reis,Vitor Reis,Vitor Reis,MCI,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-enzo-fernandez,Enzo Fernández,E. Fernández,MCI,MID,7.5,Available,2.0,6.0,5405.0,96.0,0.82,1.98,0.28,0.22,6.5,unknown,MID,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-rayan-cherki,Rayan Cherki,R. Cherki,MCI,MID,7.0,Available,16.0,4.0,3088.0,60.0,0.93,2.91,0.29,0.5,7.0,verified,MID,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-phil-foden,Phil Foden,P. Foden,MCI,MID,7.0,Available,1.0,3.0,3186.0,65.0,0.9,2.26,0.37,0.23,6.5,est_fpl,MID,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-elliot-anderson,Elliot Anderson,E. Anderson,MCI,MID,7.0,Available,1.0,3.0,4804.0,90.0,0.26,1.55,0.11,0.11,6.0,est_fpl,MID,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-antoine-semenyo,Antoine Semenyo,A. Semenyo,MCI,MID,7.0,Available,3.0,3.0,2022.0,88.0,0.89,1.02,0.49,0.13,7.5,est_fpl,MID,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-erling-haaland,Erling Haaland,E. Haaland,MCI,FWD,11.0,Available,22.0,12.0,4473.0,91.0,1.93,0.82,0.85,0.18,11.0,verified,FWD,MCI,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-senne-lammens,Senne Lammens,S. Lammens,MUN,GK,4.5,Available,,,,,,,,,4.5,est_fpl,GK,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-lisandro-martinez,Lisandro Martínez,Lisandro Martínez,MUN,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-leny-yoro,Leny Yoro,L. Yoro,MUN,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-noussair-mazraoui,Noussair Mazraoui,N. Mazraoui,MUN,DEF,4.5,Doubtful,,,,,,,,,4.5,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-luke-shaw,Luke Shaw,L. Shaw,MUN,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-harry-maguire,Harry Maguire,H. Maguire,MUN,DEF,5.0,Available,,,,,,,,,5.0,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-diogo-dalot,Diogo Dalot,Diogo Dalot,MUN,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-ayden-heaven,Ayden Heaven,A. Heaven,MUN,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-matthijs-de-ligt,Matthijs de Ligt,M. De Ligt,MUN,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-bruno-fernandes,Bruno Fernandes,Bruno Fernandes,MUN,MID,9.0,Available,19.0,8.0,3651.0,93.0,0.79,3.87,0.35,0.59,9.0,verified,MID,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-matheus-cunha,Matheus Cunha,Matheus Cunha,MUN,MID,7.0,Available,3.0,8.0,2745.0,89.0,1.18,1.38,0.33,0.13,7.0,est_fpl,MID,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-youri-tielemans,Youri Tielemans,Y. Tielemans,MUN,MID,6.5,Available,1.0,4.0,3029.0,83.0,0.33,1.66,0.06,0.21,5.5,est_fpl,MID,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-marcus-rashford,Marcus Rashford,M. Rashford,MUN,MID,7.0,Doubtful,1.0,0.0,82.0,100.0,0.0,0.0,0.0,0.0,6.5,est_fpl,MID,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-manuel-ugarte,Manuel Ugarte,M. Ugarte,MUN,MID,4.5,Injured,,,,,,,,,4.5,verified,MID,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-benjamin-sesko,Benjamin Šeško,B. Šeško,MUN,FWD,6.5,Doubtful,,,,,,,,,6.5,verified,FWD,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-bryan-mbeumo,Bryan Mbeumo,B. Mbeumo,MUN,FWD,7.0,Available,12.0,6.0,2756.0,92.0,1.14,2.12,0.46,0.1,7.0,verified,FWD,MUN,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-milinkovic-savic,Milinković-Savić,V. Milinković-Savić,NAP,GK,4.0,Available,12.0,,,,,,,,5.0,unknown,GK,NAP,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-leonardo-spinazzola,Leonardo Spinazzola,L. Spinazzola,NAP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-amir-rrahmani,Amir Rrahmani,A. Rrahmani,NAP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-di-lorenzo,Di Lorenzo,G. Di Lorenzo,NAP,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,NAP,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-alessandro-buongiorno,Alessandro Buongiorno,A. Buongiorno,NAP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-rafa-marin,Rafa Marín,Rafa Marín,NAP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-mathias-olivera,Mathías Olivera,M. Olivera,NAP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-sam-beukema,Sam Beukema,S. Beukema,NAP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-luca-marianucci,Luca Marianucci,L. Marianucci,NAP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-pasquale-mazzocchi,Pasquale Mazzocchi,P. Mazzocchi,NAP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-kevin-de-bruyne,Kevin De Bruyne,K. De Bruyne,NAP,MID,7.0,Available,1.0,2.0,1360.0,76.0,0.73,2.71,0.33,0.26,7.0,verified,MID,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-politano,Politano,M. Politano,NAP,MID,5.5,Available,,,,,,,,,6.0,unknown,MID,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-lobotka,Lobotka,S. Lobotka,NAP,MID,5.5,Available,,,,,,,,,5.0,unknown,MID,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-neres,Neres,D. Neres,NAP,MID,6.5,Available,,,,,,,,,6.5,unknown,MID,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-billy-gilmour,Billy Gilmour,B. Gilmour,NAP,MID,4.5,Available,,,,,,,,,4.5,verified,MID,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-rasmus-hojlund,Rasmus Højlund,R. Højlund,NAP,FWD,8.0,Available,1.0,2.0,3630.0,95.0,0.84,0.97,0.4,0.15,8.0,verified,FWD,NAP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-matvey-safonov,Matvey Safonov,M. Safonov,PSG,GK,5.5,Available,8.0,,,,,,,,5.5,verified,GK,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-nuno-mendes,Nuno Mendes,Nuno Mendes,PSG,DEF,6.0,Available,32.0,,,,,,,,5.5,unknown,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-willian-pacho,Willian Pacho,W. Pacho,PSG,DEF,6.0,Available,,,,,,,,,6.0,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-achraf-hakimi,Achraf Hakimi,A. Hakimi,PSG,DEF,6.0,Available,,,,,,,,,6.0,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-illia-zabarnyi,Illia Zabarnyi,I. Zabarnyi,PSG,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-lucas-digne,Lucas Digne,L. Digne,PSG,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-lucas-hernandez,Lucas Hernández,L. Hernández,PSG,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-lucas-beraldo,Lucas Beraldo,Lucas Beraldo,PSG,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-marquinhos,Marquinhos,Marquinhos,PSG,DEF,5.0,Available,17.0,,,,,,,,5.0,verified,DEF,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-fabian-ruiz,Fabián Ruiz,Fabián Ruiz,PSG,MID,6.5,Available,,,,,,,,,6.0,unknown,MID,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-vitinha,Vitinha,Vitinha,PSG,MID,7.5,Available,18.0,4.0,4205.0,91.0,0.56,1.48,0.15,0.24,7.5,verified,MID,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-khvicha-kvaratskhelia,Khvicha Kvaratskhelia,K. Kvaratskhelia,PSG,MID,10.0,Available,27.0,0.0,3305.0,77.0,1.5,1.85,0.54,0.27,10.0,verified,MID,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-desire-doue,Désiré Doué,D. Doué,PSG,MID,8.5,Available,4.0,0.0,2954.0,74.0,1.16,2.19,0.43,0.24,8.5,verified,MID,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-joao-neves,João Neves,João Neves,PSG,MID,6.0,Available,11.0,,,,,,,,6.0,verified,MID,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-ousmane-dembele,Ousmane Dembélé,O. Dembélé,PSG,FWD,10.0,Available,15.0,16.0,2520.0,64.0,1.75,2.93,0.89,0.43,10.0,verified,FWD,PSG,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-diogo-costa,Diogo Costa,Diogo Costa,POR,GK,5.0,Available,,,,,,,,,4.5,unknown,GK,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-jan-bednarek,Jan Bednarek,J. Bednarek,POR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-jakub-kiwior,Jakub Kiwior,J. Kiwior,POR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-francisco-moura,Francisco Moura,Francisco Moura,POR,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-nehuen-perez,Nehuén Pérez,Nehuén Pérez,POR,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-zaidu-sanusi,Zaidu Sanusi,Z. Sanusi,POR,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-martim-fernandes,Martim Fernandes,Martim Fernandes,POR,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-dominik-prpic,Dominik Prpić,D. Prpić,POR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-alberto-costa,Alberto Costa,Alberto Costa,POR,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-pablo-rosario,Pablo Rosario,P. Rosario,POR,MID,4.5,Available,,,,,,,,,4.5,verified,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-ivan-jaime,Iván Jaime,I. Jaime,POR,MID,4.5,Available,,,,,,,,,4.5,verified,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-stephen-eustaquio,Stephen Eustáquio,S. Eustáquio,POR,MID,4.5,Suspended,,,,,,,,,4.5,verified,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-in-beom-hwang,In-beom Hwang,I. Hwang,POR,MID,4.5,Available,,,,,,,,,4.5,verified,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-gabriel-veiga,Gabriel Veiga,Gabriel Veiga,POR,MID,5.0,Available,,,,,,,,,6.0,unknown,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-pepe,Pepê,Pepê,POR,MID,6.0,Available,,,,,,,,,6.5,unknown,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-victor-froholdt,Victor Froholdt,V. Froholdt,POR,MID,4.5,Available,,,,,,,,,4.5,verified,MID,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-andre-silva,André Silva,André Silva,POR,FWD,6.0,Available,,,,,,,,,6.0,unknown,FWD,POR,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-kovar,Kovář,M. Kovář,PSV,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-sergino-dest,Sergiño Dest,S. Dest,PSV,DEF,5.0,Available,,,,,,,,,5.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-armando-obispo,Armando Obispo,A. Obispo,PSV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-geertruida,Geertruida,L. Geertruida,PSV,DEF,4.5,Available,,,,,,,,,4.5,unknown,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-ryan-flamingo,Ryan Flamingo,R. Flamingo,PSV,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-mauro-junior,Mauro Júnior,Mauro Júnior,PSV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-yarek-gasiorowski,Yarek Gasiorowski,Y. Gasiorowski,PSV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-kiliann-sildillia,Kiliann Sildillia,K. Sildillia,PSV,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-adamo-nagalo,Adamo Nagalo,A. Nagalo,PSV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-fabian-merien,Fabian Merien,F. Merién,PSV,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-sano,Sano,K. Sano,PSV,MID,4.5,Available,,,,,,,,,5.5,unknown,MID,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-perisic,Perišić,I. Perišić,PSV,MID,6.5,Available,1.0,3.0,3090.0,84.0,0.79,1.89,0.29,0.41,6.0,unknown,MID,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-guus-til,Guus Til,G. Til,PSV,MID,5.5,Available,,,,,,,,,5.5,verified,MID,PSV,,103.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-paul-wanner,Paul Wanner,P. Wanner,PSV,MID,4.5,Available,,,,,,,,,4.5,verified,MID,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-sven-mijnans,Sven Mijnans,S. Mijnans,PSV,MID,4.5,Available,,,,,,,,,4.5,verified,MID,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-van-bommel,Van Bommel,R. van Bommel,PSV,MID,5.5,Available,,,,,,,,,6.0,unknown,FWD,PSV,,92.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-noah-fernandez,Noah Fernandez,N. Fernandez,PSV,MID,4.5,Available,,,,,,,,,4.5,verified,MID,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-ricardo-pepi,Ricardo Pepi,R. Pepi,PSV,FWD,6.0,Injured,,,,,,,,,6.0,verified,FWD,PSV,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-alvaro-valles,Álvaro Vallés,A. Valles,BET,GK,4.5,Available,,,,,,,,,4.5,unknown,GK,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-marc-bartra,Marc Bartra,M. Bartra,BET,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-hector-bellerin,Héctor Bellerín,H. Bellerín,BET,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-junior-firpo,Junior Firpo,Junior Firpo,BET,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-fran-garcia,Fran García,Fran García,BET,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-natan,Natan,Natan,BET,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-valentin-gomez,Valentín Gómez,Valentin Gomez,BET,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-diego-llorente,Diego Llorente,Diego Llorente,BET,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-isco,Isco,Isco,BET,MID,6.5,Available,1.0,5.0,237.0,22.0,0.38,1.9,0.38,0.38,6.5,unknown,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-rodrigo-riquelme,Rodrigo Riquelme,R. Riquelme,BET,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-alvaro-fidalgo,Álvaro Fidalgo,Á. Fidalgo,BET,MID,4.5,Available,,,,,,,,,4.5,verified,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-nelson-deossa,Nelson Deossa,N. Deossa,BET,MID,4.5,Available,,,,,,,,,4.5,verified,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-facundo-bernal,Facundo Bernal,F. Bernal,BET,MID,4.5,Available,,,,,,,,,4.5,verified,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-dani-ceballos,Dani Ceballos,D. Ceballos,BET,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-troy-parrott,Troy Parrott,Troy Parrott,BET,FWD,5.0,Available,,,,,,,,,5.0,verified,FWD,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-cucho-hernandez,Cucho Hernández,Cucho Hernández,BET,FWD,6.0,Available,,,,,,,,,6.0,verified,FWD,BET,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-thibaut-courtois,Thibaut Courtois,T. Courtois,RMA,GK,6.0,Available,,,,,,,,,6.0,verified,GK,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-cucurella,Cucurella,M. Cucurella,RMA,DEF,6.0,Available,12.0,,,,,,,,5.0,unknown,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-alexander-arnold,Alexander-Arnold,T. Alexander-Arnold,RMA,DEF,5.5,Available,,,,,,,,,5.5,unknown,DEF,RMA,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-konate,Konaté,I. Konaté,RMA,DEF,5.0,Available,,,,,,,,,5.0,unknown,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-ferland-mendy,Ferland Mendy,F. Mendy,RMA,DEF,4.5,Suspended,,,,,,,,,4.5,verified,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-eder-militao,Éder Militão,Éder Militão,RMA,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-raul-asencio,Raúl Asencio,Raúl Asencio,RMA,DEF,4.5,Injured,,,,,,,,,4.5,verified,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-dean-huijsen,Dean Huijsen,D. Huijsen,RMA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-valverde,Valverde,F. Valverde,RMA,MID,7.0,Available,5.0,10.0,4163.0,96.0,0.63,1.43,0.19,0.28,7.0,unknown,MID,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-tchouameni,Tchouaméni,A. Tchouaméni,RMA,MID,6.0,Doubtful,,,,,,,,,5.5,unknown,MID,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-vinicius-junior,Vinícius Júnior,Vinícius Júnior,RMA,MID,9.5,Available,7.0,3.0,4711.0,91.0,1.45,2.01,0.44,0.21,9.5,verified,MID,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-jude-bellingham,Jude Bellingham,Jude Bellingham,RMA,MID,8.5,Available,21.0,3.0,3164.0,78.0,0.94,1.68,0.26,0.17,8.5,verified,MID,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-arda-guler,Arda Güler,Arda Güler,RMA,MID,6.5,Suspended,,,,,,,,,7.5,unknown,MID,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-kylian-mbappe,Kylian Mbappé,K. Mbappé,RMA,FWD,11.0,Available,56.0,6.0,3755.0,87.0,2.4,2.44,1.03,0.14,11.0,verified,FWD,RMA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-gollini,Gollini,P. Gollini,ROM,GK,4.0,Available,,,,,,,,,4.5,unknown,GK,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-mario-hermoso,Mario Hermoso,M. Hermoso,ROM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-evan-ndicka,Evan Ndicka,E. N'Dicka,ROM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-gianluca-mancini,Gianluca Mancini,G. Mancini,ROM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-wesley-franca,Wesley França,Wesley França,ROM,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-devyne-rensch,Devyne Rensch,D. Rensch,ROM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-balerdi,Balerdi,L. Balerdi,ROM,DEF,4.5,Available,,,,,,,,,4.5,unknown,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-molina,Molina,N. Molina,ROM,DEF,5.0,Available,,,,,,,,,5.5,unknown,MID,ROM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-angelino,Angeliño,Angeliño,ROM,DEF,4.5,Suspended,,,,,,,,,4.5,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-daniele-ghilardi,Daniele Ghilardi,D. Ghilardi,ROM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-jan-ziolkowski,Jan Ziółkowski,J. Ziółkowski,ROM,DEF,4.0,Suspended,,,,,,,,,4.0,verified,DEF,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-bryan-cristante,Bryan Cristante,B. Cristante,ROM,MID,4.5,Available,,,,,,,,,4.5,verified,MID,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-kone,Koné,M. Koné,ROM,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-de-roon,De Roon,M. De Roon,ROM,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,ROM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-niccolo-pisilli,Niccolò Pisilli,N. Pisilli,ROM,MID,4.5,Available,,,,,,,,,4.5,verified,MID,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-donyell-malen,Donyell Malen,D. Malen,ROM,FWD,6.5,Available,7.0,5.0,1688.0,100.0,1.81,0.53,0.8,0.11,6.5,verified,FWD,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-dybala,Dybala,P. Dybala,ROM,FWD,7.0,Available,2.0,3.0,3344.0,74.0,1.18,3.26,0.4,0.35,6.5,unknown,FWD,ROM,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-soule,Soulé,M. Soulé,ROM,FWD,6.0,Available,,,,,,,,,6.5,unknown,MID,ROM,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-riznyk,Riznyk,D. Riznyk,SHA,GK,4.5,Available,,,,,,,,,4.0,unknown,GK,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-oleksandr-karavaiev,Oleksandr Karavaiev,O. Karavaiev,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-mykola-matviyenko,Mykola Matviyenko,M. Matviyenko,SHA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-valeriy-bondar,Valeriy Bondar,V. Bondar,SHA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-marlon-santos,Marlon Santos,Marlon Santos,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-irakli-azarovi,Irakli Azarovi,I. Azarov,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-giorgi-gocholeishvili,Giorgi Gocholeishvili,G. Gocholeishvili,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-vinicius-tobias,Vinícius Tobias,V. Tobías,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-pedro-henrique,Pedro Henrique,Pedro Henrique,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-alaa-ghram,Alaa Ghram,A. Ghram,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-diego-arroyo,Diego Arroyo,D. Arroyo,SHA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-marian-shved,Marian Shved,M. Shved,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-artem-bondarenko,Artem Bondarenko,A. Bondarenko,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-dmytro-kryskiv,Dmytro Kryskiv,D. Kryskiv,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-yehor-nazaryna,Yehor Nazaryna,Y. Nazaryna,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-oleh-ocheretko,Oleh Ocheretko,O. Ocheretko,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-pedrinho,Pedrinho,Pedrinho,SHA,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-viktor-tsukanov,Viktor Tsukanov,V. Tsukanov,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-marlon-gomes,Marlon Gomes,Marlon Gomes,SHA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-kaua-elias,Kauã Elias,Kauã Elias,SHA,FWD,6.0,Available,,,,,,,,,5.5,unknown,FWD,SHA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-mendoza,Mendoza,G. Mendoza,SHA,FWD,5.0,Available,,,,,,,,,4.5,unknown,MID,SHA,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-pokatilov,Pokatilov,S. Pokatilov,SAB,GK,4.5,Available,,,,,,,,,4.0,unknown,GK,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-tellur-mutallimov,Tellur Mutallimov,T. Mutallimov,SAB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-puchacz,Puchacz,T. Puchacz,SAB,DEF,4.5,Available,,,,,,,,,4.0,unknown,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-dashdamirov,Dashdamirov,R. Dashdamirov,SAB,DEF,4.5,Available,,,,,,,,,4.0,unknown,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-akim-zedadka,Akim Zedadka,A. Zedadka,SAB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-steve-solvet,Steve Solvet,S. Solvet,SAB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-aden-mccarthy,Aden McCarthy,A. McCarthy,SAB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-simic,Simić,V. Simić,SAB,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-mickels,Mickels,J. Mickels,SAB,MID,5.5,Available,,,,,,,,,5.5,unknown,FWD,SAB,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-lepinjica,Lepinjica,I. Lepinjica,SAB,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-aleksey-isaev,Aleksey Isaev,A. Isaev,SAB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-rauf-rustamli,Rauf Rustamli,R. Rustamli,SAB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-abdulakh-khaibulaev,Abdulakh Khaibulaev,A. Khaibulaev,SAB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-parris,Parris,K. Parris,SAB,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-nwachukwu,Nwachukwu,C. Nwachukwu,SAB,MID,5.5,Available,,,,,,,,,4.5,unknown,MID,SAB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-markovic,Markovič,J. Markovič,SLA,GK,4.0,Available,,,,,,,,,4.0,unknown,GK,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-tomas-vlcek,Tomáš Vlček,T. Vlček,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-david-zima,David Zima,D. Zima,SLA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-ange-n-guessan,Ange N'Guessan,A. N'Guessan,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-isife,Isife,S. Isife,SLA,DEF,4.0,Available,,,,,,,,,4.5,unknown,MID,SLA,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-stepan-chaloupek,Štěpán Chaloupek,Š. Chaloupek,SLA,DEF,4.0,Injured,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-tomas-holes,Tomáš Holeš,T. Holeš,SLA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-igoh-ogbu,Igoh Ogbu,I. Ogbu,SLA,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-dominik-javorcek,Dominik Javorček,D. Javorček,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-david-jurasek,David Jurásek,D. Jurásek,SLA,DEF,4.0,Doubtful,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-daiki-hashioka,Daiki Hashioka,D. Hashioka,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-youssoupha-mbodji,Youssoupha Mbodji,Y. Mbodji,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-neil-glossoa,Neil Glossoa,N. Glossoa,SLA,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-sadilek,Sadílek,M. Sadílek,SLA,MID,5.5,Available,,,,,,,,,4.5,unknown,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-wiktor-nowak,Wiktor Nowak,W. Nowak,SLA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-ayaosi,Ayaosi,E. Ayaosi,SLA,MID,4.5,Available,,,,,,,,,4.5,unknown,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-david-moses,David Moses,D. Moses,SLA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-toumani-diakite,Toumani Diakité,T. Diakite,SLA,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-suleiman,Suleiman,M. Suleiman,SLA,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-sturm,Šturm,D. Šturm,SLA,FWD,5.5,Available,,,,,,,,,4.5,unknown,MID,SLA,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-chory,Chorý,T. Chorý,SLA,FWD,6.0,Available,,,,,,,,,5.5,unknown,FWD,SLA,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-rui-silva,Rui Silva,Rui Silva,SCP,GK,5.0,Available,,,,,,,,,4.5,unknown,GK,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-eduardo-quaresma,Eduardo Quaresma,Eduardo Quaresma,SCP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-sergi-altimira,Sergi Altimira,Sergi Altimira,SCP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-georgios-vagiannidis,Georgios Vagiannidis,G. Vagiannidis,SCP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-goncalo-inacio,Gonçalo Inácio,Gonçalo Inácio,SCP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-zeno-debast,Zeno Debast,Z. Debast,SCP,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-ivan-fresneda,Iván Fresneda,I. Fresneda,SCP,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-rodrigo-zalazar,Rodrigo Zalazar,R. Zalazar,SCP,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-catamo,Catamo,G. Catamo,SCP,MID,6.5,Available,,,,,,,,,6.0,unknown,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-maxi-araujo,Maxi Araújo,M. Araújo,SCP,MID,5.5,Available,,,,,,,,,5.5,verified,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-issa-doumbia,Issa Doumbia,I. Doumbia,SCP,MID,4.5,Available,,,,,,,,,4.5,verified,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-luis-guilherme,Luis Guilherme,Luis Guilherme,SCP,MID,5.0,Available,,,,,,,,,6.0,unknown,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-andersen,Andersen,S. Andersen,SCP,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-luis-suarez,Luis Suárez,L. Suárez,SCP,FWD,7.0,Available,8.0,7.0,3653.0,83.0,1.85,1.45,0.94,0.2,7.0,verified,FWD,SCP,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-fabian-bredlow,Fabian Bredlow,F. Bredlow,VFB,GK,4.0,Available,,,,,,,,,4.0,verified,GK,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-seimen,Seimen,D. Seimen,VFB,GK,4.5,Injured,,,,,,,,,4.5,unknown,GK,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-jeff-chabot,Jeff Chabot,J. Chabot,VFB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-maximilian-mittelstadt,Maximilian Mittelstädt,M. Mittelstädt,VFB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-ramon-hendriks,Ramon Hendriks,R. Hendriks,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-josha-vagnoman,Josha Vagnoman,J. Vagnoman,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-ameen-al-dakhil,Ameen Al-Dakhil,A. Al-Dakhil,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-dan-axel-zagadou,Dan-Axel Zagadou,D. Zagadou,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-leonidas-stergiou,Leonidas Stergiou,L. Stergiou,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-lorenz-assignon,Lorenz Assignon,L. Assignon,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-yanik-spalt,Yanik Spalt,Y. Spalt,VFB,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-luca-jaquez,Luca Jaquez,L. Jaquez,VFB,DEF,4.0,Injured,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-maximilian-herwerth,Maximilian Herwerth,M. Herwerth,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-christopher-olivier,Christopher Olivier,C. Olivier,VFB,DEF,4.5,Suspended,,,,,,,,,4.5,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-alexander-gross,Alexander Groß,A. Groiß,VFB,DEF,4.0,Available,,,,,,,,,4.5,verified,DEF,VFB,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-dominik-nothnagel,Dominik Nothnagel,D. Nothnagel,VFB,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-stiller,Stiller,A. Stiller,VFB,MID,5.5,Available,,,,,,,,,5.5,unknown,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-grischa-promel,Grischa Prömel,G. Prömel,VFB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-chris-fuhrich,Chris Führich,C. Führich,VFB,MID,5.5,Available,,,,,,,,,5.5,verified,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-el-khannouss,El Khannouss,B. El Khannouss,VFB,MID,5.5,Available,,,,,,,,,5.5,unknown,MID,VFB,,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-finn-jeltsch,Finn Jeltsch,F. Jeltsch,VFB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-nikolas-nartey,Nikolas Nartey,N. Nartey,VFB,MID,4.5,Available,,,,,,,,,4.5,verified,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-chema-andres,Chema Andrés,Chema Andrés,VFB,MID,4.5,Suspended,,,,,,,,,4.5,verified,MID,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-ermedin-demirovic,Ermedin Demirović,E. Demirović,VFB,FWD,6.0,Available,,,,,,,,,6.0,verified,FWD,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-deniz-undav,Deniz Undav,D. Undav,VFB,FWD,7.0,Available,3.0,8.0,3643.0,89.0,1.68,2.15,0.62,0.37,7.0,verified,FWD,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-dzenan-pejcinovic,Dženan Pejčinović,D. Pejcinovic,VFB,FWD,5.0,Available,,,,,,,,,5.0,verified,FWD,VFB,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-ostbo,Østbø,A. Østbø,VIK,GK,4.5,Available,,,,,,,,,4.0,unknown,GK,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-kristoffer-haugen,Kristoffer Haugen,K. Haugen,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-viljar-vevatne,Viljar Vevatne,V. Vevatne,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-martin-roseth,Martin Røseth,M. Roseth,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-jesper-daland,Jesper Daland,J. Daland,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-anders-baertelsen,Anders Bærtelsen,A. Bærtelsen,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-henrik-falchener,Henrik Falchener,H. Falchener,VIK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-sondre-bjorshol,Sondre Bjørshol,S. Bjørshol,VIK,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-henrik-heggheim,Henrik Heggheim,H. Heggheim,VIK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-gianni-stensness,Gianni Stensness,G. Stensness,VIK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-herman-haugen,Herman Haugen,H. Haugen,VIK,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-zlatko-tripic,Zlatko Tripić,Z. Tripić,VIK,MID,5.5,Available,,,,,,,,,5.5,verified,MID,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-askildsen,Askildsen,K. Askildsen,VIK,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-bell,Bell,J. Bell,VIK,MID,5.0,Available,,,,,,,,,4.5,unknown,MID,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-ruben-alte,Rubén Alte,R. Alte,VIK,MID,4.5,Suspended,,,,,,,,,4.5,verified,MID,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-amin-cosic,Amin Cosic,A. Cosic,VIK,MID,4.5,Available,,,,,,,,,4.5,verified,MID,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-christiansen,Christiansen,P. Christiansen,VIK,FWD,6.0,Available,,,,,,,,,5.5,unknown,FWD,VIK,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-gulacsi,Gulácsi,P. Gulácsi,VIL,GK,4.0,Available,,,,,,,,,4.5,unknown,GK,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-logan-costa,Logan Costa,L. Costa,VIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-juan-foyth,Juan Foyth,J. Foyth,VIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-renato-veiga,Renato Veiga,Renato Veiga,VIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-carlos-romero,Carlos Romero,C. Romero,VIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-santiago-mourino,Santiago Mouriño,S. Mouriño,VIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-alex-freeman,Alex Freeman,A. Freeman,VIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-pau-navarro,Pau Navarro,P. Navarro,VIL,DEF,4.5,Available,,,,,,,,,4.5,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-sergi-cardona,Sergi Cardona,S. Cardona,VIL,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-gueye,Gueye,P. Gueye,VIL,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-alberto-moleiro,Alberto Moleiro,A. Moleiro,VIL,MID,5.0,Available,,,,,,,,,6.0,unknown,MID,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-tajon-buchanan,Tajon Buchanan,T. Buchanan,VIL,MID,4.5,Available,,,,,,,,,4.5,verified,MID,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-santi-comesana,Santi Comesaña,S. Comesaña,VIL,MID,5.0,Available,,,,,,,,,5.5,unknown,MID,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-saliba,Saliba,N. Saliba,VIL,MID,4.5,Available,,,,,,,,,5.5,unknown,MID,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-gerard-moreno,Gerard Moreno,Gerard Moreno,VIL,FWD,6.5,Available,0.0,1.0,1395.0,67.0,1.03,1.55,0.65,0.0,6.5,unknown,FWD,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-mikautadze,Mikautadze,G. Mikautadze,VIL,FWD,6.0,Available,,,,,,,,,6.5,unknown,FWD,VIL,,98.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-d-vida,D. Vida,D. Vida,AEK,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-c-lykogiannis,C. Lykogiannis,C. Lykogiannis,AEK,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-k-kairinen,K. Kairinen,K. Kairinen,AEK,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-m-balamotis,M. Balamotis,M. Balamotis,AEK,MID,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-j-mario,J. Mário,J. Mário,AEK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-o-zubkov,O. Zubkov,O. Zubkov,AEK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AEK-d-kutesa,D. Kutesa,D. Kutesa,AEK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-k-arrizabalaga,K. Arrizabalaga,K. Arrizabalaga,ARS,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-illan-meslier,Illan Meslier,I. Meslier,ARS,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-t-setford,T. Setford,T. Setford,ARS,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-b-white,B. White,B. White,ARS,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-william-saliba,William Saliba,W. Saliba,ARS,DEF,5.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-cristhian-mosquera,Cristhian Mosquera,C. Mosquera,ARS,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-m-salmon,M. Salmon,M. Salmon,ARS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-noni-madueke,Noni Madueke,N. Madueke,ARS,MID,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-mikel-merino,Mikel Merino,M. Merino,ARS,MID,6.5,Available,1.0,4.0,2096.0,61.0,0.69,1.25,0.26,0.13,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-christos-tzolis,Christos Tzolis,C. Tzolis,ARS,MID,7.5,Injured,4.0,4.0,7742.0,95.0,1.41,2.84,0.5,0.43,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-martin-zubimendi,Martín Zubimendi,M. Zubimendi,ARS,MID,6.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-max-dowman,Max Dowman,M. Dowman,ARS,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ARS-gabriel-martinelli,Gabriel Martinelli,G. Martinelli,ARS,MID,7.5,Available,0.0,0.0,2434.0,48.0,1.07,1.55,0.48,0.33,,,,,,0.0,uclfantasy.com/rankings,2026-10-14
+AVL-marco-bizot,Marco Bizot,M. Bizot,AVL,GK,4.0,Available,,,,,,,,,4.0,verified,GK,CLB,CLB-marco-bizot,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-emiliano-martinez,Emiliano Martínez,E. Martínez,AVL,GK,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-j-wright,J. Wright,J. Wright,AVL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-j-gauci,J. Gauci,J. Gauci,AVL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-t-harwood-bellis,T. Harwood-Bellis,T. Harwood-Bellis,AVL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-k-nedeljkovic,K. Nedeljković,K. Nedeljković,AVL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-ross-barkley,Ross Barkley,R. Barkley,AVL,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-alysson,Alysson,Alysson,AVL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-l-goretzka,L. Goretzka,L. Goretzka,AVL,MID,5.5,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-leon-bailey,Leon Bailey,L. Bailey,AVL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-amadou-onana,Amadou Onana,A. Onana,AVL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-evann-guessand,Evann Guessand,E. Guessand,AVL,MID,,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-tammy-abraham,Tammy Abraham,T. Abraham,AVL,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-ollie-watkins,Ollie Watkins,O. Watkins,AVL,FWD,7.5,Available,0.0,0.0,4120.0,80.0,1.22,0.9,0.46,0.15,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+AVL-brian-madjo,Brian Madjo,B. Madjo,AVL,FWD,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-juan-musso,Juan Musso,J. Musso,ATM,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-jose-maria-gimenez,José María Giménez,J. Giménez,ATM,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-c-romero,C. Romero,C. Romero,ATM,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-m-hjulmand,M. Hjulmand,M. Hjulmand,ATM,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-kang-in-lee,Kang-in Lee,Kang-in Lee,ATM,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-o-vargas,O. Vargas,O. Vargas,ATM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-thiago-almada,Thiago Almada,T. Almada,ATM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ATM-r-mendoza,R. Mendoza,R. Mendoza,ATM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-p-drewes,P. Drewes,P. Drewes,BVB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-d-ramaj,D. Ramaj,D. Ramaj,BVB,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-s-ostrzinski,S. Ostrzinski,S. Ostrzinski,BVB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-alexander-meyer,Alexander Meyer,A. Meyer,BVB,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-julian-ryerson,Julian Ryerson,J. Ryerson,BVB,DEF,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-almugera-kabar,Almugera Kabar,A. Kabar,BVB,DEF,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-j-riedl,J. Riedl,J. Riedl,BVB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-m-adje,M. Adje,M. Adje,BVB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-kaua-prates,Kauã Prates,Kauã Prates,BVB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-g-konstantelias,G. Konstantelias,G. Konstantelias,BVB,MID,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-carney-chukwuemeka,Carney Chukwuemeka,C. Chukwuemeka,BVB,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-e-nwaneri,E. Nwaneri,E. Nwaneri,BVB,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-m-albert,M. Albert,M. Albert,BVB,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-fabio-silva,Fábio Silva,Fábio Silva,BVB,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BVB-s-inacio,S. Inacio,S. Inacio,BVB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-wojciech-szczesny,Wojciech Szczęsny,W. Szczęsny,BAR,GK,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-d-livakovic,D. Livaković,D. Livaković,BAR,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-xavi-espart,Xavi Espart,Xavi Espart,BAR,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-gavi,Gavi,Gavi,BAR,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-fermin-lopez,Fermín López,Fermín López,BAR,MID,7.0,Available,20.0,1.0,3140.0,71.0,1.26,1.58,0.37,0.49,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-marc-casado,Marc Casado,M. Casadó,BAR,MID,5.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-karim-adeyemi,Karim Adeyemi,K. Adeyemi,BAR,FWD,7.0,Available,4.0,7.0,2567.0,67.0,0.74,1.3,0.53,0.35,7.0,verified,FWD,BVB,BVB-karim-adeyemi,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAR-h-abdelkarim,H. Abdelkarim,H. Abdelkarim,BAR,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-sven-ulreich,Sven Ulreich,S. Ulreich,BAY,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-jamal-musiala,Jamal Musiala,J. Musiala,BAY,MID,8.0,Available,2.0,8.0,1269.0,54.0,0.99,1.7,0.35,0.43,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-lennart-karl,Lennart Karl,L. Karl,BAY,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-tom-bischof,Tom Bischof,T. Bischof,BAY,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-serge-gnabry,Serge Gnabry,S. Gnabry,BAY,MID,6.5,Available,0.0,0.0,2304.0,69.0,1.09,1.72,0.39,0.51,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-b-zaragoza,B. Zaragoza,B. Zaragoza,BAY,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BAY-b-assomo,B. Assomo,B. Assomo,BAY,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-n-jackers,N. Jackers,N. Jackers,CLB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-s-mignolet,S. Mignolet,S. Mignolet,CLB,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-m-dams,M. Dams,M. Dams,CLB,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-b-meijer,B. Meijer,B. Meijer,CLB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-s-van-hoogen,S. Van Hoogen,S. Van Hoogen,CLB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-s-coulibaly,S. Coulibaly,S. Coulibaly,CLB,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-v-osuji,V. Osuji,V. Osuji,CLB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-a-garcia,A. Garcia,A. Garcia,CLB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-l-reis,L. Reis,L. Reis,CLB,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-r-vermant,R. Vermant,R. Vermant,CLB,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-g-nilsson,G. Nilsson,G. Nilsson,CLB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-a-vasovic,A. Vasovic,A. Vasovic,CLB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+CLB-s-campbell,S. Campbell,S. Campbell,CLB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-m-vigorito,M. Vigorito,M. Vigorito,COM,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-r-sanchez,R. Sánchez,R. Sánchez,COM,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-n-tornqvist,N. Törnqvist,N. Törnqvist,COM,GK,4.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-willy-kambwala,Willy Kambwala,W. Kambwala,COM,DEF,4.0,Available,,,,,,,,,4.0,verified,DEF,VIL,VIL-willy-kambwala,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-maxence-caqueret,Maxence Caqueret,M. Caqueret,COM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-nicolas-gerrit-kuhn,Nicolas-Gerrit Kühn,N. Kühn,COM,MID,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-s-ricci,S. Ricci,S. Ricci,COM,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-jayden-addai,Jayden Addai,J. Addai,COM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-maximo-perrone,Máximo Perrone,M. Perrone,COM,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-m-liberali,M. Liberali,M. Liberali,COM,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-alvaro-morata,Álvaro Morata,Á. Morata,COM,FWD,6.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+COM-jesus-rodriguez,Jesus Rodríguez,Jesus Rodríguez,COM,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-i-sjong,I. Sjong,I. Sjong,BOD,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-m-andersen,M. Andersen,M. Andersen,BOD,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-j-faye-lund,J. Faye Lund,J. Faye Lund,BOD,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-i-maatta,I. Määttä,I. Määttä,BOD,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-m-blix-olsen,M. Blix Olsen,M. Blix Olsen,BOD,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-m-jaiteh,M. Jaiteh,M. Jaiteh,BOD,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-o-bjortuft,O. Bjørtuft,O. Bjørtuft,BOD,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-j-kitolano,J. Kitolano,J. Kitolano,BOD,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-h-evjen,H. Evjen,H. Evjen,BOD,MID,4.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-o-brynhildsen,O. Brynhildsen,O. Brynhildsen,BOD,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BOD-m-hansen,M. Hansen,M. Hansen,BOD,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-mert-gunok,Mert Günok,Mert Günok,FEN,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-tarik-cetin,Tarık Çetin,Tarık Çetin,FEN,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-caglar-soyuncu,Çağlar Söyüncü,Çağlar Söyüncü,FEN,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-mert-muldur,Mert Müldür,Mert Müldür,FEN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-l-mercan,L. Mercan,L. Mercan,FEN,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-o-mimovic,O. Mimović,O. Mimović,FEN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-yigit-efe-demir,Yiğit Efe Demir,Yiğit Efe Demir,FEN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-j-oosterwolde,J. Oosterwolde,J. Oosterwolde,FEN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-k-oppong,K. Oppong,K. Oppong,FEN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-irfan-can-kahveci,İrfan Can Kahveci,İrfan Can Kahveci,FEN,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-talisca,Talisca,Talisca,FEN,MID,5.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-oguz-aydin,Oğuz Aydın,Oğuz Aydın,FEN,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-bartug-elmaz,Bartuğ Elmaz,Bartuğ Elmaz,FEN,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-r-lukaku,R. Lukaku,R. Lukaku,FEN,FWD,7.5,Available,1.0,1.0,74.0,0.0,0.0,0.0,0.0,0.0,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEN-d-nene,D. Nene,D. Nene,FEN,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-l-bossin,L. Bossin,L. Bossin,FEY,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-j-bos,J. Bos,J. Bos,FEY,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-goncalo-borges,Gonçalo Borges,Gonçalo Borges,FEY,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-s-t-zand,S. 't Zand,S. 't Zand,FEY,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-s-steijn,S. Steijn,S. Steijn,FEY,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-c-tengstedt,C. Tengstedt,C. Tengstedt,FEY,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+FEY-s-van-persie,S. Van Persie,S. Van Persie,FEY,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-gunay-guvenc,Günay Güvenç,Günay Güvenç,GAL,GK,4.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-jankat-yilmaz,Jankat Yılmaz,Jankat Yılmaz,GAL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-enes-buyuk,Enes Büyük,Enes Büyük,GAL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-yusuf-kahraman,Yusuf Kahraman,Yusuf Kahraman,GAL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-cihan-akgun,Cihan Akgün,Cihan Akgün,GAL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-i-gundogan,İ. Gündoğan,İ. Gündoğan,GAL,MID,6.5,Available,0.0,1.0,1865.0,61.0,0.19,1.5,0.1,0.14,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-l-sane,L. Sané,L. Sané,GAL,MID,6.5,Available,1.0,1.0,3083.0,86.0,0.55,1.78,0.2,0.23,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-rafael-leao,Rafael Leão,Rafael Leão,GAL,MID,7.0,Available,1.0,1.0,2039.0,94.0,1.15,1.02,0.4,0.13,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-ahmed-kutucu,Ahmed Kutucu,Ahmed Kutucu,GAL,MID,6.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-l-ugochukwu,L. Ugochukwu,L. Ugochukwu,GAL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-deniz-gul,Deniz Gül,Deniz Gül,GAL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-ada-yuzgec,Ada Yüzgeç,Ada Yüzgeç,GAL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+GAL-arda-tagay,Arda Tagay,Arda Tagay,GAL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-r-di-gennaro,R. Di Gennaro,R. Di Gennaro,INT,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-j-stones,J. Stones,J. Stones,INT,DEF,5.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-d-spence,D. Spence,D. Spence,INT,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-m-marello,M. Marello,M. Marello,INT,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-petar-sucic,Petar Sucic,P. Sučić,INT,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-a-stankovic,A. Stanković,A. Stanković,INT,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-c-jones,C. Jones,C. Jones,INT,MID,5.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-henrikh-mkhitaryan,Henrikh Mkhitaryan,H. Mkhitaryan,INT,MID,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-davide-frattesi,Davide Frattesi,D. Frattesi,INT,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+INT-ange-yoan-bonny,Ange-Yoan Bonny,A. Bonny,INT,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-t-schutzenauer,T. Schützenauer,T. Schützenauer,LAS,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-f-schillinger,F. Schillinger,F. Schillinger,LAS,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-c-katzmayr,C. Katzmayr,C. Katzmayr,LAS,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-j-ilk,J. Ilk,J. Ilk,LAS,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-r-rodriguez-german,R. Rodriguez German,R. Rodriguez German,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-a-midzic,A. Midzic,A. Midzic,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-m-freckleton,M. Freckleton,M. Freckleton,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-a-ibrahim,A. Ibrahim,A. Ibrahim,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-c-kebe,C. Kebe,C. Kebe,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-l-ortner,L. Ortner,L. Ortner,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-j-wansch,J. Wansch,J. Wansch,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-a-wimmer,A. Wimmer,A. Wimmer,LAS,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-d-elfadli,D. Elfadli,D. Elfadli,LAS,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-r-ljubicic,R. Ljubičić,R. Ljubičić,LAS,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-a-schopf,A. Schöpf,A. Schöpf,LAS,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-f-flecker,F. Flecker,F. Flecker,LAS,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-a-smakaj,A. Smakaj,A. Smakaj,LAS,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-m-usor,M. Usor,M. Usor,LAS,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-p-krapf,P. Krapf,P. Krapf,LAS,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-s-adeniran,S. Adeniran,S. Adeniran,LAS,FWD,7.0,Injured,0.0,0.0,2073.0,87.0,1.43,1.04,0.43,0.17,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-m-hartl,M. Hartl,M. Hartl,LAS,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LAS-n-kane,N. Kane,N. Kane,LAS,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-o-nyland,Ø. Nyland,Ø. Nyland,RBL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-l-zingerle,L. Zingerle,L. Zingerle,RBL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-assan-ouedraogo,Assan Ouedraogo,A. Ouedraogo,RBL,MID,5.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-christoph-baumgartner,Christoph Baumgartner,C. Baumgartner,RBL,MID,6.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-elif-elmas,Elif Elmas,E. Elmas,RBL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-m-guiu,M. Guiu,M. Guiu,RBL,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-tidiam-gomis,Tidiam Gomis,T. Gomis,RBL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-conrad-harder,Conrad Harder,C. Harder,RBL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-a-thomas,A. Thomas,A. Thomas,RBL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RBL-s-suleiman,S. Suleiman,S. Suleiman,RBL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-r-gurtner,R. Gurtner,R. Gurtner,RCL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-m-gorgelin,M. Gorgelin,M. Gorgelin,RCL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-herve-koffi,Hervé Koffi,H. Koffi,RCL,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-m-nawrocki,M. Nawrocki,M. Nawrocki,RCL,DEF,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-j-todibo,J. Todibo,J. Todibo,RCL,DEF,4.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-s-sagnan,S. Sagnan,S. Sagnan,RCL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-t-hazard,T. Hazard,T. Hazard,RCL,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-a-haidara,A. Haidara,A. Haidara,RCL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-j-kadile,J. Kadile,J. Kadile,RCL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-abdallah-sima,Abdallah Sima,A. Sima,RCL,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-mamadou-sangare,Mamadou Sangare,M. Sangaré,RCL,MID,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-florian-sotoca,Florian Sotoca,F. Sotoca,RCL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-rayan-fofana,Rayan Fofana,R. Fofana,RCL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RCL-remy-labeau-lascary,Rémy Labeau Lascary,R. Labeau Lascary,RCL,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-o-gill,O. Gill,O. Gill,LIL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-a-bodart,A. Bodart,A. Bodart,LIL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-t-sibiya,T. Sibiya,T. Sibiya,LIL,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-ethan-mbappe,Ethan Mbappé,E. Mbappé,LIL,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-matias-fernandez-pardo,Matias Fernandez-Pardo,M. Fernandez-Pardo,LIL,MID,5.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-felix-correia,Félix Correia,Félix Correia,LIL,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-n-edjouma,N. Edjouma,N. Edjouma,LIL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-hamza-igamane,Hamza Igamane,H. Igamane,LIL,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIL-mohamed-lamine-bayo,Mohamed Lamine Bayo,M. Bayo,LIL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-freddie-woodman,Freddie Woodman,F. Woodman,LIV,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-giorgi-mamardashvili,Giorgi Mamardashvili,G. Mamardashvili,LIV,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-vitezslav-jaros,Vitezslav Jaros,V. Jaroš,LIV,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-jeremie-frimpong,Jeremie Frimpong,J. Frimpong,LIV,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-l-chambers,L. Chambers,L. Chambers,LIV,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-i-mabaya,I. Mabaya,I. Mabaya,LIV,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-victor-munoz,Victor Munoz,V. Muñoz,LIV,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-federico-chiesa,Federico Chiesa,F. Chiesa,LIV,MID,6.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-cody-gakpo,Cody Gakpo,C. Gakpo,LIV,FWD,7.5,Doubtful,5.0,0.0,3676.0,79.0,0.78,1.89,0.22,0.15,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+LIV-h-ekitike,H. Ekitiké,H. Ekitiké,LIV,FWD,8.0,Injured,1.0,0.0,2903.0,74.0,1.05,1.02,0.53,0.19,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-marcus-bettinelli,Marcus Bettinelli,M. Bettinelli,MCI,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-geronimo-rulli,Gerónimo Rulli,G. Rulli,MCI,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-james-trafford,James Trafford,J. Trafford,MCI,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-m-chabot,M. Chabot,M. Chabot,MCI,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-rayan-ait-nouri,Rayan Aït-Nouri,R. Aït-Nouri,MCI,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-n-o-reilly,N. O'Reilly,N. O'Reilly,MCI,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-ayyoub-bouaddi,Ayyoub Bouaddi,A. Bouaddi,MCI,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-mateo-kovacic,Mateo Kovačić,M. Kovačić,MCI,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-i-ndiaye,I. Ndiaye,I. Ndiaye,MCI,MID,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-jack-grealish,Jack Grealish,J. Grealish,MCI,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-j-doku,J. Doku,J. Doku,MCI,MID,7.5,Available,1.0,0.0,3464.0,74.0,0.83,2.68,0.31,0.31,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MCI-omar-marmoush,Omar Marmoush,O. Marmoush,MCI,FWD,7.5,Available,0.0,0.0,1803.0,46.0,1.05,1.55,0.3,0.15,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-karl-darlow,Karl Darlow,K. Darlow,MUN,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-altay-bayindir,Altay Bayındır,Altay Bayındır,MUN,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-d-mee,D. Mee,D. Mee,MUN,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-tom-heaton,Tom Heaton,T. Heaton,MUN,GK,4.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-patrick-dorgu,Patrick Dorgu,P. Dorgu,MUN,DEF,5.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-harry-amass,Harry Amass,H. Amass,MUN,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-kobbie-mainoo,Kobbie Mainoo,K. Mainoo,MUN,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-mason-mount,Mason Mount,M. Mount,MUN,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-andrey-santos,Andrey Santos,Andrey Santos,MUN,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-amad-diallo,Amad Diallo,Amad Diallo,MUN,MID,5.5,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-joshua-zirkzee,Joshua Zirkzee,J. Zirkzee,MUN,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+MUN-chido-obi,Chido Obi,C. Obi,MUN,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-n-contini,N. Contini,N. Contini,NAP,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-alex-meret,Alex Meret,A. Meret,NAP,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-m-gutierrez,M. Gutiérrez,M. Gutiérrez,NAP,DEF,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-b-badiashile,B. Badiashile,B. Badiashile,NAP,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-c-favasuli,C. Favasuli,C. Favasuli,NAP,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-f-anguissa,F. Anguissa,F. Anguissa,NAP,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-scott-mctominay,Scott McTominay,S. McTominay,NAP,MID,7.5,Injured,1.0,0.0,3706.0,93.0,1.0,0.9,0.34,0.07,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-noa-lang,Noa Lang,N. Lang,NAP,MID,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-j-lindstrom,J. Lindstrøm,J. Lindstrøm,NAP,MID,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-cyril-ngonge,Cyril Ngonge,C. Ngonge,NAP,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-giuseppe-ambrosino,Giuseppe Ambrosino,G. Ambrosino,NAP,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-lorenzo-lucca,Lorenzo Lucca,L. Lucca,NAP,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-antonio-vergara,Antonio Vergara,A. Vergara,NAP,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+NAP-giovane,Giovane,Giovane,NAP,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-lucas-chevalier,Lucas Chevalier,L. Chevalier,PSG,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-a-vignaud,A. Vignaud,A. Vignaud,PSG,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-a-longoni,A. Longoni,A. Longoni,PSG,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-d-boly,D. Boly,D. Boly,PSG,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-dro-fernandez,Dro Fernández,Dro Fernández,PSG,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-m-akliouche,M. Akliouche,M. Akliouche,PSG,MID,7.0,Available,1.0,5.0,4023.0,88.0,0.78,1.63,0.22,0.22,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-m-godts,M. Godts,M. Godts,PSG,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-senny-mayulu,Senny Mayulu,S. Mayulu,PSG,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-warren-zaire-emery,Warren Zaïre-Emery,W. Zaïre-Emery,PSG,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-ferran-torres,Ferran Torres,Ferran Torres,PSG,FWD,7.0,Available,8.0,18.0,2729.0,64.0,1.62,1.09,0.69,0.1,7.0,verified,FWD,BAR,BAR-ferran-torres,95.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSG-q-ndjantou,Q. Ndjantou,Q. Ndjantou,PSG,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-claudio-ramos,Cláudio Ramos,Cláudio Ramos,POR,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-joao-costa,João Costa,João Costa,POR,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-souza,Souza,Souza,POR,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-s-fofana,S. Fofana,S. Fofana,POR,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-b-sainz,B. Sainz,B. Sainz,POR,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-g-veron,G. Veron,G. Veron,POR,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-s-gimenez,S. Giménez,S. Giménez,POR,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+POR-samu,Samu,Samu,POR,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-n-olij,N. Olij,N. Olij,PSV,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-t-smolenaars,T. Smolenaars,T. Smolenaars,PSV,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-f-kostic,F. Kostić,F. Kostić,PSV,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-j-van-den-berg,J. van den Berg,J. van den Berg,PSV,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-i-babadi,I. Babadi,I. Babadi,PSV,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-j-schouten,J. Schouten,J. Schouten,PSV,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-c-driouech,C. Driouech,C. Driouech,PSV,MID,6.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-a-plea,A. Pléa,A. Pléa,PSV,FWD,5.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-s-lammers,S. Lammers,S. Lammers,PSV,FWD,5.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-d-man,D. Man,D. Man,PSV,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+PSV-e-bajraktarevic,E. Bajraktarević,E. Bajraktarević,PSV,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-diego-conde,Diego Conde,Diego Conde,BET,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-pau-lopez,Pau López,Pau López,BET,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-pablo-fornals,Pablo Fornals,P. Fornals,BET,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-antony,Antony,Antony,BET,MID,7.0,Available,1.0,3.0,3431.0,91.0,1.26,1.97,0.37,0.24,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-giovani-lo-celso,Giovani Lo Celso,G. Lo Celso,BET,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+BET-pablo-garcia,Pablo Garcia,Pablo Garcia,BET,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-andriy-lunin,Andriy Lunin,A. Lunin,RMA,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-sergio-mestre,Sergio Mestre,Sergio Mestre,RMA,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-javi-navarro,Javi Navarro,Javi Navarro,RMA,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-antonio-rudiger,Antonio Rüdiger,A. Rüdiger,RMA,DEF,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-d-dumfries,D. Dumfries,D. Dumfries,RMA,DEF,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-alvaro-carreras,Álvaro Carreras,Á. Carreras,RMA,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-j-fortea,J. Fortea,J. Fortea,RMA,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-joan-martinez,Joan Martínez,Joan Martínez,RMA,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-mario-rivas,Mario Rivas,Mario Rivas,RMA,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-bernardo-silva,Bernardo Silva,Bernardo Silva,RMA,MID,7.0,Suspended,0.0,0.0,4254.0,86.0,0.34,1.5,0.11,0.11,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-brahim-diaz,Brahim Díaz,Brahim Díaz,RMA,MID,6.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-eduardo-camavinga,Eduardo Camavinga,E. Camavinga,RMA,MID,5.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-rodrygo,Rodrygo,Rodrygo,RMA,MID,7.0,Injured,0.0,0.0,1217.0,38.0,1.48,2.51,0.22,0.37,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-gonzalo,Gonzalo,Gonzalo,RMA,FWD,5.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-endrick,Endrick,Endrick,RMA,FWD,6.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-carlos-espi,Carlos Espí,Carlos Espí,RMA,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+RMA-y-diomande,Y. Diomande,Y. Diomande,RMA,MID,7.5,Available,1.0,1.0,3069.0,85.0,0.88,1.94,0.41,0.26,,,,,,0.0,uclfantasy.com/rankings,2026-10-14
+ROM-mile-svilar,Mile Svilar,M. Svilar,ROM,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-r-zelezny,R. Zelezny,R. Zelezny,ROM,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-d-vasquez,D. Vasquez,D. Vasquez,ROM,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-g-de-marzi,G. De Marzi,G. De Marzi,ROM,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-anass-salah-eddine,Anass Salah-Eddine,A. Salah-Eddine,ROM,DEF,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-k-koulierakis,K. Koulierakis,K. Koulierakis,ROM,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-e-lulli,E. Lulli,E. Lulli,ROM,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-rodrigo-mora,Rodrigo Mora,Rodrigo Mora,ROM,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-lorenzo-pellegrini,Lorenzo Pellegrini,L. Pellegrini,ROM,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-artem-dovbyk,Artem Dovbyk,A. Dovbyk,ROM,FWD,6.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-l-cherubini,L. Cherubini,L. Cherubini,ROM,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-s-castro,S. Castro,S. Castro,ROM,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-a-arena,A. Arena,A. Arena,ROM,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+ROM-r-vaz,R. Vaz,R. Vaz,ROM,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-k-fesiun,K. Fesiun,K. Fesiun,SHA,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-newertton,Newertton,Newertton,SHA,MID,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-l-traore,L. Traoré,L. Traoré,SHA,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-eguinaldo,Eguinaldo,Eguinaldo,SHA,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SHA-luca-meirelles,Luca Meirelles,Luca Meirelles,SHA,FWD,5.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-a-ramazanov,A. Ramazanov,A. Ramazanov,SAB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-erivaldo-almeida,Erivaldo Almeida,Erivaldo Almeida,SAB,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-rodrigo-fernandes,Rodrigo Fernandes,Rodrigo Fernandes,SAB,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-o-mbina,O. Mbina,O. Mbina,SAB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SAB-x-severina,X. Severina,X. Severina,SAB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-o-kolar,O. Kolář,O. Kolář,SLA,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-j-stanek,J. Staněk,J. Staněk,SLA,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-n-domchak,N. Domchak,N. Domchak,SLA,GK,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-e-pitak,E. Piták,E. Piták,SLA,DEF,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-m-konecny,M. Konečný,M. Konečný,SLA,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-o-kubiak,O. Kubiak,O. Kubiak,SLA,MID,5.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-l-provod,L. Provod,L. Provod,SLA,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-i-schranz,I. Schranz,I. Schranz,SLA,MID,5.0,Doubtful,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-m-chytil,M. Chytil,M. Chytil,SLA,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SLA-a-ouanda,A. Ouanda,A. Ouanda,SLA,FWD,5.0,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-joao-virginia,João Virginia,João Virginia,SCP,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-diego-callai,Diego Callai,Diego Callai,SCP,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-kaique-pereira,Kaique Pereira,Kaique Pereira,SCP,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-ricardo-mangas,Ricardo Mangas,Ricardo Mangas,SCP,DEF,4.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-o-diomande,O. Diomande,O. Diomande,SCP,DEF,4.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-i-ba,I. Ba,I. Ba,SCP,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-m-zekri,M. Zekri,M. Zekri,SCP,DEF,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-flavio-goncalves,Flávio Gonçalves,Flávio Gonçalves,SCP,MID,4.5,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-nuno-santos,Nuno Santos,Nuno Santos,SCP,MID,6.5,Injured,0.0,0.0,0.0,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-g-kochorashvili,G. Kochorashvili,G. Kochorashvili,SCP,MID,6.5,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-f-ioannidis,F. Ioannidis,F. Ioannidis,SCP,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+SCP-rafael-nel,Rafael Nel,Rafael Nel,SCP,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-m-funk,M. Funk,M. Funk,VFB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-s-drljaca,S. Drljača,S. Drljača,VFB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-t-walz,T. Walz,T. Walz,VFB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-l-nagel,L. Nagel,L. Nagel,VFB,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-jamie-leweling,Jamie Leweling,J. Leweling,VFB,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-l-sauer,L. Sauer,L. Sauer,VFB,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-tiago-tomas,Tiago Tomás,Tiago Tomás,VFB,FWD,5.5,Injured,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-badredine-bouanani,Badredine Bouanani,B. Bouanani,VFB,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-justin-diehl,Justin Diehl,J. Diehl,VFB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-j-milosevic,J. Milošević,J. Milošević,VFB,FWD,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VFB-j-arevalo,J. Arévalo,J. Arévalo,VFB,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-l-belko,Ľ. Belko,Ľ. Belko,VIK,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-e-jacobsen,E. Jacobsen,E. Jacobsen,VIK,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-v-berisha,V. Berisha,V. Berisha,VIK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-s-kvia-egeskog,S. Kvia-Egeskog,S. Kvia-Egeskog,VIK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-n-d-agostino,N. D'Agostino,N. D'Agostino,VIK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-k-frimpong,K. Frimpong,K. Frimpong,VIK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIK-r-postema,R. Postema,R. Postema,VIK,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-a-tenas,A. Tenas,A. Tenas,VIL,GK,4.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-luiz-junior,Luiz Júnior,Luiz Júnior,VIL,GK,4.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-nicolas-pepe,Nicolas Pépé,N. Pépé,VIL,MID,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-ilias-akhomach,Ilias Akhomach,I. Akhomach,VIL,MID,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-thiago-fernandez,Thiago Fernández,Thiago Fernández,VIL,MID,5.0,Suspended,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-ayoze-perez,Ayoze Pérez,Ayoze Pérez,VIL,FWD,6.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-pau-cabanes,Pau Cabanes,Pau Cabanes,VIL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14
+VIL-tani-oluwaseyi,Tani Oluwaseyi,T. Oluwaseyi,VIL,FWD,5.0,Available,,,,,,,,,,,,,,0.0,uclfantasy.com/teams (2026-10-14),2026-10-14

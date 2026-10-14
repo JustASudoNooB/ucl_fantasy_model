@@ -1,0 +1,58 @@
+# Free data sources. `ufe probe` checks each one from your machine and writes
+# data/processed/probe_report.md. status: verified = used to build the bundled seed data;
+# untested = adapter written to the documented/observed format, confirm with `ufe probe`.
+openfootball_leagues:
+  status: verified
+  url: https://raw.githubusercontent.com/openfootball/football.json/master/{season}/{code}.json
+  codes: [en.1, es.1, de.1, it.1, fr.1, nl.1, pt.1, be.1, tr.1, at.1, gr.1, sco.1]
+  provides: domestic results (team model)
+openfootball_cups:
+  status: verified
+  url: https://raw.githubusercontent.com/openfootball/champions-league/master/{season}/{comp}.txt
+  comps: [cl, el, conf]
+  provides: UEFA competition results (cross-league links)
+fpl_history:
+  status: verified
+  url: https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/{season}/{file}
+  provides: Premier League per-match player events (minutes, xG, xA, recoveries, saves, cards)
+ucl_fantasy_feed:
+  status: untested
+  base: https://gaming.uefa.com/en/uclfantasy/services/feeds
+  # The game loads its player list from a JSON feed. Open the game, DevTools > Network, filter
+  # "players" and paste the request URL below if discovery fails.
+  players_url: null
+  candidates:
+    # older seasons' public endpoint, used by github.com/sreekanthrajagopalan/uclfantasybot
+    # (response: data.value.playerList; fields id, pDName, value, skill, cCode/tName)
+    - "https://gaming.uefa.com/en/uclfantasy/services/api/Feed/players?gamedayId={md}&language=en"
+    - "{base}/players/players_{tour}_en_{md}.json"
+    - "{base}/players/players_{tour}_en.json"
+  tour_ids: [100, 90, 80, 110]
+  provides: every player, position, price, ownership, per-matchday stats and points (ground truth)
+football_data_org:
+  status: untested
+  url: https://api.football-data.org/v4
+  key_env: UFE_FOOTBALL_DATA_KEY       # free tier includes the Champions League
+  provides: fixtures, results, kick-off times
+clubelo:
+  status: untested
+  url: http://api.clubelo.com/{date}
+  provides: daily Elo ratings for every European club (team-model prior / cross-check)
+the_odds_api:
+  status: untested
+  url: https://api.the-odds-api.com/v4/sports/soccer_uefa_champs_league/odds
+  key_env: UFE_ODDS_API_KEY
+  markets: [h2h, totals]
+  provides: bookmaker prices -> market-implied goal rates (strongest public signal)
+fotmob:
+  status: untested
+  url: https://www.fotmob.com/api/matchDetails?matchId={match_id}
+  provides: confirmed line-ups ~60 min before kick-off (unofficial; cache and fail gracefully)
+news_rss:
+  status: untested
+  feeds:
+    - https://feeds.bbci.co.uk/sport/football/rss.xml
+    - https://www.theguardian.com/football/rss
+    - https://www.espn.com/espn/rss/soccer/news
+    - "https://news.google.com/rss/search?q={club}+injury+OR+suspended+OR+doubt+OR+%22team+news%22&hl=en-GB&gl=GB&ceid=GB:en"
+  provides: injury / suspension / rotation signals

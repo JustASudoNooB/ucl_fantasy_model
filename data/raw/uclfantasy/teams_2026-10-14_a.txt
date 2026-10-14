@@ -1,0 +1,358 @@
+# Squad pages of uclfantasy.com/teams/<club>, read 2026-10-14 (IST morning) via WebFetch.
+# Format per club: "## CODE header_count"; then NAME | POSITION | STATUS | PRICE (as the page showed it).
+## AEK 25
+A. Brignoli | GK | Available | €4.0m
+T. Strakosha | GK | Injured | €4.5m
+L. Rota | DEF | Available | €4.5m
+H. Moukoudi | DEF | Available | €4.5m
+Filipe Relvas | DEF | Available | €4.5m
+S. Pilios | DEF | Available | €4.5m
+D. Vida | DEF | Available | €4.5m
+C. Lykogiannis | DEF | Available | €4.0m
+M. Georgiev | DEF | Available | €4.0m
+R. Marin | MID | Available | €5.5m
+L. Majer | MID | Available | €5.0m
+Milán Vitális | MID | Available | €4.5m
+M. Gaćinović | MID | Available | €4.5m
+K. Arriaga | MID | Available | €4.5m
+P. Mantalos | MID | Available | €4.5m
+K. Kairinen | MID | Available | €5.5m
+D. Kaloskamis | MID | Available | €4.5m
+M. Balamotis | MID | Available | €4.0m
+A. Koita | FWD | Available | €5.0m
+B. Varga | FWD | Doubtful | €6.5m
+L. Jović | FWD | Available | €6.5m
+Zini | FWD | Available | €5.0m
+J. Mário | FWD | Available | €5.0m
+O. Zubkov | FWD | Available | €5.0m
+D. Kutesa | FWD | Available | €5.0m
+## ARS 29
+D. Raya | GK | Available | €6.0m
+K. Arrizabalaga | GK | Available | €4.5m
+I. Meslier | GK | Available | €4.0m
+T. Setford | GK | Available | €4.0m
+J. Timber | DEF | Available | €5.5m
+E. Konsa | DEF | Available | €4.5m
+Gabriel | DEF | Available | €6.0m
+P. Hincapié | DEF | Doubtful | €4.5m
+M. Lewis-Skelly | DEF | Available | €4.5m
+B. White | DEF | Available | €5.0m
+R. Calafiori | DEF | Available | €4.5m
+W. Saliba | DEF | Injured | €5.5m
+C. Mosquera | DEF | Available | €5.0m
+M. Salmon | DEF | Available | €4.0m
+M. Ødegaard | MID | Available | €7.0m
+B. Saka | MID | Available | €8.5m
+E. Eze | MID | Available | €7.5m
+D. Rice | MID | Available | €7.5m
+N. Madueke | MID | Available | €6.5m
+M. Merino | MID | Available | €6.5m
+Bruno Guimarães | MID | Available | €7.0m
+C. Tzolis | MID | Injured | €7.5m
+M. Zubimendi | MID | Doubtful | €6.0m
+M. Dowman | MID | Available | €5.0m
+K. Havertz | FWD | Available | €8.0m
+V. Gyökeres | FWD | Available | €8.5m
+## AVL 35
+Z. Suzuki | GK | Available | €4.0m
+M. Bizot | GK | Available | €4.0m
+E. Martínez | GK | Available | €5.0m
+J. Wright | GK | Available | €4.0m
+J. Gauci | GK | Available | €4.0m
+Pau Torres | DEF | Available | €4.5m
+V. Lindelöf | DEF | Available | €4.5m
+A. Wan-Bissaka | DEF | Available | €4.5m
+I. Maatsen | DEF | Injured | €4.5m
+L. Bogarde | DEF | Available | €4.0m
+T. Harwood-Bellis | DEF | Available | €4.0m
+M. Ruggeri | DEF | Injured | €4.5m
+T. Mings | DEF | Available | €4.5m
+K. Nedeljković | DEF | Available | €4.0m
+M. Cash | DEF | Available | €4.5m
+J. McGinn | MID | Available | €6.5m
+E. Buendía | MID | Available | €6.0m
+Joao Gomes | MID | Available | €5.5m
+B. Kamara | MID | Available | €5.0m
+R. Barkley | MID | Available | €5.5m
+Alysson | MID | Available | €5.0m
+L. Goretzka | MID | Doubtful | €5.5m
+L. Bailey | MID | Available | €5.0m
+A. Onana | MID | Available | €5.0m
+E. Guessand | MID | Available | N/A
+N. Jackson | FWD | Available | €7.0m
+T. Abraham | FWD | Available | €6.0m
+O. Watkins | FWD | Available | €7.5m
+B. Madjo | FWD | Available | €6.5m
+## ATM 22
+J. Oblak | GK | Available | €5.5m
+J. Musso | GK | Available | €4.0m
+A. Grimaldo | DEF | Available | €5.5m
+M. Pubill | DEF | Available | €4.0m
+J. Giménez | DEF | Available | €5.0m
+C. Romero | DEF | Available | €5.0m
+D. Hancko | DEF | Available | €4.5m
+R. Le Normand | DEF | Available | €4.5m
+G. Simeone | MID | Available | €6.5m
+M. Hjulmand | MID | Available | €6.0m
+Álex Baena | MID | Available | €5.5m
+M. Llorente | MID | Available | €6.5m
+A. Lookman | MID | Available | €7.0m
+Kang-in Lee | MID | Available | €5.5m
+O. Vargas | MID | Available | €5.0m
+Koke | MID | Available | €6.0m
+T. Almada | MID | Available | €5.0m
+R. Mendoza | MID | Available | €5.0m
+A. Sørloth | FWD | Available | €7.0m
+J. Alvarez | FWD | Available | €10.0m
+## BVB 33
+G. Kobel | GK | Available | €5.0m
+P. Drewes | GK | Available | €4.0m
+D. Ramaj | GK | Suspended | €4.0m
+S. Ostrzinski | GK | Available | €4.0m
+A. Meyer | GK | Available | €4.5m
+E. Can | DEF | Suspended | €4.5m
+J. Ryerson | DEF | Available | €5.5m
+W. Anton | DEF | Available | €4.5m
+R. Bensebaini | DEF | Injured | €4.5m
+N. Schlotterbeck | DEF | Injured | €5.0m
+D. Svensson | DEF | Available | €4.5m
+F. Mane | DEF | Injured | €4.0m
+A. Kabar | DEF | Suspended | €4.0m
+J. Gadou | DEF | Available | €4.0m
+L. Reggiani | DEF | Available | €4.0m
+J. Riedl | DEF | Available | €4.0m
+M. Adje | DEF | Available | €4.0m
+Kauã Prates | DEF | Available | €4.0m
+M. Sabitzer | MID | Available | €6.0m
+J. Veerman | MID | Available | €6.5m
+F. Nmecha | MID | Available | €6.5m
+G. Konstantelias | MID | Suspended | €5.0m
+Jobe Bellingham | MID | Available | €6.0m
+C. Chukwuemeka | MID | Available | €5.0m
+E. Nwaneri | MID | Available | €5.0m
+K. Karetsas | MID | Available | €5.5m
+M. Albert | MID | Available | €5.0m
+S. Guirassy | FWD | Available | €8.5m
+Fábio Silva | FWD | Available | €5.5m
+M. Beier | FWD | Available | €6.0m
+S. Inacio | FWD | Available | €5.0m
+## BAR 28
+Joan García | GK | Doubtful | €5.0m
+W. Szczęsny | GK | Available | €5.0m
+D. Livaković | GK | Available | €4.0m
+João Cancelo | DEF | Available | €5.0m
+A. Christensen | DEF | Available | €4.5m
+P. Cubarsí | DEF | Available | €5.5m
+J. Koundé | DEF | Available | €5.5m
+Eric García | DEF | Available | €4.5m
+A. Balde | DEF | Available | €4.5m
+H. Fort | DEF | Suspended | €4.0m
+Xavi Espart | DEF | Available | €4.5m
+Gerard Martín | DEF | Available | €4.0m
+Raphinha | MID | Available | €9.5m
+L. Yamal | MID | Available | €10.0m
+Pedri | MID | Available | €7.5m
+Rodri | MID | Available | €7.0m
+M. Bernal | MID | Available | €4.5m
+D. Olmo | MID | Available | €8.0m
+A. Gordon | MID | Available | €8.0m
+Gavi | MID | Available | €6.0m
+Fermín López | MID | Available | €7.0m
+M. Casadó | MID | Suspended | €5.5m
+K. Adeyemi | FWD | Available | €7.0m
+G. Jesus | FWD | Available | €6.5m
+H. Abdelkarim | FWD | Available | €6.0m
+## BAY 27
+M. Neuer | GK | Available | €5.5m
+S. Ulreich | GK | Available | €4.0m
+J. Urbig | GK | Available | €4.5m
+A. Davies | DEF | Available | €5.0m
+D. Upamecano | DEF | Available | €5.5m
+J. Tah | DEF | Available | €5.0m
+K. Laimer | DEF | Available | €5.0m
+J. Stanišić | DEF | Available | €4.5m
+H. Ito | DEF | Available | €4.0m
+S. Boey | DEF | Available | €4.0m
+Minjae Kim | DEF | Available | €4.5m
+N. Brown | DEF | Available | €4.0m
+M. Olise | MID | Available | €9.0m
+J. Musiala | MID | Available | €8.0m
+J. Kimmich | MID | Available | €6.5m
+A. Pavlović | MID | Available | €5.0m
+L. Karl | MID | Available | €6.0m
+Luis Díaz | MID | Available | €8.0m
+I. Saibari | MID | Available | €6.5m
+T. Bischof | MID | Available | €5.0m
+S. Gnabry | MID | Available | €6.5m
+H. Kane | FWD | Available | €11.0m
+B. Zaragoza | FWD | Suspended | €5.0m
+B. Assomo | FWD | Available | €5.0m
+## CLB 37
+Y. Sommer | GK | Available | €4.5m
+N. Jackers | GK | Available | €4.0m
+S. Mignolet | GK | Available | €4.5m
+B. Mechele | DEF | Available | €4.5m
+J. Seys | DEF | Available | €4.5m
+Han-beom Lee | DEF | Available | €4.0m
+H. Siquet | DEF | Available | €4.0m
+K. Sabbe | DEF | Available | €4.0m
+J. Spileers | DEF | Available | €4.0m
+M. Dams | DEF | Available | €4.5m
+J. Ordoñez | DEF | Injured | €4.5m
+B. Meijer | DEF | Available | €4.0m
+S. Van Hoogen | DEF | Available | €4.0m
+S. Coulibaly | DEF | Available | €4.5m
+V. Osuji | DEF | Available | €4.0m
+A. Garcia | DEF | Available | €4.0m
+Carlos Forbs | MID | Doubtful | €6.0m
+H. Vetlesen | MID | Available | €5.0m
+F. Potts | MID | Available | €5.5m
+H. Vanaken | MID | Available | €6.5m
+J. Virgili | MID | Available | €5.0m
+F. Lemarechal | MID | Available | €4.5m
+C. Tsawa | MID | Available | €4.5m
+L. Reis | MID | Available | €4.5m
+L. Audoor | MID | Available | €4.5m
+N. Tresoldi | FWD | Available | €7.0m
+R. Vermant | FWD | Available | €5.5m
+M. Diakhon | FWD | Available | €5.5m
+G. Nilsson | FWD | Available | €5.0m
+A. Vasovic | FWD | Available | €5.0m
+S. Campbell | FWD | Available | €5.0m
+## COM 31
+M. Vigorito | GK | Available | €4.0m
+J. Butez | GK | Available | €4.5m
+R. Sánchez | GK | Available | €4.5m
+N. Törnqvist | GK | Suspended | €4.5m
+M. Kempf | DEF | Available | €4.0m
+T. Chalobah | DEF | Available | €5.0m
+E. Goldaniga | DEF | Available | €4.0m
+I. Van Der Brempt | DEF | Suspended | €4.0m
+I. Smolčić | DEF | Available | €4.0m
+W. Kambwala | DEF | Available | €4.0m
+Yan Couto | DEF | Available | €4.0m
+A. Valle | DEF | Available | €4.0m
+J. Ramón | DEF | Available | €4.0m
+A. Cuenca | DEF | Suspended | €4.0m
+Kaiki Bruno | DEF | Available | €4.0m
+L. Milla | MID | Available | €4.5m
+M. Caqueret | MID | Available | €5.0m
+N. Kühn | MID | Suspended | €5.0m
+L. Da Cunha | MID | Available | €5.0m
+S. Ricci | MID | Available | €4.5m
+M. Baturina | MID | Available | €5.5m
+N. Paz | MID | Available | €7.0m
+J. Addai | MID | Available | €5.0m
+M. Perrone | MID | Available | €5.0m
+M. Liberali | MID | Available | €6.0m
+Á. Morata | FWD | Suspended | €6.0m
+M. Kean | FWD | Available | €6.5m
+T. Douvikas | FWD | Available | €6.5m
+Jesus Rodríguez | FWD | Available | €5.5m
+## BOD 34
+N. Haikin | GK | Available | €4.5m
+I. Sjong | GK | Available | €4.0m
+M. Andersen | GK | Available | €4.0m
+J. Faye Lund | GK | Available | €4.0m
+F. Sjøvold | DEF | Available | €4.5m
+F. Bjørkan | DEF | Available | €4.5m
+V. Nielsen | DEF | Available | €4.5m
+H. Aleesami | DEF | Injured | €4.0m
+J. Gundersen | DEF | Doubtful | €4.0m
+I. Määttä | DEF | Available | €4.0m
+M. Blix Olsen | DEF | Available | €4.0m
+M. Jaiteh | DEF | Available | €4.0m
+O. Bjørtuft | DEF | Available | €4.0m
+P. Berg | MID | Available | €5.0m
+S. Auklend | MID | Available | €6.0m
+J. Kitolano | MID | Available | €4.5m
+O. Blomberg | MID | Available | €5.0m
+J. Hauge | MID | Doubtful | €7.0m
+S. Brunstad Fet | MID | Available | €5.0m
+U. Saltnes | MID | Available | €4.5m
+H. Evjen | MID | Injured | €4.5m
+M. Riisnæs | MID | Injured | €4.5m
+A. Helmersen | FWD | Available | €5.0m
+O. Brynhildsen | FWD | Available | €5.0m
+M. Hansen | FWD | Available | €5.0m
+## FEN 27
+Mert Günok | GK | Available | €4.0m
+Tarık Çetin | GK | Available | €4.0m
+Ederson | GK | Available | €5.0m
+N. Aké | DEF | Available | €5.0m
+M. Škriniar | DEF | Available | €5.0m
+Çağlar Söyüncü | DEF | Available | €4.5m
+Nélson Semedo | DEF | Available | €5.0m
+Mert Müldür | DEF | Available | €4.0m
+L. Mercan | DEF | Available | €4.5m
+A. Brown | DEF | Available | €4.5m
+O. Mimović | DEF | Available | €4.0m
+Yiğit Efe Demir | DEF | Available | €4.0m
+J. Oosterwolde | DEF | Available | €4.0m
+K. Oppong | DEF | Available | €4.0m
+İrfan Can Kahveci | MID | Available | €5.5m
+Talisca | MID | Suspended | €5.5m
+M. Asensio | MID | Doubtful | €7.0m
+N. Kanté | MID | Available | €5.5m
+M. Greenwood | MID | Available | €7.5m
+Oğuz Aydın | MID | Available | €5.0m
+M. Guendouzi | MID | Suspended | €6.0m
+Bartuğ Elmaz | MID | Available | €4.5m
+Kerem Aktürkoğlu | MID | Available | €6.0m
+R. Lukaku | FWD | Available | €7.5m
+V. Muriqi | FWD | Available | €6.0m
+D. Nene | FWD | Available | €5.0m
+## FEY 28
+L. Bossin | GK | Available | €4.0m
+T. Ernst | GK | Available | €4.0m
+B. Nieuwkoop | DEF | Available | €4.0m
+M. Mármol | DEF | Available | €4.0m
+A. Ahmedhodžić | DEF | Suspended | €4.5m
+J. St. Juste | DEF | Available | €4.5m
+G. Smal | DEF | Available | €4.0m
+G. Read | DEF | Available | €4.5m
+T. Watanabe | DEF | Available | €4.5m
+T. Beelen | DEF | Available | €4.0m
+J. Bos | DEF | Available | €5.0m
+M. Deijl | DEF | Available | €4.0m
+J. Lotomba | DEF | Available | €4.0m
+J. Moder | MID | Available | €4.5m
+Gonçalo Borges | MID | Available | €5.0m
+S. 't Zand | MID | Available | €4.5m
+O. Targhalline | MID | Available | €5.0m
+S. Steijn | MID | Available | €5.5m
+G. Zechiel | MID | Available | €4.5m
+A. Sliti | MID | Available | €4.5m
+T. Kraaijeveld | MID | Available | €4.5m
+C. Vanhoutte | MID | Available | €4.5m
+C. Tengstedt | FWD | Suspended | €5.0m
+N. Ferri | FWD | Available | €5.5m
+S. Van Persie | FWD | Available | €5.5m
+## GAL 36
+Günay Güvenç | GK | Injured | €4.0m
+Uğurcan Çakır | GK | Available | €5.0m
+Jankat Yılmaz | GK | Available | €4.0m
+Enes Büyük | GK | Available | €4.0m
+Kaan Ayhan | DEF | Available | €4.0m
+Abdülkerim Bardakcı | DEF | Available | €4.5m
+R. Sallai | DEF | Available | €5.0m
+D. Sánchez | DEF | Available | €4.5m
+I. Jakobs | DEF | Available | €4.5m
+Metehan Baltacı | DEF | Suspended | €4.0m
+W. Singo | DEF | Injured | €4.0m
+Eren Elmalı | DEF | Available | €4.0m
+Yusuf Kahraman | DEF | Available | €4.0m
+Cihan Akgün | DEF | Available | €4.0m
+İ. Gündoğan | MID | Available | €6.5m
+L. Sané | MID | Available | €6.5m
+Rafael Leão | MID | Available | €7.0m
+Yunus Akgün | MID | Available | €5.0m
+L. Torreira | MID | Available | €6.0m
+Ahmed Kutucu | MID | Suspended | €6.0m
+M. Lemina | MID | Injured | €5.5m
+L. Ugochukwu | MID | Available | €5.0m
+Barış Alper Yılmaz | MID | Available | €5.5m
+V. Osimhen | FWD | Injured | €8.0m
+Deniz Gül | FWD | Available | €5.0m
+Ada Yüzgeç | FWD | Available | €5.0m
+Arda Tagay | FWD | Available | €5.0m

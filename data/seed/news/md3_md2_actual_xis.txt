@@ -1,0 +1,16 @@
+# MD3 provisional team news: the clubs whose MD2 starting XIs are known (Tuesday 13 Oct 2026),
+# from match reports: Fox Sports box score (ARS-LIL), FC Bayern match report (BAY), Goal.com ratings
+# (BAR), VAVEL (ATM-MUN). The previous XI predicts the next one about as well as a journalist's
+# predicted XI for the next match, but managers often reverse one-off rotations (Saka was benched
+# after the international break), so this evidence counts at half strength. Every other club falls
+# back to the MD2 news, also softened (settings: news.carry_forward). Replace with UEFA's MD3
+# predicted line-ups (published the day before) as data/processed/news_md3.txt.
+# strength: 0.5
+# Suspended for MD3 after MD2 red cards: Olise (BAY, second yellow 73'), Yoro (MUN, red 76').
+# Format: TEAM | XI (GK first) | out | doubtful | suspended
+ARS | Raya; Lewis-Skelly, Gabriel Magalhães, Konsa, Timber; Rice, Bruno Guimarães; Eze, Merino, Madueke; Gyökeres | Saliba, Tzolis | Hincapié, Zubimendi |
+LIL | Berke Özer; Perraud, Alexsandro, Ngoy, Goffi; André, Bentaleb, Mukau; Haraldsson, Bakwa; Ueda | | |
+BAY | Urbig; Laimer, Tah, Kim Min-jae, Nathaniel Brown; Kimmich, Bischof; Lennart Karl, Luis Díaz; Kane | Musiala | | Olise
+BAR | Joan García; João Cancelo, Cubarsí, Eric García, Gerard Martín; Rodri, Pedri; Lamine Yamal, Fermín López, Dani Olmo, Anthony Gordon | Raphinha, De Jong, Christensen | |
+MUN | Lammens; Dalot, Maguire, Lisandro Martínez; Baleba, Tielemans; Mbeumo, Bruno Fernandes, Rashford; Matheus Cunha | Dorgu, Heaton, Mainoo, Mazraoui, Shaw, Ugarte | | Yoro
+ATM | Oblak; Marc Pubill, Cristian Romero, Hancko, Grimaldo; Llorente, Johnny Cardoso, Barrios, Álex Baena; Julián Álvarez, Lee Kang-in | | |

@@ -1,0 +1,119 @@
+{
+  "settings": {
+    "team_model": {
+      "half_life_days": 500.0,
+      "european_weight": 1.0,
+      "prior_sd_team": 0.5,
+      "prior_sd_league": 0.45
+    }
+  },
+  "team_model_tuning": {
+    "tuned_at": "2026-10-13T12:04:38+00:00",
+    "seasons": [
+      "2024-25",
+      "2025-26"
+    ],
+    "best": {
+      "half_life_days": 500.0,
+      "european_weight": 1.0,
+      "prior_sd_team": 0.5,
+      "prior_sd_league": 0.45,
+      "rps": 0.19575965736336806,
+      "log_loss": 0.8979650997966857,
+      "accuracy": 0.5846560846560847
+    },
+    "grid_size": 18,
+    "table": [
+      {
+        "half_life_days": 500,
+        "european_weight": 1.0,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19576,
+        "log_loss": 0.89797,
+        "accuracy": 0.58466
+      },
+      {
+        "half_life_days": 500,
+        "european_weight": 0.7,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19578,
+        "log_loss": 0.89757,
+        "accuracy": 0.58466
+      },
+      {
+        "half_life_days": 500,
+        "european_weight": 0.7,
+        "prior_sd_team": 0.7,
+        "prior_sd_league": 0.45,
+        "rps": 0.19582,
+        "log_loss": 0.89817,
+        "accuracy": 0.58201
+      },
+      {
+        "half_life_days": 500,
+        "european_weight": 1.4,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19584,
+        "log_loss": 0.89874,
+        "accuracy": 0.58466
+      },
+      {
+        "half_life_days": 750,
+        "european_weight": 0.7,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19588,
+        "log_loss": 0.89774,
+        "accuracy": 0.58201
+      },
+      {
+        "half_life_days": 500,
+        "european_weight": 1.0,
+        "prior_sd_team": 0.7,
+        "prior_sd_league": 0.45,
+        "rps": 0.19589,
+        "log_loss": 0.89886,
+        "accuracy": 0.58995
+      },
+      {
+        "half_life_days": 750,
+        "european_weight": 1.0,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19594,
+        "log_loss": 0.89832,
+        "accuracy": 0.58201
+      },
+      {
+        "half_life_days": 750,
+        "european_weight": 0.7,
+        "prior_sd_team": 0.7,
+        "prior_sd_league": 0.45,
+        "rps": 0.19597,
+        "log_loss": 0.89843,
+        "accuracy": 0.57937
+      },
+      {
+        "half_life_days": 1100,
+        "european_weight": 0.7,
+        "prior_sd_team": 0.5,
+        "prior_sd_league": 0.45,
+        "rps": 0.19604,
+        "log_loss": 0.89815,
+        "accuracy": 0.57937
+      },
+      {
+        "half_life_days": 500,
+        "european_weight": 1.4,
+        "prior_sd_team": 0.7,
+        "prior_sd_league": 0.45,
+        "rps": 0.19604,
+        "log_loss": 0.89986,
+        "accuracy": 0.5873
+      }
+    ]
+  }
+}

@@ -1,0 +1,277 @@
+{
+ "rates": [
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 0.0,
+   "half_life": Infinity,
+   "ll": 0.2682,
+   "ll_early": 0.27558,
+   "ll_late": 0.2656,
+   "n": 10582,
+   "gain": 0.0,
+   "gain_early": 0.0
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 0.5,
+   "half_life": Infinity,
+   "ll": 0.26568,
+   "ll_early": 0.27371,
+   "ll_late": 0.26285,
+   "n": 10582,
+   "gain": 0.00252,
+   "gain_early": 0.00187
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": Infinity,
+   "ll": 0.26529,
+   "ll_early": 0.27324,
+   "ll_late": 0.26249,
+   "n": 10582,
+   "gain": 0.00291,
+   "gain_early": 0.00234
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": Infinity,
+   "ll": 0.26544,
+   "ll_early": 0.27332,
+   "ll_late": 0.26265,
+   "n": 10582,
+   "gain": 0.00276,
+   "gain_early": 0.00225
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": 10.0,
+   "ll": 0.26567,
+   "ll_early": 0.27333,
+   "ll_late": 0.26296,
+   "n": 10582,
+   "gain": 0.00253,
+   "gain_early": 0.00225
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": 10.0,
+   "ll": 0.26551,
+   "ll_early": 0.27322,
+   "ll_late": 0.26278,
+   "n": 10582,
+   "gain": 0.00269,
+   "gain_early": 0.00235
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": 5.0,
+   "ll": 0.26607,
+   "ll_early": 0.27345,
+   "ll_late": 0.26346,
+   "n": 10582,
+   "gain": 0.00213,
+   "gain_early": 0.00213
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": 5.0,
+   "ll": 0.2658,
+   "ll_early": 0.27324,
+   "ll_late": 0.26317,
+   "n": 10582,
+   "gain": 0.0024,
+   "gain_early": 0.00234
+  },
+  {
+   "target": "goals",
+   "k": 5.0,
+   "w_cur": 3.0,
+   "half_life": 10.0,
+   "ll": 0.26571,
+   "ll_early": 0.27356,
+   "ll_late": 0.26294,
+   "n": 10582,
+   "gain": 0.00249,
+   "gain_early": 0.00202
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 0.0,
+   "half_life": Infinity,
+   "ll": 0.27664,
+   "ll_early": 0.28421,
+   "ll_late": 0.27396,
+   "n": 10582,
+   "gain": 0.0,
+   "gain_early": 0.0
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 0.5,
+   "half_life": Infinity,
+   "ll": 0.27515,
+   "ll_early": 0.28332,
+   "ll_late": 0.27227,
+   "n": 10582,
+   "gain": 0.00148,
+   "gain_early": 0.00089
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": Infinity,
+   "ll": 0.2754,
+   "ll_early": 0.28335,
+   "ll_late": 0.27259,
+   "n": 10582,
+   "gain": 0.00124,
+   "gain_early": 0.00086
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": Infinity,
+   "ll": 0.27623,
+   "ll_early": 0.28402,
+   "ll_late": 0.27347,
+   "n": 10582,
+   "gain": 0.00041,
+   "gain_early": 0.00019
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": 10.0,
+   "ll": 0.27522,
+   "ll_early": 0.2833,
+   "ll_late": 0.27237,
+   "n": 10582,
+   "gain": 0.00141,
+   "gain_early": 0.00091
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": 10.0,
+   "ll": 0.27564,
+   "ll_early": 0.28376,
+   "ll_late": 0.27278,
+   "n": 10582,
+   "gain": 0.00099,
+   "gain_early": 0.00045
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 1.0,
+   "half_life": 5.0,
+   "ll": 0.27543,
+   "ll_early": 0.2833,
+   "ll_late": 0.27265,
+   "n": 10582,
+   "gain": 0.0012,
+   "gain_early": 0.00091
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 2.0,
+   "half_life": 5.0,
+   "ll": 0.27569,
+   "ll_early": 0.28361,
+   "ll_late": 0.27289,
+   "n": 10582,
+   "gain": 0.00095,
+   "gain_early": 0.0006
+  },
+  {
+   "target": "assists",
+   "k": 5.0,
+   "w_cur": 3.0,
+   "half_life": 10.0,
+   "ll": 0.27621,
+   "ll_early": 0.28444,
+   "ll_late": 0.27331,
+   "n": 10582,
+   "gain": 0.00042,
+   "gain_early": -0.00023
+  }
+ ],
+ "starts": [
+  {
+   "model": "prev season only",
+   "ll": 0.6681968959325291,
+   "ll_early": 0.6433254602426367,
+   "n": 13054
+  },
+  {
+   "model": "this season",
+   "ll": 0.5656362852739862,
+   "ll_early": 0.525362620762734,
+   "n": 13054
+  },
+  {
+   "model": "both",
+   "ll": 0.5699490401772347,
+   "ll_early": 0.5375131601424056,
+   "n": 13054
+  },
+  {
+   "model": "both, prev=3 matches",
+   "ll": 0.5655872349487777,
+   "ll_early": 0.5142302956846081,
+   "n": 13054
+  },
+  {
+   "model": "both, prev=5 matches",
+   "ll": 0.5668469483174186,
+   "ll_early": 0.5193476031542372,
+   "n": 13054
+  },
+  {
+   "model": "recent hl=3",
+   "ll": 0.5281437044107354,
+   "ll_early": 0.4985906831971569,
+   "n": 13054
+  },
+  {
+   "model": "recent hl=5",
+   "ll": 0.5347833215644107,
+   "ll_early": 0.5010905935601483,
+   "n": 13054
+  },
+  {
+   "model": "both + recent hl=5",
+   "ll": 0.5594136308520742,
+   "ll_early": 0.5297389565804124,
+   "n": 13054
+  },
+  {
+   "model": "both + recent hl=3",
+   "ll": 0.5613553493968164,
+   "ll_early": 0.53087470193591,
+   "n": 13054
+  }
+ ],
+ "note": "EPL 2025/26 walk-forward; FPL archive per-match Opta data"
+}

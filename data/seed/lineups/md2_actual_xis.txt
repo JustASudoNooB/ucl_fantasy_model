@@ -1,0 +1,24 @@
+# Actual MD2 starting XIs, Tuesday 13 Oct 2026 (all nine day-1 matches).
+# Source: UEFA.com "Champions League starting and predicted line-ups: Matchday 2" (updated 14 Oct 06:30),
+# cross-checked with Fox Sports box score (ARS-LIL), FC Bayern match report (VIK-BAY), teleprensa (ATM-MUN),
+# losfutbolitos (VIL-NAP), bulinews (GAL-BAR). Corrected 14 Oct 17:15 IST: the earlier MUN and ATM lines
+# (from a pre-match live blog) had Maguire, Cunha and Pubill starting; they came off the bench.
+# Format: TEAM | XI (GK first)
+RCL | Risser; Ganiou, Baidoo, Antonio; Abdulhamid, Cuisance, Haidara, Udol; Thauvin, Ivanović, Kadile
+SCP | Kaique Pereira; Fresneda, Eduardo Quaresma, Gonçalo Inácio, Maxi Araújo; João Simões, Doumbia, Sergi Altimira; Irankunda, Luis Suárez, Catamo
+SAB | Pokatilov; Zedadka, Solvet, McCarthy, Puchacz; Lepinjica, Rakhmonaliev; Parris, Du Queiroz, Simić; Mickels
+SLA | Markovič; Holeš, N'Guessan, Zima; Vlček, Moses, Sadílek, Šturm; Provod, Chorý, Ayaosi
+ARS | Raya; Timber, Konsa, Gabriel Magalhães, Lewis-Skelly; Bruno Guimarães, Rice; Madueke, Merino, Eze; Gyökeres
+LIL | Berke Özer; Goffi, Ngoy, Alexsandro, Perraud; Bentaleb, André; Bakwa, Mukau, Haraldsson; Ueda
+ATM | Oblak; Llorente, Cristian Romero, Hancko, Grimaldo; Giuliano Simeone, Barrios, Johnny Cardoso, Álex Baena; Julián Álvarez, Lee Kang-in
+MUN | Lammens; Heaven, Yoro, Lisandro Martínez, Dalot; Andrey Santos, Tielemans; Baleba, Bruno Fernandes, Rashford; Mbeumo
+INT | Josep Martínez; Bisseck, Akanji, Bastoni; Diouf, Barella, Hakan Çalhanoğlu, Zieliński, Dimarco; Thuram, Lautaro Martínez
+CLB | Sommer; Sabbe, Spileers, Mechele, Seys; Carlos Forbs, Vetlesen, Potts, Vanaken, Virgili; Tresoldi
+GAL | Uğurcan Çakır; Barış Alper Yılmaz, Davinson Sánchez, Jakobs, Eren Elmalı; Lemina, Torreira; Yunus Akgün, Batrakov, Rafael Leão; Osimhen
+BAR | Joan García; Eric García, Cubarsí, Gerard Martín, João Cancelo; Rodri, Pedri; Lamine Yamal, Fermín López, Anthony Gordon; Dani Olmo
+RBL | Vandevoordt; Baku, Orbán, Lukeba, Raum; El Aynaoui, Nkunku, Banzuzi; Gruda, Cardoso, Nusa
+PSV | Kovář; Dest, Geertruida, Obispo, Kostić; Sano, Til, Mauro Júnior; Perišić, Mijnans, Van Bommel
+VIK | Østbø; Heggheim, Falchener, Stensness, Kristoffer Haugen; Tripić, Askildsen, Bell, Bjørdal; Botheim, Christiansen
+BAY | Urbig; Laimer, Tah, Kim Min-jae, Nathaniel Brown; Kimmich, Bischof; Olise, Lennart Karl, Luis Díaz; Kane
+VIL | Luiz Júnior; Santiago Mouriño, Pau Navarro, Renato Veiga, Carlos Romero; Santi Comesaña, Saliba, Gueye, Alberto Moleiro; Gerard Moreno, Mikautadze
+NAP | Milinković-Savić; Rrahmani, Rafa Marín, Badiashile; Politano, Gilmour, McTominay, Di Lorenzo; Giovane, De Bruyne; Højlund
