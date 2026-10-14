@@ -255,6 +255,18 @@ def cmd_grade(args):
     (PROC / f"grading_md{args.md}.json").write_text(json.dumps(out, default=str))
 
 
+def cmd_myteam(args):
+    from .report import myteam
+    out = myteam.build(_engine(args), args.live_md, args.next_md, args.after_day)
+    if out.get("live"):
+        d = out["live"]["decisions"]
+        print(f"MD{args.live_md} live call: " + " | ".join(a["text"] for a in d["actions"]))
+    n = out["next"]
+    print(f"MD{n['md']}: {n['formation']}, captain {n['captain']}, {n['ev_policy']} expected with the captain plan")
+    for t in n["transfers"]:
+        print(f"  {t['n']} transfer(s): OUT {', '.join(t['sell']) or '-'} | IN {', '.join(t['buy']) or '-'}  gain {t['gain']:+}")
+
+
 def cmd_retro(args):
     from .report.export import retro_snapshot
     eng = _engine(args)
@@ -396,6 +408,11 @@ def main(argv=None):
     gr = sub.add_parser("grade", help="grade frozen predictions match by match")
     gr.add_argument("--md", type=int, required=True)
     gr.set_defaults(fn=cmd_grade)
+    mt = sub.add_parser("myteam", help="your squad (data/my/team.json): live call and next-matchday plan")
+    mt.add_argument("--live-md", dest="live_md", type=int)
+    mt.add_argument("--next-md", dest="next_md", type=int, required=True)
+    mt.add_argument("--after-day", dest="after_day", type=int, default=1)
+    mt.set_defaults(fn=cmd_myteam)
     rt = sub.add_parser("retro", help="re-forecast a played matchday with today's code (pre-match inputs only)")
     rt.add_argument("--md", type=int, required=True)
     rt.add_argument("--tag", required=True)

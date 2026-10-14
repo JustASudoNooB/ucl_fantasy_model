@@ -37,7 +37,7 @@ def grading(engine) -> dict:
 
 def replans() -> dict:
     out = {}
-    for p in sorted(RUNS.glob("md*/replan_day*.json")):
+    for p in sorted(RUNS.glob("md*/replan_day?.json")):
         d = _load(p)
         if d:
             out.setdefault(str(d["md"]), {})[str(d["after_day"] + 1)] = d
@@ -135,3 +135,8 @@ def _clean(x):
 
 def backtests() -> dict:
     return _clean(dict(team=_load(PROC / "backtest_form_homeaway.json") or {}, player=_load(PROC / "backtest_player_form.json") or {}))
+
+
+def my_team() -> dict:
+    p = RUNS / "myteam.json"
+    return _load(p) or {}

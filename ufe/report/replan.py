@@ -98,7 +98,7 @@ def realised_points(engine, md: int, day_done: int) -> tuple[pd.DataFrame, set[s
 
 def run(engine, md: int, day_done: int, squad: list[str], xi: list[str], captain: str,
         points_override: dict[str, float] | None = None, lineups_known: bool | None = None,
-        freeze: bool = True, label: str = "dashboard squad") -> dict:
+        freeze: bool = True, label: str = "dashboard squad", out_name: str | None = None) -> dict:
     players = engine.players_for(md)
     names = players.set_index("id").name
     sim = engine.simulate(md)
@@ -149,7 +149,7 @@ def run(engine, md: int, day_done: int, squad: list[str], xi: list[str], captain
                decisions=dec, lineups_known=lk, snapshot=snap,
                note="Day-1 points come from match reports plus the model's estimate of ball-recovery points; "
                     "replace them with the app's numbers (--points) when they differ.")
-    p = RUNS / f"md{md}" / f"replan_day{day_done + 1}.json"
+    p = RUNS / f"md{md}" / (out_name or f"replan_day{day_done + 1}.json")
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(out, default=str))
     return out

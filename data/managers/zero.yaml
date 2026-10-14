@@ -1,0 +1,29 @@
+# One file per manager. Edit after every transfer; `ufe dashboard` picks it up.
+# bank: leave blank to compute it (budget minus squad cost at current prices).
+name: Zero
+team_name: ONETEAMONEDREAM
+updated: 2026-10-14
+free_transfers: 2          # for the next matchday; check the Transfers screen
+bank:
+chips_used: []             # e.g. [wildcard, limitless]
+md2:
+  captain: Harry Kane
+  xi: [Senne Lammens, Gerard Martín, Ezri Konsa, Marquinhos, Luis Díaz, Michael Olise, Lamine Yamal,
+       Jude Bellingham, Rayan Cherki, Luis Suárez, Harry Kane]
+  points: 65               # after day 1 (app)
+squad:
+  - {name: Senne Lammens, team: MUN}
+  - {name: Yann Sommer, team: CLB}
+  - {name: Gerard Martín, team: BAR}
+  - {name: Ezri Konsa, team: ARS}
+  - {name: Marquinhos, team: PSG}
+  - {name: Lisandro Martínez, team: MUN}
+  - {name: Riccardo Calafiori, team: ARS}
+  - {name: Luis Díaz, team: BAY}
+  - {name: Michael Olise, team: BAY}
+  - {name: Lamine Yamal, team: BAR}
+  - {name: Jude Bellingham, team: RMA}
+  - {name: Rayan Cherki, team: MCI}
+  - {name: Luis Suárez, team: SCP}
+  - {name: Harry Kane, team: BAY}
+  - {name: Bryan Mbeumo, team: MUN}

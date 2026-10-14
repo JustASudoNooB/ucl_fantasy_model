@@ -422,6 +422,20 @@ table.ft td.dn { color: var(--bad); font-weight: 600; }
 .tests div { display: grid; gap: 3px; font-size: 13px; }
 .tests b { font-size: 14px; }
 
+
+/* ---------- managers ---------- */
+.mg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 16px; }
+.mg { padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.mg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; }
+.mg-kv { display: flex; flex-wrap: wrap; gap: 6px; }
+.mg h4 { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.mg-xi { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 4px; font-size: 13px; }
+.mg-xi div { background: var(--panel-2); border-radius: 6px; padding: 4px 8px; display: flex; justify-content: space-between; gap: 6px; min-width: 0; }
+.mg-xi div span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mg-xi div.cap { background: color-mix(in oklab, var(--accent) 28%, var(--panel-2)); font-weight: 600; }
+.mg-xi div.flag { box-shadow: inset 3px 0 0 var(--bad); }
+.mg-xi div.bench { background: transparent; border: 1px dashed var(--line); }
+
 footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; border-top: 1px solid var(--line); }
 
 #tip { position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: var(--panel); font-size: 12.5px; padding: 6px 9px; border-radius: 6px; max-width: 260px; line-height: 1.35; opacity: 0; transform: translateY(4px); transition: opacity .12s, transform .12s; }
@@ -442,7 +456,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
   </div>
   <nav class="secnav" aria-label="Sections">
-    <a href="#board">Board</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#model">Model</a><a href="#rules">Calendar</a>
+    <a href="#board">Board</a><a href="#managers">Managers</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#model">Model</a><a href="#rules">Calendar</a>
   </nav>
 </header>
 
@@ -496,6 +510,17 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     </div>
   </section>
 
+
+
+  <section id="managers" aria-labelledby="mg-h" hidden>
+    <div class="sec-head">
+      <h2 id="mg-h">Managers</h2>
+      <p id="mg-sub">Real squads, each planned by the model for the next deadline: best XI and captain, the transfers worth making over the next three matchdays, and when to play Wildcard and Limitless. Compared with the model's own best squad and with each other.</p>
+    </div>
+    <div class="panel" style="padding:14px 16px; margin-bottom:16px; overflow-x:auto;"><table class="caps" id="mg-table"></table></div>
+    <div class="mg-grid" id="mg-cards"></div>
+    <p class="muted" style="font-size:12.5px; margin-top:10px;">Add a manager: copy <code>data/managers/zero.yaml</code>, list the 15 players with their club codes, set free transfers and chips used, and rebuild the dashboard. Bank is worked out from current prices when left blank.</p>
+  </section>
 
   <section id="halftime" aria-labelledby="ht-h" hidden>
     <div class="sec-head">
@@ -1729,6 +1754,43 @@ const D = /*__UFE_DATA__*/null;
     $("#fm-tests").innerHTML = items.map(([a, b2]) => `<div><b>${esc(a)}</b><span class="ink2">${esc(b2)}</span></div>`).join("");
   }
 
+
+  // ---------------------------------------------------------------- managers
+  function renderManagers() {
+    const M = D.managers || [];
+    const box = $("#managers");
+    if (!M.length) { box.hidden = true; return; }
+    box.hidden = false;
+    const nm = id => P[id] ? shortName(P[id].name) : id;
+    const ok = M.filter(m => !m.error);
+    const md = ok.length ? ok[0].md : "";
+    $("#mg-sub").textContent = `Real squads, each planned for the MD${md} deadline: best XI and captain, the transfers worth making over the next three matchdays (net of hits), and when to play Wildcard and Limitless. Compared with the model's own best squad and with each other.`;
+    const bestTx = m => (m.transfers || []).find(t => t.n > 0 && t.gain > 0.5);
+    $("#mg-table").innerHTML = `<thead><tr><th>Manager</th><th class="r">MD${md} expected (XI)</th><th class="r">Model best XI</th><th class="r">Shared with model squad</th><th>Top transfer</th><th>Chips</th></tr></thead><tbody>${M.map(m => m.error ? `<tr><td>${esc(m.name)}</td><td colspan="5" class="muted">${esc(m.error)}</td></tr>` : (() => {
+      const t = bestTx(m);
+      const ch = (m.chip_advice || []).map(c => `${c.chip}: ${c.use_now ? "<b>play now</b>" : "MD" + c.best_md}`).join(" · ") || "none left";
+      return `<tr><td><b>${esc(m.name)}</b><br><span class="muted" style="font-size:12px">${esc(m.team_name || "")}</span></td><td class="r num">${f1(m.ev_xi)}</td><td class="r num">${f1(m.model.ev_xi)}</td><td class="r num">${m.model.overlap}/15</td>
+        <td>${t ? `${t.sell.map(nm).join(", ")} → ${t.buy.map(nm).join(", ")} <span class="muted">(+${f1(t.gain)})</span>` : "hold"}</td><td>${ch}</td></tr>`;
+    })()).join("")}</tbody>`;
+    $("#mg-cards").innerHTML = ok.map(m => {
+      const flagged = new Set((m.flags || []).map(f => f.id));
+      const cell = (id, cls) => `<div class="${cls} ${flagged.has(id) ? "flag" : ""} ${id === m.captain ? "cap" : ""}"><span>${esc(nm(id))}${id === m.captain ? " (C)" : ""} <span class="muted">${esc(tShort(P[id] ? P[id].team : ""))}</span></span><span class="num">${f1(evOf(id, m.md))}</span></div>`;
+      const tx = (m.transfers || []).map(t => `<tr><td>${t.n === 0 ? "Roll (no transfer)" : `${t.sell.map(nm).join(", ")} → ${t.buy.map(nm).join(", ")}`}</td><td class="r num">${t.hits ? "−" + 4 * t.hits : "0"}</td><td class="r num ${t.gain > 0 ? "good" : ""}">${t.n === 0 ? "–" : (t.gain > 0 ? "+" : "") + f1(t.gain)}</td></tr>`).join("");
+      const chips = (m.chip_advice || []).map(c => `<div>${c.chip === "wildcard" ? "Wildcard" : "Limitless"}: ${c.use_now ? `play it for MD${m.md} (+${f1(c.now_gain)} expected)` : `hold; best at MD${c.best_md} (+${f1(c.best_gain)}), MD${m.md} would add +${f1(c.now_gain)}`}</div>`).join("") || "<div>No chips left.</div>";
+      const flags = (m.flags || []).map(f => `${esc(f.name)} (${pct(f.p_start)} to start)`).join(", ");
+      return `<div class="panel mg">
+        <div class="mg-head"><div><h3>${esc(m.name)}</h3><span class="muted" style="font-size:12.5px">${esc(m.team_name || "")} · updated ${esc(m.updated)}</span></div>
+          <div class="mg-kv"><span class="chip">Bank €${Number(m.bank).toFixed(1)}m</span><span class="chip">${m.free_transfers} free transfers</span><span class="chip">Value €${Number(m.squad_value).toFixed(1)}m</span><span class="chip">${(m.chips_used || []).length ? "Used: " + m.chips_used.join(", ") : "All chips left"}</span></div></div>
+        <div><h4>MD${m.md} best XI (${esc(m.formation)}) · ${f1(m.ev_xi)} expected</h4></div>
+        <div class="mg-xi">${m.xi.map(id => cell(id, "")).join("")}${m.bench.map(id => cell(id, "bench")).join("")}</div>
+        ${flags ? `<p style="font-size:13px"><span class="tag bad">check</span> ${flags}</p>` : ""}
+        <div><h4>Transfers over MD${m.horizon.join(", MD")}</h4><div style="overflow-x:auto"><table class="caps"><thead><tr><th>Move</th><th class="r">Hit</th><th class="r">Gain vs rolling</th></tr></thead><tbody>${tx}</tbody></table></div></div>
+        <div><h4>Chips</h4><div class="calls" style="font-size:13px">${chips}</div></div>
+        <p class="muted" style="font-size:12.5px">The model's own best €${D.rules.budget.league_phase}m squad for MD${m.md} would expect ${f1(m.model.ev_xi)}; it shares ${m.model.overlap} of 15 players with this squad. That figure is optimistic (it picks the players the model rates highest, so its errors lean its way) and ignores transfer limits.</p>
+      </div>`;
+    }).join("");
+  }
+
   function renderCalendar() {
     const nxt = D.rules.deadlines.find(d => Date.parse(d.iso) > Date.now());
     $("#timeline").innerHTML = D.rules.deadlines.map(d => `<div class="${nxt && d.md === nxt.md ? "now" : ""}"><b>MD${d.md}</b><span>${esc(d.ist)} IST</span><span class="muted">${d.stage.replace("ko_playoff", "KO play-off").replace("league", "League phase").replace("r16", "Round of 16").replace("qf", "Quarter-final").replace("sf", "Semi-final").replace("final", "Final")}</span><span class="muted">${d.free === "unlimited" ? "Unlimited transfers" : d.free + " free transfers"}${d.chips_ok ? "" : " · no chips"}${d.manual ? "" : " · no live changes"}</span></div>`).join("");
@@ -1761,6 +1823,7 @@ const D = /*__UFE_DATA__*/null;
   renderModel();
   renderCheck();
   renderForm();
+  try { renderManagers(); } catch (e) { console.error(e); }
   renderCalendar();
   renderFooter();
   setInterval(tickClock, 1000);
