@@ -10,7 +10,7 @@ md2:
   captain: Harry Kane
   xi: [Senne Lammens, Gerard Martín, Ezri Konsa, Marquinhos, Luis Díaz, Michael Olise, Lamine Yamal,
        Jude Bellingham, Rayan Cherki, Luis Suárez, Harry Kane]
-  points: 65               # after day 1 (app)
+  points: 65               # after day 1 (app); day 2 from match reports: Bellingham 2, Cherki 1 (off at HT), Marquinhos 1, plus recoveries -> about 71 final (check the app)
 squad:
   - {name: Senne Lammens, team: MUN}
   - {name: Yann Sommer, team: CLB}

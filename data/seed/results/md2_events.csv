@@ -199,3 +199,260 @@ md,home,away,team,player,event,minute,note,source
 2,VIL,NAP,VIL,Tani Oluwaseyi,goal,86,,losfutbolitos
 2,VIL,NAP,VIL,Ayoze Pérez,assist,86,,losfutbolitos
 2,VIL,NAP,VIL,Santiago Mouriño,potm,,,uefa.com Tuesday round-up; losfutbolitos
+2,FEY,COM,COM,Assane Diao,goal,18,,bundesliga.com liveticker
+2,FEY,COM,COM,Jacobo Ramón,assist,18,,bundesliga.com liveticker
+2,FEY,COM,FEY,Gjivai Zechiël,goal,20,,bundesliga.com liveticker
+2,FEY,COM,FEY,Luciano Valente,assist,20,,bundesliga.com liveticker
+2,FEY,COM,FEY,Anis Hadj Moussa,goal,52,,bundesliga.com liveticker
+2,FEY,COM,FEY,Gaoussou Diarra,assist,52,,bundesliga.com liveticker
+2,FEY,COM,COM,Robert Sánchez,own_goal,81,,bundesliga.com liveticker
+2,FEY,COM,COM,Tasos Douvikas,goal,93,90+3,bundesliga.com liveticker
+2,FEY,COM,COM,Jesús Rodríguez,sub_on,23,,bundesliga.com liveticker
+2,FEY,COM,COM,Assane Diao,sub_off,23,,bundesliga.com liveticker
+2,FEY,COM,FEY,Gaoussou Diarra,sub_on,45,,bundesliga.com liveticker
+2,FEY,COM,FEY,Luciano Valente,sub_off,45,,bundesliga.com liveticker
+2,FEY,COM,COM,Yan Couto,sub_on,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Ivan Smolčić,sub_off,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Tasos Douvikas,sub_on,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Kaiki Bruno,sub_off,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Lucas Da Cunha,sub_on,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Luis Milla,sub_off,60,,bundesliga.com liveticker
+2,FEY,COM,COM,Mattia Liberali,sub_on,79,,bundesliga.com liveticker
+2,FEY,COM,COM,Martin Baturina,sub_off,79,,bundesliga.com liveticker
+2,FEY,COM,FEY,Tobias van den Elshout,sub_on,79,,bundesliga.com liveticker
+2,FEY,COM,FEY,Nacho Ferri,sub_off,79,,bundesliga.com liveticker
+2,FEY,COM,FEY,Tsuyoshi Watanabe,sub_on,79,,bundesliga.com liveticker
+2,FEY,COM,FEY,Jeremiah St. Juste,sub_off,79,,bundesliga.com liveticker
+2,FEY,COM,FEY,Jerayno Schaken,sub_on,91,,bundesliga.com liveticker
+2,FEY,COM,FEY,Anis Hadj Moussa,sub_off,91,,bundesliga.com liveticker
+2,FEY,COM,FEY,Gaoussou Diarra,yellow,50,,bundesliga.com liveticker
+2,FEY,COM,COM,Ivan Smolčić,yellow,57,,bundesliga.com liveticker
+2,FEY,COM,COM,Jacobo Ramón,yellow,69,,bundesliga.com liveticker
+2,FEY,COM,COM,Lucas Da Cunha,yellow,74,,bundesliga.com liveticker
+2,FEY,COM,FEY,Givairo Read,yellow,84,,bundesliga.com liveticker
+2,FEY,COM,FEY,Anis Hadj Moussa,potm,,,uefa.com POTM list
+2,LAS,LIV,LIV,Ronald Araújo,goal,22,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Kostas Tsimikas,assist,22,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Bradley Barcola,goal,24,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Lewis Koumas,assist,24,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Bradley Barcola,goal,37,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Florian Wirtz,assist,37,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Jeremie Frimpong,goal,51,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Kostas Tsimikas,assist,51,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Ljubičić,goal,63,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Dibango,assist,63,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Bradley Barcola,goal,66,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Jeremie Frimpong,assist,66,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Lewis Koumas,goal,72,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Jeremie Frimpong,assist,72,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Florian Flecker,goal,74,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Dibango,assist,74,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Florian Flecker,goal,77,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Dibango,assist,77,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Florian Flecker,sub_on,46,minute approximate (around half-time),bundesliga.com liveticker
+2,LAS,LIV,LAS,Jørgensen,sub_off,46,minute approximate (around half-time),bundesliga.com liveticker
+2,LAS,LIV,LAS,Ljubičić,sub_on,62,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Bogarde,sub_off,62,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Daniel Elfadli,sub_on,71,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Schöpf,sub_off,71,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Kalajdžić,sub_on,66,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Adeniran,sub_off,66,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Kane,sub_on,80,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Lang,sub_off,80,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Virgil van Dijk,sub_on,51,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Jacquet,sub_off,51,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Joe Gomez,sub_on,62,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Ronald Araújo,sub_off,62,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Muñoz,sub_on,73,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Bradley Barcola,sub_off,73,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Alexis Mac Allister,sub_on,82,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Nyoni,sub_off,82,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Chambers,sub_on,85,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Rio Ngumoha,sub_off,85,,bundesliga.com liveticker
+2,LAS,LIV,LAS,Daniel Elfadli,yellow,77,,bundesliga.com liveticker
+2,LAS,LIV,LIV,Bradley Barcola,potm,,,uefa.com POTM list
+2,ROM,RMA,ROM,Marten de Roon,goal,20,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Matías Soulé,assist,20,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Kylian Mbappé,goal,25,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Yan Diomande,assist,25,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Donyell Malen,goal,51,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Rodrigo Mora,assist,51,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Donyell Malen,goal,57,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Matías Soulé,assist,57,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Carlos Espí,goal,83,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Endrick,goal,85,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Arda Güler,assist,85,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Antonio Rüdiger,goal,90,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Arda Güler,assist,90,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Niccolò Pisilli,sub_on,17,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Manu Koné,sub_off,17,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Rodrigo Mora,sub_on,45,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Paulo Dybala,sub_off,45,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Endrick,sub_on,59,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Vinícius Júnior,sub_off,59,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Arda Güler,sub_on,59,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Denzel Dumfries,sub_off,59,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Leonardo Balerdi,sub_on,63,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Gianluca Mancini,sub_off,63,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Lorenzo Pellegrini,sub_on,63,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Matías Soulé,sub_off,63,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Bernardo Silva,sub_on,70,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Aurélien Tchouaméni,sub_off,70,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Carlos Espí,sub_on,78,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Yan Diomande,sub_off,78,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Álvaro Carreras,sub_on,78,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Marc Cucurella,sub_off,78,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Konstantinos Koulierakis,sub_on,81,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Mario Hermoso,sub_off,81,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Gianluca Mancini,yellow,60,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Wesley,yellow,69,,bundesliga.com liveticker
+2,ROM,RMA,ROM,Lorenzo Pellegrini,yellow,89,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Álvaro Carreras,yellow,90,,bundesliga.com liveticker
+2,ROM,RMA,RMA,Endrick,potm,,,uefa.com Wednesday round-up
+2,AVL,FEN,AVL,Johan Manzambi,goal,12,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Nicolas Jackson,goal,31,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Boubacar Kamara,assist,31,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Nicolas Jackson,goal,39,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ross Barkley,assist,39,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ross Barkley,pen_goal,68,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ross Barkley,goal,72,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ibrahim Mbaye,assist,72,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Tammy Abraham,goal,90,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Alysson,assist,90,,bundesliga.com liveticker
+2,AVL,FEN,AVL,João Gomes,sub_on,73,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Johan Manzambi,sub_off,73,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Alysson,sub_on,73,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Boubacar Kamara,sub_off,73,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Alejandro Garnacho,sub_on,79,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ibrahim Mbaye,sub_off,79,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Tammy Abraham,sub_on,79,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Nicolas Jackson,sub_off,79,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Leon Goretzka,sub_on,83,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Ross Barkley,sub_off,83,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Bartuğ Elmaz,sub_on,68,,bundesliga.com liveticker
+2,AVL,FEN,FEN,İsmail Yüksek,sub_off,68,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Dorgeles Nene,sub_on,69,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Mason Greenwood,sub_off,69,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Romelu Lukaku,sub_on,69,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Vedat Muriqi,sub_off,69,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Mattéo Guendouzi,yellow,39,,bundesliga.com liveticker
+2,AVL,FEN,FEN,Oğuz Aydın,yellow,73,,bundesliga.com liveticker
+2,AVL,FEN,AVL,Johan Manzambi,potm,,,uefa.com Wednesday round-up
+2,SHA,AEK,AEK,Lovro Majer,goal,28,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Stavros Pilios,assist,28,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Pedrinho,pen_goal,34,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Vinícius Tobias,goal,80,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Alisson Santana,assist,80,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Gleiker Mendoza,goal,86,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Isaque,assist,86,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Gleiker Mendoza,sub_on,63,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Newertton,sub_off,63,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Isaque,sub_on,63,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Pedrinho,sub_off,63,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Mijat Gaćinović,sub_on,71,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Zini,sub_off,71,,bundesliga.com liveticker
+2,SHA,AEK,AEK,João Mário,sub_on,71,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Lovro Majer,sub_off,71,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Barnabás Varga,sub_on,79,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Luka Jović,sub_off,79,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Kaan Kairinen,sub_on,79,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Milán Vitális,sub_off,79,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Yegor Nazaryna,sub_on,82,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Marlon Gomes,sub_off,82,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Olexandr Zubkov,sub_on,83,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Răzvan Marin,sub_off,83,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Luca Meirelles,sub_on,88,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Kauã Elias,sub_off,88,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Lucas Ferreira,sub_on,88,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Alisson Santana,sub_off,88,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Lovro Majer,yellow,18,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Harold Moukoudi,yellow,42,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Marlon Gomes,yellow,54,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Răzvan Marin,yellow,61,,bundesliga.com liveticker
+2,SHA,AEK,AEK,Barnabás Varga,yellow,90,,bundesliga.com liveticker
+2,SHA,AEK,SHA,Alisson Santana,potm,,,uefa.com Wednesday round-up
+2,BOD,BVB,BOD,Fredrik Sjøvold,goal,52,,bundesliga.com Spielbericht
+2,BOD,BVB,BOD,Sondre Auklend,assist,52,assist per uefa.com,uefa.com Wednesday round-up
+2,BOD,BVB,BVB,Felix Nmecha,sub_on,60,"four BVB changes at 60', players replaced not reported",bundesliga.com Spielbericht
+2,BOD,BVB,BVB,Serhou Guirassy,sub_on,60,"four BVB changes at 60', players replaced not reported",bundesliga.com Spielbericht
+2,BOD,BVB,BVB,Joane Gadou,yellow,13,,bundesliga.com Spielbericht
+2,BOD,BVB,BVB,Fábio Silva,yellow,25,,bundesliga.com Spielbericht
+2,BOD,BVB,BOD,Fredrik Sjøvold,potm,,,uefa.com Wednesday round-up
+2,MCI,PSG,PSG,Désiré Doué,goal,13,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Fabián Ruiz,assist,13,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Ousmane Dembélé,goal,15,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Désiré Doué,assist,15,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Vitinha,goal,32,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Warren Zaïre-Emery,assist,32,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Erling Haaland,goal,53,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Iliman Ndiaye,assist,53,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Maghnes Akliouche,goal,63,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Ousmane Dembélé,assist,63,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Erling Haaland,goal,75,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Ayyoub Bouaddi,assist,75,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Ferran Torres,pen_miss,90,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Gianluigi Donnarumma,pen_save,90,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Matheus Nunes,sub_on,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,MCI,Rúben Dias,sub_off,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,MCI,Iliman Ndiaye,sub_on,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,MCI,Jérémy Doku,sub_off,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,MCI,Ayyoub Bouaddi,sub_on,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,MCI,Rayan Cherki,sub_off,46,45+2,bundesliga.com liveticker
+2,MCI,PSG,PSG,Khvicha Kvaratskhelia,sub_on,66,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Désiré Doué,sub_off,66,,bundesliga.com liveticker
+2,MCI,PSG,PSG,João Neves,sub_on,76,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Maghnes Akliouche,sub_off,76,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Ferran Torres,sub_on,76,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Ousmane Dembélé,sub_off,76,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Lucas Hernández,sub_on,84,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Fabián Ruiz,sub_off,84,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Lucas Beraldo,sub_on,84,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Warren Zaïre-Emery,sub_off,84,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Nico O'Reilly,sub_on,90,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Enzo Fernández,sub_off,90,,bundesliga.com liveticker
+2,MCI,PSG,MCI,Antoine Semenyo,yellow,61,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Warren Zaïre-Emery,yellow,69,,bundesliga.com liveticker
+2,MCI,PSG,PSG,Vitinha,potm,,,uefa.com Wednesday round-up
+2,BET,POR,BET,Abde Ezzalzouli,goal,47,,bundesliga.com liveticker
+2,BET,POR,BET,Fran García,assist,47,,bundesliga.com liveticker
+2,BET,POR,POR,Gabriel Veiga,goal,54,,bundesliga.com liveticker
+2,BET,POR,POR,Samu Aghehowa,goal,61,,bundesliga.com liveticker
+2,BET,POR,POR,Pepê,assist,61,,bundesliga.com liveticker
+2,BET,POR,BET,Cucho Hernández,goal,74,,bundesliga.com liveticker
+2,BET,POR,BET,Antony,assist,74,,bundesliga.com liveticker
+2,BET,POR,BET,Isco,pen_goal,84,,bundesliga.com liveticker
+2,BET,POR,POR,Samu Aghehowa,sub_on,59,,bundesliga.com liveticker
+2,BET,POR,POR,André Silva,sub_off,59,,bundesliga.com liveticker
+2,BET,POR,POR,Alberto Costa,sub_on,59,,bundesliga.com liveticker
+2,BET,POR,POR,Martim Fernandes,sub_off,59,,bundesliga.com liveticker
+2,BET,POR,POR,Oskar Pietuszewski,sub_on,59,,bundesliga.com liveticker
+2,BET,POR,POR,Borja Sainz,sub_off,59,,bundesliga.com liveticker
+2,BET,POR,BET,Cucho Hernández,sub_on,63,,bundesliga.com liveticker
+2,BET,POR,BET,Troy Parrott,sub_off,63,,bundesliga.com liveticker
+2,BET,POR,BET,Dani Ceballos,sub_on,63,,bundesliga.com liveticker
+2,BET,POR,BET,Nelson Deossa,sub_off,63,,bundesliga.com liveticker
+2,BET,POR,POR,Hwang In-beom,sub_on,71,,bundesliga.com liveticker
+2,BET,POR,POR,Gabriel Veiga,sub_off,71,,bundesliga.com liveticker
+2,BET,POR,POR,Santiago Giménez,sub_on,86,,bundesliga.com liveticker
+2,BET,POR,POR,Alan Varela,sub_off,86,,bundesliga.com liveticker
+2,BET,POR,BET,Facundo Bernal,sub_on,87,,bundesliga.com liveticker
+2,BET,POR,BET,Isco,sub_off,87,,bundesliga.com liveticker
+2,BET,POR,BET,Pablo Fornals,sub_on,87,,bundesliga.com liveticker
+2,BET,POR,BET,Marc Roca,sub_off,87,,bundesliga.com liveticker
+2,BET,POR,BET,Rodrigo Riquelme,sub_on,90,,bundesliga.com liveticker
+2,BET,POR,BET,Antony,sub_off,90,,bundesliga.com liveticker
+2,BET,POR,BET,Abde Ezzalzouli,yellow,56,,bundesliga.com liveticker
+2,BET,POR,BET,Nelson Deossa,yellow,56,,bundesliga.com liveticker
+2,BET,POR,POR,André Silva,yellow,56,,bundesliga.com liveticker
+2,BET,POR,POR,Alan Varela,yellow,73,,bundesliga.com liveticker
+2,BET,POR,BET,Dani Ceballos,yellow,77,,bundesliga.com liveticker
+2,BET,POR,POR,Santiago Giménez,yellow,86,,bundesliga.com liveticker
+2,BET,POR,BET,Ángel Ortiz,yellow,93,,bundesliga.com liveticker
+2,BET,POR,BET,Isco,potm,,,uefa.com Wednesday round-up
+2,SLO,VFB,VFB,Deniz Undav,goal,29,assist not credited in reports (Stiller pass),bundesliga.com Spielbericht
+2,SLO,VFB,SLO,Sandro Cruz,own_goal,65,,bundesliga.com Spielbericht
+2,SLO,VFB,VFB,Ermedin Demirović,goal,90,,bundesliga.com Spielbericht
+2,SLO,VFB,VFB,Lorenz Assignon,assist,90,cross per bundesliga.com,bundesliga.com Spielbericht
+2,SLO,VFB,VFB,Ermedin Demirović,sub_on,70,came off the bench; minute not reported (estimate),uefa.com Wednesday round-up
+2,SLO,VFB,VFB,Lorenz Assignon,sub_on,85,came on shortly before 90'; minute estimated,bundesliga.com Spielbericht
+2,SLO,VFB,VFB,Josha Vagnoman,potm,,,uefa.com Wednesday round-up

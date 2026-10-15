@@ -26,15 +26,15 @@ md,stage,date,kickoff_cet,home,away,home_goals,away_goals,status,source
 2,league,2026-10-13,21:00,RBL,PSV,1.0,0.0,FT,"CBS Sports + parisfans.fr results, 14 Oct 2026"
 2,league,2026-10-13,21:00,VIK,BAY,3.0,3.0,FT,"CBS Sports + parisfans.fr results, 14 Oct 2026"
 2,league,2026-10-13,21:00,VIL,NAP,3.0,1.0,FT,"CBS Sports + parisfans.fr results, 14 Oct 2026"
-2,league,2026-10-14,18:45,FEY,COM,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,18:45,LAS,LIV,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,ROM,RMA,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,AVL,FEN,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,SHA,AEK,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,BOD,BVB,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,MCI,PSG,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,BET,POR,,,NS,uefa.com:league-phase-fixtures
-2,league,2026-10-14,21:00,SLO,VFB,,,NS,uefa.com:league-phase-fixtures
+2,league,2026-10-14,18:45,FEY,COM,3.0,2.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,18:45,LAS,LIV,3.0,6.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,ROM,RMA,3.0,4.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,AVL,FEN,6.0,0.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,SHA,AEK,3.0,1.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,BOD,BVB,1.0,0.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,MCI,PSG,2.0,4.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,BET,POR,3.0,2.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
+2,league,2026-10-14,21:00,SLO,VFB,0.0,3.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
 3,league,2026-10-20,18:45,FEN,SLA,,,NS,uefa.com:league-phase-fixtures
 3,league,2026-10-20,18:45,SAB,BVB,,,NS,uefa.com:league-phase-fixtures
 3,league,2026-10-20,21:00,ROM,SLO,,,NS,uefa.com:league-phase-fixtures
