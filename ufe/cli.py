@@ -66,27 +66,46 @@ def cmd_probe(args):
 
 
 def cmd_sync(args):
+    """Each source is fetched on its own: one failing (site down, blocked, format changed) is
+    reported and the rest still run, so a scheduled run never stops half-way."""
     from .ingest import fpl, openfootball
     from .pipeline import load_fixtures
     done = []
+
+    def step(label, fn):
+        try:
+            done.append(fn())
+        except Exception as e:  # noqa: BLE001
+            done.append(f"{label}: failed ({type(e).__name__}: {str(e)[:120]})")
+
     if args.all or args.history:
-        openfootball.download(settings()["team_model"]["history_seasons"])
-        fpl.download()
-        done.append("history")
+        def _hist():
+            openfootball.download(settings()["team_model"]["history_seasons"])
+            fpl.download()
+            return "history"
+        step("history", _hist)
     if args.all or args.fixtures:
-        from .ingest.football_data_org import sync_fixtures
-        done.append("fixtures" if sync_fixtures(load_fixtures()) is not None else "fixtures: skipped (no UFE_FOOTBALL_DATA_KEY or unreachable)")
+        def _fx():
+            from .ingest.football_data_org import sync_fixtures
+            return "fixtures" if sync_fixtures(load_fixtures()) is not None else "fixtures: skipped (no UFE_FOOTBALL_DATA_KEY or unreachable)"
+        step("fixtures", _fx)
     if args.all or args.feed:
-        from .ingest import ucl_fantasy
-        p = ucl_fantasy.sync(args.md or 1)
-        done.append(f"feed -> {p}" if p else "feed: not found (set players_url in config/sources.yaml)")
+        def _feed():
+            from .ingest import ucl_fantasy
+            p = ucl_fantasy.sync(args.md or 1)
+            return f"feed -> {p}" if p else "feed: not found (set players_url in config/sources.yaml)"
+        step("feed", _feed)
     if args.all or args.understat:
-        from .ingest import understat
-        done.append(f"understat -> {understat.sync()}")
+        def _us():
+            from .ingest import understat
+            return f"understat -> {understat.sync()}"
+        step("understat", _us)
     if args.odds:
-        from .ingest import odds
-        p = odds.fetch(args.odds, load_fixtures())
-        done.append(f"odds -> {p}" if p else "odds: skipped (no UFE_ODDS_API_KEY or no prices yet)")
+        def _odds():
+            from .ingest import odds
+            p = odds.fetch(args.odds, load_fixtures())
+            return f"odds -> {p}" if p else "odds: skipped (no UFE_ODDS_API_KEY or no prices yet)"
+        step("odds", _odds)
     print("\n".join(done) or "nothing selected (use --all)")
 
 

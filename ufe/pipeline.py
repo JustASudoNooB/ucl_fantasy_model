@@ -74,17 +74,75 @@ def legacy_pool() -> pd.DataFrame:
 def load_pool() -> pd.DataFrame:
     """Every player the game lists, with official prices.
 
-    1. data/processed/players_feed.csv (the game's own feed, synced on your laptop) if present;
-    2. else data/seed/official_squads_2026_27.csv (every club page of the game's price list,
+    1. data/seed/official_squads_2026_27.csv (every club page of the game's price list,
        reconciled with the article pool by scripts/import_official_squads.py), plus the article
-       players that page did not show (kept with their article price or flagged 'unknown');
-    3. else the article pool alone."""
+       players that page did not show (kept with their article price or flagged 'unknown'),
+       or the article pool alone when that file is missing;
+    2. then data/processed/players_feed.csv (the game's own feed, `ufe sync --feed`) laid over it
+       when it looks complete; a partial or malformed feed is ignored with a printed note."""
+    return _overlay_feed(_official_pool())
+
+
+FEED_MIN_PLAYERS, FEED_MIN_TEAMS = 300, 30
+
+
+def _read_feed() -> pd.DataFrame | None:
+    """The synced game feed, or None when it is missing or does not look like the full player list
+    (a partial or wrong-matchday response must never replace the pool)."""
     feed = PROC / "players_feed.csv"
-    if feed.exists():
-        p = pd.read_csv(feed)
-        p["source"] = p.get("source", "ucl_feed")
-        p["price_status"] = "verified"
-        return p
+    if not feed.exists():
+        return None
+    try:
+        f = pd.read_csv(feed)
+    except Exception as e:                                   # empty or truncated file
+        print(f"players_feed.csv ignored: {e}")
+        return None
+    need = {"name", "team", "pos", "price"}
+    if not need <= set(f.columns) or len(f) < FEED_MIN_PLAYERS or f.team.nunique() < FEED_MIN_TEAMS:
+        print(f"players_feed.csv ignored: {len(f)} rows, {f.team.nunique() if 'team' in f else 0} clubs, "
+              f"columns {sorted(f.columns)}")
+        return None
+    return f[f.price.notna() & f.team.notna() & f.name.notna()]
+
+
+def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
+    """Official feed prices, positions, ownership and status laid over the pool by club + name,
+    keeping the pool's player ids (every model, news file and manager file keys on them).
+    Feed players the pool lacks are added with ids built the same way."""
+    f = _read_feed()
+    if f is None:
+        return pool
+    pool = pool.copy()
+    ids, near = {}, set()
+    short = f["short"] if "short" in f else f["name"]
+    for t, grp in pool.groupby("team"):
+        cand = list(zip(grp.id, grp.name))
+        for i in f.index[f.team == t]:
+            names = {str(f.at[i, "name"]), str(short[i])}
+            sc = [(max(team_news._score(n, str(c[1])) for n in names), c[0]) for c in cand]
+            s, best = max(sc, default=(0, None))
+            if s >= 86:
+                ids[i] = best
+            elif s >= 70:
+                near.add(i)                      # probably a pool player under another spelling
+    f = f.assign(id=[ids.get(i) for i in f.index])
+    hit = f[f.id.notna()].drop_duplicates("id").set_index("id")
+    on = pool.id.isin(hit.index)
+    pool.loc[on, "price"] = pool.loc[on, "id"].map(hit.price).values
+    pool.loc[on, "pos"] = pool.loc[on, "id"].map(hit.pos).values
+    if "selected" in hit:
+        pool.loc[on, "own_pct"] = pd.to_numeric(pool.loc[on, "id"].map(hit.selected), errors="coerce").values
+    pool.loc[on, "price_status"] = "verified"
+    pool.loc[on, "source"] = "ucl_feed"
+    new = f[f.id.isna() & ~f.index.isin(near)].copy()
+    if len(new):
+        new["id"] = [f"{t}-{slug(n)}" for t, n in zip(new.team, new.name)]
+        new = new[~new.id.isin(pool.id)].assign(price_status="verified", source="ucl_feed", note="")
+        pool = pd.concat([pool, new[[c for c in pool.columns if c in new.columns]]], ignore_index=True)
+    return pool.drop_duplicates(subset=["id"]).reset_index(drop=True)
+
+
+def _official_pool() -> pd.DataFrame:
     p = legacy_pool()
     if not OFFICIAL.exists():
         return p

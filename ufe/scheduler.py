@@ -20,7 +20,7 @@ STATE = ROOT / "data" / "processed" / "scheduler_state.json"
 SQUAD = ROOT / "data" / "my" / "squad.csv"
 
 JOBS = [  # (hours before deadline, job name, command)
-    (72, "sync", ["sync", "--all"]),
+    (72, "sync", ["sync", "--all", "--md", "{md}"]),
     (48, "predict", ["predict", "--md", "{md}"]),
     (30, "news", ["news", "--md", "{md}", "--write"]),
     (24, "advise", ["advise", "--md", "{md}", "--squad", str(SQUAD)]),
