@@ -36,5 +36,8 @@ jobs:
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
             python -m ufe dashboard --mds 3-8
           fi
+      - name: Report what the syncs produced
+        if: always()
+        run: python scripts/ci_report.py
       - uses: actions/upload-artifact@v5
         with: { name: dashboard, path: data/runs/dashboard.html }

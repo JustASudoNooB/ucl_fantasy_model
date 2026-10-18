@@ -28,7 +28,6 @@ MAIN = {  # football-data.co.uk division -> openfootball code
     "G1": "gr.1", "SC0": "sco.1",
 }
 EXTRA = {"AUT": "at.1", "NOR": "no.1"}  # the "new leagues" files (all seasons in one CSV)
-LEAGUE_COUNTRY.setdefault("no", "NOR")
 
 ABBR = [  # applied to the club key (lower case, accents stripped) before fuzzy matching
     (r"^man ", "manchester "), (r"^nott m ", "nottingham "), (r"^ath madrid$", "atletico madrid"),
@@ -73,6 +72,15 @@ def name_map(fd_names: list[str], known: list[str]) -> dict[str, str]:
     return out
 
 
+def _csv(content: bytes) -> pd.DataFrame:
+    for enc in ("utf-8-sig", "cp1252", "latin-1"):          # the site has used all three over the years
+        try:
+            return pd.read_csv(io.StringIO(content.decode(enc)))
+        except UnicodeDecodeError:
+            continue
+    raise ValueError("undecodable CSV")
+
+
 def _rows(df: pd.DataFrame, home: str, away: str, hg: str, ag: str) -> pd.DataFrame:
     df = df.dropna(subset=[home, away, hg, ag]).copy()
     df["date"] = pd.to_datetime(df["Date"], dayfirst=True, errors="coerce").dt.date.astype(str)
@@ -108,7 +116,7 @@ def sync(season: str = "2026-27") -> str:
             if r.status_code != 200:
                 failed.append(f"{div}:{r.status_code}")
                 continue
-            df = pd.read_csv(io.StringIO(r.content.decode("latin-1")))
+            df = _csv(r.content)
             done.append(f"{code}+{merge(season, code, _rows(df, 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'))}")
         except Exception as e:  # noqa: BLE001
             failed.append(f"{div}:{type(e).__name__}")
@@ -118,7 +126,7 @@ def sync(season: str = "2026-27") -> str:
             if r.status_code != 200:
                 failed.append(f"{f}:{r.status_code}")
                 continue
-            df = pd.read_csv(io.StringIO(r.content.decode("latin-1")))
+            df = _csv(r.content)
             start = int(season[:4])
             # autumn-spring leagues label seasons "2026/2027"; Norway plays the calendar year "2026"
             df = df[df.Season.astype(str).str.startswith(str(start))]

@@ -25,7 +25,7 @@ teams:
   - {id: PSV, name: PSV Eindhoven, short: PSV, country: NED, aliases: [PSV]}
   - {id: FEY, name: Feyenoord, short: Feyenoord, country: NED, aliases: [Feyenoord Rotterdam]}
   - {id: POR, name: FC Porto, short: Porto, country: POR, aliases: [Porto]}
-  - {id: SCP, name: Sporting CP, short: Sporting, country: POR, aliases: [Sporting Clube de Portugal, Sporting]}
+  - {id: SCP, name: Sporting CP, short: Sporting, country: POR, aliases: [Sporting Clube de Portugal, Sporting, Sporting Lisbon, Sp Lisbon]}
   - {id: CLB, name: Club Brugge, short: Brugge, country: BEL, aliases: [Club Brugge KV]}
   - {id: SLA, name: Slavia Praha, short: Slavia, country: CZE, aliases: [SK Slavia Praha, Slavia Prague]}
   - {id: GAL, name: Galatasaray, short: Galatasaray, country: TUR, aliases: [Galatasaray SK]}
