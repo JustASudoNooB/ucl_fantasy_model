@@ -23,11 +23,14 @@ jobs:
       - name: Scheduled jobs (data syncs, predictions, alerts)
         run: python -m ufe schedule --once
         continue-on-error: true      # a source being down must not cost the dashboard
+      - name: Premier League form (FPL API)
+        run: python -m ufe sync --form
+        continue-on-error: true
       - name: Build dashboard
         run: |
           if ! python -m ufe dashboard --mds 3-8; then
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
-            rm -f data/processed/players_feed.csv data/processed/understat_players.csv data/processed/fixtures.csv
+            rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
             python -m ufe dashboard --mds 3-8
           fi
       - uses: actions/upload-artifact@v5

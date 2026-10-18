@@ -100,6 +100,11 @@ def cmd_sync(args):
             from .ingest import understat
             return f"understat -> {understat.sync()}"
         step("understat", _us)
+    if args.all or args.form:
+        def _form():
+            from .ingest import fpl_live
+            return fpl_live.sync()
+        step("form", _form)
     if args.odds:
         def _odds():
             from .ingest import odds
@@ -381,7 +386,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("probe").set_defaults(fn=cmd_probe)
     s = sub.add_parser("sync")
-    for flag in ("all", "history", "fixtures", "feed", "understat"):
+    for flag in ("all", "history", "fixtures", "feed", "understat", "form"):
         s.add_argument(f"--{flag}", action="store_true")
     s.add_argument("--odds", type=int, metavar="MD")
     s.add_argument("--md", type=int)

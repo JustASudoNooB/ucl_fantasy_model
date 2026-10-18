@@ -80,3 +80,16 @@ def test_current_season_leads_start_rate():
     assert out["h_start_cur"] and out["h_start_rate"] < 0.5    # no starts in 6 this season outweighs 30 of 38 last season
     only_prev = H._summarise(r, [prev], None)
     assert only_prev["h_start_rate"] > 0.75
+
+
+def test_fpl_form_normalise():
+    from ufe.ingest import fpl_live
+    data = dict(events=[dict(finished=True)] * 8 + [dict(finished=False)],
+                teams=[dict(id=1, name="Arsenal", short_name="ARS"), dict(id=2, name="Burnley", short_name="BUR")],
+                elements=[dict(team=1, first_name="Bukayo", second_name="Saka", minutes=600, starts=7, goals_scored=3,
+                               assists=2, expected_goals="2.95"),
+                          dict(team=2, first_name="A", second_name="B", minutes=500, starts=5),
+                          dict(team=1, first_name="C", second_name="D", minutes=0, starts=0)])
+    df = fpl_live.normalise(data)
+    assert list(df.team) == ["ARS"] and df.team_matches.iloc[0] == 8 and df.xg.iloc[0] == 2.95
+    assert list(df.columns) == fpl_live.COLS
