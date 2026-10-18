@@ -141,3 +141,13 @@ def test_football_data_fills_unplayed_fixtures(monkeypatch, tmp_path):
     assert fd.merge("2026-27", "en.1", res) == 2               # one filled in place, one new, one already there
     ms = json.loads((tmp_path / "2026-27_en.1.json").read_text())["matches"]
     assert ms[0]["score"]["ft"] == [2, 1] and len(ms) == 3
+
+
+def test_football_data_same_fixture_other_date(monkeypatch, tmp_path):
+    import json
+    from ufe.ingest import football_data_uk as fd
+    monkeypatch.setattr(fd, "RAW_DIR", tmp_path)
+    (tmp_path / "2026-27_fr.1.json").write_text(json.dumps({"matches": [
+        {"date": "2026-10-03", "team1": "Paris Saint-Germain FC", "team2": "Toulouse FC", "score": {"ft": [3, 0]}}]}))
+    res = pd.DataFrame(dict(date=["2026-10-04"], h=["Paris SG"], a=["Toulouse"], hg=[3], ag=[0]))
+    assert fd.merge("2026-27", "fr.1", res) == 0

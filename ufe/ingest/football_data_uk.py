@@ -87,6 +87,16 @@ def _rows(df: pd.DataFrame, home: str, away: str, hg: str, ag: str) -> pd.DataFr
     return df.rename(columns={home: "h", away: "a", hg: "hg", ag: "ag"})[["date", "h", "a", "hg", "ag"]]
 
 
+def _near(matches: list[dict], day: str, t1: str, t2: str, days: int = 3) -> dict | None:
+    """The same fixture listed under a date a day or two off (kick-off after midnight, local vs
+    UK date, or a short postponement)."""
+    d = pd.Timestamp(day)
+    for m in matches:
+        if m.get("team1") == t1 and m.get("team2") == t2 and m.get("date") and abs((pd.Timestamp(m["date"]) - d).days) <= days:
+            return m
+    return None
+
+
 def merge(season: str, code: str, res: pd.DataFrame) -> int:
     """Add the results to the openfootball JSON for that league and season; returns matches added."""
     nm = name_map(sorted(set(res.h) | set(res.a)), _known_names(code))
@@ -100,11 +110,12 @@ def merge(season: str, code: str, res: pd.DataFrame) -> int:
         if r.date == "NaT":
             continue
         ft = [int(r.hg), int(r.ag)]
-        old = by_key.get((r.date, t1, t2))
+        old = by_key.get((r.date, t1, t2)) or _near(data["matches"], r.date, t1, t2)
         if old is not None:
             sc = old.get("score")
             has = sc if isinstance(sc, list) else (sc or {}).get("ft")
             if not has:
+                old["date"] = r.date
                 old["score"] = {"ft": ft}
                 old["source"] = "football-data.co.uk"
                 added += 1
