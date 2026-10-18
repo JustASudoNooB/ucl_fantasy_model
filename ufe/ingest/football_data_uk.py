@@ -117,7 +117,8 @@ def sync(season: str = "2026-27") -> str:
                 failed.append(f"{div}:{r.status_code}")
                 continue
             df = _csv(r.content)
-            done.append(f"{code}+{merge(season, code, _rows(df, 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG'))}")
+            rows = _rows(df, 'HomeTeam', 'AwayTeam', 'FTHG', 'FTAG')
+            done.append(f"{code}+{merge(season, code, rows)} ({len(df)} rows, {len(rows)} played, last {rows.date.max()})")
         except Exception as e:  # noqa: BLE001
             failed.append(f"{div}:{type(e).__name__}")
     for f, code in EXTRA.items():
@@ -130,7 +131,8 @@ def sync(season: str = "2026-27") -> str:
             start = int(season[:4])
             # autumn-spring leagues label seasons "2026/2027"; Norway plays the calendar year "2026"
             df = df[df.Season.astype(str).str.startswith(str(start))]
-            done.append(f"{code}+{merge(season, code, _rows(df, 'Home', 'Away', 'HG', 'AG'))}")
+            rows = _rows(df, 'Home', 'Away', 'HG', 'AG')
+            done.append(f"{code}+{merge(season, code, rows)} ({len(rows)} played, last {rows.date.max()})")
         except Exception as e:  # noqa: BLE001
             failed.append(f"{f}:{type(e).__name__}")
     return f"results (football-data.co.uk): {', '.join(done) or 'none'}" + (f"; failed {', '.join(failed)}" if failed else "")
