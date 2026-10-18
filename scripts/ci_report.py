@@ -57,4 +57,4 @@ if (PROC / "players_feed.csv").exists():
         moved = j[(j.price - j.price_f).abs() > 1e-9]
         note(f"game feed: {len(feed)} players, {int((out.source == 'ucl_feed').sum())} matched or added, "
              f"{len(out) - len(base)} added as new, {len(moved)} prices changed"
-             + (f" (e.g. {', '.join(moved.name.head(8) + ' ' + moved.price.astype(str) + '->' + moved.price_f.astype(str))})" if len(moved) else ""))
+             + (f" (e.g. {', '.join(f'{r.name} {r.price}->{r.price_f}' for r in moved.head(8).itertuples())})" if len(moved) else ""))

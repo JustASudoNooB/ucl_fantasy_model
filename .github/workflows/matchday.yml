@@ -40,6 +40,8 @@ jobs:
           fi
       - name: Report what the syncs produced
         if: always()
+        continue-on-error: true
         run: python scripts/ci_report.py
       - uses: actions/upload-artifact@v5
+        if: always()
         with: { name: dashboard, path: data/runs/dashboard.html }
