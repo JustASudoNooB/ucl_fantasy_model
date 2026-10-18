@@ -46,3 +46,15 @@ gap = both.groupby(["comp", "t"]).date.diff().dt.days
 bad = both[(gap <= 1)]
 names = bad.groupby("comp").n.apply(lambda s: "; ".join(sorted(set(s)))[:300])
 note(f"double-counted results (club twice within 2 days): {len(bad)} " + (" | ".join(f"{c}: {v}" for c, v in names.items()) or ""))
+if (PROC / "players_feed.csv").exists():
+    from ufe.pipeline import _official_pool, _overlay_feed, _read_feed
+    base, feed = _official_pool(), _read_feed()
+    if feed is None:
+        note("game feed: present but rejected as incomplete")
+    else:
+        out = _overlay_feed(base)
+        j = base.merge(out, on="id", suffixes=("", "_f"))
+        moved = j[(j.price - j.price_f).abs() > 1e-9]
+        note(f"game feed: {len(feed)} players, {int((out.source == 'ucl_feed').sum())} matched or added, "
+             f"{len(out) - len(base)} added as new, {len(moved)} prices changed"
+             + (f" (e.g. {', '.join(moved.name.head(8) + ' ' + moved.price.astype(str) + '->' + moved.price_f.astype(str))})" if len(moved) else ""))

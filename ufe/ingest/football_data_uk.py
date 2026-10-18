@@ -31,7 +31,7 @@ EXTRA = {"AUT": "at.1", "NOR": "no.1"}  # the "new leagues" files (all seasons i
 
 ABBR = [  # applied to the club key (lower case, accents stripped) before fuzzy matching
     (r"^man ", "manchester "), (r"^nott m ", "nottingham "), (r"^ath madrid$", "atletico madrid"),
-    (r"^ath bilbao$", "athletic bilbao"), (r"^sp lisbon$", "sporting cp"), (r"^sp gijon$", "sporting gijon"),
+    (r"^ath bilbao$", "athletic bilbao"), (r"^sp lisbon$", "sporting clube de portugal"), (r"^sp gijon$", "sporting gijon"),
     (r"^ein frankfurt$", "eintracht frankfurt"), (r"^m gladbach$", "borussia monchengladbach"),
     (r"^paris sg$", "paris saint germain"), (r"^wolves$", "wolverhampton wanderers"),
     (r"^sheffield utd$", "sheffield united"), (r"^sheffield weds$", "sheffield wednesday"),
