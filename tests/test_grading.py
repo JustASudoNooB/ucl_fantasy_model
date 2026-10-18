@@ -127,3 +127,17 @@ def test_api_football_lineups(monkeypatch, tmp_path):
     df = pd.read_csv(p)
     assert dict(zip(df.id, df.role)) == {"ARS-bukayo-saka": "start", "ARS-declan-rice": "bench", "BAY-harry-kane": "start"}
     assert "1 games" in note
+
+
+def test_football_data_fills_unplayed_fixtures(monkeypatch, tmp_path):
+    import json
+    from ufe.ingest import football_data_uk as fd
+    monkeypatch.setattr(fd, "RAW_DIR", tmp_path)
+    (tmp_path / "2026-27_en.1.json").write_text(json.dumps({"matches": [
+        {"date": "2026-10-04", "team1": "Arsenal FC", "team2": "Chelsea FC"},
+        {"date": "2026-09-20", "team1": "Chelsea FC", "team2": "Arsenal FC", "score": {"ft": [0, 0]}}]}))
+    res = pd.DataFrame(dict(date=["2026-10-04", "2026-09-20", "2026-10-11"], h=["Arsenal", "Chelsea", "Arsenal"],
+                            a=["Chelsea", "Arsenal", "Brand New"], hg=[2, 0, 1], ag=[1, 0, 1]))
+    assert fd.merge("2026-27", "en.1", res) == 2               # one filled in place, one new, one already there
+    ms = json.loads((tmp_path / "2026-27_en.1.json").read_text())["matches"]
+    assert ms[0]["score"]["ft"] == [2, 1] and len(ms) == 3

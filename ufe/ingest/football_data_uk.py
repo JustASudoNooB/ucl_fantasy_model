@@ -92,15 +92,26 @@ def merge(season: str, code: str, res: pd.DataFrame) -> int:
     nm = name_map(sorted(set(res.h) | set(res.a)), _known_names(code))
     path = RAW_DIR / f"{season}_{code}.json"
     data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"name": f"{code} {season}", "matches": []}
-    seen = {(m.get("date"), m.get("team1"), m.get("team2")) for m in data["matches"]}
+    # openfootball season files also list fixtures not yet played (no score): fill those in place
+    by_key = {(m.get("date"), m.get("team1"), m.get("team2")): m for m in data["matches"]}
     added = 0
     for r in res.itertuples():
         t1, t2 = nm[r.h], nm[r.a]
-        if (r.date, t1, t2) in seen or r.date == "NaT":
+        if r.date == "NaT":
             continue
-        data["matches"].append(dict(round="", date=r.date, team1=t1, team2=t2,
-                                    score={"ft": [int(r.hg), int(r.ag)]}, source="football-data.co.uk"))
-        seen.add((r.date, t1, t2))
+        ft = [int(r.hg), int(r.ag)]
+        old = by_key.get((r.date, t1, t2))
+        if old is not None:
+            sc = old.get("score")
+            has = sc if isinstance(sc, list) else (sc or {}).get("ft")
+            if not has:
+                old["score"] = {"ft": ft}
+                old["source"] = "football-data.co.uk"
+                added += 1
+            continue
+        m = dict(round="", date=r.date, team1=t1, team2=t2, score={"ft": ft}, source="football-data.co.uk")
+        data["matches"].append(m)
+        by_key[(r.date, t1, t2)] = m
         added += 1
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
