@@ -39,3 +39,10 @@ for name in ("players_feed.csv", "understat_players.csv", "fixtures.csv"):
     note(f"{name}: {len(pd.read_csv(p)) if p.exists() else 'absent'}")
 for p in sorted(PROC.glob("odds_md*.csv")) + sorted(PROC.glob("lineups_md*.csv")):
     note(f"{p.name}: {len(pd.read_csv(p))} rows")
+# a club playing twice in one league on the same date means a name failed to map (double-counted result)
+both = pd.concat([cur[["comp", "date", "home_id", "home"]].rename(columns={"home_id": "t", "home": "n"}),
+                  cur[["comp", "date", "away_id", "away"]].rename(columns={"away_id": "t", "away": "n"})])
+wk = both.assign(w=both.date.dt.to_period("W"))
+dup = wk.groupby(["comp", "w", "t"]).n.transform("size") > 1
+names = wk[dup].groupby("comp").n.apply(lambda s: "; ".join(sorted(set(s)))[:300])
+note("possible double-counted clubs (same club twice in a week): " + (" | ".join(f"{c}: {v}" for c, v in names.items()) or "none"))
