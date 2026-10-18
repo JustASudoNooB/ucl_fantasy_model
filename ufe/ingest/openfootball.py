@@ -88,7 +88,8 @@ def _league_rows(path: Path) -> list[dict]:
             continue
         rows.append(dict(date=m["date"], comp=code, season=season, tier=tier, home=m["team1"], away=m["team2"],
                          home_country=country, away_country=country, hg=int(ft[0]), ag=int(ft[1]),
-                         neutral=False, stage=m.get("round", ""), extra_time=False, source=f"openfootball:{code}"))
+                         neutral=False, stage=m.get("round", ""), extra_time=False,
+                         source=m.get("source") or f"openfootball:{code}"))
     return rows
 
 
@@ -214,7 +215,22 @@ def load_matches(raw_dir: Path = RAW_DIR) -> pd.DataFrame:
     df["away_id"] = [res.resolve(n, c) for n, c in zip(df.away, df.away_country)]
     df["date"] = pd.to_datetime(df["date"])
     df = df.drop_duplicates(subset=["date", "home_id", "away_id"]).sort_values("date").reset_index(drop=True)
-    return df
+    return _drop_cross_source_duplicates(df)
+
+
+def _drop_cross_source_duplicates(df: pd.DataFrame) -> pd.DataFrame:
+    """A football-data.co.uk result whose home or away club already has an openfootball result
+    within a day in the same league is the same match under a name that did not map: drop it."""
+    fd = df.source.astype(str).str.contains("football-data")
+    if not fd.any():
+        return df
+    seen = set()
+    for r in df[~fd].itertuples():
+        for t in (r.home_id, r.away_id):
+            for k in (-1, 0, 1):
+                seen.add((r.comp, t, r.date + pd.Timedelta(days=k)))
+    drop = [i for i, r in df[fd].iterrows() if (r.comp, r.home_id, r.date) in seen or (r.comp, r.away_id, r.date) in seen]
+    return df.drop(index=drop).reset_index(drop=True)
 
 
 def add_current_ucl(df: pd.DataFrame, fixtures: pd.DataFrame) -> pd.DataFrame:

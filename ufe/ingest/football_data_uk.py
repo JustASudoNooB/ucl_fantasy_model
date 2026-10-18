@@ -58,6 +58,9 @@ def _known_names(code: str) -> list[str]:
     return sorted(names)
 
 
+UNMAPPED: list[str] = []
+
+
 def name_map(fd_names: list[str], known: list[str]) -> dict[str, str]:
     """football-data name -> openfootball name (or the expanded name when nothing is close)."""
     keys = {club_key(n): n for n in known}
@@ -69,6 +72,8 @@ def name_map(fd_names: list[str], known: list[str]) -> dict[str, str]:
             continue
         hit = process.extractOne(e, list(keys), scorer=fuzz.token_set_ratio) if keys else None
         out[n] = keys[hit[0]] if hit and hit[1] >= 85 else e.title()
+        if out[n] == e.title() and keys:
+            UNMAPPED.append(n)
     return out
 
 
@@ -157,4 +162,7 @@ def sync(season: str = "2026-27") -> str:
             done.append(f"{code}+{merge(season, code, rows)} ({len(rows)} played, last {rows.date.max()})")
         except Exception as e:  # noqa: BLE001
             failed.append(f"{f}:{type(e).__name__}")
-    return f"results (football-data.co.uk): {', '.join(done) or 'none'}" + (f"; failed {', '.join(failed)}" if failed else "")
+    out = f"results (football-data.co.uk): {', '.join(done) or 'none'}" + (f"; failed {', '.join(failed)}" if failed else "")
+    if UNMAPPED:
+        out += f"; names kept as new clubs: {', '.join(sorted(set(UNMAPPED)))}"
+    return out
