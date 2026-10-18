@@ -56,3 +56,9 @@ news_rss:
     - https://www.espn.com/espn/rss/soccer/news
     - "https://news.google.com/rss/search?q={club}+injury+OR+suspended+OR+doubt+OR+%22team+news%22&hl=en-GB&gl=GB&ceid=GB:en"
   provides: injury / suspension / rotation signals
+api_football:
+  status: untested
+  url: https://v3.football.api-sports.io
+  key_env: UFE_API_FOOTBALL_KEY        # free plan: 100 requests a day; one matchday day uses about 10
+  ucl_league_id: 2
+  provides: confirmed starting XIs and benches about 60 minutes before kick-off

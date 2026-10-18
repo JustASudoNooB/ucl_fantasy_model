@@ -84,6 +84,11 @@ def cmd_sync(args):
             fpl.download()
             return "history"
         step("history", _hist)
+    if args.all or args.history or args.results:
+        def _res():
+            from .ingest import football_data_uk
+            return football_data_uk.sync()
+        step("results", _res)
     if args.all or args.fixtures:
         def _fx():
             from .ingest.football_data_org import sync_fixtures
@@ -105,6 +110,15 @@ def cmd_sync(args):
             from .ingest import fpl_live
             return fpl_live.sync()
         step("form", _form)
+    got_lineups = []
+    if args.lineups:
+        def _lu():
+            from .ingest import lineups
+            eng = _engine(args)
+            p, note = lineups.api_football(args.lineups, eng.players, eng.fixtures)
+            got_lineups.append(p)
+            return note + (f" -> {p}" if p else "")
+        step("lineups", _lu)
     if args.odds:
         def _odds():
             from .ingest import odds
@@ -112,6 +126,8 @@ def cmd_sync(args):
             return f"odds -> {p}" if p else "odds: skipped (no UFE_ODDS_API_KEY or no prices yet)"
         step("odds", _odds)
     print("\n".join(done) or "nothing selected (use --all)")
+    if args.lineups and not any(got_lineups):
+        sys.exit(3)                                        # lets the scheduler retry later
 
 
 def cmd_tune(args):
@@ -386,9 +402,10 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("probe").set_defaults(fn=cmd_probe)
     s = sub.add_parser("sync")
-    for flag in ("all", "history", "fixtures", "feed", "understat", "form"):
+    for flag in ("all", "history", "fixtures", "feed", "understat", "form", "results"):
         s.add_argument(f"--{flag}", action="store_true")
     s.add_argument("--odds", type=int, metavar="MD")
+    s.add_argument("--lineups", type=int, metavar="MD", help="confirmed XIs from API-Football (UFE_API_FOOTBALL_KEY)")
     s.add_argument("--md", type=int)
     s.set_defaults(fn=cmd_sync)
     sub.add_parser("tune").set_defaults(fn=cmd_tune)

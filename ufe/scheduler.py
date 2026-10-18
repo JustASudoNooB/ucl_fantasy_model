@@ -71,7 +71,36 @@ def tick(now: datetime | None = None) -> list[str]:
                 if name == "predict-final" and rc == 0:
                     send(f"📊 MD{md} projections refreshed with the latest odds and news. Open the dashboard before "
                          f"{dl.astimezone(IST):%H:%M} IST.")
+    fired += _lineup_jobs(now, state)
     _save(state)
+    return fired
+
+
+def _lineup_jobs(now: datetime, state: dict) -> list[str]:
+    """From 75 minutes before each kick-off slot: fetch confirmed XIs, re-run the projections and
+    rebuild the dashboard, once per slot (a second try 30 minutes later if none were out)."""
+    import pandas as pd
+    from .pipeline import load_fixtures
+    from .timeutil import kickoff_dt
+    fired = []
+    fx = load_fixtures()
+    fx = fx[fx.status != "FT"]
+    for (md, day, ko), _ in fx.groupby(["md", "date", "kickoff_cet"]):
+        t = kickoff_dt(str(day), str(ko)).astimezone(timezone.utc)
+        mins = (t - now).total_seconds() / 60
+        if not 0 < mins <= 75:
+            continue
+        key = f"md{md}-lineups-{day}-{ko}"
+        tries = [k for k in state if k.startswith(key)]
+        if any(state[k].endswith("rc=0") for k in tries) or len(tries) >= 2 or (tries and mins > 45):
+            continue
+        rc = _run(["sync", "--lineups", str(md)])
+        state[f"{key}#{len(tries) + 1}"] = f"{now.isoformat()} rc={rc}"
+        if rc == 0:
+            _run(["dashboard", "--mds", f"{md}-8"])
+            send(f"📋 MD{md}: confirmed line-ups for the {ko} CET games are in the model. Check the dashboard "
+                 f"before {t.astimezone(IST):%H:%M} IST.")
+        fired.append(key)
     return fired
 
 

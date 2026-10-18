@@ -93,3 +93,37 @@ def test_fpl_form_normalise():
     df = fpl_live.normalise(data)
     assert list(df.team) == ["ARS"] and df.team_matches.iloc[0] == 8 and df.xg.iloc[0] == 2.95
     assert list(df.columns) == fpl_live.COLS
+
+
+def test_football_data_names_map_to_openfootball():
+    from ufe.ingest.football_data_uk import name_map
+    known = ["Manchester City FC", "Nottingham Forest FC", "Club Atlético de Madrid", "Athletic Club", "Real Sociedad de Fútbol"]
+    m = name_map(["Man City", "Nott'm Forest", "Ath Madrid", "Sociedad", "Brand New FC"], known)
+    assert m["Man City"] == "Manchester City FC" and m["Nott'm Forest"] == "Nottingham Forest FC"
+    assert m["Ath Madrid"] == "Club Atlético de Madrid" and m["Sociedad"] == "Real Sociedad de Fútbol"
+    assert m["Brand New FC"] == "Brand New"
+
+
+def test_api_football_lineups(monkeypatch, tmp_path):
+    import types
+    from ufe.ingest import lineups
+    monkeypatch.setenv("UFE_API_FOOTBALL_KEY", "x")
+    monkeypatch.setattr(lineups, "PROC", tmp_path)
+    fixtures = pd.DataFrame(dict(md=[3], date=["2026-10-20"], home=["ARS"], away=["BAY"], status=["NS"]))
+    players = pd.DataFrame(dict(id=["ARS-bukayo-saka", "ARS-declan-rice", "BAY-harry-kane"],
+                                name=["Bukayo Saka", "Declan Rice", "Harry Kane"], team=["ARS", "ARS", "BAY"]))
+
+    def get(url, headers=None, params=None, **k):
+        if url.endswith("/fixtures"):
+            body = {"response": [{"fixture": {"id": 7}, "teams": {"home": {"name": "Arsenal"}, "away": {"name": "Bayern München"}}}]}
+        else:
+            body = {"response": [
+                {"team": {"name": "Arsenal"}, "startXI": [{"player": {"name": "B. Saka"}}], "substitutes": [{"player": {"name": "D. Rice"}}]},
+                {"team": {"name": "Bayern München"}, "startXI": [{"player": {"name": "H. Kane"}}], "substitutes": []}]}
+        return types.SimpleNamespace(status_code=200, json=lambda: body)
+
+    monkeypatch.setattr(lineups, "get", get)
+    p, note = lineups.api_football(3, players, fixtures)
+    df = pd.read_csv(p)
+    assert dict(zip(df.id, df.role)) == {"ARS-bukayo-saka": "start", "ARS-declan-rice": "bench", "BAY-harry-kane": "start"}
+    assert "1 games" in note

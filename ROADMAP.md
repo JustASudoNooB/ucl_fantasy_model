@@ -66,3 +66,8 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - Player-specific outside-the-box shot shares from event data
 - Mini-league mode: rivals' squads → maximise P(finish first) instead of expected points
 - Bayesian (PyMC) version of the team model for proper posterior uncertainty
+
+## v0.13.0 (18 Oct 2026)
+- Done: football-data.co.uk results merged into the team model (current season, 16 leagues plus Austria and Norway); FPL current-season form for English clubs; API-Football confirmed line-ups with a kick-off-window scheduler job and Tue/Wed evening CI runs.
+- Waiting on keys: UFE_ODDS_API_KEY (odds blend, already wired), UFE_API_FOOTBALL_KEY (line-ups), UFE_TELEGRAM_TOKEN + UFE_TELEGRAM_CHAT (alerts).
+- Remaining: official game feed format check (blocked from the dev workspace), domestic form outside England (FotMob/Understat), dashboard hosting for friends.

@@ -21,7 +21,7 @@ RAW_DIR = ROOT / "data" / "raw" / "openfootball"
 
 LEAGUE_COUNTRY = {
     "en": "ENG", "es": "ESP", "de": "GER", "it": "ITA", "fr": "FRA", "nl": "NED", "pt": "POR",
-    "be": "BEL", "tr": "TUR", "at": "AUT", "gr": "GRE", "sco": "SCO", "ch": "SUI", "dk": "DEN",
+    "be": "BEL", "tr": "TUR", "at": "AUT", "gr": "GRE", "sco": "SCO", "ch": "SUI", "dk": "DEN", "no": "NOR",
 }
 
 MONTHS = {m: i for i, m in enumerate(

@@ -1,17 +1,20 @@
 # Cloud fallback for when the laptop is off: rebuilds projections and the dashboard twice a day
 # and keeps the newest dashboard as a downloadable workflow artifact.
-# Optional repository secrets: UFE_ODDS_API_KEY, UFE_FOOTBALL_DATA_KEY, UFE_TELEGRAM_TOKEN, UFE_TELEGRAM_CHAT.
+# Optional repository secrets: UFE_ODDS_API_KEY, UFE_API_FOOTBALL_KEY, UFE_FOOTBALL_DATA_KEY, UFE_TELEGRAM_TOKEN, UFE_TELEGRAM_CHAT.
 name: matchday
 on:
   schedule:
     - cron: "30 6,15 * * *"      # 12:00 and 20:30 IST (GitHub often starts scheduled runs late)
+    - cron: "*/30 15-19 * * 2,3" # Tue/Wed evenings: confirmed line-ups from 75 min before each kick-off
   workflow_dispatch: {}
+concurrency: { group: matchday, cancel-in-progress: false }
 jobs:
   run:
     runs-on: ubuntu-24.04          # pinned: ubuntu-latest moves to Ubuntu 26 from 19 Oct 2026
     timeout-minutes: 30
     env:
       UFE_ODDS_API_KEY: ${{ secrets.UFE_ODDS_API_KEY }}
+      UFE_API_FOOTBALL_KEY: ${{ secrets.UFE_API_FOOTBALL_KEY }}
       UFE_FOOTBALL_DATA_KEY: ${{ secrets.UFE_FOOTBALL_DATA_KEY }}
       UFE_TELEGRAM_TOKEN: ${{ secrets.UFE_TELEGRAM_TOKEN }}
       UFE_TELEGRAM_CHAT: ${{ secrets.UFE_TELEGRAM_CHAT }}
@@ -23,8 +26,8 @@ jobs:
       - name: Scheduled jobs (data syncs, predictions, alerts)
         run: python -m ufe schedule --once
         continue-on-error: true      # a source being down must not cost the dashboard
-      - name: Premier League form (FPL API)
-        run: python -m ufe sync --form
+      - name: Fresh domestic results and Premier League form
+        run: python -m ufe sync --results --form
         continue-on-error: true
       - name: Build dashboard
         run: |
