@@ -27,7 +27,9 @@ jobs:
         run: python -m ufe schedule --once
         continue-on-error: true      # a source being down must not cost the dashboard
       - name: Fresh domestic results and Premier League form
-        run: python -m ufe sync --results --form
+        run: |
+          python -m ufe sync --results --form 2>&1 | tee sync.txt
+          sed 's/^/::notice::sync: /' sync.txt | cut -c1-900
         continue-on-error: true
       - name: Build dashboard
         run: |
