@@ -58,3 +58,6 @@ if (PROC / "players_feed.csv").exists():
         note(f"game feed: {len(feed)} players, {int((out.source == 'ucl_feed').sum())} matched or added, "
              f"{len(out) - len(base)} added as new, {len(moved)} prices changed"
              + (f" (e.g. {', '.join(f'{r.name} {r.price}->{r.price_f}' for r in moved.head(8).itertuples())})" if len(moved) else ""))
+        added = out[~out.id.isin(base.id)]
+        if len(added):
+            note(f"game feed, added as new ({len(added)}): " + ", ".join((added.team + " " + added.name.astype(str)).head(60)))

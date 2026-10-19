@@ -105,6 +105,18 @@ def _read_feed() -> pd.DataFrame | None:
     return f[f.price.notna() & f.team.notna() & f.name.notna()]
 
 
+def _initial_surname(a: str, b: str) -> float:
+    """90 when two spellings share the surname and the first initial ("J. Bellingham" / "Jude
+    Bellingham"), or one is the surname alone and it is the other's surname; else 0."""
+    from .names import norm
+    x, y = norm(a).replace(".", " ").split(), norm(b).replace(".", " ").split()
+    if not x or not y or x[-1] != y[-1] or len(x[-1]) < 3:
+        return 0.0
+    if len(x) == 1 or len(y) == 1:
+        return 90.0
+    return 90.0 if x[0][0] == y[0][0] else 0.0
+
+
 def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
     """Official feed prices, positions, ownership and status laid over the pool by club + name,
     keeping the pool's player ids (every model, news file and manager file keys on them).
@@ -119,7 +131,11 @@ def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
         cand = list(zip(grp.id, grp.name))
         for i in f.index[f.team == t]:
             names = {str(f.at[i, "name"]), str(short[i])}
-            sc = [(max(team_news._score(n, str(c[1])) for n in names), c[0]) for c in cand]
+            full = str(f.at[i, "name"])
+            sc = [(max(max(team_news._score(n, str(c[1])) for n in names), _initial_surname(full, str(c[1]))), c[0])
+                  for c in cand]
+            if sum(_initial_surname(full, str(c[1])) > 0 for c in cand) > 1:   # two players share it
+                sc = [(max(team_news._score(n, str(c[1])) for n in names), c[0]) for c in cand]
             s, best = max(sc, default=(0, None))
             if s >= 86:
                 ids[i] = best
