@@ -143,3 +143,39 @@ from match events (+ estimated recoveries) and choose among whole plans. The day
 frozen (snapshot_day2.json, write-once after the first day-2 kick-off) so day 2 is graded twice:
 pre-deadline and half-time. Retro forecasts (today's code, pre-match inputs, as_of = matchday
 date) are graded alongside and labelled; they never replace a frozen forecast.
+
+**2026-10-26 · Goal-level terms in the team model (MD3 review).**
+UCL goals per game: 2.98, 3.00, 3.27, 3.44 over the last four seasons, 4.09 after three 2026/27
+matchdays; top-flight domestic 3.10 against 2.79 last season. The 500-day half-life moves the single
+intercept slowly, so every matchday was under-forecast (MD2 78 goals v 59.2, MD3 74 v 63.3). Added
+log-scale shifts with N(0, sd^2) priors: every match of this season, and this season's UEFA matches
+on top (a UEFA-for-all-seasons shift was tested too and did nothing). Walk-forward
+(scripts/backtest_goal_level.py), season 0.2 + cup_season 0.2 against none: UCL 2026/27 log loss
+0.8418 -> 0.8351, total-goals log score 2.140 -> 2.085, goal bias -0.69 -> -0.31 a match; domestic
+2026/27 log loss 0.9541 -> 0.9517; UCL 2024-26 log loss +0.0003 better, goal log score 0.004 worse;
+domestic 2025/26 unchanged. MD4 forecast 3.80 goals a match (3.39 before). Reverse if: the
+2027/28 walk-forward prefers sd 0.
+
+**2026-10-26 · Start probabilities learn from the previous UCL XIs.**
+Start rates came from domestic and last-season history, and never looked at who started this
+season's UCL games: Aston Villa's keeper was Martínez at 0.93 while Suzuki started MD1-MD3.
+Now, before any team news: p = (kappa * p_model + started_last + 0.7 * started_before) /
+(kappa + 1 + 0.7), on the start probability before injury multipliers (a ruled-out player stays
+out). Engine test, update before news: start log loss MD2 0.388 -> 0.358, MD3 0.483 -> 0.422; actual
+starters inside each club's top 11: 311 -> 317 and 262 -> 289 (of 395 and 392). kappa 1.0 best on
+both matchdays (1.5 close; 2.5 and 4 worse). Older team news is no longer carried forward once the
+XIs of that matchday are on file. Reverse if: after MD6 the update loses on held-out matchdays.
+
+**2026-10-26 · Odds without an over/under price set the supremacy only.**
+A 1X2 price fixes the favourite's edge well and total goals poorly (the draw price carries it, with a
+weak 2.8-goal anchor). MD3 with the hand-entered rg.org prices: 1X2-implied totals 57.7 goals,
+model 70.6, actual 74. Blending the market's home/away ratio at the model's total: result log loss
+0.857 -> 0.869 (18 games, noise level), goals 61.7 -> 70.4. Fantasy points follow goals, so the
+total stays with the model unless an over/under 2.5 price exists (then the full blend applies).
+Reverse if: over a season, 1X2-implied totals beat the model's.
+
+**2026-10-26 · Name matching: a surname unique within the club counts.**
+When no spelling scores 86+, a surname that exactly one player of that club shares is accepted
+("Tasos Douvikas" -> Anastasios Douvikas); two players with the surname (the Haugens) means no
+match. Three more MD3 starters matched; the other 12 unmatched are players missing from the pool.
+

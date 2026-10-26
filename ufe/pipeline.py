@@ -17,13 +17,14 @@ import numpy as np
 import pandas as pd
 
 from .config import ROOT, rules, settings, team_lookup
+from .evaluate import grade
 from .ingest import fpl as fpl_mod
 from .ingest import team_news
 from .ingest.openfootball import add_current_ucl, load_matches
 from .models import player_rates
-from .models.scoreline import blend_lambdas, implied_lambdas, match_probs, remove_margin
+from .models.scoreline import blend_lambdas, implied_lambdas, match_probs, remove_margin, rescale_total
 from .models.simulate import SimResult, simulate_matchday, summarise_players
-from .models.team_ratings import TeamModel, fit
+from .models.team_ratings import TeamModel, fit, fit_kwargs
 from .models.tournament import simulate_league_phase
 from .models.player_rates import slug
 from .timeutil import IST, day_index, kickoff_dt
@@ -185,6 +186,7 @@ class Engine:
     seed: int | None = None
     _sims: dict = field(default_factory=dict)
     _news: dict = field(default_factory=dict)
+    _xi: dict = field(default_factory=dict)
 
     # ---------------------------------------------------------------- data + models
     @cached_property
@@ -201,12 +203,7 @@ class Engine:
 
     @cached_property
     def team_model(self) -> TeamModel:
-        tm = self.cfg["team_model"]
-        return fit(self.matches, as_of=self.as_of, half_life_days=tm["half_life_days"],
-                   european_weight=tm["european_weight"], current_ucl_weight=tm["current_ucl_weight"],
-                   prior_sd_team=tm["prior_sd_team"], prior_sd_league=tm["prior_sd_league"],
-                   form_mix=float(tm.get("form_mix", 0.0)), form_half_life=float(tm.get("form_half_life", 60.0)),
-                   home_sd_team=float(tm.get("home_sd_team", 0.0)))
+        return fit(self.matches, as_of=self.as_of, **fit_kwargs(self.cfg["team_model"]))
 
     @cached_property
     def fpl(self) -> fpl_mod.FPLData:
@@ -245,17 +242,21 @@ class Engine:
         players, others = player_rates.build(self.pool, self.fpl, team_strength=strength, team_gpm=self.domestic_gpm,
                                              use_current_form=use_form)
         extra = [c for c in ("status", "own_pct", "pts_to_date", "start_pct", "g90", "a90") if c in self.pool]
+        players["avail"] = 1.0                 # status x availability multiplier, kept for _xi_history
         if extra:
             players = players.merge(self.pool[["id"] + extra], on="id", how="left")
             mult = players["status"].map(STATUS_MULT).fillna(1.0) if "status" in players else 1.0
             players["p_start"] = players.p_start * mult
             players["p_sub"] = players.p_sub * mult
+            players["avail"] = players.avail * mult
         av = PROC / "availability.csv"
         if av.exists():
             a = pd.read_csv(av).set_index("id")
             m = players.id.isin(a.index)
-            players.loc[m, "p_start"] = players.loc[m, "p_start"] * players.loc[m, "id"].map(a.p_available).clip(0, 1)
-            players.loc[m, "p_sub"] = players.loc[m, "p_sub"] * players.loc[m, "id"].map(a.p_available).clip(0, 1)
+            pa = players.loc[m, "id"].map(a.p_available).clip(0, 1)
+            players.loc[m, "p_start"] = players.loc[m, "p_start"] * pa
+            players.loc[m, "p_sub"] = players.loc[m, "p_sub"] * pa
+            players.loc[m, "avail"] = players.loc[m, "avail"] * pa
         return players, others
 
     @property
@@ -286,6 +287,10 @@ class Engine:
                 if "over25_odds" in o and pd.notna(o.get("over25_odds")) and pd.notna(o.get("under25_odds")):
                     p_over = float(remove_margin([o.over25_odds, o.under25_odds], "proportional")[0])
                 market = implied_lambdas(ph, pdr, pa, p_over, rho=self.team_model.rho)
+                if p_over is None:
+                    # 1X2 prices pin the supremacy but hardly the total: keep the model's total.
+                    # MD3: 1X2-implied totals came to 57.7 goals (actual 74, model 70.6).
+                    market = rescale_total(market, model[0] + model[1])
             lam.append(blend_lambdas(model, market, w))
             src.append("model+market" if market else "model")
         f["lh"], f["la"] = zip(*lam) if lam else ([], [])
@@ -313,9 +318,12 @@ class Engine:
         cfg = self.cfg.get("news") or {}
         k = float(cfg.get("strength_adjust", 0.5))
         lo, hi = cfg.get("strength_clip", [0.88, 1.06])
-        prior = self.players.set_index("id")
+        # baseline: the XI-history table without news, so only news and confirmed XIs move the
+        # rates (the team ratings already come from the matches those XIs played)
+        base = self.xi_players(md)
+        prior = base.set_index("id")
         now = self.players_for(md).set_index("id")
-        o0, o1 = self.others, self.others_for(md)
+        o0, o1 = self._others_given(base), self.others_for(md)
         w = prior.xg_share.fillna(0) + 0.6 * prior.xa_share.fillna(0)
         s0 = (prior.p_start * w).groupby(prior.team).sum()
         s1 = (now.p_start.reindex(prior.index).fillna(prior.p_start) * w).groupby(prior.team).sum()
@@ -345,9 +353,60 @@ class Engine:
         return out
 
     # ---------------------------------------------------------------- simulation
+    def xi_history(self, md: int) -> list[int]:
+        """Earlier matchdays (latest first, at most two) whose actual UCL starting XIs are on file:
+        data/seed/lineups/md{k}_actual_xis.txt, or the confirmed line-ups the API-Football sync
+        saved as data/processed/lineups_md{k}.csv."""
+        cfg = self.cfg.get("xi_history") or {}
+        if not cfg.get("enabled", True):
+            return []
+        return [k for k in range(md - 1, 0, -1)
+                if grade.xis_path(k) is not None or (PROC / f"lineups_md{k}.csv").exists()][:2]
+
+    @staticmethod
+    def _xi_started(k: int, players: pd.DataFrame) -> tuple[set, set]:
+        """(ids of the players who started matchday k, clubs whose XI is known)."""
+        x = grade.load_xis(k)
+        if x is not None:
+            return {i for i in grade._match_names(x, players) if i}, set(x.team)
+        lu = pd.read_csv(PROC / f"lineups_md{k}.csv")
+        ids = set(lu[lu.role == "start"].id)
+        return ids, set(players[players.id.isin(ids)].team)
+
+    def _xi_update(self, md: int, players: pd.DataFrame) -> pd.DataFrame:
+        """Start probabilities pulled toward who started this season's earlier UCL matches.
+
+        Beta update with the model's start probability as the prior mean and `kappa` pseudo-counts:
+        p = (kappa * p_model + sum_k w_k * started_k) / (kappa + sum_k w_k), weight 1 for the latest
+        XI on file and `decay` for the one before. It acts on the start probability before the
+        injury/status multipliers, so a player ruled out stays out. Tested on MD2 and MD3: start log
+        loss 0.388 -> 0.358 and 0.483 -> 0.422, 33 more actual starters among the clubs' top 11s."""
+        prev = self.xi_history(md)
+        if not prev:
+            return players
+        cfg = self.cfg.get("xi_history") or {}
+        kappa, decay = float(cfg.get("kappa", 1.0)), float(cfg.get("decay", 0.7))
+        players = players.copy()
+        av = players["avail"] if "avail" in players else pd.Series(1.0, index=players.index)
+        base = (players.p_start / av.where(av > 0, 1.0)).clip(0, 1)
+        num, den = kappa * base, pd.Series(kappa, index=players.index)
+        for w, k in zip((1.0, decay), prev):
+            started, teams = self._xi_started(k, players)
+            has = players.team.isin(teams).astype(float)
+            num = num + w * has * players.id.isin(started)
+            den = den + w * has
+        players["p_start"] = (num / den * av).clip(0, 1)
+        return players
+
+    def xi_players(self, md: int) -> pd.DataFrame:
+        """Player table after the XI-history update, before any team news (cached per matchday)."""
+        if md not in self._xi:
+            self._xi[md] = self._xi_update(md, self.players)
+        return self._xi[md]
+
     def players_for(self, md: int) -> pd.DataFrame:
         """Player table with this matchday's confirmed/predicted line-ups applied (if provided)."""
-        players = self.players.copy()
+        players = self.xi_players(md).copy()
         # 1) this matchday's predicted line-ups + injuries (Bayes update at full strength)
         news = team_news.load_for(md, players)
         logs, covered = [], set()
@@ -357,8 +416,12 @@ class Engine:
             players, log = team_news.apply(players, news, cfg)
             logs.append(log)
             covered = set(news.team)
-        # 2) clubs without news for this matchday reuse the latest earlier news, softened
+        # 2) clubs without news for this matchday reuse the latest earlier news, softened, unless
+        #    that matchday's actual XIs are already in the start probabilities (_xi_update)
         hit = team_news.latest_news_before(md)
+        xi = self.xi_history(md)
+        if hit is not None and xi and xi[0] >= hit[0]:
+            hit = None
         carried_from = None
         if hit is not None:
             old = team_news.match(team_news.parse(hit[1]), players)
@@ -389,7 +452,9 @@ class Engine:
         """Unlisted-player block for one matchday. When team news or confirmed XIs name the
         starters, the unlisted players' expected starts shrink to what the named players leave
         uncovered (never below 25% of the prior, which keeps their substitute minutes)."""
-        now = self.players_for(md)
+        return self._others_given(self.players_for(md))
+
+    def _others_given(self, now: pd.DataFrame) -> dict:
         prior = self.players
         n_now = now.groupby("team").p_start.sum()
         n_pri = prior.groupby("team").p_start.sum()

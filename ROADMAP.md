@@ -54,9 +54,9 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - **Gate:** knockout-stage rank inside the top 5% (overall percentile tracked in the scoreboard)
 
 ## Data gaps found on 13-14 Oct (MD2 review)
-- [ ] Domestic results after 20 Sep 2026 (openfootball lags); a second free results source
+- [x] Domestic results after 20 Sep 2026 (openfootball lags); a second free results source (football-data.co.uk, v0.13)
 - [ ] Ownership for every player (the mirror shows the top 100 by price and the biggest movers)
-- [ ] MD2 Wednesday XIs and all MD1 XIs, to refit the line-up model on 36 clubs instead of 6
+- [x] MD2 Wednesday XIs and all MD1 XIs, to refit the line-up model on 36 clubs instead of 6 (all 36 clubs for MD1-MD3, v0.14)
 - [ ] A free bookmaker-odds source for every fixture (no single page listed all 18 MD2 prices)
 - [ ] Penalty takers for the 27 clubs without one on file (`data/seed/news/set_pieces.csv`)
 - [ ] Second predicted line-ups source, to estimate each source's hit rate separately
@@ -71,3 +71,8 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - Done: football-data.co.uk results merged into the team model (current season, 16 leagues plus Austria and Norway); FPL current-season form for English clubs; API-Football confirmed line-ups with a kick-off-window scheduler job and Tue/Wed evening CI runs.
 - Waiting on keys: UFE_ODDS_API_KEY (odds blend, already wired), UFE_API_FOOTBALL_KEY (line-ups), UFE_TELEGRAM_TOKEN + UFE_TELEGRAM_CHAT (alerts).
 - Remaining: official game feed format check (blocked from the dev workspace), domestic form outside England (FotMob/Understat), dashboard hosting for friends.
+
+## v0.14.0 (26 Oct 2026, MD3 review)
+- Done: goal-level terms in the team model (this season, this season's UEFA games); start probabilities updated from the last two UCL XIs; 1X2-only odds blend keeps the model's total goals; surname rule for name matching; MD1 XIs on file.
+- Next: record each matchday's actual XIs (`data/seed/lineups/md{N}_actual_xis.txt`) right after the games, since the start model now leans on them; domestic XIs would help the same way.
+- Watch: MD4 goals per match against the 3.8 forecast; if the 2026/27 rate settles back toward 3.4 the level terms shrink on their own.

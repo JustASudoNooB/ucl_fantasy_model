@@ -23,11 +23,24 @@ jobs:
         run: |
           python -m ufe sync --results --form --feed 2>&1 | tee sync.txt
           sed 's/^/::notice::sync: /' sync.txt | cut -c1-900
+      - name: Confirmed line-ups of the last matchday played (start-probability history)
+        env:
+          UFE_API_FOOTBALL_KEY: ${{ secrets.UFE_API_FOOTBALL_KEY }}
+        run: |
+          if [ -z "$UFE_API_FOOTBALL_KEY" ]; then echo "::notice::line-ups: no UFE_API_FOOTBALL_KEY secret"; exit 0; fi
+          MD=$(python -c "from ufe.cli import _live_md; print(_live_md() - 1)")
+          if [ "$MD" -ge 1 ] && [ ! -f "data/processed/lineups_md$MD.csv" ] && [ ! -f "data/seed/lineups/md${MD}_actual_xis.txt" ]; then
+            python -m ufe sync --lineups "$MD" 2>&1 | tail -3 | sed 's/^/::notice::line-ups: /' || true
+          fi
+        continue-on-error: true
       - name: Commit changed data
         run: |
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/raw/openfootball/*.json data/processed/domestic_form.csv data/processed/players_feed.csv data/processed/feed_meta.json 2>/dev/null || true
+          for f in data/raw/openfootball/*.json data/processed/domestic_form.csv data/processed/players_feed.csv \
+                   data/processed/feed_meta.json data/processed/lineups_md*.csv; do
+            [ -e "$f" ] && git add "$f"
+          done
           if git diff --cached --quiet; then
             echo "::notice::no data changes"
           else

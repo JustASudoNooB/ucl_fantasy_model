@@ -33,10 +33,10 @@ jobs:
         continue-on-error: true
       - name: Build dashboard
         run: |
-          if ! python -m ufe dashboard --mds 3-8; then
+          if ! python -m ufe dashboard --mds live-8; then
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
-            python -m ufe dashboard --mds 3-8
+            python -m ufe dashboard --mds live-8
           fi
       - name: Report what the syncs produced
         if: always()

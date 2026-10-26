@@ -140,6 +140,25 @@ def _score(a: str, b: str) -> float:
     return s
 
 
+def best_in_team(name: str, cand: pd.DataFrame, cutoff: int = 86):
+    """Best pool id for a name among one club's players. When no spelling is close enough, a
+    surname that exactly one candidate shares still counts ("Tasos Douvikas" and "Anastasios
+    Douvikas"); two players with that surname (the Haugens at Viking) means no guess."""
+    best, best_s = None, 0
+    for c in cand.itertuples():
+        sc = _score(name, c.name)
+        if sc > best_s:
+            best, best_s = c.id, sc
+    if best_s >= cutoff:
+        return best, best_s
+    last = norm(name).split()[-1:] or [""]
+    if len(last[0]) >= 4:
+        same = [c.id for c in cand.itertuples() if norm(str(c.name)).split()[-1:] == last]
+        if len(same) == 1:
+            return same[0], 88
+    return None, best_s
+
+
 def match(news: pd.DataFrame, pool: pd.DataFrame, cutoff: int = 86) -> pd.DataFrame:
     """Attach pool ids (keepers only to keepers; one pool player per news line)."""
     news = news.copy()
@@ -148,12 +167,8 @@ def match(news: pd.DataFrame, pool: pd.DataFrame, cutoff: int = 86) -> pd.DataFr
         cand = pool[pool.team == r.team]
         if r.status == "start":
             cand = cand[(cand.pos == "GK")] if r.line_pos == "GK" else cand[cand.pos != "GK"]
-        best, best_s = None, 0
-        for c in cand.itertuples():
-            s = _score(r.name, c.name)
-            if s > best_s:
-                best, best_s = c.id, s
-        ids.append(best if best_s >= cutoff else None)
+        best, _ = best_in_team(r.name, cand, cutoff)
+        ids.append(best)
     news["id"] = ids
     return news
 

@@ -81,13 +81,8 @@ def _match_names(rows: pd.DataFrame, pool: pd.DataFrame, cutoff: int = 86) -> li
     by_team = {t: g for t, g in pool.groupby("team")}
     for r in rows.itertuples():
         cand = by_team.get(r.team)
-        best, best_s = None, 0
-        if cand is not None:
-            for c in cand.itertuples():
-                s = team_news._score(r.name, c.name)
-                if s > best_s:
-                    best, best_s = c.id, s
-        out.append(best if best_s >= cutoff else None)
+        best = team_news.best_in_team(r.name, cand, cutoff)[0] if cand is not None else None
+        out.append(best)
     return out
 
 

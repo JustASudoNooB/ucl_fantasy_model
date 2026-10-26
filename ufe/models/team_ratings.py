@@ -52,6 +52,7 @@ class TeamModel:
     hyper: dict = field(default_factory=dict)
     home_att: dict = field(default_factory=dict)    # team -> extra log-goal rate scored at home
     home_def: dict = field(default_factory=dict)    # team -> extra log-goal rate prevented at home
+    levels: dict = field(default_factory=dict)      # goal-level shifts: season, cup, cup_season (log scale)
 
     def __post_init__(self):
         self.index = {t: i for i, t in enumerate(self.teams)}
@@ -71,7 +72,15 @@ class TeamModel:
         h = 0.0 if neutral else self.home_adv.get(comp_group, self.home_adv.get("EUR", 0.25))
         xa = 0.0 if neutral else float(self.home_att.get(home, 0.0))
         xd = 0.0 if neutral else float(self.home_def.get(home, 0.0))
-        return float(np.exp(self.mu + h + xa + ah - da)), float(np.exp(self.mu + aa - dh - xd))
+        lv = self.level(comp_group)
+        return float(np.exp(self.mu + lv + h + xa + ah - da)), float(np.exp(self.mu + lv + aa - dh - xd))
+
+    def level(self, comp_group: str = "EUR") -> float:
+        """Current-season goal-level shift on the log scale (0 when the terms are off)."""
+        lv = float(self.levels.get("season", 0.0))
+        if comp_group == "EUR":
+            lv += float(self.levels.get("cup", 0.0)) + float(self.levels.get("cup_season", 0.0))
+        return lv
 
     def log_sd(self, home: str, away: str, scale: float = 1.0) -> tuple[float, float]:
         """Posterior sd of log(home goal rate) and log(away goal rate) (diagonal approximation)."""
@@ -94,7 +103,7 @@ class TeamModel:
                        home_adv=self.home_adv, groups=self.groups, group_att=self.group_att, group_def=self.group_def,
                        rho=self.rho, sd_attack=self.sd_attack.tolist(), sd_defence=self.sd_defence.tolist(),
                        fitted_through=self.fitted_through, n_matches=self.n_matches, hyper=self.hyper,
-                       home_att=self.home_att, home_def=self.home_def)
+                       home_att=self.home_att, home_def=self.home_def, levels=self.levels)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(payload), encoding="utf-8")
 
@@ -105,7 +114,7 @@ class TeamModel:
                    home_adv=d["home_adv"], groups=d["groups"], group_att=d["group_att"], group_def=d["group_def"],
                    rho=d["rho"], sd_attack=np.array(d["sd_attack"]), sd_defence=np.array(d["sd_defence"]),
                    fitted_through=d["fitted_through"], n_matches=d["n_matches"], hyper=d.get("hyper", {}),
-                   home_att=d.get("home_att", {}), home_def=d.get("home_def", {}))
+                   home_att=d.get("home_att", {}), home_def=d.get("home_def", {}), levels=d.get("levels", {}))
 
 
 def match_weights(df: pd.DataFrame, as_of: pd.Timestamp, half_life_days: float, european_weight: float,
@@ -124,15 +133,39 @@ def match_weights(df: pd.DataFrame, as_of: pd.Timestamp, half_life_days: float, 
     return w
 
 
+FIT_SETTINGS = dict(half_life_days=None, european_weight=None, prior_sd_team=None, prior_sd_league=None,
+                    current_ucl_weight=2.0, form_mix=0.0, form_half_life=60.0, home_sd_team=0.0,
+                    season_level_sd=0.0, cup_level_sd=0.0, cup_season_level_sd=0.0)
+
+
+def fit_kwargs(tm: dict) -> dict:
+    """The team_model block of the settings as fit() keyword arguments, so the engine, the CLI
+    backtest and the dashboard's backtest panel always fit the same model."""
+    out = {}
+    for k, default in FIT_SETTINGS.items():
+        if k in tm and tm[k] is not None:
+            out[k] = float(tm[k])
+        elif default is None:
+            raise KeyError(f"team_model.{k} missing from settings")
+        else:
+            out[k] = default
+    return out
+
+
 def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_days: float = 300,
         european_weight: float = 1.6, current_ucl_weight: float = 2.0, prior_sd_team: float = 0.35,
         prior_sd_league: float = 0.45, fit_rho: bool = True, min_weight: float = 1e-3,
-        home_sd_team: float = 0.0, form_mix: float = 0.0, form_half_life: float = 60.0) -> TeamModel:
+        home_sd_team: float = 0.0, form_mix: float = 0.0, form_half_life: float = 60.0,
+        season_level_sd: float = 0.0, cup_level_sd: float = 0.0, cup_season_level_sd: float = 0.0) -> TeamModel:
     """Fit on all matches strictly before `as_of` (walk-forward safe).
 
     home_sd_team > 0 adds club-specific home effects (extra goals scored and extra goals prevented
     at home, each ~ N(0, home_sd_team^2) around the league's home advantage): the home/away record.
-    form_mix > 0 adds a short-term recency component to the match weights (recent form)."""
+    form_mix > 0 adds a short-term recency component to the match weights (recent form).
+    The *_level_sd terms add goal-level shifts with N(0, sd^2) priors: `season` for every match of
+    the current season (July to June), `cup` for every UEFA match, `cup_season` for this season's
+    UEFA matches. They let the overall scoring rate move faster than the team ratings' long
+    half-life allows (a season where every league scores more)."""
     as_of = pd.Timestamp(as_of) if as_of is not None else df["date"].max() + pd.Timedelta(days=1)
     d = df[df["date"] < as_of].copy()
     w = match_weights(d, as_of, half_life_days, european_weight, current_ucl_weight, form_mix, form_half_life)
@@ -175,6 +208,15 @@ def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_
     use_home = home_sd_team > 0
     o_xa, o_xd = 1 + H + 2 * T + 2 * G, 1 + H + 3 * T + 2 * G
     n = 1 + H + 2 * T + 2 * G + (2 * T if use_home else 0)
+    season_start = pd.Timestamp(year=as_of.year if as_of.month >= 7 else as_of.year - 1, month=7, day=1)
+    is_cur = (d["date"] >= season_start).to_numpy()
+    is_cup = np.isin(comp, list(EURO_COMPS))
+    lvl_defs = [(nm, sd, mask) for nm, sd, mask in (("season", season_level_sd, is_cur), ("cup", cup_level_sd, is_cup),
+                                                     ("cup_season", cup_season_level_sd, is_cur & is_cup)) if sd > 0]
+    o_lv = n
+    n += len(lvl_defs)
+    lv_masks = [m.astype(float) for _, _, m in lvl_defs]
+    lv_iv = np.array([1.0 / sd ** 2 for _, sd, _ in lvl_defs])
     sh2 = home_sd_team ** 2 if use_home else 1.0
     st2, sl2 = prior_sd_team ** 2, prior_sd_league ** 2
     h_prior_mu, h_prior_sd2 = 0.25, 0.15 ** 2
@@ -189,6 +231,11 @@ def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_
         D = theta[o_D:o_D + G]
         eh = mu + h[hg_idx] * not_neutral + a[hi] - dd[ai]
         ea = mu + a[ai] - dd[hi]
+        if lvl_defs:
+            lv = theta[o_lv:o_lv + len(lvl_defs)]
+            shift = sum(l * mk for l, mk in zip(lv, lv_masks))
+            eh = eh + shift
+            ea = ea + shift
         if use_home:
             xa_, xd_ = theta[o_xa:o_xa + T], theta[o_xd:o_xd + T]
             eh = eh + xa_[hi] * not_neutral
@@ -202,6 +249,10 @@ def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_
             g[o_xa:o_xa + T] = np.bincount(hi, weights=rh * not_neutral, minlength=T) + xa_ / sh2
             g[o_xd:o_xd + T] = -np.bincount(hi, weights=ra * not_neutral, minlength=T) + xd_ / sh2
         g[0] = rh.sum() + ra.sum()
+        if lvl_defs:
+            for k, mk in enumerate(lv_masks):
+                g[o_lv + k] = np.sum((rh + ra) * mk) + lv[k] * lv_iv[k]
+            f += 0.5 * np.sum(lv ** 2 * lv_iv)
         g[o_h:o_h + H] = np.bincount(hg_idx, weights=rh * not_neutral, minlength=H)
         g[o_a:o_a + T] = np.bincount(hi, weights=rh, minlength=T) + np.bincount(ai, weights=ra, minlength=T)
         g[o_d:o_d + T] = -np.bincount(ai, weights=rh, minlength=T) - np.bincount(hi, weights=ra, minlength=T)
@@ -236,6 +287,10 @@ def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_
     xd_fit = th[o_xd:o_xd + T] if use_home else np.zeros(T)
     eh = eh + xa_fit[hi] * not_neutral
     ea = ea - xd_fit[hi] * not_neutral
+    lv_fit = th[o_lv:o_lv + len(lvl_defs)] if lvl_defs else np.zeros(0)
+    if lvl_defs:
+        shift = sum(l * mk for l, mk in zip(lv_fit, lv_masks))
+        eh, ea = eh + shift, ea + shift
     lh, la = np.exp(eh), np.exp(ea)
     info_a = np.bincount(hi, weights=w * lh, minlength=T) + np.bincount(ai, weights=w * la, minlength=T) + 1 / st2
     info_d = np.bincount(ai, weights=w * lh, minlength=T) + np.bincount(hi, weights=w * la, minlength=T) + 1 / st2
@@ -253,10 +308,13 @@ def fit(df: pd.DataFrame, as_of: str | pd.Timestamp | None = None, *, half_life_
                      hyper=dict(half_life_days=half_life_days, european_weight=european_weight,
                                 current_ucl_weight=current_ucl_weight, prior_sd_team=prior_sd_team,
                                 prior_sd_league=prior_sd_league, home_sd_team=home_sd_team, form_mix=form_mix,
-                                form_half_life=form_half_life, converged=bool(res.success),
+                                form_half_life=form_half_life, season_level_sd=season_level_sd,
+                                cup_level_sd=cup_level_sd, cup_season_level_sd=cup_season_level_sd,
+                                converged=bool(res.success),
                                 fitted_at=datetime.now(timezone.utc).isoformat(timespec="seconds")),
                      home_att={t: float(xa_fit[i]) for t, i in tix.items()} if use_home else {},
-                     home_def={t: float(xd_fit[i]) for t, i in tix.items()} if use_home else {})
+                     home_def={t: float(xd_fit[i]) for t, i in tix.items()} if use_home else {},
+                     levels={nm: float(v) for (nm, _, _), v in zip(lvl_defs, lv_fit)})
 
 
 def _dc_tau(x: np.ndarray, y: np.ndarray, lh: np.ndarray, la: np.ndarray, rho: float) -> np.ndarray:

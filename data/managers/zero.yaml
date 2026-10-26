@@ -2,28 +2,32 @@
 # bank: leave blank to compute it (budget minus squad cost at current prices).
 name: Zero
 team_name: ONETEAMONEDREAM
-updated: 2026-10-14
-free_transfers: 2          # for the next matchday; check the Transfers screen
-bank:
-chips_used: []             # e.g. [wildcard, limitless]
+updated: 2026-10-26
+free_transfers: 2          # MD4 per the rules (2, carry 1); assumed nothing carried after the MD3 wildcard: check the Transfers screen
+bank: 0.7                  # app, after the MD3 wildcard (pool prices give 0.5)
+chips_used: [wildcard]     # MD3
 md2:
   captain: Harry Kane
   xi: [Senne Lammens, Gerard Martín, Ezri Konsa, Marquinhos, Luis Díaz, Michael Olise, Lamine Yamal,
        Jude Bellingham, Rayan Cherki, Luis Suárez, Harry Kane]
   points: 65               # after day 1 (app); day 2 from match reports: Bellingham 2, Cherki 1 (off at HT), Marquinhos 1, plus recoveries -> about 71 final (check the app)
+md3:
+  chip: wildcard
+  captain: Kylian Mbappé   # switched to him after day 1
+  points_day1: 29          # app; Isco subbed in for Gvardiol before day 2
 squad:
-  - {name: Senne Lammens, team: MUN}
+  - {name: Zion Suzuki, team: AVL}
   - {name: Yann Sommer, team: CLB}
-  - {name: Gerard Martín, team: BAR}
-  - {name: Ezri Konsa, team: ARS}
-  - {name: Marquinhos, team: PSG}
-  - {name: Lisandro Martínez, team: MUN}
-  - {name: Riccardo Calafiori, team: ARS}
-  - {name: Luis Díaz, team: BAY}
-  - {name: Michael Olise, team: BAY}
+  - {name: Joško Gvardiol, team: MCI}
+  - {name: Marc Guéhi, team: MCI}
+  - {name: Federico Dimarco, team: INT}
+  - {name: Jeremy Jacquet, team: LIV}
+  - {name: Grimaldo, team: ATM}
   - {name: Lamine Yamal, team: BAR}
+  - {name: Luis Díaz, team: BAY}
   - {name: Jude Bellingham, team: RMA}
   - {name: Rayan Cherki, team: MCI}
+  - {name: Isco, team: BET}
+  - {name: Kylian Mbappé, team: RMA}
   - {name: Luis Suárez, team: SCP}
-  - {name: Harry Kane, team: BAY}
-  - {name: Bryan Mbeumo, team: MUN}
+  - {name: Nicolò Tresoldi, team: CLB}

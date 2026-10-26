@@ -41,7 +41,7 @@ ABBR = [  # applied to the club key (lower case, accents stripped) before fuzzy 
     (r"^rennes$", "stade rennais"), (r"^sp braga$", "sc braga"), (r"^west brom$", "west bromwich albion"),
     (r"^st gilloise$", "union saint gilloise"), (r"^hearts$", "heart of midlothian"), (r"^for sittard$", "fortuna sittard"),
     (r"^nijmegen$", "nec"), (r"^buyuksehyr$", "istanbul basaksehir"), (r"^ofi crete$", "ofi"),
-    (r"^ad alcorcon$", "alcorcon"), (r"^austria vienna$", "austria wien"), (r"^rapid vienna$", "rapid wien"), (r"^cambuur$", "sc cambuur"), (r"^mgladbach$", "borussia monchengladbach"),
+    (r"^ad alcorcon$", "alcorcon"), (r"^austria vienna$", "austria wien"), (r"^rapid vienna$", "rapid wien"), (r"^mgladbach$", "borussia monchengladbach"),
 ]
 RESERVE = re.compile(r"\b(b|ii|u19|u21|u23|reserves?)\b")
 

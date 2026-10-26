@@ -118,6 +118,12 @@ def implied_lambdas(p_home: float, p_draw: float, p_away: float, p_over25: float
     return float(lh), float(la)
 
 
+def rescale_total(lams: tuple[float, float], total: float) -> tuple[float, float]:
+    """Same home/away ratio, given total goals."""
+    k = total / max(lams[0] + lams[1], 1e-9)
+    return float(lams[0] * k), float(lams[1] * k)
+
+
 def blend_lambdas(model: tuple[float, float], market: tuple[float, float] | None, w_market: float) -> tuple[float, float]:
     if market is None:
         return model

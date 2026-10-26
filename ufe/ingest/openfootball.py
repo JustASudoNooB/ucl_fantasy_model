@@ -221,7 +221,8 @@ def load_matches(raw_dir: Path = RAW_DIR) -> pd.DataFrame:
 def _drop_cross_source_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     """A football-data.co.uk result whose home or away club already has an openfootball result
     within a day in the same league is the same match under a name that did not map: drop it."""
-    fd = df.source.astype(str).str.contains("football-data")
+    # rows football-data added on their own (no openfootball round); filled-in fixtures keep a round
+    fd = df.source.astype(str).str.contains("football-data") & (df.stage.fillna("").astype(str) == "")
     if not fd.any():
         return df
     seen = set()

@@ -28,6 +28,15 @@ team_model:
   # club-specific home/away effects: tested at prior sd 0.05/0.1/0.2, worse on UCL matches -> off.
   # Home advantage stays per league (and one for UEFA games); records are shown on the dashboard.
   home_sd_team: 0.0
+  # goal-level shifts (log scale, N(0, sd^2) priors): every match of this season, and this season's
+  # UEFA matches on top. The 500-day half-life moved the scoring rate too slowly: 2026/27 UCL has
+  # 4.09 goals a game after MD3 (3.44 last season) and the model under-forecast every matchday.
+  # Walk-forward (scripts/backtest_goal_level.py, 26 Oct): UCL 2026/27 log loss 0.8418 -> 0.8351,
+  # total-goals log score 2.140 -> 2.085, goal bias -0.69 -> -0.31 a match; domestic 2026/27 log loss
+  # 0.9541 -> 0.9517; UCL 2024-26 and domestic 2025/26 unchanged within 0.0004.
+  season_level_sd: 0.2
+  cup_level_sd: 0.0
+  cup_season_level_sd: 0.2
 
 market:
   blend_weight: 0.65           # weight on market-implied goal rates when odds exist
@@ -75,6 +84,16 @@ alerts:
   telegram_token_env: UFE_TELEGRAM_TOKEN
   telegram_chat_env: UFE_TELEGRAM_CHAT
   deadline_warnings_hours: [48, 24, 6, 2]
+
+xi_history:
+  # earlier UCL starting XIs (data/seed/lineups/md{N}_actual_xis.txt) update start probabilities
+  # before any team news: Beta update, prior weight kappa, latest XI weight 1, the one before decay.
+  # Checked with the engine on MD2 and MD3 (update before news, scratch test 26 Oct): start log loss
+  # MD2 0.388 -> 0.358, MD3 0.483 -> 0.422; actual starters among each club's top 11: 311 -> 317 and
+  # 262 -> 289. kappa 1.0 was best on both matchdays, 1.5 close, 2.5+ clearly worse.
+  enabled: true
+  kappa: 1.0
+  decay: 0.7
 
 news:
   # Predicted line-ups update start probabilities by Bayes' rule (ufe/ingest/team_news.py).

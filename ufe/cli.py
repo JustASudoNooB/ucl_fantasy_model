@@ -30,12 +30,24 @@ def _engine(args):
                   n_sims=getattr(args, "sims", None))
 
 
+def _live_md() -> int:
+    """The first matchday whose last game day is today or later (stays on through day 2)."""
+    from datetime import date
+    from .pipeline import load_fixtures
+    last = load_fixtures().groupby("md").date.max()
+    left = [int(md) for md, d in last.items() if str(d)[:10] >= date.today().isoformat()]
+    return min(left) if left else int(last.index.max())
+
+
 def _mds(spec: str) -> list[int]:
+    """"3-8", "4,5" or "live-8" (from the matchday being played or next up)."""
+    if "live" in spec:
+        spec = spec.replace("live", str(_live_md()))
     out = []
     for part in spec.split(","):
         if "-" in part:
             a, b = part.split("-")
-            out += list(range(int(a), int(b) + 1))
+            out += list(range(int(a), max(int(a), int(b)) + 1))     # "9-8" in the knockouts -> [9]
         else:
             out.append(int(part))
     return out
@@ -139,12 +151,11 @@ def cmd_tune(args):
 def cmd_backtest(args):
     from .evaluate.backtest import backtest_team_model
     from .ingest.openfootball import load_matches
+    from .models.team_ratings import fit_kwargs
     tm = settings()["team_model"]
     df = load_matches()
     for s in args.seasons.split(","):
-        _, summ = backtest_team_model(df, s, half_life_days=tm["half_life_days"], european_weight=tm["european_weight"],
-                                      prior_sd_team=tm["prior_sd_team"], prior_sd_league=tm["prior_sd_league"],
-                                      form_mix=float(tm.get("form_mix", 0.0)), form_half_life=float(tm.get("form_half_life", 60.0)))
+        _, summ = backtest_team_model(df, s, **fit_kwargs(tm))
         keep = {k: round(v, 4) if isinstance(v, float) else v for k, v in summ.items() if not k.startswith("calibration")}
         print(s, json.dumps(keep, indent=2))
 
@@ -336,6 +347,7 @@ def cmd_results(args):
 
 def cmd_dashboard(args):
     from .evaluate.backtest import backtest_team_model
+    from .models.team_ratings import fit_kwargs
     from .report.export import dashboard_data, snapshot
     from .report.render import render
     eng = _engine(args)
@@ -343,9 +355,7 @@ def cmd_dashboard(args):
     tm = settings()["team_model"]
     bt = {}
     for s in ("2024-25", "2025-26"):
-        _, summ = backtest_team_model(eng.matches, s, half_life_days=tm["half_life_days"], european_weight=tm["european_weight"],
-                                      prior_sd_team=tm["prior_sd_team"], prior_sd_league=tm["prior_sd_league"],
-                                      form_mix=float(tm.get("form_mix", 0.0)), form_half_life=float(tm.get("form_half_life", 60.0)))
+        _, summ = backtest_team_model(eng.matches, s, **fit_kwargs(tm))
         bt[s] = summ
     data = dashboard_data(eng, mds, backtest=bt, standings=eng.league_table_projection())
     for md in mds:
