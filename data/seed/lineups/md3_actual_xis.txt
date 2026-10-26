@@ -1,0 +1,39 @@
+# Actual MD3 starting XIs, 20-21 Oct 2026 (all 18 matches).
+# Source: UEFA.com "Champions League starting line-ups: Matchday 3" (read 26 Oct, after the games).
+# Format: TEAM | XI (GK first)
+FEN | Ederson; Nélson Semedo, Milan Škriniar, Nathan Aké, Archie Brown; Mattéo Guendouzi, N'Golo Kanté; Oğuz Aydın, Mason Greenwood, Kerem Aktürkoğlu; Vedat Muriqi
+SLA | Markovič; Vlček, Zima, N'Guessan; Suleiman, Moses, Nowak, Kubiak; Ayaosi, Lukáš Provod; Šturm
+SAB | Pokatilov; Zedadka, Solvet, Aden McCarthy, Tymoteusz Puchacz; Rakhmonaliev, Lepinjica; Parris, Du Queiroz; Simić; Mickels
+BVB | Gregor Kobel; Nico Schlotterbeck, Waldemar Anton, Ramy Bensebaini; Julian Ryerson, Joey Veerman, Carney Chukwuemeka, Daniel Svensson; Fábio Silva, Felix Nmecha; Serhou Guirassy
+ROM | Gollini; Ghilardi, Leonardo Balerdi, Mario Hermoso; Nahuel Molina, Marten de Roon, Niccolò Pisilli, Wesley; Rodrigo Mora, Donyell Malen, Lorenzo Pellegrini
+SLO | Takáč; Blackman, Bajrić, Marković, Sandro Cruz; Pokorný; Gajdoš, Ibrahim; Barseghyan, Marcelli, Suleiman Camara
+POR | Diogo Costa; Alberto Costa, Bednarek, Jakub Kiwior, Sanusi; Froholdt, Rosario, Gabriel Veiga; Pepê, Samu Aghehowa, Oskar Pietuszewski
+PSV | Kovář; Sergiño Dest, Lutsharel Geertruida, Gasiorowski, Kostić; Sano, Guus Til, Mauro Júnior; Bajraktarević, Mijnans, Perišić
+LIV | Alisson Becker; Ronald Araújo, Jeremy Jacquet, Virgil van Dijk, Kostas Tsimikas; Alexis Mac Allister, Nyoni, Ryan Gravenberch; Cody Gakpo, Lewis Koumas, Rio Ngumoha
+VIL | Gulácsi; Santiago Mouriño, Pau Navarro, Renato Veiga, Sergi Cardona; Santi Comesaña, Gueye; Saliba; Buchanan, Georges Mikautadze, Alberto Moleiro
+MCI | Gianluigi Donnarumma; Rico Lewis, Abdukodir Khusanov, Rúben Dias, Joško Gvardiol; Elliot Anderson, Enzo Fernández; Allan Elias, Rayan Cherki, Phil Foden; Samba
+AEK | Brignoli; Lazaros Rota, Harold Moukoudi, Filipe Relvas, Stavros Pilios; Lovro Majer, Arriaga, Răzvan Marin, João Mário; Barnabás Varga, Luka Jović
+PSG | Safonov; Achraf Hakimi, Marquinhos, Willian Pacho, Lucas Hernández; João Neves, Vitinha, Fabián Ruiz; Désiré Doué, Ousmane Dembélé, Khvicha Kvaratskhelia
+BAR | Joan García; Xavi Espart, Pau Cubarsí, Gerard Martín, João Cancelo; Bernal, Pedri; Lamine Yamal, Dani Olmo, Anthony Gordon; Raphinha
+NAP | Meret; Di Lorenzo, Amir Rrahmani, Rafa Marín, Spinazzola; Anguissa, Kevin De Bruyne, Scott McTominay; Matteo Politano, Rasmus Højlund, Noa Lang
+BOD | Nikita Haikin; Fredrik Sjøvold, Gundersen, Odin Bjørtuft, Fredrik Bjørkan; Sondre Auklend, Patrick Berg, Sondre Brunstad Fet; Blomberg, Andreas Helmersen, Jens Petter Hauge
+VFB | Seimen; Josha Vagnoman, Chabot, Hendriks, Maximilian Mittelstädt; Grischa Prömel, Angelo Stiller; Chris Führich, El Khannouss, Jamie Leweling; Deniz Undav
+ATM | Jan Oblak; Marcos Llorente, Marc Pubill, Dávid Hancko, Grimaldo; Giuliano Simeone, Pablo Barrios, Morten Hjulmand, Álex Baena; Julián Álvarez, Jonathan David
+COM | Butez; Yan Couto, Jacobo Ramón, Marc Oliver Kempf, Álex Valle; Luis Milla, Perrone; Lucas Da Cunha, Nico Paz, Martin Baturina; Tasos Douvikas
+MUN | Senne Lammens; Diogo Dalot, Harry Maguire, Matthijs de Ligt, Noussair Mazraoui; Andrey Santos, Youri Tielemans; Matheus Cunha, Bruno Fernandes, Mason Mount; Bryan Mbeumo
+LIL | Berke Özer; Goffi, Ngoy, Alexsandro, Verdonk; Mukau, Nabil Bentaleb, André; Bakwa, Haraldsson, Soriba Diaoune
+GAL | Uğurcan Çakır; Sallai, Davinson Sánchez, Abdülkerim Bardakcı, Jakobs; Aleksei Batrakov, Torreira, Gabriel Sara; Yunus Akgün, Victor Osimhen, Barış Alper Yılmaz
+AVL | Zion Suzuki; João Gomes, Victor Lindelöf, Pau Torres, Tyrone Mings; John McGinn, Ross Barkley; Alysson, Emiliano Buendía, Ibrahim Mbaye; Nicolas Jackson
+VIK | Østbø; H Haugen, Daland, Stensness, Henrik Heggheim; Askildsen, Bell, Moi; Peter Christiansen, Botheim, Tripić
+CLB | Yann Sommer; Sabbe, Spileers, Mechele, Joaquin Seys; Lemaréchal, Potts, Hans Vanaken; Carlos Forbs, Nicolò Tresoldi, Virgili
+RCL | Risser; Aguilar, Baidoo, Udol; Abdulhamid, Cuisance, Haidara, Skóraś; Hazard, Ivanović, Kadile
+BAY | Manuel Neuer; Konrad Laimer, Dayot Upamecano, Kim Min-jae, Stanišić; Bischof, Aleksandar Pavlović; Serge Gnabry, Saibari, Alphonso Davies; Harry Kane
+ARS | David Raya; Jurriën Timber, Ezri Konsa, Gabriel Magalhães, Riccardo Calafiori; Bruno Guimarães, Declan Rice, Martin Ødegaard; Noni Madueke, Bukayo Saka; Kai Havertz
+INT | Josep Martínez; Carlos Augusto, Manuel Akanji, Alessandro Bastoni; Spence, Nicolò Barella, Hakan Çalhanoğlu, Petar Sučić, Federico Dimarco; Ange-Yoan Bonny, Marcus Thuram
+SHA | Riznyk; Vinícius Tobias, Valeriy Bondar, Mykola Matviyenko, Pedro Henrique; Ocheretko; Alisson Santana, Pedrinho, Marlon Gomes, Gleiker Mendoza; Kauã Elias
+RMA | Thibaut Courtois; Federico Valverde, Dean Huijsen, Antonio Rüdiger, Álvaro Carreras; Bernardo Silva, Eduardo Camavinga, Jude Bellingham; Arda Güler, Vinícius Júnior, Kylian Mbappé
+RBL | Vandevoordt; Baku, Orbán, Lukeba, Raum; Seiwald, El Aynaoui; Brajan Gruda, Nkunku, Nusa; Cardoso
+BET | Álvaro Vallés; Héctor Bellerín, Marc Bartra, Natan, Fran García; Pablo Fornals, Isco, Marc Roca; Antony, Troy Parrott, Abde Ezzalzouli
+FEY | Ernst; Givairo Read, Jeremiah St. Juste, Mármol, Javi López; Gjivai Zechiël, Vanhoutte, Targhalline; Anis Hadj Moussa, Nacho Ferri, Luciano Valente
+SCP | Kaique Pereira; Fresneda, Eduardo Quaresma, Gonçalo Inácio, Maxi Araújo; Doumbia, Sergi Altimira, João Simões; Catamo, Luis Suárez, Irankunda
+LAS | Jungwirth; Jørgensen, Xavier Mbuyamba, Alemão, Andrade, Dibango; Kryštof Daněk, Ljubičić, Horvath; Saša Kalajdžić, Christoph Lang

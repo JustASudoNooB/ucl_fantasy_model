@@ -151,3 +151,25 @@ def test_football_data_same_fixture_other_date(monkeypatch, tmp_path):
         {"date": "2026-10-03", "team1": "Paris Saint-Germain FC", "team2": "Toulouse FC", "score": {"ft": [3, 0]}}]}))
     res = pd.DataFrame(dict(date=["2026-10-04"], h=["Paris SG"], a=["Toulouse"], hg=[3], ag=[0]))
     assert fd.merge("2026-27", "fr.1", res) == 0
+
+
+def test_football_data_names_across_tiers_and_prefixes():
+    from ufe.ingest.football_data_uk import name_map
+    known = ["Olympique Lyonnais", "Stade Brestois 29", "Paris FC"]
+    wider = ["VfL Wolfsburg", "Real Sociedad B"]
+    m = name_map(["Lyon", "Brest", "Wolfsburg", "Sociedad"], known, wider)
+    assert m["Lyon"] == "Olympique Lyonnais" and m["Brest"] == "Stade Brestois 29"
+    assert m["Wolfsburg"] == "VfL Wolfsburg"
+    assert m["Sociedad"] != "Real Sociedad B"                 # reserve sides are never a target
+
+
+def test_football_data_merge_is_idempotent(monkeypatch, tmp_path):
+    import json
+    from ufe.ingest import football_data_uk as fd
+    monkeypatch.setattr(fd, "RAW_DIR", tmp_path)
+    (tmp_path / "2026-27_fr.1.json").write_text(json.dumps({"matches": [
+        {"round": "Matchday 1", "date": "2026-08-20", "team1": "Olympique Lyonnais", "team2": "Paris FC", "score": {"ft": [1, 0]}}]}))
+    res = pd.DataFrame(dict(date=["2026-10-04"], h=["Lyon"], a=["Paris FC"], hg=[2], ag=[2]))
+    fd.merge("2026-27", "fr.1", res); fd.merge("2026-27", "fr.1", res)
+    ms = json.loads((tmp_path / "2026-27_fr.1.json").read_text())["matches"]
+    assert len(ms) == 2 and ms[1]["team1"] == "Olympique Lyonnais"

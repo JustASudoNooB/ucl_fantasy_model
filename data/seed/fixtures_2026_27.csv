@@ -35,24 +35,24 @@ md,stage,date,kickoff_cet,home,away,home_goals,away_goals,status,source
 2,league,2026-10-14,21:00,MCI,PSG,2.0,4.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
 2,league,2026-10-14,21:00,BET,POR,3.0,2.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
 2,league,2026-10-14,21:00,SLO,VFB,0.0,3.0,FT,"uefa.com Wednesday round-up + bundesliga.com livetickers, 15 Oct 2026"
-3,league,2026-10-20,18:45,FEN,SLA,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,18:45,SAB,BVB,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,ROM,SLO,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,POR,PSV,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,LIV,VIL,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,MCI,AEK,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,PSG,BAR,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,NAP,BOD,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-20,21:00,VFB,ATM,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,18:45,COM,MUN,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,18:45,LIL,GAL,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,AVL,VIK,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,CLB,RCL,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,BAY,ARS,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,INT,SHA,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,RMA,RBL,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,BET,FEY,,,NS,uefa.com:league-phase-fixtures
-3,league,2026-10-21,21:00,SCP,LAS,,,NS,uefa.com:league-phase-fixtures
+3,league,2026-10-20,18:45,FEN,SLA,2.0,2.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,18:45,SAB,BVB,1.0,2.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,ROM,SLO,4.0,0.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,POR,PSV,0.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,LIV,VIL,4.0,3.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,MCI,AEK,5.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,PSG,BAR,4.0,2.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,NAP,BOD,4.0,3.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-20,21:00,VFB,ATM,1.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,18:45,COM,MUN,4.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,18:45,LIL,GAL,2.0,4.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,AVL,VIK,3.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,CLB,RCL,3.0,0.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,BAY,ARS,2.0,2.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,INT,SHA,1.0,0.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,RMA,RBL,4.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,BET,FEY,1.0,0.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
+3,league,2026-10-21,21:00,SCP,LAS,2.0,3.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
 4,league,2026-11-03,18:45,SHA,SCP,,,NS,uefa.com:league-phase-fixtures
 4,league,2026-11-03,18:45,GAL,VFB,,,NS,uefa.com:league-phase-fixtures
 4,league,2026-11-03,21:00,ATM,BAY,,,NS,uefa.com:league-phase-fixtures

@@ -37,8 +37,13 @@ ABBR = [  # applied to the club key (lower case, accents stripped) before fuzzy 
     (r"^sheffield utd$", "sheffield united"), (r"^sheffield weds$", "sheffield wednesday"),
     (r"^qpr$", "queens park rangers"), (r"^fc koln$", "koln"), (r"^st pauli$", "fc st pauli"),
     (r"^vallecano$", "rayo vallecano"), (r"^espanol$", "espanyol"), (r"^sociedad$", "real sociedad"),
-    (r"^celta$", "celta vigo"), (r"^st etienne$", "saint etienne"), (r"^st truiden$", "sint truiden"),
+    (r"^celta$", "celta vigo"), (r"^st etienne$", "saint etienne"), (r"^st truiden$", "sint truidense"),
+    (r"^rennes$", "stade rennais"), (r"^sp braga$", "sc braga"), (r"^west brom$", "west bromwich albion"),
+    (r"^st gilloise$", "union saint gilloise"), (r"^hearts$", "heart of midlothian"), (r"^for sittard$", "fortuna sittard"),
+    (r"^nijmegen$", "nec"), (r"^buyuksehyr$", "istanbul basaksehir"), (r"^ofi crete$", "ofi"),
+    (r"^ad alcorcon$", "alcorcon"), (r"^austria vienna$", "austria wien"), (r"^rapid vienna$", "rapid wien"), (r"^cambuur$", "sc cambuur"), (r"^mgladbach$", "borussia monchengladbach"),
 ]
+RESERVE = re.compile(r"\b(b|ii|u19|u21|u23|reserves?)\b")
 
 
 def _expand(name: str) -> str:
@@ -48,32 +53,84 @@ def _expand(name: str) -> str:
     return k
 
 
+def _is_appended(m: dict) -> bool:
+    """A match this module added (not an openfootball fixture it only filled in)."""
+    return m.get("source") == "football-data.co.uk" and not m.get("round")
+
+
 def _known_names(code: str) -> list[str]:
-    """Club names openfootball uses in this league (any season); B teams in the second tier
-    would otherwise attract first-team names."""
+    """Club names openfootball itself uses in this league (any season). Names this module added
+    are left out, so an earlier mapping miss cannot become its own target."""
     names = set()
     for p in RAW_DIR.glob(f"*_{code}.json"):
         for m in json.loads(p.read_text(encoding="utf-8")).get("matches", []):
-            names.update([m["team1"], m["team2"]])
+            if not _is_appended(m):
+                names.update([m["team1"], m["team2"]])
     return sorted(names)
+
+
+def _country_names(code: str) -> list[str]:
+    """The other tiers of the same country (promoted and relegated clubs), reserve sides excluded."""
+    country = code.split(".")[0]
+    names = set()
+    for p in RAW_DIR.glob(f"*_{country}.*.json"):
+        if p.stem.split("_", 1)[1] == code:
+            continue
+        for m in json.loads(p.read_text(encoding="utf-8")).get("matches", []):
+            if not _is_appended(m):
+                names.update(n for n in (m["team1"], m["team2"]) if not RESERVE.search(club_key(n)))
+    return sorted(names)
+
+
+def _prefix_score(e: str, cand: str) -> int:
+    """92 when every word of the short name starts a different word of the candidate
+    ("lyon" -> "olympique lyonnais", "west brom" -> "west bromwich albion"), else 0."""
+    a, b = e.split(), cand.split()
+    if not a or any(len(t) < 3 for t in a):
+        return 0
+    used = set()
+    for t in a:
+        j = next((j for j, u in enumerate(b) if j not in used and u.startswith(t)), None)
+        if j is None:
+            return 0
+        used.add(j)
+    return 92
+
+
+def _best(e: str, keys: dict[str, str]) -> tuple[str | None, int]:
+    if not keys:
+        return None, 0
+    scored = [(max(fuzz.token_set_ratio(e, k), _prefix_score(e, k)), k) for k in keys]
+    scored.sort(reverse=True)
+    top, k = scored[0]
+    if len(scored) > 1 and scored[1][0] == top and top < 100:
+        return None, 0                                   # two equally good candidates: do not guess
+    return keys[k], top
 
 
 UNMAPPED: list[str] = []
 
 
-def name_map(fd_names: list[str], known: list[str]) -> dict[str, str]:
-    """football-data name -> openfootball name (or the expanded name when nothing is close)."""
+def name_map(fd_names: list[str], known: list[str], wider: list[str] | None = None) -> dict[str, str]:
+    """football-data name -> openfootball name: exact or fuzzy within the league first, then the
+    country's other tiers; the expanded name itself when nothing is close (recorded in UNMAPPED)."""
     keys = {club_key(n): n for n in known}
+    more = {club_key(n): n for n in (wider or []) if club_key(n) not in keys and not RESERVE.search(club_key(n))}
     out = {}
     for n in fd_names:
         e = _expand(n)
         if e in keys:
             out[n] = keys[e]
             continue
-        hit = process.extractOne(e, list(keys), scorer=fuzz.token_set_ratio) if keys else None
-        out[n] = keys[hit[0]] if hit and hit[1] >= 85 else e.title()
-        if out[n] == e.title() and keys:
-            UNMAPPED.append(n)
+        hit, sc = _best(e, keys)
+        if hit is None or sc < 85:
+            hit, sc = _best(e, more)
+        if hit is not None and sc >= 85:
+            out[n] = hit
+        else:
+            out[n] = e.title()
+            if keys:
+                UNMAPPED.append(n)
     return out
 
 
@@ -103,10 +160,13 @@ def _near(matches: list[dict], day: str, t1: str, t2: str, days: int = 3) -> dic
 
 
 def merge(season: str, code: str, res: pd.DataFrame) -> int:
-    """Add the results to the openfootball JSON for that league and season; returns matches added."""
-    nm = name_map(sorted(set(res.h) | set(res.a)), _known_names(code))
+    """Add the results to the openfootball JSON for that league and season; returns matches added.
+    Rows added by an earlier run are rebuilt from scratch, so an improved name mapping never leaves
+    a match in the file twice under two spellings."""
+    nm = name_map(sorted(set(res.h) | set(res.a)), _known_names(code), _country_names(code))
     path = RAW_DIR / f"{season}_{code}.json"
     data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"name": f"{code} {season}", "matches": []}
+    data["matches"] = [m for m in data["matches"] if not _is_appended(m)]
     # openfootball season files also list fixtures not yet played (no score): fill those in place
     by_key = {(m.get("date"), m.get("team1"), m.get("team2")): m for m in data["matches"]}
     added = 0
