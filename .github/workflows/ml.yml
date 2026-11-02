@@ -1,0 +1,38 @@
+# Weekly retrain of the neural-network challenger (ufe/ml/): fresh Premier League player-matches
+# from the FPL archive, three networks trained in NumPy (about a minute on the runner), then the
+# comparison with the current model on every UCL matchday with actual XIs on file. Commits the
+# model and its scores; the dashboard shows both models side by side.
+name: ml-retrain
+on:
+  schedule:
+    - cron: "10 5 * * 1"         # Mondays 10:40 IST
+  workflow_dispatch: {}
+permissions: { contents: write }
+concurrency: { group: ml, cancel-in-progress: false }
+jobs:
+  retrain:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Training data and training
+        run: |
+          python -m ufe ml all 2>&1 | tee ml.txt
+          sed 's/^/::notice::ml: /' ml.txt | tail -8
+      - name: Comparison on UCL matchdays
+        run: |
+          python -m ufe ml eval 2>&1 | tail -12 | sed 's/^/::notice::ml eval: /'
+        continue-on-error: true
+      - name: Commit the model and its scores
+        run: |
+          git config user.name "ucl-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/processed/ml_model.json data/processed/ml_metrics.json data/processed/ml_ucl_eval.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "::notice::model unchanged"; else
+            git commit -q -m "ml: weekly retrain $(date -u +%F)"
+            git stash -u -q || true
+            git pull --rebase -q && git push -q && echo "::notice::model committed"
+          fi

@@ -5,3 +5,8 @@ data/raw/fetch_log.jsonl
 data/processed/scheduler.log
 data/my/
 .pytest_cache/
+# neural-network training inputs: re-downloaded / rebuilt by `python -m ufe ml data`
+data/raw/fpl/fpl_2022-23_*
+data/raw/fpl/fpl_2023-24_*
+data/raw/fpl/*_fixtures.csv
+data/processed/ml_train.csv.gz

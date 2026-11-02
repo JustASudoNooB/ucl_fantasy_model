@@ -263,6 +263,26 @@ def cmd_live(args):
         print("  -", a["text"])
 
 
+def cmd_ml(args):
+    """Neural-network challenger: training data, training, and the UCL comparison."""
+    from .ml import data as mld
+    from .ml import train as mlt
+    if args.action in ("data", "all"):
+        got = mld.download()
+        df = mld.build()
+        print(f"ml data: {len(got)} files, {len(df):,} player-matches -> {mld.save(df)}")
+    if args.action in ("train", "all"):
+        out = mlt.run()
+        for name in ("network", "linear"):
+            t = out["results"][name]["test"]
+            print(f"{name:8s} 2026/27 test: start log loss {t['start_ll']:.4f}, goals {t['goal_poisson_ll']:.4f}, "
+                  f"assists {t['assist_poisson_ll']:.4f} (epochs {out['results'][name]['best_epoch']})")
+        print(f"saved {mlt.MODEL}")
+    if args.action in ("eval", "all-eval"):
+        from .ml import evaluate
+        evaluate.run(n_sims=getattr(args, "sims", None) or 6000)
+
+
 def cmd_livecall(args):
     """Captain switch and manual subs for manager files, from the game feed's live points."""
     from .alerts.telegram import send
@@ -482,6 +502,9 @@ def main(argv=None):
     lv.add_argument("--lineups-known", dest="lineups_known", action="store_true")
     lv.add_argument("--sent-off", dest="sent_off", help="comma-separated names of players sent off (they cannot be subbed)")
     lv.set_defaults(fn=cmd_live)
+    ml = sub.add_parser("ml", help="neural-network challenger: data | train | all | eval")
+    ml.add_argument("action", choices=["data", "train", "all", "eval"])
+    ml.set_defaults(fn=cmd_ml)
     lc = sub.add_parser("livecall", help="manager files: captain switch + subs between matchday days (game-feed points)")
     lc.add_argument("--manager", default="zero")
     lc.add_argument("--all", action="store_true")

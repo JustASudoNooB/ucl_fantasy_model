@@ -129,3 +129,8 @@ player_form:
   # (data/seed/form/domestic_2026_27.csv; data/processed/domestic_form.csv from `ufe sync --form`).
   # Weights in ufe/models/history.py, from scripts/backtest_player_form.py.
   enabled: true
+
+ml:
+  # neural-network challenger (ufe/ml/): weight of its player priors in the engine's picks.
+  # 0 until it has beaten the model on matchdays it never saw (python -m ufe ml eval).
+  blend: 0.0

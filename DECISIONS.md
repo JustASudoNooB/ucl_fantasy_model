@@ -227,3 +227,20 @@ captain and transfer options by P(top after MD8) from the joint simulation (riva
 their best expected XI), so a differential captain can rank above the expected-points pick when you
 trail. It switches on when every manager file has league_points.
 
+**2026-11-03 · Neural-network challenger (ufe/ml/), shown beside the model, not yet in the picks.**
+A multi-task network in NumPy (two hidden layers, 32 and 16 units; outputs: start, goals per 90,
+assists per 90; an average of three training runs) trained on 108,984 Premier League player-matches
+from the FPL archive (2022/23 GW16, when FPL began recording starts and xG, to 2026/27 GW6), with
+features that can be built the same way for UCL players (position, price inside the club, team and
+opponent expected goals, rest days, start history, the last two XIs, xG/xA share of team xG).
+Against a linear model on the same features, on seasons it never saw:
+2025/26 start log loss 0.2825 v 0.2947, goals 0.2579 v 0.2602, assists 0.2670 v 0.2676;
+2026/27 0.3475 v 0.3545, 0.2798 v 0.2822, 0.2731 v 0.2753 (better on all six).
+In the engine on UCL matchdays, pre-match information only (ufe/ml/evaluate.py), start log loss
+model / 50-50 blend / network: MD1 0.541 / 0.528 / 0.621, MD2 0.358 / 0.353 / 0.354, MD3 0.430 /
+0.418 / 0.431; goal log loss MD2 0.1651 / 0.1652 / 0.1670, MD3 0.1756 / 0.1731 / 0.1710; expected v
+event points correlation MD2 0.518 / 0.524 / 0.527, MD3 0.427 / 0.433 / 0.436. The blend beats the
+model on 7 of 8 comparisons (one tie); the network alone does not (MD1 starts: it has no UCL XIs
+to go on). settings ml.blend stays 0 for MD4, as promised before the deadline; switch to 0.5 for
+MD5 if MD4's grading agrees. Retrained every Monday by .github/workflows/ml.yml.
+

@@ -456,7 +456,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
   </div>
   <nav class="secnav" aria-label="Sections">
-    <a href="#board">Board</a><a href="#managers">Managers</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#model">Model</a><a href="#rules">Calendar</a>
+    <a href="#board">Board</a><a href="#managers">Managers</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#nn">Network</a><a href="#model">Model</a><a href="#rules">Calendar</a>
   </nav>
 </header>
 
@@ -710,6 +710,14 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     </div>
     <div class="legend" id="race-legend"></div>
     <div class="panel" style="padding:14px 16px;"><div class="race" id="race-rows"></div></div>
+  </section>
+
+  <section id="nn" aria-labelledby="nn-h" hidden>
+    <div class="sec-head">
+      <h2 id="nn-h">Neural-network challenger</h2>
+      <p id="nn-sub">A small neural network trained on Premier League player-matches, run alongside the model. It only feeds the picks if it predicts better on matches it has not seen.</p>
+    </div>
+    <div class="panel" id="nn-box" style="padding:14px 16px; overflow-x:auto;"></div>
   </section>
 
   <section id="model" aria-labelledby="md-h">
@@ -1108,7 +1116,7 @@ const D = /*__UFE_DATA__*/null;
   // ---------------------------------------------------------------- players table
   let plSort = { key: "xpts", dir: -1 }, plPos = "ALL", plLimit = 60;
   const COLS = [
-    ["name", "Player"], ["price", "€m"], ["xpts", "xPts"], ["range", "Range"], ["p_start_sim", "Start"], ["p_goal", "Goal"],
+    ["name", "Player"], ["price", "€m"], ["xpts", "xPts"], ["xpts_nn", "Net xPts"], ["range", "Range"], ["p_start_sim", "Start"], ["p_goal", "Goal"],
     ["p_assist", "Assist"], ["xrec", "Recov."], ["p_cs", "Clean sheet"], ["p_potm", "POTM"], ["p_haul", "≥10 pts"], ["value", "xPts/€m"], ["day", "Day"], ["src", "Data"]
   ];
   function renderPlayers() {
@@ -1132,7 +1140,7 @@ const D = /*__UFE_DATA__*/null;
       const X = v => (Math.max(v, 0) / maxR * 100).toFixed(1) + "%";
       return `<tr>
         <td class="pname"><span class="pos-tag">${p.pos}</span><b>${esc(p.name)}</b><small>${esc(tShort(p.team))}</small></td>
-        <td>${p.ps === "unknown" ? `<span class="muted" data-tip="Not in any price list yet: simulated, never picked">?</span>` : (p.ps === "est_fpl" ? `<span data-tip="Estimated from the FPL price: check in the app">≈${Number(p.price).toFixed(1)}</span>` : Number(p.price).toFixed(1))}</td><td><b>${f2(p.xpts)}</b></td>
+        <td>${p.ps === "unknown" ? `<span class="muted" data-tip="Not in any price list yet: simulated, never picked">?</span>` : (p.ps === "est_fpl" ? `<span data-tip="Estimated from the FPL price: check in the app">≈${Number(p.price).toFixed(1)}</span>` : Number(p.price).toFixed(1))}</td><td><b>${f2(p.xpts)}</b></td><td class="muted" data-tip="Neural-network challenger (start ${p.p_start_nn == null ? "–" : pct(p.p_start_nn)})">${p.xpts_nn == null ? "–" : f2(p.xpts_nn)}</td>
         <td><span class="range" data-tip="${esc(`10th pct ${p.p10} · median ${p.p50} · 90th pct ${p.p90} · mean ${f1(p.xpts)}`)}"><span class="ln" style="left:${X(p.p10)};width:calc(${X(p.p90)} - ${X(p.p10)})"></span><span class="md" style="left:${X(p.p50)}"></span><span class="mn" style="left:${X(p.xpts)}"></span></span></td>
         <td>${pct(p.p_start_sim)}</td><td>${pct(p.p_goal)}</td><td>${pct(p.p_assist)}</td><td>${f1(p.xrec)}</td><td>${p.pos === "FWD" ? "–" : pct(p.p_cs)}</td><td>${pct(p.p_potm, 1)}</td><td>${pct(p.p_haul)}</td><td>${f2(p.value)}</td><td>${dayOfFx(p.day)}</td>
         <td><span class="src" title="${esc(p.src)}">${esc(p.src)}</span></td></tr>`;
@@ -1381,6 +1389,26 @@ const D = /*__UFE_DATA__*/null;
 
   // ---------------------------------------------------------------- model
   let calKey = "2025-26|calibration_home";
+  function renderNN() {
+    const M = D.ml;
+    if (!M || !M.results) return;
+    $("#nn").hidden = false;
+    const r = M.results, n = r.network, l = r.linear;
+    const row = (lab, k, d = 4) => `<tr><td>${lab}</td><td class="r num">${n.test[k].toFixed(d)}</td><td class="r num">${l.test[k].toFixed(d)}</td><td class="r num">${n.val[k].toFixed(d)}</td><td class="r num">${l.val[k].toFixed(d)}</td></tr>`;
+    const ucl = M.ucl || {};
+    const urows = Object.keys(ucl).sort().map(md => {
+      const u = ucl[md], c = u["0.0"] || {}, h = u["0.5"] || {}, w = u["1.0"] || {};
+      const cell = (o, k) => o[k] == null ? "–" : Number(o[k]).toFixed(k === "top11" ? 0 : 4);
+      return `<tr><td>MD${md}</td>${["start_ll", "goal_ll", "points_corr"].map(k => `<td class="r num">${cell(c, k)}</td><td class="r num">${cell(h, k)}</td><td class="r num">${cell(w, k)}</td>`).join("")}</tr>`;
+    }).join("");
+    $("#nn-box").innerHTML = `<p style="font-size:13px">Trained ${esc((M.trained_at || "").slice(0, 10))} on ${M.rows ? M.rows.all.toLocaleString() : "–"} Premier League player-matches (FPL archive, 2022/23 to now): two hidden layers (32 and 16 units), three outputs (start, goals per 90, assists per 90), an average of three training runs. It ${M.blend > 0 ? `feeds the picks at weight ${M.blend}` : "does not feed the picks yet"}; its expected points sit next to the model's in the player table ("Net xPts").</p>
+      <h4>Premier League matches it never saw (lower is better)</h4>
+      <table class="caps"><thead><tr><th>Score</th><th class="r">Network, 2026/27</th><th class="r">Linear, 2026/27</th><th class="r">Network, 2025/26</th><th class="r">Linear, 2025/26</th></tr></thead><tbody>
+      ${row("Start log loss", "start_ll")}${row("Goals log loss", "goal_poisson_ll")}${row("Assists log loss", "assist_poisson_ll")}</tbody></table>
+      ${urows ? `<h4>Champions League matchdays (pre-match information only)</h4><table class="caps"><thead><tr><th></th><th class="r" colspan="3">Start log loss (lower better)</th><th class="r" colspan="3">Goal log loss (lower better)</th><th class="r" colspan="3">Points correlation (higher better)</th></tr><tr><th>Matchday</th>${"<th class='r'>Model</th><th class='r'>50/50</th><th class='r'>Network</th>".repeat(3)}</tr></thead><tbody>${urows}</tbody></table>` : ""}
+      ${M.available === false ? `<p class="muted" style="font-size:12.5px">Challenger projections unavailable this build: ${esc(M.error || "")}</p>` : ""}`;
+  }
+
   function renderModel() {
     const bt = D.backtest || {};
     const seasons = Object.keys(bt).sort();
@@ -1835,6 +1863,7 @@ const D = /*__UFE_DATA__*/null;
   renderAll();
   renderRace();
   renderModel();
+  try { renderNN(); } catch (e) { console.error(e); }
   renderCheck();
   renderForm();
   try { renderManagers(); } catch (e) { console.error(e); }

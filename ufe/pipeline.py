@@ -291,6 +291,10 @@ class Engine:
 
     # ---------------------------------------------------------------- fixtures with probabilities
     def fixture_table(self, md: int) -> pd.DataFrame:
+        return self._lineup_adjust(md, self._base_fixture_table(md)).reset_index(drop=True)
+
+    def _base_fixture_table(self, md: int) -> pd.DataFrame:
+        """Goal rates from the team model and the market, before any line-up adjustment."""
         f = self.fixtures[self.fixtures.md == md].copy()
         di = day_index(f.date.tolist())
         f["day"] = f.date.map(di)
@@ -326,7 +330,6 @@ class Engine:
         shrink = [(1 - w) if s_ == "model+market" else 1.0 for s_ in src]     # market prices carry their own
         f["sh"] = [a * c for (a, _), c in zip(sds, shrink)] if sds else []
         f["sa"] = [b * c for (_, b), c in zip(sds, shrink)] if sds else []
-        f = self._lineup_adjust(md, f)
         return f.reset_index(drop=True)
 
     def _odds(self, md: int) -> pd.DataFrame | None:

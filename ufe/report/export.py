@@ -244,6 +244,7 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
         teams[t] = dict(name=info["name"], short=info["short"], country=info["country"], rating=_r(tm.rating(t)),
                         attack=_r(a), defence=_r(d), uncertainty=_r(tm.uncertainty(t)))
     blocks = {str(md): matchday_block(engine, md, with_checks=(i == 0)) for i, md in enumerate(mds)}
+    ml = _ml_block(engine, mds[0], blocks[str(mds[0])]) if mds else None
     E = engine.ev_matrix(mds)
     cols = ["id", "name", "team", "pos", "price"] + [c for c in ("price_status", "own_pct", "status") if c in engine.players]
     idx_players = engine.players[cols].rename(columns={"price_status": "ps", "own_pct": "own", "status": "st"})
@@ -281,8 +282,34 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
         graded=graded_matchdays(engine),
         verification=_load_json(PROC / "verification.json"),
         changes=_load_json(PROC / "changes.json"),
+        ml=ml,
         **_extras(engine),
     )
+
+
+def _ml_block(engine, md: int, block: dict) -> dict | None:
+    """The neural-network challenger: its expected points next to the current model's for the
+    coming matchday (written into the players table), plus its test results."""
+    metrics = _load_json(PROC / "ml_metrics.json")
+    if not metrics:
+        return None
+    out = dict(trained_at=metrics.get("trained_at"), rows=metrics.get("rows"), results=metrics.get("results"),
+               ucl=_load_json(PROC / "ml_ucl_eval.json"), blend=float((settings().raw.get("ml") or {}).get("blend", 0.0)), md=md)
+    try:
+        from ..ml.ucl import Challenger
+        ch = Challenger(as_of=engine.as_of, n_sims=engine.n_sims, seed=engine.seed, blend=1.0)
+        for k in ("cfg", "fixtures", "matches", "team_model", "fpl", "pool", "domestic_gpm", "player_tables"):
+            if k in engine.__dict__:
+                ch.__dict__[k] = engine.__dict__[k]
+        pr = ch.projections(md).set_index("id")
+        for d in block.get("players", []):
+            if d["id"] in pr.index:
+                d["xpts_nn"] = _r(float(pr.xpts[d["id"]]))
+                d["p_start_nn"] = _r(float(pr.p_start_sim[d["id"]]))
+        out["available"] = True
+    except Exception as e:                         # the challenger must never stop the dashboard
+        out.update(available=False, error=f"{type(e).__name__}: {str(e)[:160]}")
+    return out
 
 
 def _managers(engine):

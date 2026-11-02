@@ -1,0 +1,112 @@
+{
+ "trained_at": "2026-11-02T21:00:56+00:00",
+ "features": [
+  "pos_GK",
+  "pos_DEF",
+  "pos_MID",
+  "pos_FWD",
+  "log_price",
+  "price_rel",
+  "price_rank",
+  "home",
+  "lam_for",
+  "lam_against",
+  "rest_days",
+  "start_rate",
+  "has_start_hist",
+  "started_last1",
+  "started_last2",
+  "xg_share",
+  "xa_share",
+  "has_att_hist",
+  "log_n90"
+ ],
+ "hidden": [
+  32,
+  16
+ ],
+ "rows": {
+  "train": 75344,
+  "val": 29757,
+  "test": 3883,
+  "all": 108984
+ },
+ "seasons": {
+  "train": [
+   "2022-23",
+   "2023-24",
+   "2024-25"
+  ],
+  "val": [
+   "2025-26"
+  ],
+  "test": [
+   "2026-27"
+  ]
+ },
+ "results": {
+  "network": {
+   "best_epoch": 20,
+   "val": {
+    "n": 29757,
+    "start_ll": 0.28251,
+    "start_brier": 0.08634,
+    "n_played": 11498,
+    "goal_poisson_ll": 0.25789,
+    "goal_brier": 0.0661,
+    "goal_pred": 966.75592,
+    "goal_actual": 1009.0,
+    "assist_poisson_ll": 0.26695,
+    "assist_brier": 0.06845,
+    "assist_pred": 925.91152,
+    "assist_actual": 942.0
+   },
+   "test": {
+    "n": 3883,
+    "start_ll": 0.34749,
+    "start_brier": 0.10544,
+    "n_played": 1853,
+    "goal_poisson_ll": 0.27975,
+    "goal_brier": 0.07058,
+    "goal_pred": 145.63318,
+    "goal_actual": 170.0,
+    "assist_poisson_ll": 0.27309,
+    "assist_brier": 0.0706,
+    "assist_pred": 144.11079,
+    "assist_actual": 162.0
+   }
+  },
+  "linear": {
+   "best_epoch": 12,
+   "val": {
+    "n": 29757,
+    "start_ll": 0.29473,
+    "start_brier": 0.08846,
+    "n_played": 11498,
+    "goal_poisson_ll": 0.26016,
+    "goal_brier": 0.06655,
+    "goal_pred": 994.17826,
+    "goal_actual": 1009.0,
+    "assist_poisson_ll": 0.26758,
+    "assist_brier": 0.06856,
+    "assist_pred": 944.14222,
+    "assist_actual": 942.0
+   },
+   "test": {
+    "n": 3883,
+    "start_ll": 0.35449,
+    "start_brier": 0.10724,
+    "n_played": 1853,
+    "goal_poisson_ll": 0.28216,
+    "goal_brier": 0.07082,
+    "goal_pred": 160.64523,
+    "goal_actual": 170.0,
+    "assist_poisson_ll": 0.27528,
+    "assist_brier": 0.07141,
+    "assist_pred": 146.33356,
+    "assist_actual": 162.0
+   }
+  }
+ },
+ "production_epochs": 20
+}

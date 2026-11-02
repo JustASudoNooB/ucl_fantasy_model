@@ -83,3 +83,7 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - Blocked: Understat (unreachable from CI), assist grading (no free per-match assist source), UCL results and actual XIs without UFE_FOOTBALL_DATA_KEY / UFE_API_FOOTBALL_KEY (entered by hand until then).
 - After MD4: `python scripts/calibrate_news_labels.py 4`, `python scripts/tune_xi_history.py`, then `python -m ufe grade --md 4` (now includes expected v actual fantasy points per player).
 
+## v0.16.0 (3 Nov 2026)
+- Done: neural-network challenger (Premier League training, UCL comparison, weekly retrain, "Net xPts" column and a Network section on the dashboard).
+- After MD4: `python -m ufe ml eval` (adds MD4), then set `ml.blend: 0.5` if the blend still beats the model.
+

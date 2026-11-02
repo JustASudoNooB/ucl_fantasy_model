@@ -47,6 +47,7 @@ Free keys that switch on extra layers (set as environment variables, all optiona
 | After day 1 | add the evening's events to `data/seed/results/mdN_events.csv`, then `python -m ufe --as-of <day-2 date> replan --md N --squad data/my/squad.csv --xi data/my/xi.csv --captain Olise` | refit on day 1, refreshed day-2 forecast (frozen for grading), your day-1 points, the captain switch and manual subs (`--points app.csv` overrides the event estimate; `--lineups-known` once XIs are out) |
 | After day 1 (quick) | `python -m ufe live --md N --day 1 --squad data/my/squad.csv --captain Olise --points day1.csv` | the same call without the refit |
 | After day 1 (automatic) | `python -m ufe livecall --manager zero` (GitHub Actions: every run between the days) | captain switch and subs for each file in `data/managers/`, with day-1 points from the game feed (season total minus the copy saved before the deadline), the chance the new captain beats the old one's score, Telegram when the call changes |
+| Weekly (automatic) | `python -m ufe ml all` then `python -m ufe ml eval` (GitHub Actions, Mondays) | the neural-network challenger retrained on Premier League player-matches and compared with the model on every UCL matchday; its expected points appear as "Net xPts" |
 | Before each deadline | fill `league_points:` in every manager file (yours has `me: true`) | mini-league mode: P(top after the matchday) and P(top after MD8) for your captain and transfer options, differentials against each rival |
 | After each day | `python -m ufe grade --md N` | every match graded (result, scoreline, scorers, assisters, POTM, XIs), day 1 and day 2 separately |
 | After the MD | `python -m ufe results --md N --results results.csv --players players.csv` | scores the snapshot, updates calibration, logs a model version |
@@ -66,6 +67,7 @@ ufe/ingest/     openfootball, FPL archive, official game feed, football-data.org
 ufe/models/     team_ratings (hierarchical Dixon–Coles), scoreline, player_rates, simulate, tournament
 ufe/optimize/   milp (HiGHS via SciPy), squad, transfers (multi-matchday), policy (in-matchday), chips
 ufe/evaluate/   metrics, backtest, tune, feedback (the learning loop)
+ufe/ml/         neural-network challenger in NumPy: training data (FPL archive), network, UCL features, comparison
 ufe/report/     export (snapshots, dashboard data), render, command_center.html
 ufe/alerts/     Telegram                                          ufe/scheduler.py  the self-running loop
 tests/          pytest suite                                      schedule/  cron, Windows, GitHub Actions
