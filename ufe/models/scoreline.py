@@ -98,17 +98,28 @@ def remove_margin(odds: list[float], method: str = "power") -> np.ndarray:
     raise ValueError(method)
 
 
+def p_over_line(m: np.ndarray, line: float) -> float:
+    """P(total goals > line) from a score matrix. Integer lines are Asian: a push is refunded,
+    so the market's over probability is P(over) / (1 - P(exactly the line))."""
+    tot = np.add.outer(np.arange(m.shape[0]), np.arange(m.shape[1]))
+    over = float(m[tot > line].sum())
+    if float(line).is_integer():
+        return over / max(1.0 - float(m[tot == line].sum()), 1e-9)
+    return over
+
+
 def implied_lambdas(p_home: float, p_draw: float, p_away: float, p_over25: float | None = None,
-                    rho: float = -0.06, total_prior: float = 2.8) -> tuple[float, float]:
-    """Goal rates that reproduce market 1X2 (and optionally over 2.5) probabilities."""
+                    rho: float = -0.06, total_prior: float = 2.8, line: float = 2.5) -> tuple[float, float]:
+    """Goal rates that reproduce market 1X2 (and optionally an over/under line) probabilities.
+    `p_over25` is the margin-free probability of over `line` goals (2.5 by default)."""
     target = np.array([p_home, p_draw, p_away])
 
     def loss(x):
         lh, la = np.exp(x)
-        mp = match_probs(lh, la, rho, 8)
+        mp = match_probs(lh, la, rho, 10 if line > 3 else 8)
         err = np.sum((np.array([mp.p_home, mp.p_draw, mp.p_away]) - target) ** 2)
         if p_over25 is not None:
-            err += (mp.over25 - p_over25) ** 2
+            err += ((mp.over25 if line == 2.5 else p_over_line(mp.matrix, line)) - p_over25) ** 2
         else:
             err += 1e-3 * (np.log(lh + la) - np.log(total_prior)) ** 2   # weak anchor on total goals
         return err

@@ -361,13 +361,53 @@ def snapshot_paths(md: int) -> dict[str, Path]:
     return out
 
 
+def feed_actual_points(md: int) -> pd.Series | None:
+    """Each player's fantasy points for matchday `md` from the game feed: the copy saved before the
+    next matchday's deadline (or the current feed) minus the copy saved before this one."""
+    from ..pipeline import feed_points, load_pool
+    pre = PROC / f"feed_pre_md{md}.csv"
+    post = PROC / f"feed_pre_md{md + 1}.csv"
+    if not post.exists():
+        post = PROC / "players_feed.csv"
+    if not pre.exists() or not post.exists():
+        return None
+    pool = load_pool()
+    a, b = feed_points(pool, post), feed_points(pool, pre)
+    d = (a - b.reindex(a.index)).dropna()
+    return d if (d != 0).any() else None
+
+
+def points_grade(snap: dict, actual: pd.Series) -> dict:
+    """Expected points against the feed's actual points for every player in the frozen forecast."""
+    pl = pd.DataFrame(snap["players"])[["id", "name", "team", "xpts"]]
+    pl = pl[pl.id.isin(actual.index)].assign(actual=lambda x: x.id.map(actual))
+    if pl.empty:
+        return {}
+    bins = pd.cut(pl.xpts, [-1, 1, 2, 3, 4, 5, 6, 8, 99], labels=["<1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-8", "8+"])
+    cal = pl.groupby(bins, observed=True).agg(n=("id", "size"), xpts=("xpts", "mean"), actual=("actual", "mean")).round(2)
+    top = pl.sort_values("actual", ascending=False).head(10)
+    return dict(n=int(len(pl)), xpts=_r(pl.xpts.sum(), 1), actual=_r(pl.actual.sum(), 1),
+                mae=_r((pl.xpts - pl.actual).abs().mean(), 2), corr=_r(pl.xpts.corr(pl.actual), 3),
+                calibration=cal.reset_index().rename(columns={"xpts": "mean_xpts", "actual": "mean_actual", "index": "bin"}).to_dict(orient="records"),
+                top=top[["name", "team", "xpts", "actual"]].round(2).to_dict(orient="records"))
+
+
 def grade_md(md: int, fixtures: pd.DataFrame) -> list[dict]:
     ev, xi = load_events(md), load_xis(md)
+    actual = None
+    try:
+        actual = feed_actual_points(md)
+    except Exception:                                   # the feed copies are optional
+        actual = None
     out = []
     for label, p in snapshot_paths(md).items():
         snap = json.loads(p.read_text())
         g = grade(snap, fixtures, ev, xi, label=label)
-        if g and g.get("matches"):
+        if (not g or not g.get("matches")) and actual is not None:
+            g = dict(md=md, label=label, created_at=snap.get("created_at"), model_version=snap.get("model_version"), matches=[])
+        if g and (g.get("matches") or actual is not None):
+            if actual is not None:
+                g["points"] = points_grade(snap, actual)
             g["file"] = p.name
             out.append(g)
     return out

@@ -131,6 +131,24 @@ def cmd_sync(args):
             got_lineups.append(p)
             return note + (f" -> {p}" if p else "")
         step("lineups", _lu)
+    if args.all or args.penalties:
+        def _pens():
+            from .ingest import setpieces
+            return setpieces.sync()
+        step("penalties", _pens)
+    if args.teamnews:
+        def _tn():
+            from .ingest import starting11
+            md = _live_md() if args.teamnews == "live" else int(args.teamnews)
+            eng = _engine(args)
+            return starting11.sync(md, eng.fixtures, eng.players)[1]
+        step("teamnews", _tn)
+    if args.freeodds:
+        def _fo():
+            from .ingest import rg_odds
+            md = _live_md() if args.freeodds == "live" else int(args.freeodds)
+            return rg_odds.sync(md, load_fixtures())[1]
+        step("freeodds", _fo)
     if args.odds:
         def _odds():
             from .ingest import odds
@@ -243,6 +261,23 @@ def cmd_live(args):
         print(f"  plan {k:13s} {v:6.2f}{'  <- best' if k == out.get('choice') else ''}")
     for a in out["actions"]:
         print("  -", a["text"])
+
+
+def cmd_livecall(args):
+    """Captain switch and manual subs for manager files, from the game feed's live points."""
+    from .alerts.telegram import send
+    from .report import livecall
+    eng = _engine(args)
+    if args.auto:
+        for line in livecall.auto(eng, send=send):
+            print(line)
+        return
+    files = sorted(livecall.MANAGERS.glob("*.yaml")) if args.all else [livecall.MANAGERS / f"{args.manager}.yaml"]
+    for f in files:
+        res = livecall.run(eng, f, md=args.md, after_day=args.after_day)
+        print(res.get("message") or f"{f.stem}: {res.get('status')}")
+        if args.send and res.get("message"):
+            send(res["message"])
 
 
 def cmd_replan(args):
@@ -412,9 +447,11 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("probe").set_defaults(fn=cmd_probe)
     s = sub.add_parser("sync")
-    for flag in ("all", "history", "fixtures", "feed", "understat", "form", "results"):
+    for flag in ("all", "history", "fixtures", "feed", "understat", "form", "results", "penalties"):
         s.add_argument(f"--{flag}", action="store_true")
-    s.add_argument("--odds", type=int, metavar="MD")
+    s.add_argument("--odds", type=int, metavar="MD", help="The Odds API (UFE_ODDS_API_KEY)")
+    s.add_argument("--teamnews", metavar="MD|live", help="predicted XIs and absences from starting11.com (no key)")
+    s.add_argument("--freeodds", metavar="MD|live", help="1X2 and goals-line prices from rg.org (no key)")
     s.add_argument("--lineups", type=int, metavar="MD", help="confirmed XIs from API-Football (UFE_API_FOOTBALL_KEY)")
     s.add_argument("--md", type=int)
     s.set_defaults(fn=cmd_sync)
@@ -445,6 +482,14 @@ def main(argv=None):
     lv.add_argument("--lineups-known", dest="lineups_known", action="store_true")
     lv.add_argument("--sent-off", dest="sent_off", help="comma-separated names of players sent off (they cannot be subbed)")
     lv.set_defaults(fn=cmd_live)
+    lc = sub.add_parser("livecall", help="manager files: captain switch + subs between matchday days (game-feed points)")
+    lc.add_argument("--manager", default="zero")
+    lc.add_argument("--all", action="store_true")
+    lc.add_argument("--md", type=int)
+    lc.add_argument("--after-day", dest="after_day", type=int)
+    lc.add_argument("--auto", action="store_true", help="only between days; Telegram once per new call")
+    lc.add_argument("--send", action="store_true", help="also send the call to Telegram")
+    lc.set_defaults(fn=cmd_livecall)
     rp = sub.add_parser("replan", help="after a matchday's first day: refresh the rest, captain switch + subs")
     rp.add_argument("--md", type=int, required=True)
     rp.add_argument("--after-day", dest="after_day", type=int, default=1)

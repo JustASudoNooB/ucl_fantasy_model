@@ -287,7 +287,25 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
 
 def _managers(engine):
     from .managers import all_managers
-    return all_managers(engine, list(getattr(engine, "_mds", [])))
+    out = all_managers(engine, list(getattr(engine, "_mds", [])))
+    # the latest live call (between a matchday's days) for each manager, if one was made
+    for m in out:
+        hits = sorted((ROOT / "data" / "runs").glob(f"md*/live_{str(m.get('name', '')).lower()}.json"))
+        if hits:
+            try:
+                live = json.loads(hits[-1].read_text())
+                m["live"] = {k: live.get(k) for k in ("md", "after_day", "created_at", "day_points", "points_source",
+                                                       "xi_source", "decisions", "message", "next_kickoff_ist")}
+            except Exception:
+                pass
+    return out
+
+
+def _league(engine):
+    from .league import run
+    from .managers import next_md
+    mds = list(getattr(engine, "_mds", []))
+    return run(engine, next_md(), mds or [next_md()])
 
 
 def _extras(engine) -> dict:
@@ -296,7 +314,7 @@ def _extras(engine) -> dict:
     for key, fn in (("grading", lambda: insights.grading(engine)), ("replan", insights.replans),
                     ("live", lambda: insights.live_points(engine)), ("form_players", lambda: insights.player_form(engine)),
                     ("team_records", lambda: insights.team_records(engine)), ("form_tests", insights.backtests),
-                    ("managers", lambda: _managers(engine))):
+                    ("managers", lambda: _managers(engine)), ("league", lambda: _league(engine))):
         try:
             out[key] = fn()
         except Exception as e:                       # the dashboard must still build

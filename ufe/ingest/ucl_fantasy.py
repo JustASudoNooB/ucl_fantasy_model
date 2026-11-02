@@ -119,4 +119,21 @@ def sync(md: int = 1) -> Path | None:
     out = PROC / "players_feed.csv"
     df.to_csv(out, index=False)
     (PROC / "feed_meta.json").write_text(json.dumps(dict(url=url, n=len(df))))
+    _save_baseline(df)
     return out
+
+
+def _save_baseline(df: pd.DataFrame) -> Path | None:
+    """Before a matchday's deadline, keep a copy of the feed as feed_pre_md{N}.csv: the live call
+    reads each player's points for the matchday as the feed's season total minus this copy."""
+    from ..report.managers import next_md
+    from ..timeutil import deadline_for
+    from ..config import rules
+    from datetime import datetime, timezone
+    md = next_md()
+    row = next((r for r in rules()["matchdays"] if int(r["md"]) == md), None)
+    if row is None or datetime.now(timezone.utc) >= deadline_for(row).astimezone(timezone.utc):
+        return None
+    p = PROC / f"feed_pre_md{md}.csv"
+    df.to_csv(p, index=False)
+    return p

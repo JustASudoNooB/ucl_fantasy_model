@@ -57,9 +57,9 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - [x] Domestic results after 20 Sep 2026 (openfootball lags); a second free results source (football-data.co.uk, v0.13)
 - [ ] Ownership for every player (the mirror shows the top 100 by price and the biggest movers)
 - [x] MD2 Wednesday XIs and all MD1 XIs, to refit the line-up model on 36 clubs instead of 6 (all 36 clubs for MD1-MD3, v0.14)
-- [ ] A free bookmaker-odds source for every fixture (no single page listed all 18 MD2 prices)
-- [ ] Penalty takers for the 27 clubs without one on file (`data/seed/news/set_pieces.csv`)
-- [ ] Second predicted line-ups source, to estimate each source's hit rate separately
+- [x] A free bookmaker-odds source for every fixture (rg.org articles, all 18 games with goal lines, v0.15)
+- [x] Penalty takers for the 27 clubs without one on file (30 of 36 from this season's evidence, v0.15)
+- [x] Second predicted line-ups source, to estimate each source's hit rate separately (starting11.com; calibrate tags after MD4)
 
 ## Ideas backlog (only if a backtest shows a gain)
 - Referee card rates; weather; travel distance
@@ -76,3 +76,10 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - Done: goal-level terms in the team model (this season, this season's UEFA games); start probabilities updated from the last two UCL XIs; 1X2-only odds blend keeps the model's total goals; surname rule for name matching; MD1 XIs on file.
 - Next: record each matchday's actual XIs (`data/seed/lineups/md{N}_actual_xis.txt`) right after the games, since the start model now leans on them; domestic XIs would help the same way.
 - Watch: MD4 goals per match against the 3.8 forecast; if the 2026/27 rate settles back toward 3.4 the level terms shrink on their own.
+
+## v0.15.0 (2 Nov 2026)
+- Done: automatic team news (starting11.com) and odds with goal lines (rg.org), both committed by the matchday workflow; live captain/sub call from game-feed points between a matchday's days; mini-league mode (needs league points and rivals' squads); penalty takers for 30 clubs; keeper-specific XI weight; XI-history re-tune script; feed-based points grading from MD4.
+- Tested and rejected: domestic (FPL) XIs in the start model.
+- Blocked: Understat (unreachable from CI), assist grading (no free per-match assist source), UCL results and actual XIs without UFE_FOOTBALL_DATA_KEY / UFE_API_FOOTBALL_KEY (entered by hand until then).
+- After MD4: `python scripts/calibrate_news_labels.py 4`, `python scripts/tune_xi_history.py`, then `python -m ufe grade --md 4` (now includes expected v actual fantasy points per player).
+

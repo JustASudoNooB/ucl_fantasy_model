@@ -179,3 +179,51 @@ When no spelling scores 86+, a surname that exactly one player of that club shar
 ("Tasos Douvikas" -> Anastasios Douvikas); two players with the surname (the Haugens) means no
 match. Three more MD3 starters matched; the other 12 unmatched are players missing from the pool.
 
+**2026-11-02 · Free team news and odds instead of waiting for keys.**
+starting11.com publishes an "Oracle XI" for all clubs of the next matchday with a confidence tag per
+player, plus absences and doubts; rg.org publishes every game's 1X2 and goal-line prices from up to
+ten bookmakers (US and Canadian editions). Both are server-rendered and reachable from GitHub
+Actions, so the matchday workflow now writes news_md{N}.txt and odds_md{N}.csv itself before every
+dashboard build and commits them. Tags scale each named player's update (nailed on 1.0, probable 0.8,
+toss-up 0.5, punt 0.3, doubt 0.5) and the file counts at strength 0.7: the site is an algorithm with
+no measured hit rate yet (158 of its 353 MD4 picks are toss-ups). These values are priors, to be
+replaced from MD4 with scripts/calibrate_news_labels.py. Reverse if: MD4-MD5 show the tags do not
+separate starters (then strength 0.4 and equal tags).
+
+**2026-11-02 · Goal lines other than 2.5.**
+Bookmakers now quote 3.5 for most UCL games (4.5 for Barcelona v Villa). implied_lambdas fits any
+line; integer lines are Asian (a push refunds, so P(over) / (1 − P(exactly the line))). With a line
+present the market's total is blended at the usual 0.65; without one the supremacy-only rule stays.
+
+**2026-11-02 · Penalty takers from this season's evidence.**
+Only 13 clubs had a designated taker (FPL order or notes), so 23 clubs' penalties went by xG share.
+Now scored per player: UCL penalties taken this season 3.0, league penalties taken this season 2.0
+(starting11.com tables, 28 clubs), last season's attempts at the club 0.7, the season before 0.3,
+the existing order 1.5, set_pieces.csv 100. Top score of 1.4 or more = taker, runner-up = backup
+(weight 8 against the taker's 50 in the simulation). 30 of 36 clubs now have one (not BOD, LAS, SAB,
+SLA, SLO, VIK). Changes that matter: Raphinha is Barcelona's taker (3/3 in the league; Yamal 1/2 is
+the backup), Grimaldo is Atlético's (2/2), Da Cunha is Como's (4/4; Nico Paz 0/2 backup).
+LaLiga's order matches analiticafantasy.com's 2026/27 guide for Barcelona, Real Madrid and Betis.
+
+**2026-11-02 · Keepers' previous XIs count four times as much (kappa_gk 0.25).**
+scripts/tune_xi_history.py on MD2 and MD3: keeper start log loss 0.197 -> 0.179, outfield unchanged,
+best overall at kappa 1.0, decay 0.5-0.7 (0.7 kept). 0.25 is the edge of the grid; not pushed lower
+on two matchdays.
+
+**2026-11-02 · Domestic XIs in the start model: tested, rejected.**
+The five English clubs' league starters from FPL (GW6 before MD2, GW7 before MD3) added to the Beta
+update at weight 0.3 / 0.5 / 1.0 / 1.5: start log loss MD2 0.416 -> 0.421 / 0.425 / 0.434 / 0.443,
+MD3 0.517 -> 0.519 / 0.524 / 0.541 / 0.559. Managers rotate between league and UCL games, so the
+weekend XI does not predict the midweek one. Not added. Reverse if: a larger sample shows a gain
+(or a negative weight, i.e. rested-at-the-weekend players starting midweek, is worth a test).
+
+**2026-11-02 · Live call from game-feed points; mini-league mode.**
+Between a matchday's days the workflow computes each manager file's day-1 points as the feed's
+season totals minus the copy saved before the deadline (feed_pre_md{N}.csv, kept by data-sync),
+then runs the existing whole-plan policy (captain switch, up to four subs, auto-sub cover) and
+reports the chance the new captain beats the points already banked. The XI is the file's md{N}
+block, else the plan frozen at the deadline, else the model's best XI. Mini-league mode ranks your
+captain and transfer options by P(top after MD8) from the joint simulation (rivals assumed to play
+their best expected XI), so a differential captain can rank above the expected-points pick when you
+trail. It switches on when every manager file has league_points.
+

@@ -147,7 +147,8 @@ def simulate_fixture(rng, n: int, lh: float, la: float, rho: float, home: pd.Dat
         onp = (on[:, None, :] < e["t"][..., None]) & (e["t"][..., None] <= off[:, None, :])     # (n, g, P)
         xg = df.xg_share.to_numpy()
         xa = df.xa_share.to_numpy()
-        pen_w = np.where(df.pen_order.to_numpy() == 1, 50.0, xg)
+        po = df.pen_order.to_numpy()
+        pen_w = np.where(po == 1, 50.0, np.where(po == 2, 8.0, xg))     # backup taker when the first is off
         o_xg = oth[s].get("others_xg", 0.1)
         o_xa = oth[s].get("others_xa", 0.1)
         # scorers

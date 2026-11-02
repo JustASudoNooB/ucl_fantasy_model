@@ -94,6 +94,9 @@ xi_history:
   enabled: true
   kappa: 1.0
   decay: 0.7
+  # keepers rotate least: their previous XIs count four times as much (scripts/tune_xi_history.py,
+  # 2 Nov, MD2+MD3: keeper start log loss 0.197 -> 0.179 at kappa_gk 0.25; outfield unchanged)
+  kappa_gk: 0.25
 
 news:
   # Predicted line-ups update start probabilities by Bayes' rule (ufe/ingest/team_news.py).

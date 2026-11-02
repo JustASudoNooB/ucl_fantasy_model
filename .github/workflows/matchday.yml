@@ -1,5 +1,8 @@
 # Cloud fallback for when the laptop is off: rebuilds projections and the dashboard twice a day
-# and keeps the newest dashboard as a downloadable workflow artifact.
+# (and every 30 minutes on Tuesday/Wednesday evenings), keeps the newest dashboard as a
+# downloadable workflow artifact, and commits the matchday's inputs and live calls: team news
+# (starting11.com), odds (rg.org), the pre-deadline feed copy, the frozen forecast and the
+# between-days captain/sub call for every manager file.
 # Optional repository secrets: UFE_ODDS_API_KEY, UFE_API_FOOTBALL_KEY, UFE_FOOTBALL_DATA_KEY, UFE_TELEGRAM_TOKEN, UFE_TELEGRAM_CHAT.
 name: matchday
 on:
@@ -8,10 +11,11 @@ on:
     - cron: "*/30 15-19 * * 2,3" # Tue/Wed evenings: confirmed line-ups from 75 min before each kick-off
   workflow_dispatch: {}
 concurrency: { group: matchday, cancel-in-progress: false }
+permissions: { contents: write }
 jobs:
   run:
     runs-on: ubuntu-24.04          # pinned: ubuntu-latest moves to Ubuntu 26 from 19 Oct 2026
-    timeout-minutes: 30
+    timeout-minutes: 40
     env:
       UFE_ODDS_API_KEY: ${{ secrets.UFE_ODDS_API_KEY }}
       UFE_API_FOOTBALL_KEY: ${{ secrets.UFE_API_FOOTBALL_KEY }}
@@ -26,10 +30,15 @@ jobs:
       - name: Scheduled jobs (data syncs, predictions, alerts)
         run: python -m ufe schedule --once
         continue-on-error: true      # a source being down must not cost the dashboard
-      - name: Fresh domestic results and Premier League form
+      - name: Fresh data (domestic results, form, game feed, team news, odds)
         run: |
-          python -m ufe sync --results --form 2>&1 | tee sync.txt
+          MD=$(python -c "from ufe.cli import _live_md; print(_live_md())")
+          python -m ufe sync --results --form --feed --md "$MD" --teamnews live --freeodds live 2>&1 | tee sync.txt
           sed 's/^/::notice::sync: /' sync.txt | cut -c1-900
+        continue-on-error: true
+      - name: Live captain and sub call (only between a matchday's days)
+        run: |
+          python -m ufe livecall --auto 2>&1 | tail -5 | sed 's/^/::notice::livecall: /'
         continue-on-error: true
       - name: Build dashboard
         run: |
@@ -37,6 +46,24 @@ jobs:
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
             python -m ufe dashboard --mds live-8
+          fi
+      - name: Save the matchday's inputs and calls
+        if: always()
+        continue-on-error: true
+        run: |
+          git config user.name "ucl-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          MD=$(python -c "from ufe.cli import _live_md; print(_live_md())")
+          for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv data/processed/feed_pre_md*.csv \
+                   data/processed/livecall_state.json data/processed/scheduler_state.json \
+                   data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json; do
+            [ -e "$f" ] && git add "$f"
+          done
+          if git diff --cached --quiet; then
+            echo "::notice::nothing new to save"
+          else
+            git commit -q -m "matchday: MD$MD inputs and calls $(date -u +%FT%H%MZ)"
+            git pull --rebase -q && git push -q && echo "::notice::saved $(git diff --stat HEAD~1 | tail -1)"
           fi
       - name: Report what the syncs produced
         if: always()

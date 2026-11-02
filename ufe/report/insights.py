@@ -65,6 +65,26 @@ def live_points(engine) -> dict:
         days_done = sorted({int(d) for d in engine.fixture_table(md).query("status == 'FT'").day})
         teams_done = sorted(set(fx[(fx.md == md) & (fx.status == "FT")].home) | set(fx[(fx.md == md) & (fx.status == "FT")].away))
         out[str(md)] = dict(players=rows, days_done=days_done, teams_done=teams_done)
+    # the matchday being played: points from the game feed (total now minus the pre-deadline copy)
+    try:
+        from ..cli import _live_md
+        from .livecall import days_status, feed_day_points
+        md = _live_md()
+        st = days_status(fx, md)
+        if str(md) not in out and st["finished"] >= 1:
+            pts = feed_day_points(engine, md)
+            if pts:
+                ft = engine.fixture_table(md)
+                done = ft[ft.day <= st["finished"]]
+                teams_done = sorted(set(done.home) | set(done.away))
+                team_of = engine.players.set_index("id").team
+                rows = {pid: dict(pts=_r(v, 0), min=90 if v >= 2 else (30 if v == 1 else 0), g=None, a=None, potm=False,
+                                  off=False, rec=0)
+                        for pid, v in pts.items() if pid in team_of.index and team_of[pid] in teams_done}
+                out[str(md)] = dict(players=rows, days_done=list(range(1, st["finished"] + 1)), teams_done=teams_done,
+                                    source="game feed (minutes estimated from points)")
+    except Exception:
+        pass
     return out
 
 

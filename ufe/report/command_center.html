@@ -518,6 +518,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
       <p id="mg-sub">Real squads, each planned by the model for the next deadline: best XI and captain, the transfers worth making over the next three matchdays, and when to play Wildcard and Limitless. Compared with the model's own best squad and with each other.</p>
     </div>
     <div class="panel" style="padding:14px 16px; margin-bottom:16px; overflow-x:auto;"><table class="caps" id="mg-table"></table></div>
+    <div class="panel" id="lg-box" style="padding:14px 16px; margin-bottom:16px; overflow-x:auto;" hidden></div>
     <div class="mg-grid" id="mg-cards"></div>
     <p class="muted" style="font-size:12.5px; margin-top:10px;">Add a manager: copy <code>data/managers/zero.yaml</code>, list the 15 players with their club codes, set free transfers and chips used, and rebuild the dashboard. Bank is worked out from current prices when left blank.</p>
   </section>
@@ -1772,6 +1773,18 @@ const D = /*__UFE_DATA__*/null;
       return `<tr><td><b>${esc(m.name)}</b><br><span class="muted" style="font-size:12px">${esc(m.team_name || "")}</span></td><td class="r num">${f1(m.ev_xi)}</td><td class="r num">${f1(m.model.ev_xi)}</td><td class="r num">${m.model.overlap}/15</td>
         <td>${t ? `${t.sell.map(nm).join(", ")} → ${t.buy.map(nm).join(", ")} <span class="muted">(+${f1(t.gain)})</span>` : "hold"}</td><td>${ch}</td></tr>`;
     })()).join("")}</tbody>`;
+    const G = D.league;
+    if (G && G.table) {
+      const lb = $("#lg-box"); lb.hidden = false;
+      const rows = G.table.map(r => `<tr${r.me ? ' style="font-weight:600"' : ""}><td>${esc(r.name)}</td><td class="r num">${r.points}</td><td class="r num">${f1(r.md_exp)} <span class="muted">(${r.md_p10}–${r.md_p90})</span></td><td>${esc(r.captain)}</td><td class="r num">${pct(r.p_top_after_md)}</td><td class="r num">${pct(r.p_top_md8)}</td></tr>`).join("");
+      const plans = (G.plans || []).map(p => `<tr><td>${esc(p.plan)}</td><td class="r num">${f1(p.md_exp)}</td><td class="r num">${pct(p.p_top_after_md)}</td><td class="r num"><b>${pct(p.p_top_md8)}</b></td><td class="muted" style="font-size:12px">${Object.entries(p.beats).map(([k, v]) => `${esc(k)} ${pct(v)}`).join(" · ")}</td></tr>`).join("");
+      const diffs = (G.differentials || []).map(d => `<div style="margin-top:8px"><b>vs ${esc(d.rival)}</b> <span class="muted">(${d.shared}/15 shared${d.same_captain ? ", same captain" : ""})</span><br><span class="muted">They have:</span> ${d.theirs.map(x => `${esc(x.name)} ${f1(x.md)}`).join(", ") || "–"}<br><span class="muted">You have:</span> ${d.ours.map(x => `${esc(x.name)} ${f1(x.md)}`).join(", ") || "–"}</div>`).join("");
+      lb.innerHTML = `<h3 style="margin-top:0">Mini-league, MD${G.md}</h3>
+        <table class="caps"><thead><tr><th>Manager</th><th class="r">Points</th><th class="r">MD${G.md} expected (10–90%)</th><th>Captain</th><th class="r">Top after MD${G.md}</th><th class="r">Top after MD8</th></tr></thead><tbody>${rows}</tbody></table>
+        <h4>Your options, ranked by the chance of leading after MD8</h4>
+        <table class="caps"><thead><tr><th>Plan</th><th class="r">MD${G.md} expected</th><th class="r">Top after MD${G.md}</th><th class="r">Top after MD8</th><th>Beat each rival this matchday</th></tr></thead><tbody>${plans}</tbody></table>
+        ${diffs}<p class="muted" style="font-size:12px">${esc(G.note)} ${G.n_sims.toLocaleString()} joint simulations.</p>`;
+    }
     $("#mg-cards").innerHTML = ok.map(m => {
       const flagged = new Set((m.flags || []).map(f => f.id));
       const cell = (id, cls) => `<div class="${cls} ${flagged.has(id) ? "flag" : ""} ${id === m.captain ? "cap" : ""}"><span>${esc(nm(id))}${id === m.captain ? " (C)" : ""} <span class="muted">${esc(tShort(P[id] ? P[id].team : ""))}</span></span><span class="num">${f1(evOf(id, m.md))}</span></div>`;
@@ -1781,6 +1794,7 @@ const D = /*__UFE_DATA__*/null;
       return `<div class="panel mg">
         <div class="mg-head"><div><h3>${esc(m.name)}</h3><span class="muted" style="font-size:12.5px">${esc(m.team_name || "")} · updated ${esc(m.updated)}</span></div>
           <div class="mg-kv"><span class="chip">Bank €${Number(m.bank).toFixed(1)}m</span><span class="chip">${m.free_transfers} free transfers</span><span class="chip">Value €${Number(m.squad_value).toFixed(1)}m</span><span class="chip">${(m.chips_used || []).length ? "Used: " + m.chips_used.join(", ") : "All chips left"}</span></div></div>
+        ${m.live ? `<div class="calls" style="font-size:13px"><h4>Live call, MD${m.live.md} after day ${m.live.after_day}</h4>${(m.live.decisions.actions || []).map(a => `<div>${esc(a.text)}${a.p_beats != null ? ` <span class="muted">(${pct(a.p_beats)} chance he beats it)</span>` : ""}</div>`).join("")}<div class="muted">Day ${m.live.after_day} XI points ${esc(m.live.day_points)} (${esc(m.live.points_source)}); XI from ${esc(m.live.xi_source)}${m.live.next_kickoff_ist ? `; changes close ${esc(m.live.next_kickoff_ist)} IST` : ""}. Made ${esc(m.live.created_at)} UTC.</div></div>` : ""}
         <div><h4>MD${m.md} best XI (${esc(m.formation)}) · ${f1(m.ev_xi)} expected</h4></div>
         <div class="mg-xi">${m.xi.map(id => cell(id, "")).join("")}${m.bench.map(id => cell(id, "bench")).join("")}</div>
         ${flags ? `<p style="font-size:13px"><span class="tag bad">check</span> ${flags}</p>` : ""}

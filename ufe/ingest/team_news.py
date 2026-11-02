@@ -102,6 +102,18 @@ def _line_pos(i: int, n: int) -> str:
     return "MID"
 
 
+# a source's confidence tag after a name, "Suzuki [toss-up]": the named player's update is scaled
+LABEL_CONF = {"nailed on": 1.0, "probable": 0.8, "toss-up": 0.5, "punt": 0.3, "doubt": 0.5}
+
+
+def _label(nm: str) -> tuple[str, float, str]:
+    m = re.match(r"(.*?)\s*\[([^\]]+)\]\s*$", nm)
+    if not m:
+        return nm, 1.0, ""
+    lab = m.group(2).strip().lower()
+    return m.group(1).strip(), float(LABEL_CONF.get(lab, 1.0)), lab
+
+
 def parse(path: Path) -> pd.DataFrame:
     """One row per named player. A header line '# strength: 0.5' marks weaker evidence (e.g. the
     previous match's actual XI rather than a predicted XI for this match)."""
@@ -121,12 +133,15 @@ def parse(path: Path) -> pd.DataFrame:
         k = 0
         for li, ln in enumerate(lines):
             for nm in _names(ln):
-                rows.append(dict(team=team, name=nm, status="start", line_pos=_line_pos(li, len(lines)), order=k))
+                nm, conf, label = _label(nm)
+                rows.append(dict(team=team, name=nm, status="start", line_pos=_line_pos(li, len(lines)), order=k,
+                                 conf=conf, label=label))
                 k += 1
         for status, cell in (("out", out), ("doubt", doubt), ("susp", susp)):
             for nm in _names(cell):
-                rows.append(dict(team=team, name=nm, status=status, line_pos="", order=-1))
-    out = pd.DataFrame(rows)
+                nm, _, _ = _label(nm)
+                rows.append(dict(team=team, name=nm, status=status, line_pos="", order=-1, conf=1.0, label=""))
+    out = pd.DataFrame(rows, columns=["team", "name", "status", "line_pos", "order", "conf", "label"])
     out.attrs["strength"] = strength
     return out
 
@@ -144,11 +159,15 @@ def best_in_team(name: str, cand: pd.DataFrame, cutoff: int = 86):
     """Best pool id for a name among one club's players. When no spelling is close enough, a
     surname that exactly one candidate shares still counts ("Tasos Douvikas" and "Anastasios
     Douvikas"); two players with that surname (the Haugens at Viking) means no guess."""
-    best, best_s = None, 0
+    best, best_s, ties = None, 0, 0
     for c in cand.itertuples():
         sc = _score(name, c.name)
         if sc > best_s:
-            best, best_s = c.id, sc
+            best, best_s, ties = c.id, sc, 1
+        elif sc == best_s:
+            ties += 1
+    if best_s >= cutoff and ties > 1 and len(norm(name).split()) == 1:
+        return None, best_s                  # "García" at Barcelona: Joan or Eric, no guess
     if best_s >= cutoff:
         return best, best_s
     last = norm(name).split()[-1:] or [""]
@@ -285,8 +304,11 @@ def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None) ->
     players = players.copy()
     teams = set(news.team)
     status: dict[str, set] = {}
+    conf: dict[str, float] = {}
     for r in news.dropna(subset=["id"]).itertuples():
         status.setdefault(r.id, set()).add(r.status)
+        if r.status == "start":
+            conf[r.id] = float(getattr(r, "conf", 1.0) if pd.notna(getattr(r, "conf", 1.0)) else 1.0)
     log = []
     for i, r in players.iterrows():
         if r.team not in teams:
@@ -298,7 +320,8 @@ def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None) ->
         elif "out" in s or "susp" in s:
             q, sub = 0.0, 0.0
         else:
-            q = updated_start(p0, "start" in s, cfg)
+            c = conf.get(r.id, 1.0) if "start" in s else 1.0
+            q = updated_start(p0, "start" in s, cfg if c >= 0.999 else _scaled(cfg, c))
             sub = float(r.p_sub)
             if "doubt" in s:
                 q = min(q, cfg["doubt_in"] if "start" in s else cfg["doubt_out"])
@@ -309,6 +332,11 @@ def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None) ->
             log.append(dict(id=r.id, name=r["name"], team=r.team, p_start_before=round(p0, 3), p_start_after=round(q, 3),
                             news="/".join(sorted(s)) or "not in predicted XI"))
     return players, pd.DataFrame(log)
+
+
+def _scaled(cfg: dict, c: float) -> dict:
+    """A named player tagged with confidence c < 1: a fraction c of the full update."""
+    return {**cfg, "_k": float(cfg.get("_k", 1.0)) * c, "lr_start": float(cfg["lr_start"]) ** c}
 
 
 def named_flags(news: pd.DataFrame, players: pd.DataFrame) -> dict[str, int]:

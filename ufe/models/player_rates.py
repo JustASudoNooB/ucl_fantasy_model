@@ -200,6 +200,9 @@ def build(pool: pd.DataFrame, d: fpl_mod.FPLData | None = None, use_fpl_availabi
         if len(g) > 1:
             keep = g.sort_values(["pen_src", "minutes_hist"], ascending=False).index[0]
             players.loc[g.index.difference([keep]), "pen_order"] = 9
+    # this season's penalties (UCL events, domestic pk) and last season's attempts at the club
+    from . import penalties
+    players = penalties.apply(players)
     players = _apply_understat(players)
     strength = _strength_scale(team_strength, players.team.unique())
     players, others = _start_probabilities(players, strength)

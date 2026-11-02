@@ -39,12 +39,15 @@ Free keys that switch on extra layers (set as environment variables, all optiona
 | Any time | `python -m ufe schedule` | leaves a loop running that does everything below and pings Telegram |
 | T-72h | `python -m ufe sync --all` | fresh fixtures, results, prices, xG, news |
 | T-48h | `python -m ufe predict --md N` | projections + a frozen pre-deadline snapshot (used to grade the model honestly) |
-| T-30h | save UEFA.com's predicted line-ups as `data/seed/news/mdN_uefa.txt`, then `python -m ufe teamnews --md N --file data/seed/news/mdN_uefa.txt` | start chances updated from the named XIs, injuries and bans; missing starters added to the pool |
+| Any time | `python -m ufe sync --teamnews live --freeodds live --penalties` | no keys needed: predicted XIs with confidence labels, injuries and bans (starting11.com), 1X2 and goal-line prices for every game (rg.org), this season's penalty takers (starting11.com league tables). GitHub Actions runs it before every dashboard build |
+| T-30h | optional: save UEFA.com's predicted line-ups as `data/seed/news/mdN_uefa.txt`, then `python -m ufe teamnews --md N --file data/seed/news/mdN_uefa.txt` | a second line-up source (a file in data/processed/ takes precedence) |
 | T-24h | `python -m ufe advise --md N --squad data/my/squad.csv --bank 0.5 --ft 2` | best XI, captain plan, transfer options with gains net of hits, chip table |
 | T-6h | `python -m ufe sync --odds N` then `predict` again | market-blended probabilities |
 | T-1h | `python -m ufe lineup --md N --team BAY --start "Neuer, Kim, ..."` | confirmed XIs replace predicted ones; re-run `predict` |
 | After day 1 | add the evening's events to `data/seed/results/mdN_events.csv`, then `python -m ufe --as-of <day-2 date> replan --md N --squad data/my/squad.csv --xi data/my/xi.csv --captain Olise` | refit on day 1, refreshed day-2 forecast (frozen for grading), your day-1 points, the captain switch and manual subs (`--points app.csv` overrides the event estimate; `--lineups-known` once XIs are out) |
 | After day 1 (quick) | `python -m ufe live --md N --day 1 --squad data/my/squad.csv --captain Olise --points day1.csv` | the same call without the refit |
+| After day 1 (automatic) | `python -m ufe livecall --manager zero` (GitHub Actions: every run between the days) | captain switch and subs for each file in `data/managers/`, with day-1 points from the game feed (season total minus the copy saved before the deadline), the chance the new captain beats the old one's score, Telegram when the call changes |
+| Before each deadline | fill `league_points:` in every manager file (yours has `me: true`) | mini-league mode: P(top after the matchday) and P(top after MD8) for your captain and transfer options, differentials against each rival |
 | After each day | `python -m ufe grade --md N` | every match graded (result, scoreline, scorers, assisters, POTM, XIs), day 1 and day 2 separately |
 | After the MD | `python -m ufe results --md N --results results.csv --players players.csv` | scores the snapshot, updates calibration, logs a model version |
 

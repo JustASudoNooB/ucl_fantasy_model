@@ -126,6 +126,30 @@ def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
     if f is None:
         return pool
     pool = pool.copy()
+    ids, near = _feed_ids(pool, f)
+    f = f.assign(id=[ids.get(i) for i in f.index])
+    hit = f[f.id.notna()].drop_duplicates("id").set_index("id")
+    on = pool.id.isin(hit.index)
+    pool.loc[on, "price"] = pool.loc[on, "id"].map(hit.price).values
+    pool.loc[on, "pos"] = pool.loc[on, "id"].map(hit.pos).values
+    if "selected" in hit:
+        pool.loc[on, "own_pct"] = pd.to_numeric(pool.loc[on, "id"].map(hit.selected), errors="coerce").values
+    if "points" in hit:
+        pool.loc[on, "pts_to_date"] = pd.to_numeric(pool.loc[on, "id"].map(hit.points), errors="coerce").values
+    pool.loc[on, "price_status"] = "verified"
+    pool.loc[on, "source"] = "ucl_feed"
+    new = f[f.id.isna() & ~f.index.isin(near)].copy()
+    if len(new):
+        new["id"] = [f"{t}-{slug(n)}" for t, n in zip(new.team, new.name)]
+        if "points" in new:
+            new["pts_to_date"] = pd.to_numeric(new.points, errors="coerce")
+        new = new[~new.id.isin(pool.id)].assign(price_status="verified", source="ucl_feed", note="")
+        pool = pd.concat([pool, new[[c for c in pool.columns if c in new.columns]]], ignore_index=True)
+    return pool.drop_duplicates(subset=["id"]).reset_index(drop=True)
+
+
+def _feed_ids(pool: pd.DataFrame, f: pd.DataFrame) -> tuple[dict, set]:
+    """Feed row index -> pool id by club + name (ambiguous near-misses returned separately)."""
     ids, near = {}, set()
     short = f["short"] if "short" in f else f["name"]
     for t, grp in pool.groupby("team"):
@@ -142,21 +166,19 @@ def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
                 ids[i] = best
             elif s >= 70:
                 near.add(i)                      # probably a pool player under another spelling
-    f = f.assign(id=[ids.get(i) for i in f.index])
-    hit = f[f.id.notna()].drop_duplicates("id").set_index("id")
-    on = pool.id.isin(hit.index)
-    pool.loc[on, "price"] = pool.loc[on, "id"].map(hit.price).values
-    pool.loc[on, "pos"] = pool.loc[on, "id"].map(hit.pos).values
-    if "selected" in hit:
-        pool.loc[on, "own_pct"] = pd.to_numeric(pool.loc[on, "id"].map(hit.selected), errors="coerce").values
-    pool.loc[on, "price_status"] = "verified"
-    pool.loc[on, "source"] = "ucl_feed"
-    new = f[f.id.isna() & ~f.index.isin(near)].copy()
-    if len(new):
-        new["id"] = [f"{t}-{slug(n)}" for t, n in zip(new.team, new.name)]
-        new = new[~new.id.isin(pool.id)].assign(price_status="verified", source="ucl_feed", note="")
-        pool = pd.concat([pool, new[[c for c in pool.columns if c in new.columns]]], ignore_index=True)
-    return pool.drop_duplicates(subset=["id"]).reset_index(drop=True)
+    return ids, near
+
+
+def feed_points(pool: pd.DataFrame, path: Path) -> pd.Series:
+    """Season fantasy points per pool id from a saved copy of the game feed (players_feed.csv or
+    feed_pre_md{N}.csv). Feed players the pool lacks keep the id the overlay gives them."""
+    f = pd.read_csv(path)
+    if "points" not in f:
+        return pd.Series(dtype=float)
+    f = f[f.team.notna() & f.name.notna()]
+    ids, _ = _feed_ids(pool, f)
+    pid = [ids.get(i) or f"{t}-{slug(n)}" for i, t, n in zip(f.index, f.team, f.name)]
+    return pd.Series(pd.to_numeric(f.points, errors="coerce").to_numpy(), index=pid).groupby(level=0).max()
 
 
 def _official_pool() -> pd.DataFrame:
@@ -283,10 +305,13 @@ class Engine:
             if odds is not None and r.fixture_id in odds.index:
                 o = odds.loc[r.fixture_id]
                 ph, pdr, pa = remove_margin([o.home_odds, o.draw_odds, o.away_odds], self.cfg["market"]["margin_method"])
-                p_over = None
-                if "over25_odds" in o and pd.notna(o.get("over25_odds")) and pd.notna(o.get("under25_odds")):
+                p_over, line = None, 2.5
+                if pd.notna(o.get("total_line", np.nan)) and pd.notna(o.get("over_odds", np.nan)) and pd.notna(o.get("under_odds", np.nan)):
+                    p_over = float(remove_margin([o.over_odds, o.under_odds], "proportional")[0])
+                    line = float(o.total_line)
+                elif "over25_odds" in o and pd.notna(o.get("over25_odds")) and pd.notna(o.get("under25_odds")):
                     p_over = float(remove_margin([o.over25_odds, o.under25_odds], "proportional")[0])
-                market = implied_lambdas(ph, pdr, pa, p_over, rho=self.team_model.rho)
+                market = implied_lambdas(ph, pdr, pa, p_over, rho=self.team_model.rho, line=line)
                 if p_over is None:
                     # 1X2 prices pin the supremacy but hardly the total: keep the model's total.
                     # MD3: 1X2-implied totals came to 57.7 goals (actual 74, model 70.6).
@@ -386,10 +411,12 @@ class Engine:
             return players
         cfg = self.cfg.get("xi_history") or {}
         kappa, decay = float(cfg.get("kappa", 1.0)), float(cfg.get("decay", 0.7))
+        k_gk = float(cfg.get("kappa_gk", kappa))            # keepers rotate less: their history can count more
         players = players.copy()
         av = players["avail"] if "avail" in players else pd.Series(1.0, index=players.index)
         base = (players.p_start / av.where(av > 0, 1.0)).clip(0, 1)
-        num, den = kappa * base, pd.Series(kappa, index=players.index)
+        kap = pd.Series(np.where(players.pos == "GK", k_gk, kappa), index=players.index)
+        num, den = kap * base, kap.copy()
         for w, k in zip((1.0, decay), prev):
             started, teams = self._xi_started(k, players)
             has = players.team.isin(teams).astype(float)
@@ -412,7 +439,8 @@ class Engine:
         logs, covered = [], set()
         if news is not None:
             k = float(news.attrs.get("strength", 1.0))
-            cfg = None if k >= 0.999 else {**team_news.softened(team_news._cfg(), k), "_carried": True}
+            # weaker evidence counts for less, but this matchday's absences still mean out
+            cfg = None if k >= 0.999 else team_news.softened(team_news._cfg(), k)
             players, log = team_news.apply(players, news, cfg)
             logs.append(log)
             covered = set(news.team)

@@ -1,6 +1,7 @@
 # Daily data refresh that is saved back to the repo, so laptop runs and every later workflow
 # start from the same fresh inputs: current-season domestic results (football-data.co.uk merged
-# into the openfootball files), Premier League form (FPL API) and the official game feed.
+# into the openfootball files), Premier League form (FPL API), the official game feed (and its
+# pre-deadline copy for live points) and this season's league penalty takers (starting11.com).
 # Commits only when a file actually changed.
 name: data-sync
 on:
@@ -21,7 +22,7 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Sync results, form and game feed
         run: |
-          python -m ufe sync --results --form --feed 2>&1 | tee sync.txt
+          python -m ufe sync --results --form --feed --penalties 2>&1 | tee sync.txt
           sed 's/^/::notice::sync: /' sync.txt | cut -c1-900
       - name: Confirmed line-ups of the last matchday played (start-probability history)
         env:
@@ -38,7 +39,8 @@ jobs:
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
           for f in data/raw/openfootball/*.json data/processed/domestic_form.csv data/processed/players_feed.csv \
-                   data/processed/feed_meta.json data/processed/lineups_md*.csv; do
+                   data/processed/feed_meta.json data/processed/feed_pre_md*.csv data/processed/lineups_md*.csv \
+                   data/processed/penalty_takers.csv; do
             [ -e "$f" ] && git add "$f"
           done
           if git diff --cached --quiet; then

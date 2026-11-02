@@ -72,8 +72,26 @@ def tick(now: datetime | None = None) -> list[str]:
                     send(f"📊 MD{md} projections refreshed with the latest odds and news. Open the dashboard before "
                          f"{dl.astimezone(IST):%H:%M} IST.")
     fired += _lineup_jobs(now, state)
+    fired += _livecall_job(now)
     _save(state)
     return fired
+
+
+def _livecall_job(now: datetime) -> list[str]:
+    """Between a matchday's days: the live captain/sub call for every manager file (it decides
+    itself whether the window is open and alerts only when the call is new or changed)."""
+    import os
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        return []                              # the matchday workflow runs it as its own step, after the feed sync
+    from .cli import _live_md
+    from .report.livecall import days_status
+    from .pipeline import load_fixtures
+    md = _live_md()
+    st = days_status(load_fixtures(), md, now)
+    if st["finished"] < 1 or st["finished"] >= st["n_days"]:
+        return []
+    rc = _run(["livecall", "--auto"])
+    return [f"md{md}-livecall-day{st['finished']} rc={rc}"]
 
 
 def _lineup_jobs(now: datetime, state: dict) -> list[str]:

@@ -102,7 +102,13 @@ def all_managers(engine, mds: list[int]) -> list[dict]:
     for p in sorted(DIR.glob("*.yaml")):
         try:
             cfg = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
-            out.append(plan_manager(engine, cfg, md, mds))
+            plan = plan_manager(engine, cfg, md, mds)
+            out.append(plan)
+            try:
+                from .livecall import save_plan
+                save_plan(plan)
+            except Exception:                          # the frozen plan is a convenience only
+                pass
         except Exception as e:                       # one bad file must not break the dashboard
             out.append(dict(name=p.stem, error=str(e)))
     return out
