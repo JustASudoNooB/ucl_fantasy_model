@@ -47,7 +47,14 @@ jobs:
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
             python -m ufe dashboard --mds live-8
           fi
-      - name: Save the matchday's inputs and calls
+      - name: Report what the syncs produced
+        if: always()
+        continue-on-error: true
+        run: python scripts/ci_report.py
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with: { name: dashboard, path: data/runs/dashboard.html }
+      - name: Save the matchday's inputs and calls (last, because it sets the working tree aside)
         if: always()
         continue-on-error: true
         run: |
@@ -63,12 +70,6 @@ jobs:
             echo "::notice::nothing new to save"
           else
             git commit -q -m "matchday: MD$MD inputs and calls $(date -u +%FT%H%MZ)"
+            git stash -u -q || true              # the build's other outputs are not committed
             git pull --rebase -q && git push -q && echo "::notice::saved $(git diff --stat HEAD~1 | tail -1)"
           fi
-      - name: Report what the syncs produced
-        if: always()
-        continue-on-error: true
-        run: python scripts/ci_report.py
-      - uses: actions/upload-artifact@v5
-        if: always()
-        with: { name: dashboard, path: data/runs/dashboard.html }
