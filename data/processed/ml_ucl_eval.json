@@ -13,7 +13,7 @@
    "starters": 394
   },
   "1.0": {
-   "start_ll": 0.6214,
+   "start_ll": 0.6213,
    "start_brier": 0.2094,
    "top11": 246,
    "starters": 394
@@ -25,33 +25,33 @@
    "start_brier": 0.1097,
    "top11": 316,
    "starters": 395,
-   "goal_ll": 0.1651,
-   "goal_brier": 0.0456,
+   "goal_ll": 0.1648,
+   "goal_brier": 0.0455,
    "goals_exp": 53.2,
    "scorers": 65,
-   "points_corr": 0.5179
+   "points_corr": 0.5176
   },
   "0.5": {
    "start_ll": 0.3534,
    "start_brier": 0.1081,
    "top11": 314,
    "starters": 395,
-   "goal_ll": 0.1652,
+   "goal_ll": 0.1653,
    "goal_brier": 0.0455,
    "goals_exp": 53.4,
    "scorers": 65,
-   "points_corr": 0.5239
+   "points_corr": 0.5241
   },
   "1.0": {
    "start_ll": 0.3542,
    "start_brier": 0.1082,
    "top11": 316,
    "starters": 395,
-   "goal_ll": 0.167,
-   "goal_brier": 0.0456,
-   "goals_exp": 53.4,
+   "goal_ll": 0.166,
+   "goal_brier": 0.0455,
+   "goals_exp": 53.5,
    "scorers": 65,
-   "points_corr": 0.5267
+   "points_corr": 0.5274
   }
  },
  "3": {
@@ -60,33 +60,33 @@
    "start_brier": 0.1326,
    "top11": 289,
    "starters": 392,
-   "goal_ll": 0.1756,
-   "goal_brier": 0.0471,
+   "goal_ll": 0.1762,
+   "goal_brier": 0.0472,
    "goals_exp": 58.2,
    "scorers": 63,
-   "points_corr": 0.427
+   "points_corr": 0.4246
   },
   "0.5": {
    "start_ll": 0.4176,
    "start_brier": 0.1305,
    "top11": 293,
    "starters": 392,
-   "goal_ll": 0.1731,
+   "goal_ll": 0.173,
    "goal_brier": 0.0467,
-   "goals_exp": 57.8,
+   "goals_exp": 58.0,
    "scorers": 63,
-   "points_corr": 0.4332
+   "points_corr": 0.4315
   },
   "1.0": {
    "start_ll": 0.4305,
    "start_brier": 0.1326,
    "top11": 291,
    "starters": 392,
-   "goal_ll": 0.171,
-   "goal_brier": 0.0464,
+   "goal_ll": 0.1717,
+   "goal_brier": 0.0465,
    "goals_exp": 57.9,
    "scorers": 63,
-   "points_corr": 0.4357
+   "points_corr": 0.4353
   }
  }
 }
