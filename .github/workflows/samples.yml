@@ -1,0 +1,22 @@
+# Saves raw copies of the free data pages to the `samples` branch (manual run only), so parsers
+# can be developed against real markup from a machine that cannot reach those sites.
+name: samples
+on: { workflow_dispatch: {} }
+permissions: { contents: write }
+jobs:
+  fetch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - run: python scripts/fetch_samples.py /tmp/samples
+      - name: Commit to the samples branch
+        run: |
+          cd /tmp/samples
+          git init -q -b samples
+          git config user.name "ucl-data-bot"; git config user.email "actions@users.noreply.github.com"
+          git add -A && git commit -q -m "samples $(date -u +%FT%H%M)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" samples
