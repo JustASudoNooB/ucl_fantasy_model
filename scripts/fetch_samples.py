@@ -34,6 +34,9 @@ def save(name: str, url: str, headers: dict | None = None):
 
 
 save("starting11_ucl.html", "https://starting11.com/champions-league")
+for lg in ("la-liga", "bundesliga", "serie-a", "ligue-1", "eredivisie", "super-lig", "primeira-liga",
+           "belgian-pro-league", "premier-league"):
+    save(f"s11_setpieces_{lg}.html", f"https://starting11.com/set-piece-takers/{lg}")
 save("starting11_home.html", "https://starting11.com/")
 for tag, url in (("rg_news_us.html", "https://rg.org/news/soccer"), ("rg_news_ca.html", "https://rg.org/en-ca/news/soccer")):
     r = save(tag, url)
@@ -57,6 +60,10 @@ meta = ROOT / "data" / "processed" / "feed_meta.json"
 if meta.exists():
     url = json.loads(meta.read_text()).get("url")
     r = save("feed_raw.json", url, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"})
+    if r is None or r.status_code != 200:
+        import time
+        time.sleep(5)
+        r = save("feed_raw.json", url, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"})
     if r is not None and r.status_code == 200:
         try:
             data = r.json()
