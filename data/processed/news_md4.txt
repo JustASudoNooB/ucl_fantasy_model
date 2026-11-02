@@ -1,0 +1,40 @@
+# MD4 predicted line-ups and team news: starting11.com "Champions League 26/27 Matchday 4 predicted lineups",
+# https://starting11.com/champions-league, updated Sun 1 Nov 2026 06:30 GMT, read 2 Nov 2026 06:45 IST.
+# No XI published for SHA and SLO (they keep the XI-history start probabilities).
+# Page conflicts resolved: Inter keeper Martínez kept in the XI (also listed injured); Real Madrid's
+# Valverde (out) and Vinícius (suspended) removed from the XI, which leaves 9 named starters; Galatasaray's injured "Yilmaz" is not Barış Alper Yılmaz.
+# Format: TEAM | XI (GK first) | out | doubtful | suspended
+GAL | Çakır; Jakobs, Sánchez, Bardakcı, Sallai; Torreira, Gabriel Sara; Barış Alper Yılmaz, Batrakov, Akgün; Osimhen | Aydın, Ayhan, Güner, Karataş, Ünyay | Leão, Singo, Torreira |
+VFB | Seimen; Mittelstädt, Hendriks, Chabot, Jeltsch; Prömel, Karazor; Führich, El Khannouss, Leweling; Undav | Stiller, Vagnoman, Al Dakhil, Drljača, Nartey | Mittelstädt |
+SCP | Kaique Pereira; Maxi Araújo, Eduardo Quaresma, Gonçalo Inácio, Fresneda; João Simões, Sergi Altimira, Doumbia; Irankunda, Catamo, Luis Suárez | Zalazar, Debast | |
+BOD | Haikin; Bjørkan, Gundersen, Bjørtuft, Sjøvold; Auklend, Berg, Fet; Hauge, Blomberg, Helmersen | Evjen, Lund, Mikkelsen, Sjong | Riisnæs, Blomberg |
+LIL | Berke Özer; Verdonk, Ngoy, Ribeiro, Goffi; Mukau, Bentaleb, André; Diaoune, Bakwa, Haraldsson | Ueda, Igamane | Berke Özer, Sahraoui | Ethan Mbappé
+FEY | Ernst; Javi López, Watanabe, Mármol, Givairo Read; Zechiël, Vanhoutte, Targhalline; Valente, Hadj Moussa, Ferri | St. Juste, Beelen, Bos, Nelson, Nieuwkoop | Moder |
+INT | Josep Martínez; Akanji, Bisseck, Carlos Augusto; Dimarco, Barella, Çalhanoğlu, Sučić, Spence; Thuram, Bonny | Jones, Pavard, Henrique, Stones | | Bastoni
+MUN | Lammens; Mazraoui, de Ligt, Maguire, Dalot; Tielemans, Santos; Cunha, Bruno Fernandes, Mount; Mbeumo | Dorgu, Šeško, Shaw, Ugarte | Mazraoui, Bruno Fernandes, Heaven, Mainoo, Rashford | Lisandro Martínez
+ROM | Gollini; Ghilardi, Balerdi, Hermoso; Wesley, de Roon, Pisilli, Molina; Mora, Lulli; Malen | Dybala, Koné, Cristante, Pellegrini, Svilar, Bah | |
+BAR | Joan García; Cancelo, Cubarsí, Gerard Martín, Balde; Bernal, Pedri; Gordon, Fermín López, Lamine Yamal; Raphinha | Olmo, Christensen, Espart, Bardghji | Eric García, Koundé |
+AVL | Suzuki; Mings, Lindelöf, Pau Torres, João Gomes; McGinn, Barkley; Mbaye, Buendía, Edward; Nicolas Jackson | Wan-Bissaka, Cissé, Harwood-Bellis, Madjo | Hemmings | Cash
+ATM | Oblak; Grimaldo, Pubill, Hancko, Llorente; Baena, Barrios, Castillo, Giuliano Simeone; Jonathan David, Julián Álvarez | Johnny Cardoso, Koke | Lee Kang-in, Cristian Romero | Hjulmand
+BAY | Urbig; Stanišić, Upamecano, Tah, Laimer; Bischof, Olise; Davies, Saibari, Gnabry; Kane | Luis Díaz, Kimmich, Kim Min-jae, Neuer, Pavlović, Musiala | Olise, Saibari, Gnabry |
+VIL | Gulácsi; Cardona, Navarro, Veiga, Mouriño; Diatta, Gueye; Moleiro, Comesaña, Macia; Mikautadze | Saliba, Buchanan, Akhomach, Pépé | Moreno, Romero |
+PSG | Safonov; Lucas Hernández, Zaïre-Emery, Pacho, Hakimi; João Neves, Vitinha, Fabián Ruiz; Torres, Doué, Akliouche | Dembélé, Marquinhos, Nuno Mendes, Kvaratskhelia, Longoni | Mayulu |
+LAS | Jungwirth; Mbuyamba, Alemão, Andrade; Dibango, Ljubičić, Horvath, Jørgensen; Lang, Daněk, Kalajdzic | Bello, Cheikne, Harakaté, Smakaj | Horvath, Usor |
+AEK | Brignoli; Pilios, Moukoudi, Relvas, Rota; João Mário, Arriaga, Marin, Majer; Varga, Jović | | |
+RMA | Lunin; Fernández, Rüdiger, Huijsen; Camavinga, Silva; Bellingham, Güler; Mbappé | Valverde, Militão, Asencio, Rodrygo | Courtois, Mendy | Vinícius Júnior
+FEN | Ederson; Archie Brown, Demir, Mercan, Semedo; Kanté, Guendouzi; Aktürkoğlu, Greenwood, Oğuz Aydın; Muriqi | Aké, Asensio, Oosterwolde, Diouf, Yandaş | Müldür, Kanté | Škriniar
+LIV | Alisson Becker; Tsimikas, Jacquet, van Dijk, Ronald Araújo; Gravenberch, Nyoni, Mac Allister; Gakpo, Ngumoha, Koumas | Barcola, Frimpong, Bradley, Chiesa, Ekitike | Szoboszlai, Muñoz |
+RBL | Vandevoordt; Raum, Orbán, Lukeba, Baku; El Aynaoui, Seiwald; Nusa, Banzuzi, Bakayoko; Rômulo | Guiu, Estève, Ouédraogo, Zingerle | Nkunku, Baumgartner |
+MCI | Donnarumma; Gvardiol, Khusanov, Rúben Dias, Rico Lewis; Elliot Anderson, Enzo Fernández; Allan Elias, Cherki, Foden; Samba | Semenyo | Matheus Nunes |
+POR | Diogo Costa; Sanusi, Bednarek, Kiwior, Baio; Froholdt, Rosario, Veiga; Pietuszewski, Aquino, Samu | William Gomes, Mec, Prpić | |
+NAP | Meret; Di Lorenzo, Rrahmani, Marín; Beukema, Anguissa, McTominay, Politano; De Bruyne, Lang; Højlund | Badiashile, Lobotka, Santos, Spinazzola, Buongiorno | Vergara, Rrahmani, Politano |
+PSV | Kovář; Kostić, Geertruida, Gasiorowski, Dest; Sano, Mauro Júnior; Perišić, Til, Bajraktarevic; Mijnans | Wanner, Lammers, Nagalo, Pléa, Schouten | van Bommel, Pepi, Ouaissa, Kostić, Til |
+CLB | Sommer; Seys, Spileers, Mechele, Sabbe; Potts, Vanaken; Virgili, Lemaréchal, Forbs; Tresoldi | Ordóñez | |
+RCL | Risser; Aguilar, Baidoo, Udol; Skóraś, Cuisance, Haidara, Abdulhamid; Kadile, Hazard; Ivanović | Ganiou, Sima, Çelik, Chavez, Édouard | Aguilar, Bernardino, Gradit |
+COM | Butez; Valle, Kempf, Naveros, Couto; Perrone, Milla; Baturina, Nico Paz, Da Cunha; Douvikas | Diao, Addai, Caqueret, Goldaniga, Kean | Chalobah |
+BVB | Kobel; Anton, Schlotterbeck, Bensebaïni; Svensson, Chukwuemeka, Veerman, Ryerson; Silva, Nmecha; Guirassy | Can, Konstantelias, Lerma | Bensebaïni, Karetsas, Prates |
+BET | Vallés; Fran García, Bartra, Natan, Bellerín; Fornals, Marc Roca; Ezzalzouli, Isco, Antony; Parrott | Firpo, Hernández, Losada | Ruibal |
+VIK | Østbø; Bassey, Falchener, Daland, Haugen; Askildsen, Bell, Moi; Tripić, Postema, Botheim | Bærtelsen, Berisha, Bjørshol, D'Agostino, Frimpong | Middelthon, Falchener, Haugen |
+SAB | Pokatilov; Puchacz, Almeida, McCarthy, Daşdəmirov; Rakhmonaliev, Lepinjica; Simić, Du Queiroz, Parris; Mickels | | | Zedadka, Solvet
+SLA | Markovič; Vlček, Zima, N'Guessan; Kubiak, Moses, Nowak, Suleiman; Ayaosi, Šturm; Provod | Chaloupek, Chorý, Jurásek, Kante, Kolář | |
+ARS | Raya; Lewis-Skelly, Konsa, Gabriel, Timber; Ødegaard, Bruno Guimarães, Rice; Madueke, Gyökeres, Havertz | Saka, Saliba | Rice, Madueke, Calafiori, Hincapié, Tzolis | Dowman
