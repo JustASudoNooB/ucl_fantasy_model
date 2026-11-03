@@ -45,17 +45,56 @@ def _club(name: str) -> str | None:
     return ucl_team_id(name) or ucl_team_id(re.sub(r"\s+(FA|FC|SK|CF)$", "", name))
 
 
+def _summary_table(tbl: str) -> list[dict]:
+    """A table with a "Match (Home | Draw | Away)" column and one "home | draw | away" cell per book."""
+    txt = lambda c: H.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+    rows = re.findall(r"<tr>(.*?)</tr>", tbl, flags=re.S)
+    if not rows:
+        return []
+    books = [txt(c) for c in re.findall(r"<th[^>]*>(.*?)</th>", rows[0], flags=re.S)][1:]
+    out = []
+    for r in rows[1:]:
+        cells = [txt(c) for c in re.findall(r"<td[^>]*>(.*?)</td>", r, flags=re.S)]
+        if not cells:
+            continue
+        m = re.match(r"(.+?)\s+[Vv][Ss]\.?\s+(.+?)\s*$", cells[0])
+        home, away = (_club(m.group(1)), _club(m.group(2))) if m else (None, None)
+        if not home or not away:
+            continue
+        quotes = []
+        for b, v in zip(books, cells[1:]):
+            parts = [to_decimal(x.strip()) for x in v.split("|")]
+            if len(parts) == 3 and all(x is not None for x in parts):
+                quotes.append(dict(book=b, home=parts[0], draw=parts[1], away=parts[2]))
+        if quotes:
+            out.append(dict(home=home, away=away, quotes=quotes))
+    return out
+
+
 def parse(html: str) -> list[dict]:
     """[{home, away, quotes: [{book, home, draw, away, line, over, under}]}] from one article."""
     cut = html.find("self.__next_f")
     s = html[:cut] if cut > 0 else html
     out = []
     for t in re.finditer(r"<table>(.*?)</table>", s, flags=re.S):
+        th0 = re.search(r"<th[^>]*>(.*?)</th>", t.group(1), flags=re.S)
+        if th0 and re.sub(r"<[^>]+>", "", th0.group(1)).strip().lower().startswith("match (home"):
+            out += _summary_table(t.group(1))           # MD2 style: one row per match, "home | draw | away" per book
+            continue
         heads = re.findall(r"<h[23][^>]*>(.*?)</h[23]>", s[max(0, t.start() - 4000):t.start()], flags=re.S)
         if not heads:
             continue
         title = H.unescape(re.sub(r"<[^>]+>", "", heads[-1])).strip()
         m = re.match(r"(.+?)\s+[Vv][Ss]\.?\s+(.+?)\s+Odds", title)
+        if not m:
+            # older articles (MD1-2): the heading is just "Home vs Away", and the table's first header
+            # cell repeats it with the kick-off time in brackets
+            th0 = re.search(r"<th[^>]*>(.*?)</th>", t.group(1), flags=re.S)
+            for cand in (title, H.unescape(re.sub(r"<[^>]+>", "", th0.group(1))).strip() if th0 else ""):
+                m = re.match(r"(.+?)\s+[Vv][Ss]\.?\s+(.+?)\s*(?:\(.*\))?\s*$", cand)
+                if m and _club(m.group(1)) and _club(m.group(2)):
+                    break
+                m = None
         if not m:
             continue
         home, away = _club(m.group(1)), _club(m.group(2))
@@ -77,7 +116,7 @@ def parse(html: str) -> list[dict]:
                     continue
                 if lm:
                     lines[b].setdefault(float(lm.group(2)), {})[lm.group(1).lower()] = d
-                elif label.endswith(": Draw"):
+                elif label.endswith(": Draw") or label.strip().lower() == "draw":
                     q[b]["draw"] = d
                 elif _club(label.split(":", 1)[-1]) == home:
                     q[b]["home"] = d
