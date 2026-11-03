@@ -1,0 +1,26 @@
+{
+ "extra_0.html": {
+  "url": "https://rg.org/news/soccer/champions-league-matchday-1-odds-predictions-best-bets",
+  "status": 200,
+  "bytes": 540666,
+  "type": "text/html; charset=utf-8"
+ },
+ "extra_1.html": {
+  "url": "https://rg.org/en-ca/news/soccer/real-madrid-inter-napoli-arsenal-odds-champions-league-matchday-1-picks",
+  "status": 200,
+  "bytes": 517812,
+  "type": "text/html; charset=utf-8"
+ },
+ "extra_2.html": {
+  "url": "https://rg.org/en-ca/news/soccer/man-city-vs-psg-atletico-vs-man-utd-champions-league-matchday-2-odds",
+  "status": 200,
+  "bytes": 472670,
+  "type": "text/html; charset=utf-8"
+ },
+ "extra_3.html": {
+  "url": "https://rg.org/news/soccer/atletico-vs-man-utd-man-city-vs-psg-champions-league-matchday-2-bets",
+  "status": 200,
+  "bytes": 492098,
+  "type": "text/html; charset=utf-8"
+ }
+}
