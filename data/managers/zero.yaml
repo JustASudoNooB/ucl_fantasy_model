@@ -3,8 +3,8 @@
 name: Zero
 team_name: ONETEAMONEDREAM
 updated: 2026-11-03
-free_transfers: 2          # MD4: used both (Díaz, Tresoldi out; Vinícius, Christiansen in), as recommended 3 Nov; confirm
-bank: 0.2                  # after the MD4 transfers (0.7 - 0.5); confirm in the app
+free_transfers: 2          # MD4: three transfers, one -4 hit (Díaz, Tresoldi, Gvardiol out; Doué, Malen, Hakimi in), Zero's choice 3 Nov 22:44 IST
+bank: 0.2                  # after the MD4 transfers (0.7 + 20.5 - 21.0); confirm in the app
 chips_used: [wildcard]     # MD3
 me: true                   # this is your file (mini-league mode compares it with the rivals' files)
 league_points: 257        # mini-league table after MD3 (3rd: Prateek 267, Addi 261)
@@ -14,11 +14,14 @@ md2:
        Jude Bellingham, Rayan Cherki, Luis Suárez, Harry Kane]
   points: 65               # after day 1 (app); day 2 from match reports: Bellingham 2, Cherki 1 (off at HT), Marquinhos 1, plus recoveries -> about 71 final (check the app)
 md4:
-  # recommended 3 Nov 22:15 IST (3-4-3 for Gvardiol's rotation risk) and assumed until confirmed; the live call after day 1 uses this
+  # Zero's own plan (3 transfers, -4). Model's plan for comparison after MD4: Díaz, Tresoldi -> Vinícius, Christiansen,
+  # 3-4-3 (Suzuki; Jacquet, Grimaldo, Dimarco; Yamal (C), Vinícius, Bellingham, Cherki; Mbappé, Suárez, Christiansen),
+  # expected 77.4 vs 72.2 for this team (both with the after-Tuesday changes, net of hits).
+  hits: -4
   captain: Lamine Yamal
-  xi: [Zion Suzuki, Jeremy Jacquet, Grimaldo, Federico Dimarco, Lamine Yamal, Vinícius Júnior,
-       Jude Bellingham, Rayan Cherki, Kylian Mbappé, Luis Suárez, Christiansen]
-  bench: [Joško Gvardiol, Isco, Marc Guéhi, Yann Sommer]
+  xi: [Zion Suzuki, Achraf Hakimi, Jeremy Jacquet, Grimaldo, Federico Dimarco, Lamine Yamal, Désiré Doué,
+       Jude Bellingham, Rayan Cherki, Kylian Mbappé, Luis Suárez]
+  bench: [Isco, Donyell Malen, Marc Guéhi, Yann Sommer]
 md3:
   chip: wildcard
   captain: Kylian Mbappé   # switched to him after day 1
@@ -26,16 +29,16 @@ md3:
 squad:
   - {name: Zion Suzuki, team: AVL}
   - {name: Yann Sommer, team: CLB}
-  - {name: Joško Gvardiol, team: MCI}
+  - {name: Achraf Hakimi, team: PSG}
   - {name: Marc Guéhi, team: MCI}
   - {name: Federico Dimarco, team: INT}
   - {name: Jeremy Jacquet, team: LIV}
   - {name: Grimaldo, team: ATM}
   - {name: Lamine Yamal, team: BAR}
-  - {name: Vinícius Júnior, team: RMA}
+  - {name: Désiré Doué, team: PSG}
   - {name: Jude Bellingham, team: RMA}
   - {name: Rayan Cherki, team: MCI}
   - {name: Isco, team: BET}
   - {name: Kylian Mbappé, team: RMA}
   - {name: Luis Suárez, team: SCP}
-  - {name: Christiansen, team: VIK}
+  - {name: Donyell Malen, team: ROM}
