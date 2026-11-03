@@ -1417,7 +1417,7 @@ const D = /*__UFE_DATA__*/null;
       if (!LB.mds) return `<p class="muted">No leaderboard yet: run <code>python -m ufe models eval</code>.</p>`;
       const S = LB.summary || {}, A = S.average || {}, best = S.best || {}, wins = S.wins || {};
       const rows = SC.map(([m, lab, low, d]) => `<tr><td>${lab} <span class="muted">(${low ? "lower" : "higher"} is better)</span></td>${keys.map(k => {
-        const a = A[k] || {}, v = a[m], b = best[m] === k;
+        const a = A[k] || {}, v = a[m], bv = (A[best[m]] || {})[m], b = v != null && bv != null && fmt(v, d) === fmt(bv, d);
         return `<td class="r num"${b ? ' style="font-weight:700;color:var(--good)"' : ""}>${fmt(v, d)}${v != null ? `<span class="muted" style="font-weight:400"> ·${a[m + "_n"]}</span>` : ""}</td>`;
       }).join("")}</tr>`).join("");
       const per = Object.keys(LB.mds).sort((a, b) => a - b).map(md => `<tr><td>MD${md}</td>${keys.map(k => {
@@ -1428,9 +1428,9 @@ const D = /*__UFE_DATA__*/null;
         const x = (f.models || {})[k];
         return `<td class="r num">${x ? f1(x.expected) + (x.error != null ? ` <span class="muted">(${x.error > 0 ? "+" : ""}${x.error})</span>` : "") : "–"}</td>`;
       }).join("")}</tr>`).join("");
-      return `<p style="font-size:13px">Each model is rebuilt as of each matchday using only what was known before it, then scored on what happened. The small number after each average is how many matchdays it covers; bold marks the best model on that score.</p>
+      return `<p style="font-size:13px">Each model is rebuilt as of each matchday using only what was known before it, then scored on what happened. The small number after each average is how many matchdays it covers; bold marks the best model on that score (ties share it, and a tied matchday splits the win).</p>
         <table class="caps"><thead><tr><th>Score</th>${th()}</tr></thead><tbody>${rows}
-        <tr><td><strong>Scores won</strong> <span class="muted">(matchday × score)</span></td>${keys.map(k => `<td class="r num"><strong>${wins[k] ?? 0}</strong></td>`).join("")}</tr></tbody></table>
+        <tr><td><strong>Scores won</strong> <span class="muted">(matchday × score)</span></td>${keys.map(k => `<td class="r num"><strong>${Number(wins[k] ?? 0).toFixed(Number.isInteger(wins[k] ?? 0) ? 0 : 1)}</strong></td>`).join("")}</tr></tbody></table>
         <h4>By matchday <span class="muted" style="font-weight:400">(start log loss / goal log loss / points correlation)</span></h4>
         <table class="caps"><thead><tr><th>Matchday</th>${th()}</tr></thead><tbody>${per}</tbody></table>
         ${fr ? `<h4>Deadline forecasts for saved teams <span class="muted" style="font-weight:400">(expected points with the between-day moves; actual minus expected in brackets)</span></h4>

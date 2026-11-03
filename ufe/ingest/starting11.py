@@ -200,5 +200,7 @@ def sync(md: int, fixtures: pd.DataFrame, players: pd.DataFrame | None = None, h
     PROC.mkdir(parents=True, exist_ok=True)
     p = PROC / f"news_md{md}.txt"
     p.write_text(text, encoding="utf-8")
+    from .frozen import keep_pre_deadline_copy
+    keep_pre_deadline_copy(p, md)                 # the version the deadline forecasts use
     n = sum(1 for ln in text.splitlines() if ln and not ln.startswith("#"))
     return str(p), f"team news (starting11) -> {p.name}: {n} clubs, page updated {parsed.get('updated')}"

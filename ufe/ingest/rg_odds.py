@@ -202,5 +202,7 @@ def sync(md: int, fixtures: pd.DataFrame, pages: dict[str, str] | None = None, m
     PROC.mkdir(parents=True, exist_ok=True)
     p = PROC / f"odds_md{md}.csv"
     df.to_csv(p, index=False)
+    from .frozen import keep_pre_deadline_copy
+    keep_pre_deadline_copy(p, md)
     return str(p), (f"odds (rg.org) -> {p.name}: {len(df)} games, goals line for {int(df.total_line.notna().sum())}, "
                     f"median {int(df.n_books.median())} bookmakers")

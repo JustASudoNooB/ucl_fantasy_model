@@ -71,3 +71,32 @@ def test_leaderboard_compares_on_shared_matchdays():
     assert s["matchdays_used"]["start_ll"] == [2, 3]
     assert s["average"]["a"]["start_ll"] == 0.41 and s["average"]["b"]["start_ll"] == 0.41
     assert s["wins"] == {"a": 1, "b": 1}
+    tie = leaderboard.summarise({"1": {"a": {"start_ll": 0.5}, "b": {"start_ll": 0.5}}}, ["a", "b"])
+    assert tie["wins"] == {"a": 0.5, "b": 0.5}                 # ties split the win
+
+
+def test_pre_deadline_copies_freeze_at_the_deadline(tmp_path, monkeypatch):
+    from ufe.ingest import frozen
+    p = tmp_path / "news_md4.txt"
+    p.write_text("before")
+    before = datetime(2026, 11, 3, 12, 0, tzinfo=timezone.utc)          # MD4 deadline 17:45 UTC
+    after = datetime(2026, 11, 3, 20, 0, tzinfo=timezone.utc)
+    assert frozen.keep_pre_deadline_copy(p, 4, now=before) == tmp_path / "news_md4_pre.txt"
+    p.write_text("after the deadline")
+    assert frozen.keep_pre_deadline_copy(p, 4, now=after) is None
+    assert (tmp_path / "news_md4_pre.txt").read_text() == "before"
+
+
+def test_frozen_mode_reads_pre_deadline_news(tmp_path, monkeypatch):
+    from ufe.ingest import team_news
+    monkeypatch.setattr(team_news, "PROC", tmp_path)
+    monkeypatch.setattr(team_news, "NEWS_DIR", tmp_path / "seed")
+    (tmp_path / "seed").mkdir()
+    (tmp_path / "news_md2.txt").write_text("updated after the deadline")
+    (tmp_path / "seed" / "md2_uefa_predicted.txt").write_text("pre-match")
+    monkeypatch.delenv("UFE_FROZEN_INPUTS", raising=False)
+    assert team_news.news_path(2).name == "news_md2.txt"               # live use: the latest news
+    monkeypatch.setenv("UFE_FROZEN_INPUTS", "1")
+    assert team_news.news_path(2).name == "md2_uefa_predicted.txt"     # backtests: no post-deadline file
+    (tmp_path / "news_md2_pre.txt").write_text("frozen at the deadline")
+    assert team_news.news_path(2).name == "news_md2_pre.txt"

@@ -22,10 +22,6 @@ jobs:
         run: |
           python -m ufe ml all 2>&1 | tee ml.txt
           sed 's/^/::notice::ml: /' ml.txt | tail -8
-      - name: Comparison on UCL matchdays
-        run: |
-          python -m ufe ml eval 2>&1 | tail -12 | sed 's/^/::notice::ml eval: /'
-        continue-on-error: true
       - name: Decision trees (LightGBM) on the same data
         run: |
           python -m ufe models train 2>&1 | tail -4 | sed 's/^/::notice::trees: /'

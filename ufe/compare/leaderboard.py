@@ -117,8 +117,11 @@ def summarise(by_md: dict, keys: list[str]) -> dict:
         for r in by_md.values():
             got = {k: r[k][m] for k in keys if m in (r.get(k) or {})}
             if len(got) >= 2:
-                wins[(min if m in LOWER_BETTER else max)(got, key=got.get)] += 1
-    return dict(average=avg, best=best, matchdays_used=used, wins=wins)
+                top = (min if m in LOWER_BETTER else max)(got.values())
+                tied = [k for k, v in got.items() if abs(v - top) < 1e-9]
+                for k in tied:                        # a tie splits the win (the bookmaker shares the
+                    wins[k] += 1.0 / len(tied)        # statistical model's starts, so they often tie)
+    return dict(average=avg, best=best, matchdays_used=used, wins={k: round(v, 2) for k, v in wins.items()})
 
 
 def forecast_scores() -> list[dict]:
@@ -143,6 +146,19 @@ def forecast_scores() -> list[dict]:
 
 
 def run(mds: list[int] | None = None, n_sims: int = 6000, verbose: bool = True) -> dict:
+    import os
+    prev = os.environ.get("UFE_FROZEN_INPUTS")
+    os.environ["UFE_FROZEN_INPUTS"] = "1"           # news and prices as they were at each deadline
+    try:
+        return _run(mds, n_sims, verbose)
+    finally:
+        if prev is None:
+            os.environ.pop("UFE_FROZEN_INPUTS", None)
+        else:
+            os.environ["UFE_FROZEN_INPUTS"] = prev
+
+
+def _run(mds: list[int] | None, n_sims: int, verbose: bool) -> dict:
     fx = load_fixtures()
     keys = registry.available()
     mds = mds or [int(m) for m in sorted(fx.md.unique()) if grade.xis_path(int(m)) is not None]
@@ -152,7 +168,7 @@ def run(mds: list[int] | None = None, n_sims: int = 6000, verbose: bool = True) 
         by_md[str(md)] = grade_md(md, keys, n_sims=n_sims, verbose=verbose)
     by_md = dict(sorted(by_md.items(), key=lambda kv: int(kv[0])))
     out = dict(generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"), models=keys,
-               method="today's code, rebuilt as of each matchday's first date with the news and odds saved before it",
+               method="today's code, rebuilt as of each matchday's first date with the team news and prices saved before its deadline",
                mds=by_md, summary=summarise(by_md, keys), forecasts=forecast_scores())
     OUT.write_text(json.dumps(out, indent=1))
     return out

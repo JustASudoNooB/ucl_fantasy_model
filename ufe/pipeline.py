@@ -333,7 +333,10 @@ class Engine:
         return f.reset_index(drop=True)
 
     def _odds(self, md: int) -> pd.DataFrame | None:
+        from .ingest.frozen import frozen_mode, pre_path
         p = PROC / f"odds_md{md}.csv"
+        if frozen_mode() and pre_path(p).exists():    # backtests: the prices known at the deadline
+            p = pre_path(p)
         return pd.read_csv(p).set_index("fixture_id") if p.exists() else None
 
     def _lineup_adjust(self, md: int, f: pd.DataFrame) -> pd.DataFrame:

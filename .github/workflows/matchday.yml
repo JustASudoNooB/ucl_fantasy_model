@@ -1,5 +1,5 @@
 # Cloud fallback for when the laptop is off: rebuilds projections and the dashboard twice a day
-# (and every 30 minutes on Tuesday/Wednesday evenings), keeps the newest dashboard as a
+# (and every 30 minutes on Tuesday/Wednesday evenings) in the days around each matchday, keeps the newest dashboard as a
 # downloadable workflow artifact, and commits the matchday's inputs and live calls: team news
 # (starting11.com), odds (rg.org), the pre-deadline feed copy, the frozen forecast and the
 # between-days captain/sub call for every manager file.
@@ -7,13 +7,29 @@
 name: matchday
 on:
   schedule:
-    - cron: "30 6,15 * * *"      # 12:00 and 20:30 IST (GitHub often starts scheduled runs late)
-    - cron: "*/30 15-19 * * 2,3" # Tue/Wed evenings: confirmed line-ups from 75 min before each kick-off
+    # Off the hour and half-hour, when GitHub delays or drops the most scheduled runs. Every slot
+    # passes the gate job first: outside a matchday window the run stops there (free minutes).
+    - cron: "41 6,15 * * *"         # 12:11 and 21:11 IST
+    - cron: "7,37 15-19 * * 2,3"    # Tue/Wed evenings: confirmed line-ups from 75 min before each kick-off
+    - cron: "23 1,4,7,10,13 * * 3"  # Wednesday light runs for the between-days live call (scripts/ci_gate.py)
   workflow_dispatch: {}
 concurrency: { group: matchday, cancel-in-progress: false }
 permissions: { contents: write }
 jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      run: ${{ steps.g.outputs.run }}
+      light: ${{ steps.g.outputs.light }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: g
+        env: { EVENT: "${{ github.event_name }}", SCHEDULE: "${{ github.event.schedule }}" }
+        run: python3 scripts/ci_gate.py
   run:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-24.04          # pinned: ubuntu-latest moves to Ubuntu 26 from 19 Oct 2026
     timeout-minutes: 40
     env:
@@ -28,6 +44,7 @@ jobs:
         with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt
       - name: Scheduled jobs (data syncs, predictions, alerts)
+        if: needs.gate.outputs.light != 'true'
         run: python -m ufe schedule --once
         continue-on-error: true      # a source being down must not cost the dashboard
       - name: Fresh data (domestic results, form, game feed, team news, odds)
@@ -41,8 +58,9 @@ jobs:
           python -m ufe livecall --auto 2>&1 | tail -5 | sed 's/^/::notice::livecall: /'
         continue-on-error: true
       - name: Build dashboard
+        if: needs.gate.outputs.light != 'true'
         env:
-          UFE_MODELS: ${{ github.event.schedule == '*/30 15-19 * * 2,3' && '0' || '1' }}   # evening line-up runs skip the model comparison
+          UFE_MODELS: ${{ github.event.schedule == '7,37 15-19 * * 2,3' && '0' || '1' }}   # evening line-up runs skip the model comparison
         run: |
           if ! python -m ufe dashboard --mds live-8; then
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
@@ -50,6 +68,7 @@ jobs:
             python -m ufe dashboard --mds live-8
           fi
       - name: Every model's forecast for the saved teams (only in the 3 hours before a deadline)
+        if: needs.gate.outputs.light != 'true'
         run: |
           python -m ufe models forecast --window 3 2>&1 | tail -2 | sed 's/^/::notice::forecast: /'
         continue-on-error: true
@@ -58,7 +77,7 @@ jobs:
         continue-on-error: true
         run: python scripts/ci_report.py
       - uses: actions/upload-artifact@v5
-        if: always()
+        if: always() && needs.gate.outputs.light != 'true'
         with: { name: dashboard, path: data/runs/dashboard.html, retention-days: 7 }   # keeps Actions storage inside the free 500 MB
       - name: Save the matchday's inputs and calls (last, because it sets the working tree aside)
         if: always()
@@ -67,7 +86,8 @@ jobs:
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
           MD=$(python -c "from ufe.cli import _live_md; print(_live_md())")
-          for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv data/processed/feed_pre_md*.csv \
+          for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv \
+                   data/processed/news_md${MD}_pre.txt data/processed/odds_md${MD}_pre.csv data/processed/feed_pre_md*.csv \
                    data/processed/livecall_state.json data/processed/scheduler_state.json \
                    data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json data/runs/md*/forecast_*.json; do
             [ -e "$f" ] && git add "$f"

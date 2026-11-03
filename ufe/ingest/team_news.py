@@ -72,10 +72,15 @@ def _cfg() -> dict:
 
 # ------------------------------------------------------------------------------------- parsing
 def news_path(md: int) -> Path | None:
+    from .frozen import frozen_mode, pre_path
     p = PROC / f"news_md{md}.txt"
+    hits = sorted(NEWS_DIR.glob(f"md{md}_*.txt"))
+    if frozen_mode():                              # backtests: only what was known at the deadline
+        if pre_path(p).exists():
+            return pre_path(p)
+        return hits[-1] if hits else None
     if p.exists():
         return p
-    hits = sorted(NEWS_DIR.glob(f"md{md}_*.txt"))
     return hits[-1] if hits else None
 
 
