@@ -1,0 +1,331 @@
+{
+ "generated_at": "2026-11-03T18:04:36+00:00",
+ "models": [
+  "statistical",
+  "network",
+  "bookmaker",
+  "trees"
+ ],
+ "method": "today's code, rebuilt as of each matchday's first date with the news and odds saved before it",
+ "mds": {
+  "1": {
+   "statistical": {
+    "start_ll": 0.5327,
+    "start_brier": 0.1715,
+    "top11": 246,
+    "starters": 394,
+    "top11_share": 0.6244,
+    "result_ll": 0.679,
+    "goals_exp": 66.2,
+    "goals_actual": 69,
+    "goals_abs_err": 2.8,
+    "n_matches": 18
+   },
+   "network": {
+    "start_ll": 0.6214,
+    "start_brier": 0.2094,
+    "top11": 246,
+    "starters": 394,
+    "top11_share": 0.6244,
+    "result_ll": 0.679,
+    "goals_exp": 66.2,
+    "goals_actual": 69,
+    "goals_abs_err": 2.8,
+    "n_matches": 18
+   },
+   "bookmaker": {
+    "skipped": "no bookmaker prices on file for MD1"
+   },
+   "trees": {
+    "start_ll": 0.6982,
+    "start_brier": 0.2273,
+    "top11": 247,
+    "starters": 394,
+    "top11_share": 0.6269,
+    "result_ll": 0.679,
+    "goals_exp": 66.2,
+    "goals_actual": 69,
+    "goals_abs_err": 2.8,
+    "n_matches": 18
+   }
+  },
+  "2": {
+   "statistical": {
+    "start_ll": 0.3576,
+    "start_brier": 0.1097,
+    "top11": 316,
+    "starters": 395,
+    "top11_share": 0.8,
+    "goal_ll": 0.1646,
+    "goal_brier": 0.0456,
+    "scorers_exp": 53.0,
+    "scorers": 65,
+    "points_corr": 0.5156,
+    "top20_points": 115,
+    "result_ll": 0.9052,
+    "goals_exp": 63.7,
+    "goals_actual": 78,
+    "goals_abs_err": 14.3,
+    "n_matches": 18
+   },
+   "network": {
+    "start_ll": 0.3542,
+    "start_brier": 0.1082,
+    "top11": 316,
+    "starters": 395,
+    "top11_share": 0.8,
+    "goal_ll": 0.166,
+    "goal_brier": 0.0454,
+    "scorers_exp": 53.5,
+    "scorers": 65,
+    "points_corr": 0.5284,
+    "top20_points": 131,
+    "result_ll": 0.9107,
+    "goals_exp": 64.8,
+    "goals_actual": 78,
+    "goals_abs_err": 13.2,
+    "n_matches": 18
+   },
+   "bookmaker": {
+    "skipped": "no bookmaker prices on file for MD2"
+   },
+   "trees": {
+    "start_ll": 0.3615,
+    "start_brier": 0.1122,
+    "top11": 315,
+    "starters": 395,
+    "top11_share": 0.7975,
+    "goal_ll": 0.1659,
+    "goal_brier": 0.0454,
+    "scorers_exp": 53.9,
+    "scorers": 65,
+    "points_corr": 0.5243,
+    "top20_points": 116,
+    "result_ll": 0.909,
+    "goals_exp": 65.7,
+    "goals_actual": 78,
+    "goals_abs_err": 12.3,
+    "n_matches": 18
+   }
+  },
+  "3": {
+   "statistical": {
+    "start_ll": 0.4297,
+    "start_brier": 0.1326,
+    "top11": 289,
+    "starters": 392,
+    "top11_share": 0.7372,
+    "goal_ll": 0.1756,
+    "goal_brier": 0.0471,
+    "scorers_exp": 58.2,
+    "scorers": 63,
+    "points_corr": 0.4249,
+    "top20_points": 79,
+    "result_ll": 0.8537,
+    "goals_exp": 72.7,
+    "goals_actual": 74,
+    "goals_abs_err": 1.3,
+    "n_matches": 18
+   },
+   "network": {
+    "start_ll": 0.4305,
+    "start_brier": 0.1326,
+    "top11": 291,
+    "starters": 392,
+    "top11_share": 0.7423,
+    "goal_ll": 0.1717,
+    "goal_brier": 0.0464,
+    "scorers_exp": 57.9,
+    "scorers": 63,
+    "points_corr": 0.4354,
+    "top20_points": 73,
+    "result_ll": 0.8537,
+    "goals_exp": 72.7,
+    "goals_actual": 74,
+    "goals_abs_err": 1.3,
+    "n_matches": 18
+   },
+   "bookmaker": {
+    "start_ll": 0.4297,
+    "start_brier": 0.1326,
+    "top11": 289,
+    "starters": 392,
+    "top11_share": 0.7372,
+    "goal_ll": 0.1771,
+    "goal_brier": 0.0471,
+    "scorers_exp": 50.7,
+    "scorers": 63,
+    "points_corr": 0.4236,
+    "top20_points": 80,
+    "result_ll": 0.8358,
+    "goals_exp": 62.0,
+    "goals_actual": 74,
+    "goals_abs_err": 12.0,
+    "n_matches": 18
+   },
+   "trees": {
+    "start_ll": 0.4445,
+    "start_brier": 0.1341,
+    "top11": 291,
+    "starters": 392,
+    "top11_share": 0.7423,
+    "goal_ll": 0.1709,
+    "goal_brier": 0.0463,
+    "scorers_exp": 57.2,
+    "scorers": 63,
+    "points_corr": 0.4413,
+    "top20_points": 69,
+    "result_ll": 0.8547,
+    "goals_exp": 72.7,
+    "goals_actual": 74,
+    "goals_abs_err": 1.3,
+    "n_matches": 18
+   }
+  }
+ },
+ "summary": {
+  "average": {
+   "statistical": {
+    "start_ll": 0.4297,
+    "start_ll_n": 1,
+    "top11_share": 0.7372,
+    "top11_share_n": 1,
+    "goal_ll": 0.1756,
+    "goal_ll_n": 1,
+    "points_corr": 0.4249,
+    "points_corr_n": 1,
+    "top20_points": 79.0,
+    "top20_points_n": 1,
+    "result_ll": 0.8537,
+    "result_ll_n": 1,
+    "goals_abs_err": 1.3,
+    "goals_abs_err_n": 1
+   },
+   "network": {
+    "start_ll": 0.4305,
+    "start_ll_n": 1,
+    "top11_share": 0.7423,
+    "top11_share_n": 1,
+    "goal_ll": 0.1717,
+    "goal_ll_n": 1,
+    "points_corr": 0.4354,
+    "points_corr_n": 1,
+    "top20_points": 73.0,
+    "top20_points_n": 1,
+    "result_ll": 0.8537,
+    "result_ll_n": 1,
+    "goals_abs_err": 1.3,
+    "goals_abs_err_n": 1
+   },
+   "bookmaker": {
+    "start_ll": 0.4297,
+    "start_ll_n": 1,
+    "top11_share": 0.7372,
+    "top11_share_n": 1,
+    "goal_ll": 0.1771,
+    "goal_ll_n": 1,
+    "points_corr": 0.4236,
+    "points_corr_n": 1,
+    "top20_points": 80.0,
+    "top20_points_n": 1,
+    "result_ll": 0.8358,
+    "result_ll_n": 1,
+    "goals_abs_err": 12.0,
+    "goals_abs_err_n": 1
+   },
+   "trees": {
+    "start_ll": 0.4445,
+    "start_ll_n": 1,
+    "top11_share": 0.7423,
+    "top11_share_n": 1,
+    "goal_ll": 0.1709,
+    "goal_ll_n": 1,
+    "points_corr": 0.4413,
+    "points_corr_n": 1,
+    "top20_points": 69.0,
+    "top20_points_n": 1,
+    "result_ll": 0.8547,
+    "result_ll_n": 1,
+    "goals_abs_err": 1.3,
+    "goals_abs_err_n": 1
+   }
+  },
+  "best": {
+   "start_ll": "statistical",
+   "top11_share": "network",
+   "goal_ll": "trees",
+   "points_corr": "trees",
+   "top20_points": "bookmaker",
+   "result_ll": "bookmaker",
+   "goals_abs_err": "statistical"
+  },
+  "matchdays_used": {
+   "start_ll": [
+    3
+   ],
+   "top11_share": [
+    3
+   ],
+   "goal_ll": [
+    3
+   ],
+   "points_corr": [
+    3
+   ],
+   "top20_points": [
+    3
+   ],
+   "result_ll": [
+    3
+   ],
+   "goals_abs_err": [
+    3
+   ]
+  },
+  "wins": {
+   "statistical": 8,
+   "network": 4,
+   "bookmaker": 2,
+   "trees": 4
+  }
+ },
+ "forecasts": [
+  {
+   "md": 4,
+   "manager": "zero",
+   "made_at": "2026-11-03T17:58:16+00:00",
+   "pre_deadline": false,
+   "actual": null,
+   "models": {
+    "statistical": {
+     "expected": 72.2,
+     "expected_no_changes": 68.1,
+     "error": null,
+     "p10": 50.0,
+     "p90": 96.0
+    },
+    "network": {
+     "expected": 68.7,
+     "expected_no_changes": 65.4,
+     "error": null,
+     "p10": 46.0,
+     "p90": 93.0
+    },
+    "bookmaker": {
+     "expected": 73.9,
+     "expected_no_changes": 69.8,
+     "error": null,
+     "p10": 51.0,
+     "p90": 99.0
+    },
+    "trees": {
+     "expected": 66.3,
+     "expected_no_changes": 63.1,
+     "error": null,
+     "p10": 45.0,
+     "p90": 89.0
+    }
+   }
+  }
+ ]
+}

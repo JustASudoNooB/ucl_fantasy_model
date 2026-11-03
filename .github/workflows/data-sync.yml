@@ -7,7 +7,10 @@ name: data-sync
 on:
   schedule:
     - cron: "40 4 * * *"         # 10:10 IST daily
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      odds_md: { description: "Backfill bookmaker odds for this matchday (optional)", required: false, default: "" }
+      odds_urls: { description: "Comma-separated rg.org article URLs for that matchday", required: false, default: "" }
 permissions:
   contents: write
 concurrency: { group: data-sync, cancel-in-progress: false }
@@ -34,13 +37,18 @@ jobs:
             python -m ufe sync --lineups "$MD" 2>&1 | tail -3 | sed 's/^/::notice::line-ups: /' || true
           fi
         continue-on-error: true
+      - name: Backfill bookmaker odds for a past matchday (manual runs only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.odds_md != '' && inputs.odds_urls != '' }}
+        run: |
+          python -m ufe sync --freeodds "${{ inputs.odds_md }}" --odds-urls "${{ inputs.odds_urls }}" 2>&1 | tail -3 | sed 's/^/::notice::odds backfill: /'
+        continue-on-error: true
       - name: Commit changed data
         run: |
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
           for f in data/raw/openfootball/*.json data/processed/domestic_form.csv data/processed/players_feed.csv \
                    data/processed/feed_meta.json data/processed/feed_pre_md*.csv data/processed/lineups_md*.csv \
-                   data/processed/penalty_takers.csv; do
+                   data/processed/penalty_takers.csv data/processed/odds_md*.csv; do
             [ -e "$f" ] && git add "$f"
           done
           if git diff --cached --quiet; then

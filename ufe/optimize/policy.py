@@ -89,7 +89,8 @@ def auto_subs(pts: np.ndarray, played: np.ndarray, pos_arr: np.ndarray, xi: list
 
 
 def evaluate(sim: SimResult, players: pd.DataFrame, squad: list[str], xi: list[str], captain: str,
-             bench: list[str], md: int, margin: float = 0.25, lineups_known: bool = False) -> PolicyReport:
+             bench: list[str], md: int, margin: float = 0.25, lineups_known: bool = False,
+             keep_arrays: bool = False) -> PolicyReport:
     idx = sim.index()
     missing = [p for p in squad if p not in idx]
     if missing:
@@ -116,7 +117,10 @@ def evaluate(sim: SimResult, players: pd.DataFrame, squad: list[str], xi: list[s
         why = ("No in-matchday changes on this matchday: every game kicks off at the same time."
                if not manual_actions_allowed(md) else "All your players play on the same day, so there is nothing to switch.")
         q = np.percentile(passive, pct).round(1).tolist()
-        return PolicyReport(float(passive.mean()), float(passive.mean()), 0.0, 0.0, [dict(kind="info", text=why)], q, q)
+        rep = PolicyReport(float(passive.mean()), float(passive.mean()), 0.0, 0.0, [dict(kind="info", text=why)], q, q)
+        if keep_arrays:
+            rep.arrays = (passive, passive)
+        return rep
 
     ev = pts.mean(axis=1)
     st = sim.started
@@ -208,8 +212,11 @@ def evaluate(sim: SimResult, players: pd.DataFrame, squad: list[str], xi: list[s
                                        f"bring on {names[sim.player_ids[b]]} (day {int(day[b])}, expected {ev[b]:.1f})."))
     out_rules.append(dict(kind="autosub_cost", value=round(cover0, 2),
                           text=f"A manual change switches off auto-subs; that cover is worth {cover0:.2f} points after day {d0}."))
-    return PolicyReport(float(passive.mean()), float(active.mean()), float(switched.mean()), float(nsubs.mean()), out_rules,
-                        np.percentile(passive, pct).round(1).tolist(), np.percentile(active, pct).round(1).tolist())
+    rep = PolicyReport(float(passive.mean()), float(active.mean()), float(switched.mean()), float(nsubs.mean()), out_rules,
+                       np.percentile(passive, pct).round(1).tolist(), np.percentile(active, pct).round(1).tolist())
+    if keep_arrays:
+        rep.arrays = (passive, active)            # points per simulation, before and after the between-day moves
+    return rep
 
 
 def head_to_head(sim: SimResult, mine: dict, rival: dict) -> dict:

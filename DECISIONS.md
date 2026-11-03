@@ -244,3 +244,23 @@ model on 7 of 8 comparisons (one tie); the network alone does not (MD1 starts: i
 to go on). settings ml.blend stays 0 for MD4, as promised before the deadline; switch to 0.5 for
 MD5 if MD4's grading agrees. Retrained every Monday by .github/workflows/ml.yml.
 
+
+**2026-11-03 · Four models side by side (ufe/compare/): statistical, neural network, bookmaker, decision trees.**
+Every model predicts every matchday through the same simulation, points and optimiser, so they
+differ only in their inputs. Bookmaker: match goal rates from prices alone (1X2 plus the goals line;
+1X2 only: same supremacy, total at the UCL two-year average; no prices: the statistical rates,
+flagged), no line-up adjustment (prices carry the news); players as the statistical model. It tests
+whether the team model adds anything over the market. Decision trees: LightGBM (free, MIT licence)
+on the network's rows and features (start: binary; goals and assists: Poisson with a log-minutes
+offset), trees chosen on 2025/26, scored once on 2026/27. Premier League 2026/27 test, trees /
+network / linear: start log loss 0.3432 / 0.3475 / 0.3545, goals 0.2794 / 0.2797 / 0.2822, assists 0.2717 / 0.2731 / 0.2753
+(trees best on all three). UCL MD1-3 rebuilt with pre-match information (compare/leaderboard.py):
+on MD3, the one matchday every model can be graded on (no bookmaker prices on file for MD1-2 yet),
+start log loss statistical = bookmaker 0.430, network 0.431, trees 0.445; goal log loss trees 0.171,
+network 0.172, statistical 0.176, bookmaker 0.177; result log loss bookmaker 0.836 v 0.854 for the
+model; total goals bookmaker 62.0 v 72.7 model (74 scored: 1X2-only prices with an average total
+miss high-scoring rounds). Too few matchdays to pick a winner; nothing changes in the picks.
+Deadline forecasts for every manager's saved team, from every model, are written in the three
+hours before each deadline and frozen after it (forecast_{manager}.json); MD4's was computed just
+after the deadline from inputs frozen before it, and says so. Reverse if: after MD6 one model leads
+on most scores, then it (or a blend weighted by accuracy) feeds the picks.

@@ -147,7 +147,15 @@ def cmd_sync(args):
         def _fo():
             from .ingest import rg_odds
             md = _live_md() if args.freeodds == "live" else int(args.freeodds)
-            return rg_odds.sync(md, load_fixtures())[1]
+            pages = None
+            if getattr(args, "odds_urls", None):             # past matchdays: the articles named, not the index pages
+                from .ingest.http import get
+                pages = {}
+                for u in [x.strip() for x in args.odds_urls.split(",") if x.strip()]:
+                    r = get(u, headers=rg_odds.UA, retries=1)
+                    if r.status_code == 200:
+                        pages[u] = r.text
+            return rg_odds.sync(md, load_fixtures(), pages=pages)[1]
         step("freeodds", _fo)
     if args.odds:
         def _odds():
@@ -281,6 +289,30 @@ def cmd_ml(args):
     if args.action in ("eval", "all-eval"):
         from .ml import evaluate
         evaluate.run(n_sims=getattr(args, "sims", None) or 6000)
+
+
+def cmd_models(args):
+    """Several models side by side: train the trees, grade every model, save deadline forecasts."""
+    if args.action in ("train", "all"):
+        from .ml import trees
+        out = trees.run()
+        for name in ("trees", "network", "linear"):
+            if name in out["results"]:
+                t = out["results"][name]["test"]
+                print(f"{name:8s} 2026/27 test: start log loss {t['start_ll']:.4f}, goals {t['goal_poisson_ll']:.4f}, "
+                      f"assists {t['assist_poisson_ll']:.4f}")
+        print(f"saved {trees.MODEL}")
+    if args.action in ("eval", "all"):
+        from .compare import leaderboard
+        mds = [int(x) for x in args.mds.split(",")] if args.mds else None
+        out = leaderboard.run(mds=mds, n_sims=args.sims or 6000)
+        print(f"leaderboard -> {leaderboard.OUT}: best by score {out['summary']['best']}, wins {out['summary']['wins']}")
+    if args.action == "forecast":
+        from .compare import forecast
+        md = args.md if args.md else None
+        w = forecast.run(md=md, managers=[args.manager] if args.manager else None, force=args.force,
+                         n_sims=args.sims or 10000, window_hours=args.window)
+        print("forecasts: " + (", ".join(w) if w else "nothing to write (deadline passed, or outside the window)"))
 
 
 def cmd_livecall(args):
@@ -472,6 +504,7 @@ def main(argv=None):
     s.add_argument("--odds", type=int, metavar="MD", help="The Odds API (UFE_ODDS_API_KEY)")
     s.add_argument("--teamnews", metavar="MD|live", help="predicted XIs and absences from starting11.com (no key)")
     s.add_argument("--freeodds", metavar="MD|live", help="1X2 and goals-line prices from rg.org (no key)")
+    s.add_argument("--odds-urls", dest="odds_urls", help="with --freeodds MD: comma-separated rg.org article URLs (backfill)")
     s.add_argument("--lineups", type=int, metavar="MD", help="confirmed XIs from API-Football (UFE_API_FOOTBALL_KEY)")
     s.add_argument("--md", type=int)
     s.set_defaults(fn=cmd_sync)
@@ -505,6 +538,15 @@ def main(argv=None):
     ml = sub.add_parser("ml", help="neural-network challenger: data | train | all | eval")
     ml.add_argument("action", choices=["data", "train", "all", "eval"])
     ml.set_defaults(fn=cmd_ml)
+    mo = sub.add_parser("models", help="model comparison: train (trees) | eval (leaderboard) | forecast | all")
+    mo.add_argument("action", choices=["train", "eval", "forecast", "all"])
+    mo.add_argument("--mds", help="eval: comma-separated matchdays (default: every matchday with actual XIs)")
+    mo.add_argument("--md", type=int, help="forecast: matchday (default: the next deadline)")
+    mo.add_argument("--manager", help="forecast: one manager file (default: all)")
+    mo.add_argument("--force", action="store_true", help="forecast: write even after the deadline (marked as such)")
+    mo.add_argument("--window", type=float, help="forecast: only within this many hours before the deadline")
+    mo.add_argument("--sims", type=int)
+    mo.set_defaults(fn=cmd_models)
     lc = sub.add_parser("livecall", help="manager files: captain switch + subs between matchday days (game-feed points)")
     lc.add_argument("--manager", default="zero")
     lc.add_argument("--all", action="store_true")

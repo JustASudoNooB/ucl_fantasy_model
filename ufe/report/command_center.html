@@ -456,7 +456,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
   </div>
   <nav class="secnav" aria-label="Sections">
-    <a href="#board">Board</a><a href="#managers">Managers</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#nn">Network</a><a href="#model">Model</a><a href="#rules">Calendar</a>
+    <a href="#board">Board</a><a href="#managers">Managers</a><a href="#halftime">Half-time</a><a href="#matches">Matches</a><a href="#accuracy">Accuracy</a><a href="#form">Form</a><a href="#check">Check</a><a href="#fixtures">Fixtures</a><a href="#players">Players</a><a href="#team">My team</a><a href="#chips">Chips</a><a href="#race">Table race</a><a href="#models">Models</a><a href="#model">Model</a><a href="#rules">Calendar</a>
   </nav>
 </header>
 
@@ -712,12 +712,13 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     <div class="panel" style="padding:14px 16px;"><div class="race" id="race-rows"></div></div>
   </section>
 
-  <section id="nn" aria-labelledby="nn-h" hidden>
+  <section id="models" aria-labelledby="mo-h" hidden>
     <div class="sec-head">
-      <h2 id="nn-h">Neural-network challenger</h2>
-      <p id="nn-sub">A small neural network trained on Premier League player-matches, run alongside the model. It only feeds the picks if it predicts better on matches it has not seen.</p>
+      <h2 id="mo-h">Models</h2>
+      <p id="mo-sub">Four models predict every matchday. Pick one to see only its numbers, or open the leaderboard to see which has been most accurate so far.</p>
     </div>
-    <div class="panel" id="nn-box" style="padding:14px 16px; overflow-x:auto;"></div>
+    <div class="seg" id="mo-pick" role="group" aria-label="Model"></div>
+    <div class="panel" id="mo-box" style="padding:14px 16px; overflow-x:auto; margin-top:10px;"></div>
   </section>
 
   <section id="model" aria-labelledby="md-h">
@@ -1389,24 +1390,110 @@ const D = /*__UFE_DATA__*/null;
 
   // ---------------------------------------------------------------- model
   let calKey = "2025-26|calibration_home";
-  function renderNN() {
-    const M = D.ml;
-    if (!M || !M.results) return;
-    $("#nn").hidden = false;
-    const r = M.results, n = r.network, l = r.linear;
-    const row = (lab, k, d = 4) => `<tr><td>${lab}</td><td class="r num">${n.test[k].toFixed(d)}</td><td class="r num">${l.test[k].toFixed(d)}</td><td class="r num">${n.val[k].toFixed(d)}</td><td class="r num">${l.val[k].toFixed(d)}</td></tr>`;
-    const ucl = M.ucl || {};
-    const urows = Object.keys(ucl).sort().map(md => {
-      const u = ucl[md], c = u["0.0"] || {}, h = u["0.5"] || {}, w = u["1.0"] || {};
-      const cell = (o, k) => o[k] == null ? "–" : Number(o[k]).toFixed(k === "top11" ? 0 : 4);
-      return `<tr><td>MD${md}</td>${["start_ll", "goal_ll", "points_corr"].map(k => `<td class="r num">${cell(c, k)}</td><td class="r num">${cell(h, k)}</td><td class="r num">${cell(w, k)}</td>`).join("")}</tr>`;
-    }).join("");
-    $("#nn-box").innerHTML = `<p style="font-size:13px">Trained ${esc((M.trained_at || "").slice(0, 10))} on ${M.rows ? M.rows.all.toLocaleString() : "–"} Premier League player-matches (FPL archive, 2022/23 to now): two hidden layers (32 and 16 units), three outputs (start, goals per 90, assists per 90), an average of three training runs. It ${M.blend > 0 ? `feeds the picks at weight ${M.blend}` : "does not feed the picks yet"}; its expected points sit next to the model's in the player table ("Net xPts").</p>
-      <h4>Premier League matches it never saw (lower is better)</h4>
-      <table class="caps"><thead><tr><th>Score</th><th class="r">Network, 2026/27</th><th class="r">Linear, 2026/27</th><th class="r">Network, 2025/26</th><th class="r">Linear, 2025/26</th></tr></thead><tbody>
-      ${row("Start log loss", "start_ll")}${row("Goals log loss", "goal_poisson_ll")}${row("Assists log loss", "assist_poisson_ll")}</tbody></table>
-      ${urows ? `<h4>Champions League matchdays (pre-match information only)</h4><table class="caps"><thead><tr><th></th><th class="r" colspan="3">Start log loss (lower better)</th><th class="r" colspan="3">Goal log loss (lower better)</th><th class="r" colspan="3">Points correlation (higher better)</th></tr><tr><th>Matchday</th>${"<th class='r'>Model</th><th class='r'>50/50</th><th class='r'>Network</th>".repeat(3)}</tr></thead><tbody>${urows}</tbody></table>` : ""}
-      ${M.available === false ? `<p class="muted" style="font-size:12.5px">Challenger projections unavailable this build: ${esc(M.error || "")}</p>` : ""}`;
+  function renderModels() {
+    const MB = D.models;
+    if (!MB || !MB.models || !MB.models.length) return;
+    $("#models").hidden = false;
+    const P = {}; (D.players_index || []).forEach(p => { P[p.id] = p; });
+    const keys = MB.models.map(m => m.key), byKey = Object.fromEntries(MB.models.map(m => [m.key, m]));
+    const LB = MB.leaderboard || {};
+    let sel = "leaderboard", posF = "ALL";
+    try { const s = localStorage.getItem("ufe-model"); if (s === "leaderboard" || byKey[s]) sel = s; } catch (e) {}
+    const pct = x => x == null ? "–" : Math.round(x * 100) + "%";
+    const f1 = x => x == null ? "–" : Number(x).toFixed(1);
+    const fmt = (v, d) => v == null ? "–" : d === "pct" ? (v * 100).toFixed(1) + "%" : Number(v).toFixed(d);
+    const tn = t => ((D.teams || {})[t] || {}).short || t;
+    const FEAT = { started_last1: "started the last match", started_last2: "started two matches ago", start_rate: "season start rate",
+      has_start_hist: "has start history", xg_share: "share of team xG", xa_share: "share of team xA", price_rank: "price rank in the club",
+      price_rel: "price vs the club's top price", log_price: "price", lam_for: "team's expected goals", lam_against: "opponent's expected goals",
+      log_n90: "minutes of history", has_att_hist: "has attacking history", rest_days: "rest days", home: "home match",
+      pos_GK: "goalkeeper", pos_DEF: "defender", pos_MID: "midfielder", pos_FWD: "forward" };
+    const SC = [["start_ll", "Start log loss", true, 3], ["top11_share", "Actual starters in its predicted XIs", false, "pct"],
+      ["goal_ll", "Goal log loss", true, 3], ["points_corr", "Expected vs actual points (correlation)", false, 3],
+      ["top20_points", "Actual points of its top 20 players", false, 0], ["result_ll", "Match result log loss", true, 3],
+      ["goals_abs_err", "Total goals error", true, 1]];
+    const th = () => keys.map(k => `<th class="r">${esc(byKey[k].name)}</th>`).join("");
+    function leaderboard() {
+      if (!LB.mds) return `<p class="muted">No leaderboard yet: run <code>python -m ufe models eval</code>.</p>`;
+      const S = LB.summary || {}, A = S.average || {}, best = S.best || {}, wins = S.wins || {};
+      const rows = SC.map(([m, lab, low, d]) => `<tr><td>${lab} <span class="muted">(${low ? "lower" : "higher"} is better)</span></td>${keys.map(k => {
+        const a = A[k] || {}, v = a[m], b = best[m] === k;
+        return `<td class="r num"${b ? ' style="font-weight:700;color:var(--good)"' : ""}>${fmt(v, d)}${v != null ? `<span class="muted" style="font-weight:400"> ·${a[m + "_n"]}</span>` : ""}</td>`;
+      }).join("")}</tr>`).join("");
+      const per = Object.keys(LB.mds).sort((a, b) => a - b).map(md => `<tr><td>MD${md}</td>${keys.map(k => {
+        const x = LB.mds[md][k] || {};
+        return `<td class="r num">${x.skipped ? `<span class="muted">${esc(x.skipped)}</span>` : x.error ? "error" : `${fmt(x.start_ll, 3)} / ${fmt(x.goal_ll, 3)} / ${fmt(x.points_corr, 3)}`}</td>`;
+      }).join("")}</tr>`).join("");
+      const fr = (LB.forecasts || []).map(f => `<tr><td>MD${f.md}</td><td>${esc(f.manager)}</td><td class="r num">${f.actual ?? "not in yet"}</td>${keys.map(k => {
+        const x = (f.models || {})[k];
+        return `<td class="r num">${x ? f1(x.expected) + (x.error != null ? ` <span class="muted">(${x.error > 0 ? "+" : ""}${x.error})</span>` : "") : "–"}</td>`;
+      }).join("")}</tr>`).join("");
+      return `<p style="font-size:13px">Each model is rebuilt as of each matchday using only what was known before it, then scored on what happened. The small number after each average is how many matchdays it covers; bold marks the best model on that score.</p>
+        <table class="caps"><thead><tr><th>Score</th>${th()}</tr></thead><tbody>${rows}
+        <tr><td><strong>Scores won</strong> <span class="muted">(matchday × score)</span></td>${keys.map(k => `<td class="r num"><strong>${wins[k] ?? 0}</strong></td>`).join("")}</tr></tbody></table>
+        <h4>By matchday <span class="muted" style="font-weight:400">(start log loss / goal log loss / points correlation)</span></h4>
+        <table class="caps"><thead><tr><th>Matchday</th>${th()}</tr></thead><tbody>${per}</tbody></table>
+        ${fr ? `<h4>Deadline forecasts for saved teams <span class="muted" style="font-weight:400">(expected points with the between-day moves; actual minus expected in brackets)</span></h4>
+        <table class="caps"><thead><tr><th>Matchday</th><th>Manager</th><th class="r">Actual</th>${th()}</tr></thead><tbody>${fr}</tbody></table>` : ""}
+        <p class="muted" style="font-size:12.5px">Updated ${esc((LB.generated_at || "").slice(0, 10))}: ${esc(LB.method || "")}.</p>`;
+    }
+    function modelPage(k) {
+      const m = byKey[k], st = byKey.statistical;
+      if (m.error) return `<p style="font-size:13px">${esc(m.desc)}</p><p class="muted">This model could not run in this build: ${esc(m.error)}</p>`;
+      let team = "";
+      const me = Object.entries(m.picks || {}).find(([, p]) => p.me);
+      if (me) {
+        const [stem, p] = me;
+        const fc = (MB.forecasts || []).filter(f => f.md === MB.md && f.manager === stem).pop(), fm = fc && fc.models[k];
+        const saved = fm ? `Deadline forecast for your saved team${fc.pre_deadline ? "" : " (made after the deadline from pre-deadline data)"}: <strong>${f1(fm.expected)}</strong> with the between-day moves, ${f1(fm.expected_no_changes)} without; middle half of outcomes ${f1(fm.percentiles[1])}–${f1(fm.percentiles[3])}; chance of 80+ ${pct(fm.p80)}.`
+          : p.saved_expected != null ? `Your saved team: <strong>${f1(p.saved_expected)}</strong> expected with no changes after day 1 (captain ${esc(p.saved_captain)}).` : "";
+        team = `<h4>Your team, MD${MB.md}</h4><p style="font-size:13px">${saved} The team it would pick from your squad: ${esc(p.formation || "")}, ${esc(p.captain)} captain, ${f1(p.expected)} expected with no changes.</p>
+          <p class="muted" style="font-size:12.5px">${p.xi.map(esc).join(", ")}</p>`;
+      }
+      let train = "";
+      if (m.test) {
+        const lab = { trees: "Decision trees", network: "Neural network", linear: "Linear baseline" };
+        const names = ["trees", "network", "linear"].filter(n => m.test[n]);
+        const r = (l, c) => `<tr><td>${l}</td>${names.map(n => `<td class="r num"${n === k ? ' style="font-weight:700"' : ""}>${m.test[n][c] != null ? Number(m.test[n][c]).toFixed(4) : "–"}</td>`).join("")}</tr>`;
+        train = `<h4>Premier League 2026/27 matches it never trained on <span class="muted" style="font-weight:400">(lower is better)</span></h4>
+          <table class="caps"><thead><tr><th>Score</th>${names.map(n => `<th class="r">${lab[n]}</th>`).join("")}</tr></thead><tbody>${r("Start log loss", "start_ll")}${r("Goals log loss", "goal_poisson_ll")}${r("Assists log loss", "assist_poisson_ll")}</tbody></table>
+          <p class="muted" style="font-size:12.5px">Trained ${esc((m.trained_at || "").slice(0, 10))} on ${m.rows ? m.rows.toLocaleString() : "–"} Premier League player-matches (2022/23 to now).</p>`;
+      }
+      if (m.importance) {
+        const lab = { start: "Starting", goals: "Goals", assists: "Assists" };
+        train += `<h4>Inputs it leans on most</h4><table class="caps"><tbody>${Object.entries(m.importance).map(([t, o]) => `<tr><td>${lab[t] || t}</td><td>${Object.entries(o).slice(0, 4).map(([f, v]) => `${esc(FEAT[f] || f)} ${Math.round(v * 100)}%`).join(", ")}</td></tr>`).join("")}</tbody></table>`;
+      }
+      const L = LB.mds || {};
+      const acc = Object.keys(L).sort((a, b) => a - b).map(md => {
+        const x = L[md][k] || {};
+        return x.skipped || x.error ? `<tr><td>MD${md}</td><td colspan="5" class="muted">${esc(x.skipped || x.error)}</td></tr>`
+          : `<tr><td>MD${md}</td><td class="r num">${fmt(x.start_ll, 3)}</td><td class="r num">${fmt(x.top11_share, "pct")}</td><td class="r num">${fmt(x.goal_ll, 3)}</td><td class="r num">${fmt(x.points_corr, 3)}</td><td class="r num">${fmt(x.result_ll, 3)}</td></tr>`;
+      }).join("");
+      const mt = (m.matches || []).map(x => `<tr><td>${esc(tn(x.home))} – ${esc(tn(x.away))}</td><td class="muted">${esc(x.kickoff_ist || "")}</td><td class="r num">${pct(x.p[0])}</td><td class="r num">${pct(x.p[1])}</td><td class="r num">${pct(x.p[2])}</td><td class="r num">${f1(x.xg[0])}–${f1(x.xg[1])}</td><td class="muted">${esc(x.src)}</td></tr>`).join("");
+      const ids = Object.keys(m.players || {}).filter(id => posF === "ALL" || (P[id] || {}).pos === posF).sort((a, b) => m.players[b][0] - m.players[a][0]).slice(0, 30);
+      const pr = ids.map(id => {
+        const v = m.players[id], q = P[id] || {}, s0 = st && st.players && st.players[id], dl = k !== "statistical" && s0 ? v[0] - s0[0] : null;
+        return `<tr><td>${esc(q.name || id)}</td><td>${esc(tn(q.team))}</td><td>${esc(q.pos || "")}</td><td class="r num">${q.price != null ? Number(q.price).toFixed(1) : "–"}</td><td class="r num">${pct(v[1])}</td><td class="r num">${pct(v[2])}</td><td class="r num">${pct(v[3])}</td><td class="r num">${q.pos === "GK" || q.pos === "DEF" ? pct(v[4]) : "–"}</td><td class="r num"><strong>${f1(v[0])}</strong></td>${k !== "statistical" ? `<td class="r num">${dl == null ? "–" : (dl > 0 ? "+" : "") + dl.toFixed(1)}</td>` : ""}</tr>`;
+      }).join("");
+      return `<p style="font-size:13px">${esc(m.desc)}${m.odds_coverage != null ? ` Bookmaker prices cover ${pct(m.odds_coverage)} of MD${MB.md}'s matches.` : ""}</p>${team}${train}
+        ${acc ? `<h4>Accuracy so far</h4><table class="caps"><thead><tr><th>Matchday</th><th class="r">Start log loss</th><th class="r">Starters in its XIs</th><th class="r">Goal log loss</th><th class="r">Points corr.</th><th class="r">Result log loss</th></tr></thead><tbody>${acc}</tbody></table>` : ""}
+        <h4>MD${MB.md} matches</h4><table class="caps"><thead><tr><th>Match</th><th>Kick-off (IST)</th><th class="r">Home</th><th class="r">Draw</th><th class="r">Away</th><th class="r">Expected goals</th><th>Goal rates from</th></tr></thead><tbody>${mt}</tbody></table>
+        <h4>MD${MB.md} players, top 30 by expected points</h4>
+        <div class="seg" role="group" aria-label="Position">${["ALL", "GK", "DEF", "MID", "FWD"].map(x => `<button type="button" data-p="${x}" aria-pressed="${x === posF}">${x === "ALL" ? "All" : x}</button>`).join("")}</div>
+        <table class="caps" style="margin-top:8px"><thead><tr><th>Player</th><th>Club</th><th>Pos</th><th class="r">Price</th><th class="r">Start</th><th class="r">Goal</th><th class="r">Assist</th><th class="r">Clean sheet</th><th class="r">xPts</th>${k !== "statistical" ? '<th class="r">vs Statistical</th>' : ""}</tr></thead><tbody>${pr}</tbody></table>`;
+    }
+    function draw() {
+      $("#mo-pick").innerHTML = [["leaderboard", "Leaderboard"], ...MB.models.map(m => [m.key, m.name])]
+        .map(([k, n]) => `<button type="button" data-k="${k}" aria-pressed="${k === sel}">${esc(n)}</button>`).join("");
+      $("#mo-box").innerHTML = sel === "leaderboard" ? leaderboard() : modelPage(sel);
+    }
+    $("#mo-pick").addEventListener("click", ev => {
+      const b = ev.target.closest("button[data-k]"); if (!b) return;
+      sel = b.dataset.k; try { localStorage.setItem("ufe-model", sel); } catch (e) {}
+      draw();
+    });
+    $("#mo-box").addEventListener("click", ev => { const b = ev.target.closest("button[data-p]"); if (!b) return; posF = b.dataset.p; draw(); });
+    draw();
   }
 
   function renderModel() {
@@ -1863,7 +1950,7 @@ const D = /*__UFE_DATA__*/null;
   renderAll();
   renderRace();
   renderModel();
-  try { renderNN(); } catch (e) { console.error(e); }
+  try { renderModels(); } catch (e) { console.error(e); }
   renderCheck();
   renderForm();
   try { renderManagers(); } catch (e) { console.error(e); }

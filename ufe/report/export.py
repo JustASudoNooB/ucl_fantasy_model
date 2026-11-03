@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -245,6 +246,8 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
                         attack=_r(a), defence=_r(d), uncertainty=_r(tm.uncertainty(t)))
     blocks = {str(md): matchday_block(engine, md, with_checks=(i == 0)) for i, md in enumerate(mds)}
     ml = _ml_block(engine, mds[0], blocks[str(mds[0])]) if mds else None
+    # UFE_MODELS=0 skips the other models' simulations (the frequent evening CI runs only need the live call)
+    models = _models_block(engine, mds[0], blocks[str(mds[0])]) if mds and os.environ.get("UFE_MODELS", "1") != "0" else None
     E = engine.ev_matrix(mds)
     cols = ["id", "name", "team", "pos", "price"] + [c for c in ("price_status", "own_pct", "status") if c in engine.players]
     idx_players = engine.players[cols].rename(columns={"price_status": "ps", "own_pct": "own", "status": "st"})
@@ -283,6 +286,7 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
         verification=_load_json(PROC / "verification.json"),
         changes=_load_json(PROC / "changes.json"),
         ml=ml,
+        models=models,
         **_extras(engine),
     )
 
@@ -295,20 +299,82 @@ def _ml_block(engine, md: int, block: dict) -> dict | None:
         return None
     out = dict(trained_at=metrics.get("trained_at"), rows=metrics.get("rows"), results=metrics.get("results"),
                ucl=_load_json(PROC / "ml_ucl_eval.json"), blend=float((settings().raw.get("ml") or {}).get("blend", 0.0)), md=md)
-    try:
-        from ..ml.ucl import Challenger
-        ch = Challenger(as_of=engine.as_of, n_sims=engine.n_sims, seed=engine.seed, blend=1.0)
-        for k in ("cfg", "fixtures", "matches", "team_model", "fpl", "pool", "domestic_gpm", "player_tables"):
-            if k in engine.__dict__:
-                ch.__dict__[k] = engine.__dict__[k]
-        pr = ch.projections(md).set_index("id")
-        for d in block.get("players", []):
-            if d["id"] in pr.index:
-                d["xpts_nn"] = _r(float(pr.xpts[d["id"]]))
-                d["p_start_nn"] = _r(float(pr.p_start_sim[d["id"]]))
-        out["available"] = True
-    except Exception as e:                         # the challenger must never stop the dashboard
-        out.update(available=False, error=f"{type(e).__name__}: {str(e)[:160]}")
+    out["available"] = True                     # its projections come from _models_block ("network")
+    return out
+
+
+def _models_block(engine, md: int, block: dict) -> dict:
+    """Every model's numbers for the coming matchday (players, matches, each manager's best XI and
+    the saved team's expected score), the model details, the leaderboard and saved forecasts."""
+    import yaml
+    from ..compare import forecast as fc
+    from ..compare import registry
+    from ..optimize.squad import best_xi
+    from .league import team_sims
+    ids = [d["id"] for d in block.get("players", [])]
+    cfgs = []
+    for f in sorted(fc.MANAGERS.glob("*.yaml")):
+        try:
+            cfgs.append((f.stem, yaml.safe_load(f.read_text(encoding="utf-8")) or {}))
+        except Exception:
+            continue
+    details = dict(network=_load_json(PROC / "ml_metrics.json"), trees=_load_json(PROC / "trees_metrics.json"))
+    out = dict(md=md, models=[], leaderboard=_load_json(PROC / "model_leaderboard.json"), forecasts=[])
+    for k in registry.available():
+        spec = registry.MODELS[k]
+        m = dict(key=k, name=spec["name"], kind=spec["kind"], desc=spec["desc"])
+        d = details.get(k) or {}
+        if d:
+            m["trained_at"] = d.get("trained_at")
+            m["rows"] = (d.get("rows") or {}).get("all")
+            m["test"] = {n: (v or {}).get("test") for n, v in (d.get("results") or {}).items()}
+            if d.get("importance"):
+                m["importance"] = d["importance"]
+        try:
+            e = engine if k == "statistical" else registry.build(k, engine.as_of, n_sims=engine.n_sims, seed=engine.seed, base=engine)
+            pr = e.projections(md).set_index("id")
+            pl = e.players_for(md)
+            m["players"] = {pid: [_r(float(pr.xpts[pid])), _r(float(pr.p_start_sim[pid]), 3), _r(float(pr.p_goal[pid]), 3),
+                                  _r(float(pr.p_assist[pid]), 3), _r(float(pr.p_cs[pid]), 3)] for pid in ids if pid in pr.index}
+            m["matches"] = [dict(home=x["home"], away=x["away"], day=x["day"], kickoff_ist=x["kickoff_ist"],
+                                 xg=[_r(x["xg_home"]), _r(x["xg_away"])], p=[_r(x["p_home"], 3), _r(x["p_draw"], 3), _r(x["p_away"], 3)],
+                                 src=x["lambda_source"]) for x in e.match_probabilities(md)]
+            ev = pr.xpts.reindex(pl.id).fillna(0.0)
+            by = pl.set_index("id")
+            sim = e.simulate(md)
+            m["picks"] = {}
+            for stem, cfg in cfgs:
+                team = fc.saved_team(pl, cfg, md)
+                if team is None:
+                    continue
+                hit = 4 * team.get("hits", 0)
+                pk = best_xi(team["squad"], pl, ev)
+                row = dict(name=cfg.get("name", stem), me=bool(cfg.get("me")), captain=by.name[pk["captain"]],
+                           xi=[by.name[p] for p in pk["xi"]], formation=pk.get("formation"),
+                           expected=_r(float(team_sims(sim, pl, pk["xi"] + pk["bench"], pk["xi"], pk["captain"]).mean()) - hit, 1))
+                if team.get("xi"):
+                    row["saved_expected"] = _r(float(team_sims(sim, pl, team["xi"] + team["bench"], team["xi"], team["captain"]).mean()) - hit, 1)
+                    row["saved_captain"] = by.name[team["captain"]]
+                m["picks"][stem] = row
+            if k == "network":                         # the players table's "Net xPts" column
+                for dd in block.get("players", []):
+                    if dd["id"] in pr.index:
+                        dd["xpts_nn"] = _r(float(pr.xpts[dd["id"]]))
+                        dd["p_start_nn"] = _r(float(pr.p_start_sim[dd["id"]]))
+            if k == "bookmaker":
+                m["odds_coverage"] = _r(e.odds_coverage(md), 2)
+        except Exception as ex:                        # one model must never stop the dashboard
+            m["error"] = f"{type(ex).__name__}: {str(ex)[:160]}"
+        out["models"].append(m)
+    for p in sorted(fc.RUNS.glob("md*/forecast_*.json")):
+        try:
+            f = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if "models" in f:
+            out["forecasts"].append(dict(md=f["md"], manager=f["manager"], made_at=f.get("made_at"), pre_deadline=f.get("pre_deadline"),
+                                         note=f.get("note"), models={k: {x: v.get(x) for x in ("expected", "expected_no_changes", "percentiles", "p80", "p85", "p_below_60", "own_pick")}
+                                                                    for k, v in f["models"].items() if "expected" in v}))
     return out
 
 

@@ -67,7 +67,8 @@ ufe/ingest/     openfootball, FPL archive, official game feed, football-data.org
 ufe/models/     team_ratings (hierarchical Dixon–Coles), scoreline, player_rates, simulate, tournament
 ufe/optimize/   milp (HiGHS via SciPy), squad, transfers (multi-matchday), policy (in-matchday), chips
 ufe/evaluate/   metrics, backtest, tune, feedback (the learning loop)
-ufe/ml/         neural-network challenger in NumPy: training data (FPL archive), network, UCL features, comparison
+ufe/ml/         learned challengers: training data (FPL archive), neural network (NumPy), decision trees (LightGBM)
+ufe/compare/    four models side by side: registry, bookmaker engine, leaderboard, deadline forecasts
 ufe/report/     export (snapshots, dashboard data), render, command_center.html
 ufe/alerts/     Telegram                                          ufe/scheduler.py  the self-running loop
 tests/          pytest suite                                      schedule/  cron, Windows, GitHub Actions
@@ -105,6 +106,21 @@ tests/          pytest suite                                      schedule/  cro
 6. **Learning loop.** After each matchday the frozen pre-deadline snapshot is graded (log loss,
    RPS, Brier, calibration, points error), the recovery conversion is updated, every player's
    UCL results feed back into his rates, and a registry entry records the change.
+
+## Comparing models
+
+Four models predict every matchday: **statistical** (the default), **neural network**, **bookmaker**
+(match goal rates from prices only) and **decision trees** (LightGBM). They share the simulation and
+optimiser, so they differ only in their inputs. The dashboard's Models section has one page per model
+(its player and match predictions, its pick for your squad, its accuracy) and a leaderboard.
+
+```
+python -m ufe models train      # decision trees on the Premier League rows (seconds)
+python -m ufe models eval       # leaderboard: every model rebuilt as of each played matchday
+python -m ufe models forecast   # every model's forecast for each saved team (before the deadline)
+```
+The weekly ML workflow runs the first two; the matchday workflow saves forecasts in the three hours
+before each deadline and never after it.
 
 ## How accurate is it
 

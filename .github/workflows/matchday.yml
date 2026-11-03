@@ -41,19 +41,25 @@ jobs:
           python -m ufe livecall --auto 2>&1 | tail -5 | sed 's/^/::notice::livecall: /'
         continue-on-error: true
       - name: Build dashboard
+        env:
+          UFE_MODELS: ${{ github.event.schedule == '*/30 15-19 * * 2,3' && '0' || '1' }}   # evening line-up runs skip the model comparison
         run: |
           if ! python -m ufe dashboard --mds live-8; then
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
             python -m ufe dashboard --mds live-8
           fi
+      - name: Every model's forecast for the saved teams (only in the 3 hours before a deadline)
+        run: |
+          python -m ufe models forecast --window 3 2>&1 | tail -2 | sed 's/^/::notice::forecast: /'
+        continue-on-error: true
       - name: Report what the syncs produced
         if: always()
         continue-on-error: true
         run: python scripts/ci_report.py
       - uses: actions/upload-artifact@v5
         if: always()
-        with: { name: dashboard, path: data/runs/dashboard.html }
+        with: { name: dashboard, path: data/runs/dashboard.html, retention-days: 7 }   # keeps Actions storage inside the free 500 MB
       - name: Save the matchday's inputs and calls (last, because it sets the working tree aside)
         if: always()
         continue-on-error: true
@@ -63,7 +69,7 @@ jobs:
           MD=$(python -c "from ufe.cli import _live_md; print(_live_md())")
           for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv data/processed/feed_pre_md*.csv \
                    data/processed/livecall_state.json data/processed/scheduler_state.json \
-                   data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json; do
+                   data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json data/runs/md*/forecast_*.json; do
             [ -e "$f" ] && git add "$f"
           done
           if git diff --cached --quiet; then

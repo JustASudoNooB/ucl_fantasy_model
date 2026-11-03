@@ -1,4 +1,4 @@
-# Weekly retrain of the neural-network challenger (ufe/ml/): fresh Premier League player-matches
+# Weekly retrain of the learned challengers (ufe/ml/: neural network and decision trees): fresh Premier League player-matches
 # from the FPL archive, three networks trained in NumPy (about a minute on the runner), then the
 # comparison with the current model on every UCL matchday with actual XIs on file. Commits the
 # model and its scores; the dashboard shows both models side by side.
@@ -26,11 +26,20 @@ jobs:
         run: |
           python -m ufe ml eval 2>&1 | tail -12 | sed 's/^/::notice::ml eval: /'
         continue-on-error: true
+      - name: Decision trees (LightGBM) on the same data
+        run: |
+          python -m ufe models train 2>&1 | tail -4 | sed 's/^/::notice::trees: /'
+        continue-on-error: true
+      - name: Leaderboard of every model on the UCL matchdays played
+        run: |
+          python -m ufe models eval 2>&1 | tail -2 | sed 's/^/::notice::leaderboard: /'
+        continue-on-error: true
       - name: Commit the model and its scores
         run: |
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/processed/ml_model.json data/processed/ml_metrics.json data/processed/ml_ucl_eval.json 2>/dev/null || true
+          git add data/processed/ml_model.json data/processed/ml_metrics.json data/processed/ml_ucl_eval.json \
+            data/processed/trees_model.json data/processed/trees_metrics.json data/processed/model_leaderboard.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "::notice::model unchanged"; else
             git commit -q -m "ml: weekly retrain $(date -u +%F)"
             git stash -u -q || true

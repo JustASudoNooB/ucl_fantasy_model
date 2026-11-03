@@ -87,3 +87,11 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
 - Done: neural-network challenger (Premier League training, UCL comparison, weekly retrain, "Net xPts" column and a Network section on the dashboard).
 - After MD4: `python -m ufe ml eval` (adds MD4), then set `ml.blend: 0.5` if the blend still beats the model.
 
+
+## v0.17.0 (3 Nov 2026)
+- Done: decision-tree model (LightGBM), bookmaker model, model registry, leaderboard (`python -m ufe models eval`),
+  per-model deadline forecasts for every manager file, Models section on the dashboard (one page per model + leaderboard).
+- Next: backfill MD1-2 bookmaker prices (data-sync, manual run with the rg.org article URLs), grade MD4 once its XIs and
+  events are in, then decide after MD6 which model (or accuracy-weighted blend) feeds the picks.
+- Kept free: GitHub Actions about 430 of the 2,000 free minutes a month (forecasts run only in the 3 hours before a
+  deadline), dashboard artifacts kept 7 days, every library open source, every data source free.

@@ -1,64 +1,369 @@
 {
  "manager": "zero",
  "md": 4,
- "made_at": "2026-11-03T17:40:53+00:00",
- "note": "pre-deadline forecast for the team Zero saved (3 transfers, -4); points net of the hit",
- "captain": "Lamine Yamal",
- "xi": [
-  "Zion Suzuki",
-  "Achraf Hakimi",
-  "Jeremy Jacquet",
-  "Grimaldo",
-  "Federico Dimarco",
-  "Lamine Yamal",
-  "Désiré Doué",
-  "Jude Bellingham",
-  "Rayan Cherki",
-  "Kylian Mbappé",
-  "Luis Suárez"
- ],
- "bench": [
-  "Isco",
-  "Donyell Malen",
-  "Marc Guéhi",
-  "Yann Sommer"
- ],
- "player_xpts": {
-  "Zion Suzuki": 3.24,
-  "Achraf Hakimi": 5.99,
-  "Jeremy Jacquet": 5.07,
-  "Grimaldo": 5.03,
-  "Federico Dimarco": 4.96,
-  "Lamine Yamal": 7.82,
-  "Désiré Doué": 6.76,
-  "Jude Bellingham": 6.63,
-  "Rayan Cherki": 5.43,
-  "Kylian Mbappé": 6.6,
-  "Luis Suárez": 4.86,
-  "Isco": 4.66,
-  "Donyell Malen": 3.77,
-  "Marc Guéhi": 2.17,
-  "Yann Sommer": 3.2
+ "made_at": "2026-11-03T17:58:16+00:00",
+ "deadline": "2026-11-03T17:45:00+00:00",
+ "pre_deadline": false,
+ "as_of": "2026-11-03",
+ "n_sims": 10000,
+ "team_source": "saved in the manager file",
+ "models": {
+  "statistical": {
+   "expected": 72.2,
+   "expected_no_changes": 68.1,
+   "hits": -4,
+   "percentiles": [
+    50.0,
+    59.0,
+    71.0,
+    84.0,
+    96.0
+   ],
+   "percentiles_no_changes": [
+    47.0,
+    56.0,
+    66.0,
+    79.0,
+    91.0
+   ],
+   "p80": 0.323,
+   "p85": 0.235,
+   "p90": 0.167,
+   "p_below_60": 0.252,
+   "players": {
+    "Zion Suzuki": 3.24,
+    "Yann Sommer": 3.2,
+    "Achraf Hakimi": 5.99,
+    "Marc Guéhi": 2.17,
+    "Federico Dimarco": 4.96,
+    "Jeremy Jacquet": 5.07,
+    "Grimaldo": 5.03,
+    "Lamine Yamal": 7.82,
+    "Désiré Doué": 6.76,
+    "Jude Bellingham": 6.63,
+    "Rayan Cherki": 5.43,
+    "Isco": 4.66,
+    "Kylian Mbappé": 6.6,
+    "Luis Suárez": 4.86,
+    "Donyell Malen": 3.77
+   },
+   "own_pick": {
+    "xi": [
+     "Zion Suzuki",
+     "Achraf Hakimi",
+     "Jeremy Jacquet",
+     "Grimaldo",
+     "Federico Dimarco",
+     "Lamine Yamal",
+     "Désiré Doué",
+     "Jude Bellingham",
+     "Rayan Cherki",
+     "Kylian Mbappé",
+     "Luis Suárez"
+    ],
+    "bench": [
+     "Isco",
+     "Donyell Malen",
+     "Marc Guéhi",
+     "Yann Sommer"
+    ],
+    "captain": "Lamine Yamal",
+    "formation": "4-4-2",
+    "expected": 72.2,
+    "expected_no_changes": 68.1
+   },
+   "rules": [
+    "If Lamine Yamal scores 5 or fewer on day 1, move the armband to Jude Bellingham (day 2, expected 6.6).",
+    "If Zion Suzuki scores 2 or fewer, bring on Yann Sommer (day 2, expected 3.2).",
+    "If Achraf Hakimi scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Grimaldo scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Federico Dimarco scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Désiré Doué scores 3 or fewer, bring on Isco (day 2, expected 4.7)."
+   ]
+  },
+  "network": {
+   "expected": 68.7,
+   "expected_no_changes": 65.4,
+   "hits": -4,
+   "percentiles": [
+    46.0,
+    56.0,
+    68.0,
+    81.0,
+    93.0
+   ],
+   "percentiles_no_changes": [
+    44.0,
+    53.0,
+    64.0,
+    76.0,
+    89.0
+   ],
+   "p80": 0.267,
+   "p85": 0.192,
+   "p90": 0.129,
+   "p_below_60": 0.325,
+   "players": {
+    "Zion Suzuki": 3.06,
+    "Yann Sommer": 3.26,
+    "Achraf Hakimi": 5.38,
+    "Marc Guéhi": 2.42,
+    "Federico Dimarco": 4.86,
+    "Jeremy Jacquet": 4.28,
+    "Grimaldo": 4.32,
+    "Lamine Yamal": 7.33,
+    "Désiré Doué": 5.82,
+    "Jude Bellingham": 6.26,
+    "Rayan Cherki": 5.27,
+    "Isco": 4.46,
+    "Kylian Mbappé": 6.69,
+    "Luis Suárez": 5.01,
+    "Donyell Malen": 3.99
+   },
+   "own_pick": {
+    "xi": [
+     "Yann Sommer",
+     "Achraf Hakimi",
+     "Federico Dimarco",
+     "Grimaldo",
+     "Lamine Yamal",
+     "Jude Bellingham",
+     "Désiré Doué",
+     "Rayan Cherki",
+     "Isco",
+     "Kylian Mbappé",
+     "Luis Suárez"
+    ],
+    "bench": [
+     "Jeremy Jacquet",
+     "Donyell Malen",
+     "Marc Guéhi",
+     "Zion Suzuki"
+    ],
+    "captain": "Lamine Yamal",
+    "formation": "3-5-2",
+    "expected": 68.0,
+    "expected_no_changes": 65.5
+   },
+   "rules": [
+    "If Lamine Yamal scores 5 or fewer on day 1, move the armband to Kylian Mbappé (day 2, expected 6.7).",
+    "If Zion Suzuki scores 1 or fewer, bring on Yann Sommer (day 2, expected 3.3).",
+    "If Achraf Hakimi scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Grimaldo scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Federico Dimarco scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Désiré Doué scores 2 or fewer, bring on Isco (day 2, expected 4.5)."
+   ]
+  },
+  "bookmaker": {
+   "expected": 73.9,
+   "expected_no_changes": 69.8,
+   "hits": -4,
+   "percentiles": [
+    51.0,
+    61.0,
+    73.0,
+    86.0,
+    99.0
+   ],
+   "percentiles_no_changes": [
+    48.0,
+    57.0,
+    68.0,
+    81.0,
+    94.0
+   ],
+   "p80": 0.358,
+   "p85": 0.274,
+   "p90": 0.198,
+   "p_below_60": 0.226,
+   "players": {
+    "Zion Suzuki": 3.28,
+    "Yann Sommer": 3.21,
+    "Achraf Hakimi": 6.21,
+    "Marc Guéhi": 2.13,
+    "Federico Dimarco": 5.16,
+    "Jeremy Jacquet": 5.05,
+    "Grimaldo": 4.76,
+    "Lamine Yamal": 8.15,
+    "Désiré Doué": 7.08,
+    "Jude Bellingham": 6.81,
+    "Rayan Cherki": 5.45,
+    "Isco": 4.7,
+    "Kylian Mbappé": 6.75,
+    "Luis Suárez": 5.05,
+    "Donyell Malen": 4.06
+   },
+   "own_pick": {
+    "xi": [
+     "Zion Suzuki",
+     "Achraf Hakimi",
+     "Federico Dimarco",
+     "Jeremy Jacquet",
+     "Grimaldo",
+     "Lamine Yamal",
+     "Désiré Doué",
+     "Jude Bellingham",
+     "Rayan Cherki",
+     "Kylian Mbappé",
+     "Luis Suárez"
+    ],
+    "bench": [
+     "Isco",
+     "Donyell Malen",
+     "Marc Guéhi",
+     "Yann Sommer"
+    ],
+    "captain": "Lamine Yamal",
+    "formation": "4-4-2",
+    "expected": 73.9,
+    "expected_no_changes": 69.8
+   },
+   "rules": [
+    "If Lamine Yamal scores 5 or fewer on day 1, move the armband to Jude Bellingham (day 2, expected 6.8).",
+    "If Zion Suzuki scores 2 or fewer, bring on Yann Sommer (day 2, expected 3.2).",
+    "If Achraf Hakimi scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Grimaldo scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Federico Dimarco scores 3 or fewer, bring on Isco (day 2, expected 4.7).",
+    "If Désiré Doué scores 3 or fewer, bring on Isco (day 2, expected 4.7)."
+   ]
+  },
+  "trees": {
+   "expected": 66.3,
+   "expected_no_changes": 63.1,
+   "hits": -4,
+   "percentiles": [
+    45.0,
+    54.0,
+    65.0,
+    78.0,
+    89.0
+   ],
+   "percentiles_no_changes": [
+    43.0,
+    51.0,
+    62.0,
+    74.0,
+    86.0
+   ],
+   "p80": 0.217,
+   "p85": 0.147,
+   "p90": 0.099,
+   "p_below_60": 0.371,
+   "players": {
+    "Zion Suzuki": 3.17,
+    "Yann Sommer": 3.31,
+    "Achraf Hakimi": 5.09,
+    "Marc Guéhi": 2.71,
+    "Federico Dimarco": 4.15,
+    "Jeremy Jacquet": 4.23,
+    "Grimaldo": 4.07,
+    "Lamine Yamal": 7.28,
+    "Désiré Doué": 5.63,
+    "Jude Bellingham": 5.99,
+    "Rayan Cherki": 4.71,
+    "Isco": 4.48,
+    "Kylian Mbappé": 6.41,
+    "Luis Suárez": 5.06,
+    "Donyell Malen": 4.26
+   },
+   "own_pick": {
+    "xi": [
+     "Yann Sommer",
+     "Achraf Hakimi",
+     "Jeremy Jacquet",
+     "Federico Dimarco",
+     "Lamine Yamal",
+     "Jude Bellingham",
+     "Désiré Doué",
+     "Rayan Cherki",
+     "Isco",
+     "Kylian Mbappé",
+     "Luis Suárez"
+    ],
+    "bench": [
+     "Donyell Malen",
+     "Grimaldo",
+     "Marc Guéhi",
+     "Zion Suzuki"
+    ],
+    "captain": "Lamine Yamal",
+    "formation": "3-5-2",
+    "expected": 63.2,
+    "expected_no_changes": 63.0
+   },
+   "rules": [
+    "If Lamine Yamal scores 4 or fewer on day 1, move the armband to Kylian Mbappé (day 2, expected 6.4).",
+    "If Zion Suzuki scores 1 or fewer, bring on Yann Sommer (day 2, expected 3.3).",
+    "If Achraf Hakimi scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Grimaldo scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Federico Dimarco scores 2 or fewer, bring on Isco (day 2, expected 4.5).",
+    "If Désiré Doué scores 2 or fewer, bring on Isco (day 2, expected 4.5)."
+   ]
+  }
  },
- "statistical": {
-  "expected_no_changes": 68.2,
-  "expected_with_changes": 72.3,
-  "p10": 50,
-  "p25": 59,
-  "median": 71,
-  "p75": 84,
-  "p90": 97,
-  "p80_plus": 0.32,
-  "p85_plus": 0.24,
-  "p90_plus": 0.17,
-  "p_below_60": 0.25,
-  "p_top_after_md4": 0.351
- },
- "network_no_changes": 65.4,
- "blend_no_changes": 66.3,
- "model_plan": {
-  "team": "Díaz, Tresoldi -> Vinícius, Christiansen; 3-4-3",
-  "expected_with_changes": 77.2,
-  "p80_plus": 0.42
+ "note": "Computed 3 Nov 23:40 IST, after the 23:15 deadline, from inputs frozen before it (data as of the 23:10 IST commit: no MD4 line-ups or results on file). The statistical forecast was also saved before the deadline (saved_before_deadline).",
+ "saved_before_deadline": {
+  "manager": "zero",
+  "md": 4,
+  "made_at": "2026-11-03T17:40:53+00:00",
+  "note": "pre-deadline forecast for the team Zero saved (3 transfers, -4); points net of the hit",
+  "captain": "Lamine Yamal",
+  "xi": [
+   "Zion Suzuki",
+   "Achraf Hakimi",
+   "Jeremy Jacquet",
+   "Grimaldo",
+   "Federico Dimarco",
+   "Lamine Yamal",
+   "Désiré Doué",
+   "Jude Bellingham",
+   "Rayan Cherki",
+   "Kylian Mbappé",
+   "Luis Suárez"
+  ],
+  "bench": [
+   "Isco",
+   "Donyell Malen",
+   "Marc Guéhi",
+   "Yann Sommer"
+  ],
+  "player_xpts": {
+   "Zion Suzuki": 3.24,
+   "Achraf Hakimi": 5.99,
+   "Jeremy Jacquet": 5.07,
+   "Grimaldo": 5.03,
+   "Federico Dimarco": 4.96,
+   "Lamine Yamal": 7.82,
+   "Désiré Doué": 6.76,
+   "Jude Bellingham": 6.63,
+   "Rayan Cherki": 5.43,
+   "Kylian Mbappé": 6.6,
+   "Luis Suárez": 4.86,
+   "Isco": 4.66,
+   "Donyell Malen": 3.77,
+   "Marc Guéhi": 2.17,
+   "Yann Sommer": 3.2
+  },
+  "statistical": {
+   "expected_no_changes": 68.2,
+   "expected_with_changes": 72.3,
+   "p10": 50,
+   "p25": 59,
+   "median": 71,
+   "p75": 84,
+   "p90": 97,
+   "p80_plus": 0.32,
+   "p85_plus": 0.24,
+   "p90_plus": 0.17,
+   "p_below_60": 0.25,
+   "p_top_after_md4": 0.351
+  },
+  "network_no_changes": 65.4,
+  "blend_no_changes": 66.3,
+  "model_plan": {
+   "team": "Díaz, Tresoldi -> Vinícius, Christiansen; 3-4-3",
+   "expected_with_changes": 77.2,
+   "p80_plus": 0.42
+  }
  }
 }

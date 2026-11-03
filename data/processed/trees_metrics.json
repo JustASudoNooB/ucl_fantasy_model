@@ -1,0 +1,182 @@
+{
+ "trained_at": "2026-11-03T17:50:55+00:00",
+ "library": "lightgbm 4.7.0",
+ "params": {
+  "learning_rate": 0.05,
+  "num_leaves": 15,
+  "min_data_in_leaf": 200,
+  "feature_fraction": 0.9,
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1,
+  "lambda_l2": 1.0,
+  "verbose": -1,
+  "seed": 0,
+  "num_threads": 2,
+  "deterministic": true
+ },
+ "features": [
+  "pos_GK",
+  "pos_DEF",
+  "pos_MID",
+  "pos_FWD",
+  "log_price",
+  "price_rel",
+  "price_rank",
+  "home",
+  "lam_for",
+  "lam_against",
+  "rest_days",
+  "start_rate",
+  "has_start_hist",
+  "started_last1",
+  "started_last2",
+  "xg_share",
+  "xa_share",
+  "has_att_hist",
+  "log_n90"
+ ],
+ "rows": {
+  "train": 75344,
+  "val": 29757,
+  "test": 3883,
+  "all": 108984
+ },
+ "seasons": {
+  "train": [
+   "2022-23",
+   "2023-24",
+   "2024-25"
+  ],
+  "val": [
+   "2025-26"
+  ],
+  "test": [
+   "2026-27"
+  ]
+ },
+ "results": {
+  "trees": {
+   "best_iter": {
+    "start": 211,
+    "goals": 307,
+    "assists": 268
+   },
+   "val": {
+    "n": 29757,
+    "start_ll": 0.27932,
+    "start_brier": 0.08578,
+    "n_played": 11498,
+    "goal_poisson_ll": 0.25955,
+    "goal_brier": 0.06642,
+    "goal_pred": 1059.29548,
+    "goal_actual": 1009.0,
+    "assist_poisson_ll": 0.26715,
+    "assist_brier": 0.06839,
+    "assist_pred": 986.94744,
+    "assist_actual": 942.0
+   },
+   "test": {
+    "n": 3883,
+    "start_ll": 0.34315,
+    "start_brier": 0.10399,
+    "n_played": 1853,
+    "goal_poisson_ll": 0.27943,
+    "goal_brier": 0.07053,
+    "goal_pred": 155.71414,
+    "goal_actual": 170.0,
+    "assist_poisson_ll": 0.27169,
+    "assist_brier": 0.07033,
+    "assist_pred": 149.96052,
+    "assist_actual": 162.0
+   }
+  },
+  "network": {
+   "best_epoch": 20,
+   "val": {
+    "n": 29757,
+    "start_ll": 0.28251,
+    "start_brier": 0.08634,
+    "n_played": 11498,
+    "goal_poisson_ll": 0.25789,
+    "goal_brier": 0.0661,
+    "goal_pred": 966.75592,
+    "goal_actual": 1009.0,
+    "assist_poisson_ll": 0.26695,
+    "assist_brier": 0.06845,
+    "assist_pred": 925.91152,
+    "assist_actual": 942.0
+   },
+   "test": {
+    "n": 3883,
+    "start_ll": 0.34749,
+    "start_brier": 0.10544,
+    "n_played": 1853,
+    "goal_poisson_ll": 0.27975,
+    "goal_brier": 0.07058,
+    "goal_pred": 145.63318,
+    "goal_actual": 170.0,
+    "assist_poisson_ll": 0.27309,
+    "assist_brier": 0.0706,
+    "assist_pred": 144.11079,
+    "assist_actual": 162.0
+   }
+  },
+  "linear": {
+   "best_epoch": 12,
+   "val": {
+    "n": 29757,
+    "start_ll": 0.29473,
+    "start_brier": 0.08846,
+    "n_played": 11498,
+    "goal_poisson_ll": 0.26016,
+    "goal_brier": 0.06655,
+    "goal_pred": 994.17826,
+    "goal_actual": 1009.0,
+    "assist_poisson_ll": 0.26758,
+    "assist_brier": 0.06856,
+    "assist_pred": 944.14222,
+    "assist_actual": 942.0
+   },
+   "test": {
+    "n": 3883,
+    "start_ll": 0.35449,
+    "start_brier": 0.10724,
+    "n_played": 1853,
+    "goal_poisson_ll": 0.28216,
+    "goal_brier": 0.07082,
+    "goal_pred": 160.64523,
+    "goal_actual": 170.0,
+    "assist_poisson_ll": 0.27528,
+    "assist_brier": 0.07141,
+    "assist_pred": 146.33356,
+    "assist_actual": 162.0
+   }
+  }
+ },
+ "importance": {
+  "start": {
+   "started_last1": 0.708,
+   "start_rate": 0.187,
+   "log_n90": 0.021,
+   "has_start_hist": 0.02,
+   "started_last2": 0.019,
+   "log_price": 0.008
+  },
+  "goals": {
+   "xg_share": 0.457,
+   "price_rank": 0.101,
+   "lam_for": 0.072,
+   "pos_FWD": 0.061,
+   "log_price": 0.043,
+   "pos_GK": 0.042
+  },
+  "assists": {
+   "xa_share": 0.268,
+   "price_rank": 0.168,
+   "lam_for": 0.109,
+   "pos_GK": 0.085,
+   "lam_against": 0.056,
+   "xg_share": 0.052
+  }
+ }
+}
