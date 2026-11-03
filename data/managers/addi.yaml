@@ -1,0 +1,37 @@
+name: Addi
+team_name: Addi
+updated: '2026-11-03'
+league_points: 261
+note: Squad as shown in the app on 3 Nov (their MD3 team; MD4 changes are hidden until
+  the deadline).
+squad:
+- name: Harry Kane
+  team: BAY
+- name: Kylian Mbappé
+  team: RMA
+- name: Lamine Yamal
+  team: BAR
+- name: Fermín López
+  team: BAR
+- name: Vitinha
+  team: PSG
+- name: Emiliano Buendía
+  team: AVL
+- name: Fresneda
+  team: SCP
+- name: Gabriel Magalhães
+  team: ARS
+- name: Ronald Araújo
+  team: LIV
+- name: Huijsen
+  team: RMA
+- name: David Raya
+  team: ARS
+- name: Zion Suzuki
+  team: AVL
+- name: Pubill
+  team: ATM
+- name: Raphinha
+  team: BAR
+- name: Esposito
+  team: INT

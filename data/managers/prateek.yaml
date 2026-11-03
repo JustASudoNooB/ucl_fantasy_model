@@ -1,0 +1,37 @@
+name: Prateek
+team_name: prat69
+updated: '2026-11-03'
+league_points: 267
+note: Squad as shown in the app on 3 Nov (their MD3 team; MD4 changes are hidden until
+  the deadline).
+squad:
+- name: Harry Kane
+  team: BAY
+- name: Kylian Mbappé
+  team: RMA
+- name: Fermín López
+  team: BAR
+- name: Lamine Yamal
+  team: BAR
+- name: Vitinha
+  team: PSG
+- name: Raphinha
+  team: BAR
+- name: Kostić
+  team: PSV
+- name: Rúben Dias
+  team: MCI
+- name: Jonathan Tah
+  team: BAY
+- name: Gabriel Magalhães
+  team: ARS
+- name: Zion Suzuki
+  team: AVL
+- name: David Raya
+  team: ARS
+- name: Zalazar
+  team: SCP
+- name: Pejcinovic
+  team: VFB
+- name: Vagnoman
+  team: VFB

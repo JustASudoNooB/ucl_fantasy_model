@@ -1,0 +1,37 @@
+name: Arnav
+team_name: SameFC
+updated: '2026-11-03'
+league_points: 240
+note: Squad as shown in the app on 3 Nov (their MD3 team; MD4 changes are hidden until
+  the deadline).
+squad:
+- name: Kylian Mbappé
+  team: RMA
+- name: Lamine Yamal
+  team: BAR
+- name: Rayan Cherki
+  team: MCI
+- name: Vinícius Júnior
+  team: RMA
+- name: Thauvin
+  team: RCL
+- name: Schlotterbeck
+  team: BVB
+- name: Virgil van Dijk
+  team: LIV
+- name: Grimaldo
+  team: ATM
+- name: Joško Gvardiol
+  team: MCI
+- name: Hermoso
+  team: ROM
+- name: Courtois
+  team: RMA
+- name: Donnarumma
+  team: MCI
+- name: Isak
+  team: LIV
+- name: Barcola
+  team: LIV
+- name: Dembélé
+  team: PSG

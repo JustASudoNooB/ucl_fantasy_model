@@ -1,0 +1,37 @@
+name: Ayush
+team_name: ASCA
+updated: '2026-11-03'
+league_points: 251
+note: Squad as shown in the app on 3 Nov (their MD3 team; MD4 changes are hidden until
+  the deadline).
+squad:
+- name: Harry Kane
+  team: BAY
+- name: Kylian Mbappé
+  team: RMA
+- name: Lamine Yamal
+  team: BAR
+- name: Bruno Fernandes
+  team: MUN
+- name: Baku
+  team: RBL
+- name: Federico Dimarco
+  team: INT
+- name: Sergi Altimira
+  team: SCP
+- name: Marquinhos
+  team: PSG
+- name: Hakimi
+  team: PSG
+- name: Brown
+  team: BAY
+- name: Zion Suzuki
+  team: AVL
+- name: Bredlow
+  team: VFB
+- name: Undav
+  team: VFB
+- name: Zalazar
+  team: SCP
+- name: Raphinha
+  team: BAR
