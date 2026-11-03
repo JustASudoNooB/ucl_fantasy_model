@@ -1,7 +1,11 @@
 # Saves raw copies of the free data pages to the `samples` branch (manual run only), so parsers
 # can be developed against real markup from a machine that cannot reach those sites.
 name: samples
-on: { workflow_dispatch: {} }
+on:
+  workflow_dispatch:
+    inputs:
+      urls: { description: "Extra comma-separated URLs to save (optional)", required: false, default: "" }
+      only: { description: "1 = save only the extra URLs", required: false, default: "0" }
 permissions: { contents: write }
 jobs:
   fetch:
@@ -13,6 +17,9 @@ jobs:
         with: { python-version: "3.12", cache: pip }
       - run: pip install -r requirements.txt
       - run: python scripts/fetch_samples.py /tmp/samples
+        env:
+          EXTRA_URLS: ${{ inputs.urls }}
+          EXTRA_ONLY: ${{ inputs.only }}
       - name: Commit to the samples branch
         run: |
           cd /tmp/samples

@@ -33,6 +33,12 @@ def save(name: str, url: str, headers: dict | None = None):
         return None
 
 
+import os
+for i, u in enumerate(x.strip() for x in os.environ.get("EXTRA_URLS", "").split(",") if x.strip()):
+    save(f"extra_{i}.html", u)                 # pages asked for by hand (e.g. past odds articles)
+if os.environ.get("EXTRA_ONLY") == "1":
+    (OUT / "report.json").write_text(json.dumps(report, indent=1))
+    raise SystemExit(0)
 save("starting11_ucl.html", "https://starting11.com/champions-league")
 for lg in ("la-liga", "bundesliga", "serie-a", "ligue-1", "eredivisie", "super-lig", "primeira-liga",
            "belgian-pro-league", "premier-league"):
