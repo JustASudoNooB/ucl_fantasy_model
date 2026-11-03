@@ -1,0 +1,64 @@
+{
+ "manager": "zero",
+ "md": 4,
+ "made_at": "2026-11-03T17:40:53+00:00",
+ "note": "pre-deadline forecast for the team Zero saved (3 transfers, -4); points net of the hit",
+ "captain": "Lamine Yamal",
+ "xi": [
+  "Zion Suzuki",
+  "Achraf Hakimi",
+  "Jeremy Jacquet",
+  "Grimaldo",
+  "Federico Dimarco",
+  "Lamine Yamal",
+  "Désiré Doué",
+  "Jude Bellingham",
+  "Rayan Cherki",
+  "Kylian Mbappé",
+  "Luis Suárez"
+ ],
+ "bench": [
+  "Isco",
+  "Donyell Malen",
+  "Marc Guéhi",
+  "Yann Sommer"
+ ],
+ "player_xpts": {
+  "Zion Suzuki": 3.24,
+  "Achraf Hakimi": 5.99,
+  "Jeremy Jacquet": 5.07,
+  "Grimaldo": 5.03,
+  "Federico Dimarco": 4.96,
+  "Lamine Yamal": 7.82,
+  "Désiré Doué": 6.76,
+  "Jude Bellingham": 6.63,
+  "Rayan Cherki": 5.43,
+  "Kylian Mbappé": 6.6,
+  "Luis Suárez": 4.86,
+  "Isco": 4.66,
+  "Donyell Malen": 3.77,
+  "Marc Guéhi": 2.17,
+  "Yann Sommer": 3.2
+ },
+ "statistical": {
+  "expected_no_changes": 68.2,
+  "expected_with_changes": 72.3,
+  "p10": 50,
+  "p25": 59,
+  "median": 71,
+  "p75": 84,
+  "p90": 97,
+  "p80_plus": 0.32,
+  "p85_plus": 0.24,
+  "p90_plus": 0.17,
+  "p_below_60": 0.25,
+  "p_top_after_md4": 0.351
+ },
+ "network_no_changes": 65.4,
+ "blend_no_changes": 66.3,
+ "model_plan": {
+  "team": "Díaz, Tresoldi -> Vinícius, Christiansen; 3-4-3",
+  "expected_with_changes": 77.2,
+  "p80_plus": 0.42
+ }
+}
