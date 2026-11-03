@@ -1,49 +1,47 @@
 team,name,slug,full,pos,scored,taken,league,read_at
-ARS,Saka,saka,saka,FWD,1,1,premier-league,2026-11-02
-AVL,Buendía,buendia,buendia,MID,1,1,premier-league,2026-11-02
-AVL,Barkley,barkley,barkley,MID,1,1,premier-league,2026-11-02
-LIV,Szoboszlai,szoboszlai,szoboszlai,MID,1,1,premier-league,2026-11-02
-LIV,Gakpo,gakpo,gakpo,FWD,1,1,premier-league,2026-11-02
-MCI,Haaland,haaland,haaland,FWD,5,6,premier-league,2026-11-02
-MUN,Fernandes,bruno-fernandes,bruno fernandes,MID,1,1,premier-league,2026-11-02
-ATM,Grimaldo,alex-grimaldo,alex grimaldo,DEF,2,2,la-liga,2026-11-02
-BAR,Raphinha,raphinha,raphinha,FWD,3,3,la-liga,2026-11-02
-BAR,Yamal,lamine-yamal,lamine yamal,FWD,1,2,la-liga,2026-11-02
-BET,Isco,isco,isco,MID,3,3,la-liga,2026-11-02
-RMA,Mbappé,kylian-mbappe,kylian mbappe,FWD,1,2,la-liga,2026-11-02
-VIL,Moreno,gerard-moreno,gerard moreno,FWD,1,1,la-liga,2026-11-02
-VIL,Gueye,gueye-0696,gueye,MID,1,1,la-liga,2026-11-02
-VIL,Mikautadze,mikautadze,mikautadze,FWD,1,1,la-liga,2026-11-02
-BAY,Kane,kane,kane,FWD,4,4,bundesliga,2026-11-02
-BAY,Olise,olise,olise,MID,1,1,bundesliga,2026-11-02
-BVB,Guirassy,guirassy,guirassy,FWD,1,1,bundesliga,2026-11-02
-RBL,Nusa,nusa,nusa,MID,1,1,bundesliga,2026-11-02
-VFB,Mittelstädt,mittelstadt,mittelstadt,DEF,5,5,bundesliga,2026-11-02
-VFB,Demirović,demirovic,demirovic,FWD,1,2,bundesliga,2026-11-02
-VFB,Stiller,stiller,stiller,MID,0,1,bundesliga,2026-11-02
-ROM,Malen,malen,malen,FWD,1,1,serie-a,2026-11-02
-COM,da Cunha,da-cunha,da cunha,MID,4,4,serie-a,2026-11-02
-COM,Paz,paz,paz,MID,0,2,serie-a,2026-11-02
-COM,Douvikas,douvikas,douvikas,FWD,1,1,serie-a,2026-11-02
-INT,Çalhanoğlu,calhanoglu,calhanoglu,MID,1,1,serie-a,2026-11-02
-INT,Zieliński,zielinski,zielinski,MID,1,1,serie-a,2026-11-02
-NAP,De Bruyne,de-bruyne,de bruyne,MID,1,2,serie-a,2026-11-02
-RCL,Thauvin,thauvin,thauvin,MID,3,3,ligue-1,2026-11-02
-LIL,Giroud,giroud,giroud,FWD,1,1,ligue-1,2026-11-02
-PSG,Dembélé,dembele-153,dembele,FWD,5,7,ligue-1,2026-11-02
-PSG,Vitinha,vitinha-8384,vitinha,MID,1,2,ligue-1,2026-11-02
-PSG,Mendes,nuno-mendes,nuno mendes,DEF,1,1,ligue-1,2026-11-02
-FEY,Valente,valente,valente,FWD,1,1,eredivisie,2026-11-02
-FEY,Steijn,steijn,steijn,MID,1,1,eredivisie,2026-11-02
-PSV,Pepi,pepi,pepi,FWD,1,1,eredivisie,2026-11-02
-PSV,Perišić,perisic,perisic,MID,0,1,eredivisie,2026-11-02
-PSV,Mijnans,mijnans,mijnans,MID,0,1,eredivisie,2026-11-02
-FEN,Greenwood,greenwood,greenwood,MID,1,3,super-lig,2026-11-02
-GAL,Leão,rafael-leao,rafael leao,MID,1,1,super-lig,2026-11-02
-GAL,Osimhen,osimhen,osimhen,FWD,1,1,super-lig,2026-11-02
-POR,Silva,andre-silva,andre silva,FWD,1,1,primeira-liga,2026-11-02
-POR,Veiga,gabri-veiga,gabri veiga,MID,1,1,primeira-liga,2026-11-02
-POR,Giménez,gimenez,gimenez,FWD,1,1,primeira-liga,2026-11-02
-SCP,Suárez,suarez,suarez,FWD,4,4,primeira-liga,2026-11-02
-CLB,Tresoldi,tresoldi,tresoldi,FWD,4,4,belgian-pro-league,2026-11-02
-CLB,Vetlesen,vetlesen,vetlesen,MID,1,1,belgian-pro-league,2026-11-02
+ARS,Saka,saka,saka,FWD,1,1,premier-league,2026-11-03
+AVL,Buendía,buendia,buendia,MID,1,1,premier-league,2026-11-03
+AVL,Barkley,barkley,barkley,MID,1,1,premier-league,2026-11-03
+LIV,Szoboszlai,szoboszlai,szoboszlai,MID,1,1,premier-league,2026-11-03
+LIV,Gakpo,gakpo,gakpo,FWD,1,1,premier-league,2026-11-03
+MCI,Haaland,haaland,haaland,FWD,5,6,premier-league,2026-11-03
+MUN,Fernandes,bruno-fernandes,bruno fernandes,MID,1,1,premier-league,2026-11-03
+ATM,Grimaldo,alex-grimaldo,alex grimaldo,DEF,2,2,la-liga,2026-11-03
+BAR,Raphinha,raphinha,raphinha,FWD,3,3,la-liga,2026-11-03
+BAR,Yamal,lamine-yamal,lamine yamal,FWD,1,2,la-liga,2026-11-03
+BET,Isco,isco,isco,MID,3,3,la-liga,2026-11-03
+RMA,Mbappé,kylian-mbappe,kylian mbappe,FWD,2,3,la-liga,2026-11-03
+VIL,Moreno,gerard-moreno,gerard moreno,FWD,1,1,la-liga,2026-11-03
+VIL,Gueye,gueye-0696,gueye,MID,1,1,la-liga,2026-11-03
+VIL,Mikautadze,mikautadze,mikautadze,FWD,1,1,la-liga,2026-11-03
+BAY,Kane,kane,kane,FWD,4,4,bundesliga,2026-11-03
+BAY,Olise,olise,olise,MID,1,1,bundesliga,2026-11-03
+BVB,Guirassy,guirassy,guirassy,FWD,1,1,bundesliga,2026-11-03
+RBL,Nusa,nusa,nusa,MID,1,1,bundesliga,2026-11-03
+VFB,Mittelstädt,mittelstadt,mittelstadt,DEF,5,5,bundesliga,2026-11-03
+VFB,Demirović,demirovic,demirovic,FWD,1,2,bundesliga,2026-11-03
+VFB,Stiller,stiller,stiller,MID,0,1,bundesliga,2026-11-03
+ROM,Malen,malen,malen,FWD,1,1,serie-a,2026-11-03
+COM,da Cunha,da-cunha,da cunha,MID,1,1,serie-a,2026-11-03
+INT,Çalhanoğlu,calhanoglu,calhanoglu,MID,1,1,serie-a,2026-11-03
+INT,Zieliński,zielinski,zielinski,MID,1,1,serie-a,2026-11-03
+NAP,De Bruyne,de-bruyne,de bruyne,MID,1,2,serie-a,2026-11-03
+RCL,Thauvin,thauvin,thauvin,MID,3,3,ligue-1,2026-11-03
+LIL,Giroud,giroud,giroud,FWD,1,1,ligue-1,2026-11-03
+PSG,Dembélé,dembele-153,dembele,FWD,5,7,ligue-1,2026-11-03
+PSG,Vitinha,vitinha-8384,vitinha,MID,1,2,ligue-1,2026-11-03
+PSG,Mendes,nuno-mendes,nuno mendes,DEF,1,1,ligue-1,2026-11-03
+FEY,Valente,valente,valente,FWD,1,1,eredivisie,2026-11-03
+FEY,Steijn,steijn,steijn,MID,1,1,eredivisie,2026-11-03
+PSV,Pepi,pepi,pepi,FWD,1,1,eredivisie,2026-11-03
+PSV,Perišić,perisic,perisic,FWD,0,1,eredivisie,2026-11-03
+PSV,Mijnans,mijnans,mijnans,MID,0,1,eredivisie,2026-11-03
+FEN,Greenwood,greenwood,greenwood,MID,1,3,super-lig,2026-11-03
+GAL,Leão,rafael-leao,rafael leao,MID,1,1,super-lig,2026-11-03
+GAL,Osimhen,osimhen,osimhen,FWD,1,1,super-lig,2026-11-03
+POR,Silva,andre-silva,andre silva,FWD,1,1,primeira-liga,2026-11-03
+POR,Veiga,gabri-veiga,gabri veiga,MID,1,1,primeira-liga,2026-11-03
+POR,Giménez,gimenez,gimenez,FWD,1,1,primeira-liga,2026-11-03
+SCP,Suárez,suarez,suarez,FWD,4,4,primeira-liga,2026-11-03
+CLB,Tresoldi,tresoldi,tresoldi,FWD,4,4,belgian-pro-league,2026-11-03
+CLB,Vetlesen,vetlesen,vetlesen,MID,1,1,belgian-pro-league,2026-11-03
