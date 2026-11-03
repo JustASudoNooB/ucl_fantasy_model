@@ -254,15 +254,17 @@ whether the team model adds anything over the market. Decision trees: LightGBM (
 on the network's rows and features (start: binary; goals and assists: Poisson with a log-minutes
 offset), trees chosen on 2025/26, scored once on 2026/27. Premier League 2026/27 test, trees /
 network / linear: start log loss 0.3432 / 0.3475 / 0.3545, goals 0.2794 / 0.2797 / 0.2822, assists 0.2717 / 0.2731 / 0.2753
-(trees best on all three). UCL MD1-3 rebuilt with pre-match information (compare/leaderboard.py; MD1 prices backfilled from
-rg.org's preview articles, MD2's cover only 7 games so the bookmaker model skips MD2). On the
-matchdays every model has (MD1 and MD3 for starts and results, MD3 for goals and points):
-start log loss statistical = bookmaker 0.481, network 0.527, trees 0.571 (the learned models have no
-UCL XIs to use at MD1); goal log loss trees 0.171, network 0.171, statistical 0.176, bookmaker 0.178;
-points correlation trees 0.443, network 0.433, bookmaker 0.424, statistical 0.424; result log loss
-bookmaker 0.739 v 0.753 for the statistical model; total goals off by 10.3 a matchday for the
-bookmaker (1X2-only prices with an average total) v 2.2. Scores won (matchday x score): statistical 7,
-network 4, trees 4, bookmaker 3. Too few matchdays to pick a winner; nothing changes in the picks.
+(trees best on all three). UCL MD1-3 rebuilt with what was known at each deadline (compare/leaderboard.py reads the
+pre-deadline copies of news and prices; MD2's news file had been updated on day 2, so MD2 uses the
+UEFA predicted line-ups saved before its deadline; MD1 prices backfilled from rg.org's preview
+articles; MD2's articles cover only 7 games, so the bookmaker model skips MD2). On the matchdays
+every model has (MD1 and MD3 for starts and results, MD3 for goals and points): start log loss
+statistical = bookmaker 0.481, network 0.527, trees 0.571 (the learned models have no UCL XIs to
+use at MD1); goal log loss trees 0.171, network 0.171, statistical 0.176, bookmaker 0.178; points
+correlation trees 0.443, network 0.433, bookmaker 0.424, statistical 0.424; result log loss
+bookmaker 0.739 v 0.753; total goals off by 10.3 a matchday for the bookmaker (1X2-only prices with
+an average total) v 2.2. Scores won (matchday x score, ties split): trees 5.2, network 4.7,
+statistical 4.2, bookmaker 4.0. Too few matchdays to pick a winner; nothing changes in the picks.
 Deadline forecasts for every manager's saved team, from every model, are written in the three
 hours before each deadline and frozen after it (forecast_{manager}.json); MD4's was computed just
 after the deadline from inputs frozen before it, and says so. Reverse if: after MD6 one model leads

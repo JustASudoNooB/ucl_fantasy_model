@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-11-03T18:49:18+00:00",
+ "generated_at": "2026-11-03T19:47:53+00:00",
  "models": [
   "statistical",
   "network",
   "bookmaker",
   "trees"
  ],
- "method": "today's code, rebuilt as of each matchday's first date with the news and odds saved before it",
+ "method": "today's code, rebuilt as of each matchday's first date with the team news and prices saved before its deadline",
  "mds": {
   "1": {
    "statistical": {
@@ -60,60 +60,60 @@
   },
   "2": {
    "statistical": {
-    "start_ll": 0.3574,
-    "start_brier": 0.1097,
+    "start_ll": 0.3612,
+    "start_brier": 0.1107,
     "top11": 316,
     "starters": 395,
     "top11_share": 0.8,
-    "goal_ll": 0.1645,
-    "goal_brier": 0.0455,
-    "scorers_exp": 53.0,
+    "goal_ll": 0.1652,
+    "goal_brier": 0.0457,
+    "scorers_exp": 53.1,
     "scorers": 65,
-    "points_corr": 0.5164,
+    "points_corr": 0.5125,
     "top20_points": 114,
-    "result_ll": 0.9051,
-    "goals_exp": 63.7,
+    "result_ll": 0.9036,
+    "goals_exp": 63.8,
     "goals_actual": 78,
-    "goals_abs_err": 14.3,
+    "goals_abs_err": 14.2,
     "n_matches": 18
    },
    "network": {
-    "start_ll": 0.3543,
-    "start_brier": 0.1082,
+    "start_ll": 0.3583,
+    "start_brier": 0.1095,
     "top11": 316,
     "starters": 395,
     "top11_share": 0.8,
-    "goal_ll": 0.1663,
+    "goal_ll": 0.1665,
     "goal_brier": 0.0454,
-    "scorers_exp": 53.6,
+    "scorers_exp": 53.7,
     "scorers": 65,
-    "points_corr": 0.5281,
-    "top20_points": 131,
-    "result_ll": 0.9107,
-    "goals_exp": 64.9,
+    "points_corr": 0.5257,
+    "top20_points": 124,
+    "result_ll": 0.9089,
+    "goals_exp": 65.0,
     "goals_actual": 78,
-    "goals_abs_err": 13.1,
+    "goals_abs_err": 13.0,
     "n_matches": 18
    },
    "bookmaker": {
     "skipped": "no bookmaker prices on file for MD2"
    },
    "trees": {
-    "start_ll": 0.3612,
-    "start_brier": 0.1121,
-    "top11": 315,
+    "start_ll": 0.365,
+    "start_brier": 0.1132,
+    "top11": 314,
     "starters": 395,
-    "top11_share": 0.7975,
-    "goal_ll": 0.1659,
-    "goal_brier": 0.0454,
-    "scorers_exp": 54.1,
+    "top11_share": 0.7949,
+    "goal_ll": 0.1666,
+    "goal_brier": 0.0455,
+    "scorers_exp": 54.3,
     "scorers": 65,
-    "points_corr": 0.5236,
-    "top20_points": 116,
-    "result_ll": 0.9098,
-    "goals_exp": 65.8,
+    "points_corr": 0.5189,
+    "top20_points": 117,
+    "result_ll": 0.9081,
+    "goals_exp": 65.9,
     "goals_actual": 78,
-    "goals_abs_err": 12.2,
+    "goals_abs_err": 12.1,
     "n_matches": 18
    }
   },
@@ -296,10 +296,10 @@
    ]
   },
   "wins": {
-   "statistical": 7,
-   "network": 4,
-   "bookmaker": 3,
-   "trees": 4
+   "statistical": 4.17,
+   "network": 4.67,
+   "bookmaker": 4.0,
+   "trees": 5.17
   }
  },
  "forecasts": [
