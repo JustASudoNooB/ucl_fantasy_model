@@ -14,16 +14,15 @@ md2:
        Jude Bellingham, Rayan Cherki, Luis Suárez, Harry Kane]
   points: 71               # final (Zero, 3 Nov)
 md4:
-  # Zero's own plan (3 transfers, -4). Model's plan for comparison after MD4: Díaz, Tresoldi -> Vinícius, Christiansen,
-  # 3-4-3 (Suzuki; Jacquet, Grimaldo, Dimarco; Yamal (C), Vinícius, Bellingham, Cherki; Mbappé, Suárez, Christiansen),
-  # expected 77.4 vs 72.2 for this team (both with the after-Tuesday changes, net of hits).
+  # as actually saved in the app (screenshot 4 Nov 11:47 IST): 5-3-2, Mbappé and Cherki on the bench
   hits: -4
   captain: Lamine Yamal
-  xi: [Zion Suzuki, Achraf Hakimi, Jeremy Jacquet, Grimaldo, Federico Dimarco, Lamine Yamal, Désiré Doué,
-       Jude Bellingham, Rayan Cherki, Kylian Mbappé, Luis Suárez]
-  bench: [Isco, Donyell Malen, Marc Guéhi, Yann Sommer]
-  points_day1: 45        # 31 from the game feed + Doué ~8, Hakimi ~6 (PSG's game not in the feed on 4 Nov 10:00 IST)
-  day2_change: Suárez (2) -> Isco recommended; Yamal (8) stays captain
+  xi: [Zion Suzuki, Federico Dimarco, Marc Guéhi, Achraf Hakimi, Grimaldo, Jeremy Jacquet, Jude Bellingham,
+       Lamine Yamal, Désiré Doué, Luis Suárez, Donyell Malen]
+  bench: [Yann Sommer, Isco, Kylian Mbappé, Rayan Cherki]
+  points_day1: 52          # app (before the -4); season total 305 after day 1
+  day2_plan: Suárez -> Mbappé, Grimaldo -> Cherki, Guéhi -> Isco (3-5-2); Yamal stays captain
+  note: the deadline forecast (forecast_zero.json) was made for the XI assumed then (Mbappé, Cherki starting), not this one
 md3:
   chip: wildcard
   captain: Kylian Mbappé   # switched to him after day 1
