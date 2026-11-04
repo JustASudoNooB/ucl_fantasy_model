@@ -22,6 +22,8 @@ md4:
   xi: [Zion Suzuki, Achraf Hakimi, Jeremy Jacquet, Grimaldo, Federico Dimarco, Lamine Yamal, Désiré Doué,
        Jude Bellingham, Rayan Cherki, Kylian Mbappé, Luis Suárez]
   bench: [Isco, Donyell Malen, Marc Guéhi, Yann Sommer]
+  points_day1: 45        # 31 from the game feed + Doué ~8, Hakimi ~6 (PSG's game not in the feed on 4 Nov 10:00 IST)
+  day2_change: Suárez (2) -> Isco recommended; Yamal (8) stays captain
 md3:
   chip: wildcard
   captain: Kylian Mbappé   # switched to him after day 1

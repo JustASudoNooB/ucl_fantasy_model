@@ -53,15 +53,15 @@ md,stage,date,kickoff_cet,home,away,home_goals,away_goals,status,source
 3,league,2026-10-21,21:00,RMA,RBL,4.0,1.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
 3,league,2026-10-21,21:00,BET,FEY,1.0,0.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
 3,league,2026-10-21,21:00,SCP,LAS,2.0,3.0,FT,"uefa.com MD3 round-ups, 26 Oct 2026"
-4,league,2026-11-03,18:45,SHA,SCP,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,18:45,GAL,VFB,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,ATM,BAY,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,BAR,AVL,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,FEY,INT,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,BOD,LIL,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,LAS,SLO,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,MUN,ROM,,,NS,uefa.com:league-phase-fixtures
-4,league,2026-11-03,21:00,VIL,PSG,,,NS,uefa.com:league-phase-fixtures
+4,league,2026-11-03,18:45,SHA,SCP,0.0,1.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,18:45,GAL,VFB,2.0,0.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,ATM,BAY,0.0,2.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,BAR,AVL,3.0,0.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,FEY,INT,0.0,3.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,BOD,LIL,0.0,0.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,LAS,SLO,4.0,0.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,MUN,ROM,3.0,2.0,FT,uefa.com:league-phase-fixtures
+4,league,2026-11-03,21:00,VIL,PSG,0.0,6.0,FT,uefa.com:league-phase-fixtures
 4,league,2026-11-04,18:45,AEK,RMA,,,NS,uefa.com:league-phase-fixtures
 4,league,2026-11-04,18:45,FEN,LIV,,,NS,uefa.com:league-phase-fixtures
 4,league,2026-11-04,21:00,BVB,BET,,,NS,uefa.com:league-phase-fixtures
