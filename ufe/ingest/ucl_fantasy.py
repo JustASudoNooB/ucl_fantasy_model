@@ -68,11 +68,27 @@ def _find_player_list(obj) -> list[dict] | None:
     return best
 
 
+# UEFA's own short club names that are ambiguous elsewhere ("Paris FC" is another club in French
+# league data), so they are matched only inside this feed.
+FEED_CLUBS = {"paris": "PSG", "dortmund": "BVB", "bratislava": "SLO"}
+
+
+def _feed_team(v) -> str | None:
+    t = ucl_team_id(str(v))
+    return t or FEED_CLUBS.get(str(v).strip().lower())
+
+
 def normalise(records: list[dict]) -> pd.DataFrame:
-    rows = []
+    rows, unmapped = [], set()
     for r in records:
-        team_raw = _first(r, KEYS["team"])
-        team = ucl_team_id(str(team_raw)) if team_raw is not None else None
+        team = None
+        for k in KEYS["team"]:                      # every name field, not just the first present: UEFA's
+            if r.get(k) not in (None, ""):           # full name for some clubs is a form ("Paris") we may not know
+                team = _feed_team(r[k])
+                if team:
+                    break
+        if team is None:
+            unmapped.add(str(_first(r, KEYS["team"])))
         pos = POS_CODES.get(_first(r, KEYS["pos"]), POS_CODES.get(str(_first(r, KEYS["pos"])).upper()))
         price = _first(r, KEYS["price"])
         if team is None or pos is None or price is None:
@@ -81,7 +97,9 @@ def normalise(records: list[dict]) -> pd.DataFrame:
                          team=team, pos=pos, price=float(price), selected=_first(r, KEYS["selected"]),
                          points=_first(r, KEYS["points"]), status=_first(r, KEYS["status"]), source="ucl_feed",
                          as_of=pd.Timestamp.utcnow().date().isoformat(), note=""))
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    df.attrs["unmapped"] = sorted(unmapped)
+    return df
 
 
 def discover(md: int = 1) -> tuple[str | None, list[dict] | None]:
@@ -118,7 +136,10 @@ def sync(md: int = 1) -> Path | None:
     PROC.mkdir(parents=True, exist_ok=True)
     out = PROC / "players_feed.csv"
     df.to_csv(out, index=False)
-    (PROC / "feed_meta.json").write_text(json.dumps(dict(url=url, n=len(df))))
+    meta = dict(url=url, n=len(df), clubs=int(df.team.nunique()), unmapped_clubs=df.attrs.get("unmapped", []))
+    (PROC / "feed_meta.json").write_text(json.dumps(meta))
+    if meta["unmapped_clubs"] or meta["clubs"] < 36:
+        print(f"WARNING feed: {meta['clubs']} of 36 clubs; names not matched: {meta['unmapped_clubs']}", flush=True)
     _save_baseline(df)
     return out
 

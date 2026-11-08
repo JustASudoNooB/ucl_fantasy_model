@@ -100,3 +100,11 @@ def test_frozen_mode_reads_pre_deadline_news(tmp_path, monkeypatch):
     assert team_news.news_path(2).name == "md2_uefa_predicted.txt"     # backtests: no post-deadline file
     (tmp_path / "news_md2_pre.txt").write_text("frozen at the deadline")
     assert team_news.news_path(2).name == "news_md2_pre.txt"
+
+
+def test_feed_maps_clubs_by_any_name_field():
+    from ufe.ingest.ucl_fantasy import normalise
+    recs = [dict(id=1, pFName="Désiré Doué", tName="Paris", cCode="PSG", skill=3, value=8.5, totPts=30),
+            dict(id=2, pFName="Unknown", tName="Atlantis FC", skill=3, value=5.0, totPts=0)]
+    df = normalise(recs)
+    assert list(df.team) == ["PSG"] and df.attrs["unmapped"] == ["Atlantis FC"]
