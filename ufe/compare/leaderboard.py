@@ -8,7 +8,8 @@ first date (today's code, the news and odds files saved before that matchday) an
   points     correlation between expected and actual points (ball recoveries left out on both
              sides), and the actual points of each model's 20 highest-expected players
   matches    result log loss (home/draw/away) and total goals expected vs scored
-A model is not graded on a matchday it cannot predict (the bookmaker model needs prices for at
+A matchday without line-ups on file is graded on the game feed's points (ball recoveries
+included on both sides) and the results only. A model is not graded on a matchday it cannot predict (the bookmaker model needs prices for at
 least half the matches). Saved deadline forecasts (forecast.py) are scored against the points
 each manager reports (md{N}.points in the manager file).
 Writes data/processed/model_leaderboard.json.
@@ -70,6 +71,21 @@ def grade_md(md: int, keys: list[str], n_sims: int = 6000, verbose: bool = True)
                     continue
             pl = e.players_for(md)
             pl = pl[pl.team.isin(teams)]
+            if grade.xis_path(md) is None:             # no line-ups on file: grade on the feed's points and results
+                r = dict(graded_on="game-feed points and results (no line-ups on file)")
+                pts = grade.feed_actual_points(md)
+                if pts is not None:
+                    pr = e.projections(md).set_index("id")
+                    pr = pr[pr.index.isin(pl.id) & pr.index.isin(pts.index)]
+                    a = pts.reindex(pr.index).astype(float)
+                    r["points_corr"] = round(float(np.corrcoef(pr.xpts, a)[0, 1]), 4)
+                    r["top20_points"] = int(a[pr.xpts.sort_values(ascending=False).index[:20]].sum())
+                    r["n_players"] = int(len(pr))
+                r.update(_match_scores(e, md, fx))
+                out[k] = r
+                if verbose:
+                    print(f"MD{md} {k}: {out[k]}", flush=True)
+                continue
             started, scored, pts = _actual(md, e, pl)
             y = pl.id.isin(started).astype(float)
             n11 = int(sum(g.assign(y=y[g.index]).nlargest(11, "p_start").y.sum() for _, g in pl.groupby("team")))
@@ -161,7 +177,8 @@ def run(mds: list[int] | None = None, n_sims: int = 6000, verbose: bool = True) 
 def _run(mds: list[int] | None, n_sims: int, verbose: bool) -> dict:
     fx = load_fixtures()
     keys = registry.available()
-    mds = mds or [int(m) for m in sorted(fx.md.unique()) if grade.xis_path(int(m)) is not None]
+    done = lambda m: grade.xis_path(m) is not None or (fx[fx.md == m].home_goals.notna().all() and grade.feed_actual_points(m) is not None)
+    mds = mds or [int(m) for m in sorted(fx.md.unique()) if done(int(m))]
     old = json.loads(OUT.read_text()) if OUT.exists() else {}
     by_md = {k: v for k, v in (old.get("mds") or {}).items() if int(k) not in mds}
     for md in mds:

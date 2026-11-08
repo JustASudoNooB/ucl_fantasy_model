@@ -7,7 +7,7 @@ free_transfers: 2          # MD4: three transfers, one -4 hit (Díaz, Tresoldi, 
 bank: 0.2                  # after the MD4 transfers (0.7 + 20.5 - 21.0); confirm in the app
 chips_used: [wildcard]     # MD3
 me: true                   # this is your file (mini-league mode compares it with the rivals' files)
-league_points: 257        # mini-league table after MD3 (3rd: Prateek 267, Addi 261)
+league_points: 320        # mini-league table after MD3 (3rd: Prateek 267, Addi 261)
 md2:
   captain: Harry Kane
   xi: [Senne Lammens, Gerard Martín, Ezri Konsa, Marquinhos, Luis Díaz, Michael Olise, Lamine Yamal,
@@ -24,6 +24,8 @@ md4:
   bench: [Zion Suzuki, Luis Suárez, Grimaldo, Marc Guéhi]
   points_banked_day1: 36   # Yamal 8, Doué 9, Dimarco 7, Hakimi 7, Malen 5 (Suárez, Suzuki, Grimaldo subbed out)
   expected_final: 74.0     # statistical model, 20,000 sims: P(80+) 0.32, P(90+) 0.14
+  points: 63               # final, after the -4 (67 in the app): Sommer 4, Jacquet 2, Dimarco 7, Hakimi 7, Bellingham 11,
+                           # Yamal 8, Doué 9, Cherki 2, Isco 0, Mbappé 6 x2, Malen 5
   note: the deadline forecast (forecast_zero.json) was made for the XI assumed then, not the one played
 md3:
   chip: wildcard
