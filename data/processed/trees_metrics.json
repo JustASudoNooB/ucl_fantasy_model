@@ -1,5 +1,5 @@
 {
- "trained_at": "2026-11-03T17:50:55+00:00",
+ "trained_at": "2026-11-09T13:49:07+00:00",
  "library": "lightgbm 4.7.0",
  "params": {
   "learning_rate": 0.05,
