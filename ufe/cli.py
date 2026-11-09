@@ -122,6 +122,11 @@ def cmd_sync(args):
             from .ingest import fpl_live
             return fpl_live.sync()
         step("form", _form)
+    if getattr(args, "apifootball", False):            # only the daily data-sync: the free plan is 100 calls a day
+        def _apif():
+            from .ingest import api_football
+            return api_football.sync()
+        step("api-football form", _apif)
     got_lineups = []
     if args.lineups:
         def _lu():
@@ -504,6 +509,7 @@ def main(argv=None):
     s.add_argument("--odds", type=int, metavar="MD", help="The Odds API (UFE_ODDS_API_KEY)")
     s.add_argument("--teamnews", metavar="MD|live", help="predicted XIs and absences from starting11.com (no key)")
     s.add_argument("--freeodds", metavar="MD|live", help="1X2 and goals-line prices from rg.org (no key)")
+    s.add_argument("--apifootball", action="store_true", help="league form for non-Premier League players (UFE_API_FOOTBALL_KEY)")
     s.add_argument("--odds-urls", dest="odds_urls", help="with --freeodds MD: comma-separated rg.org article URLs (backfill)")
     s.add_argument("--lineups", type=int, metavar="MD", help="confirmed XIs from API-Football (UFE_API_FOOTBALL_KEY)")
     s.add_argument("--md", type=int)

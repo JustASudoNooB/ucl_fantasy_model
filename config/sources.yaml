@@ -61,4 +61,5 @@ api_football:
   url: https://v3.football.api-sports.io
   key_env: UFE_API_FOOTBALL_KEY        # free plan: 100 requests a day; one matchday day uses about 10
   ucl_league_id: 2
-  provides: confirmed starting XIs and benches about 60 minutes before kick-off
+  provides: confirmed starting XIs and benches about 60 minutes before kick-off; league form (apps, starts,
+            minutes, goals, assists, shots) for non-Premier League players, about 30 calls a day (ingest/api_football.py)

@@ -108,3 +108,16 @@ def test_feed_maps_clubs_by_any_name_field():
             dict(id=2, pFName="Unknown", tName="Atlantis FC", skill=3, value=5.0, totPts=0)]
     df = normalise(recs)
     assert list(df.team) == ["PSG"] and df.attrs["unmapped"] == ["Atlantis FC"]
+
+
+def test_api_football_league_row_picks_the_domestic_league(monkeypatch):
+    from ufe.ingest import api_football as af
+    stats = [dict(league=dict(name="UEFA Champions League"), games=dict(appearences=4, lineups=4, minutes=360), goals=dict(total=2), shots=dict(total=9, on=5), penalty={}),
+             dict(league=dict(name="La Liga"), games=dict(appearences=11, lineups=10, minutes=880), goals=dict(total=5, assists=3),
+                  shots=dict(total=30, on=14), penalty=dict(scored=1, missed=1)),
+             dict(league=dict(name="Copa del Rey"), games=dict(appearences=1), goals={}, shots={}, penalty={})]
+    r = af.league_row("BAR", dict(name="L. Yamal"), stats)
+    assert r["comp"] == "La Liga" and r["starts"] == 10 and r["pk"] == 2
+    assert abs(r["xg"] - (0.10 * 28 + 0.76 * 2)) < 1e-9
+    monkeypatch.delenv("UFE_API_FOOTBALL_KEY", raising=False)
+    assert "skipped" in af.sync()
