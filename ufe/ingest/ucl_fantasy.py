@@ -137,6 +137,13 @@ def sync(md: int = 1) -> Path | None:
     out = PROC / "players_feed.csv"
     df.to_csv(out, index=False)
     meta = dict(url=url, n=len(df), clubs=int(df.team.nunique()), unmapped_clubs=df.attrs.get("unmapped", []))
+    try:                                           # what the feed carries, for building on it later
+        top = max(recs, key=lambda r: float(_first(r, KEYS["points"]) or 0))
+        meta["fields"] = sorted({k for r in recs[:200] for k in r})
+        meta["sample"] = {k: (v if not isinstance(v, (list, dict)) else json.loads(json.dumps(v))[:3] if isinstance(v, list) else v)
+                          for k, v in top.items()}
+    except Exception:
+        pass
     (PROC / "feed_meta.json").write_text(json.dumps(meta))
     if meta["unmapped_clubs"] or meta["clubs"] < 36:
         print(f"WARNING feed: {meta['clubs']} of 36 clubs; names not matched: {meta['unmapped_clubs']}", flush=True)
