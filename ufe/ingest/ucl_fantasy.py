@@ -161,7 +161,7 @@ def sync(md: int = 1) -> Path | None:
         print(f"WARNING feed: {meta['clubs']} of 36 clubs; names not matched: {meta['unmapped_clubs']}", flush=True)
     _save_baseline(df)
     try:
-        sync_md_points(url)
+        sync_md_points(url, latest=recs)
     except Exception as e:                           # extra data: never fail the feed sync over it
         print(f"WARNING feed: matchday points not updated ({type(e).__name__}: {str(e)[:120]})", flush=True)
     return out
@@ -176,7 +176,7 @@ def played_mds(now=None) -> list[int]:
     return sorted(int(r["md"]) for r in rules()["matchdays"] if deadline_for(r).astimezone(timezone.utc) <= now)
 
 
-def sync_md_points(url: str, fetch=None) -> Path | None:
+def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Path | None:
     """Each player's official points in every matchday played: the feed returns one matchday's
     points (curGDPts) per gamedayId. Written to feed_md_points.csv (feed_id, md, points). Earlier
     matchdays are final and fetched once; the latest one is refreshed on every run (UEFA corrects
@@ -198,7 +198,8 @@ def sync_md_points(url: str, fetch=None) -> Path | None:
             if fetch is not None:
                 data = fetch(u)
             else:
-                r = get(u, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"}, retries=1)
+                r = get(u, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"},
+                        retries=2, timeout=60.0)             # a large file: the default 20 s was not always enough
                 data = r.json() if r.status_code == 200 else None
         except Exception:
             data = None
@@ -206,6 +207,11 @@ def sync_md_points(url: str, fetch=None) -> Path | None:
         if not recs or str(recs[0].get("mdId")) != str(g):      # the feed did not serve this matchday
             continue
         rows += [dict(feed_id=_first(r, KEYS["id"]), md=g, points=r.get("curGDPts")) for r in recs]
+    got = {r["md"] for r in rows}
+    if latest and mds[-1] not in got and not (old.md == mds[-1]).any():
+        # the latest matchday could not be fetched on its own: the main feed's "last matchday" points are the same numbers
+        rows += [dict(feed_id=_first(r, KEYS["id"]), md=mds[-1], points=r.get("lastGdPoints")) for r in latest
+                 if r.get("lastGdPoints") is not None]
     if not rows:
         return out if out.exists() else None
     new = pd.DataFrame(rows)
