@@ -39,6 +39,16 @@ KEYS = dict(
 )
 
 
+# Season-to-date numbers the feed carries for every player (cumulative over the matchdays played).
+# Kept in players_feed.csv and in the pre-deadline copy, so the difference between two copies is a
+# player's line for the matchday in between. pen_* meanings are UEFA's pS / pC / pE / pM fields.
+STATS = dict(mins="minsPlyd", goals="gS", assists="assist", cs="cS", gc="gC", yc="yC", rc="rC", og="oG",
+             pen_saved="pS", pen_conceded="pC", pen_earned="pE", pen_missed="pM", saves="saves", recoveries="bR",
+             goals_outside="gOB", motm="mOM", last_md_points="lastGdPoints", transfers_in="mTransferIn",
+             transfers_out="mTransferOut")
+TEXT = dict(trained="trained", q_status="qStatus")       # UEFA's own availability notes
+
+
 def _first(d: dict, keys: list[str]):
     for k in keys:
         if k in d and d[k] not in (None, ""):
@@ -96,7 +106,9 @@ def normalise(records: list[dict]) -> pd.DataFrame:
         rows.append(dict(feed_id=_first(r, KEYS["id"]), name=_first(r, KEYS["name"]), short=_first(r, KEYS["short"]),
                          team=team, pos=pos, price=float(price), selected=_first(r, KEYS["selected"]),
                          points=_first(r, KEYS["points"]), status=_first(r, KEYS["status"]), source="ucl_feed",
-                         as_of=pd.Timestamp.utcnow().date().isoformat(), note=""))
+                         as_of=pd.Timestamp.utcnow().date().isoformat(), note="",
+                         **{c: r.get(k) for c, k in STATS.items()},
+                         **{c: (str(r.get(k) or "").strip() or None) for c, k in TEXT.items()}))
     df = pd.DataFrame(rows)
     df.attrs["unmapped"] = sorted(unmapped)
     return df
@@ -148,6 +160,57 @@ def sync(md: int = 1) -> Path | None:
     if meta["unmapped_clubs"] or meta["clubs"] < 36:
         print(f"WARNING feed: {meta['clubs']} of 36 clubs; names not matched: {meta['unmapped_clubs']}", flush=True)
     _save_baseline(df)
+    try:
+        sync_md_points(url)
+    except Exception as e:                           # extra data: never fail the feed sync over it
+        print(f"WARNING feed: matchday points not updated ({type(e).__name__}: {str(e)[:120]})", flush=True)
+    return out
+
+
+def played_mds(now=None) -> list[int]:
+    """Matchdays whose deadline has passed."""
+    from datetime import datetime, timezone
+    from ..config import rules
+    from ..timeutil import deadline_for
+    now = now or datetime.now(timezone.utc)
+    return sorted(int(r["md"]) for r in rules()["matchdays"] if deadline_for(r).astimezone(timezone.utc) <= now)
+
+
+def sync_md_points(url: str, fetch=None) -> Path | None:
+    """Each player's official points in every matchday played: the feed returns one matchday's
+    points (curGDPts) per gamedayId. Written to feed_md_points.csv (feed_id, md, points). Earlier
+    matchdays are final and fetched once; the latest one is refreshed on every run (UEFA corrects
+    points for a day or two)."""
+    import re
+    if not re.search(r"gamedayId=\d+", url or ""):
+        return None
+    out = PROC / "feed_md_points.csv"
+    old = pd.read_csv(out) if out.exists() else pd.DataFrame(columns=["feed_id", "md", "points"])
+    mds = played_mds()
+    if not mds:
+        return None
+    rows = []
+    for g in mds:
+        if g != mds[-1] and (old.md == g).any():
+            continue
+        u = re.sub(r"gamedayId=\d+", f"gamedayId={g}", url)
+        try:
+            if fetch is not None:
+                data = fetch(u)
+            else:
+                r = get(u, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"}, retries=1)
+                data = r.json() if r.status_code == 200 else None
+        except Exception:
+            data = None
+        recs = _find_player_list(data) if data is not None else None
+        if not recs or str(recs[0].get("mdId")) != str(g):      # the feed did not serve this matchday
+            continue
+        rows += [dict(feed_id=_first(r, KEYS["id"]), md=g, points=r.get("curGDPts")) for r in recs]
+    if not rows:
+        return out if out.exists() else None
+    new = pd.DataFrame(rows)
+    keep = pd.concat([old[~old.md.isin(set(new.md))], new], ignore_index=True).sort_values(["md", "feed_id"])
+    keep.to_csv(out, index=False)
     return out
 
 

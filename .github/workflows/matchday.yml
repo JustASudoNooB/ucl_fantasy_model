@@ -87,7 +87,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           MD=$(python -c "from ufe.cli import _live_md; print(_live_md())")
           for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv \
-                   data/processed/news_md${MD}_pre.txt data/processed/odds_md${MD}_pre.csv data/processed/feed_pre_md*.csv \
+                   data/processed/news_md${MD}_pre.txt data/processed/odds_md${MD}_pre.csv data/processed/feed_pre_md*.csv data/processed/feed_md_points.csv \
                    data/processed/livecall_state.json data/processed/scheduler_state.json \
                    data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json data/runs/md*/forecast_*.json; do
             [ -e "$f" ] && git add "$f"

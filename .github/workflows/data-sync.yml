@@ -49,7 +49,7 @@ jobs:
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
           for f in data/raw/openfootball/*.json data/processed/domestic_form.csv data/processed/players_feed.csv \
-                   data/processed/feed_meta.json data/processed/feed_pre_md*.csv data/processed/lineups_md*.csv data/processed/api_football_teams.json \
+                   data/processed/feed_meta.json data/processed/feed_md_points.csv data/processed/feed_pre_md*.csv data/processed/lineups_md*.csv data/processed/api_football_teams.json \
                    data/processed/penalty_takers.csv data/processed/odds_md*.csv; do
             [ -e "$f" ] && git add "$f"
           done

@@ -121,3 +121,18 @@ def test_api_football_league_row_picks_the_domestic_league(monkeypatch):
     assert abs(r["xg"] - (0.10 * 28 + 0.76 * 2)) < 1e-9
     monkeypatch.delenv("UFE_API_FOOTBALL_KEY", raising=False)
     assert "skipped" in af.sync()
+
+
+def test_feed_keeps_stats_and_matchday_points(tmp_path, monkeypatch):
+    from ufe.ingest import ucl_fantasy as uf
+    rec = dict(id=7, pFName="Nicolás Paz", pDName="N. Paz", tName="Como", cCode="COM", skill=3, value=7.0, totPts=43,
+               minsPlyd=318, gS=3, assist=5, bR=15, mOM=1, trained="In contention to start next game", mdId="1", curGDPts=8)
+    df = uf.normalise([rec])
+    assert df.mins[0] == 318 and df.recoveries[0] == 15 and df.trained[0].startswith("In contention")
+    monkeypatch.setattr(uf, "PROC", tmp_path)
+    monkeypatch.setattr(uf, "played_mds", lambda now=None: [1, 2])
+    served = {1: [dict(rec, mdId="1", curGDPts=8)], 2: [dict(rec, mdId="1", curGDPts=8)]}     # gameday 2 not honoured
+    fetch = lambda u: {"data": {"value": {"playerList": served[int(u.split("gamedayId=")[1][0])]}}}
+    out = uf.sync_md_points("https://x/players?gamedayId=1&language=en", fetch=fetch)
+    got = __import__("pandas").read_csv(out)
+    assert got[["md", "points"]].values.tolist() == [[1, 8]]            # the mismatched matchday is not stored
