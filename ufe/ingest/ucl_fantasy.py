@@ -106,7 +106,7 @@ def normalise(records: list[dict]) -> pd.DataFrame:
         rows.append(dict(feed_id=_first(r, KEYS["id"]), name=_first(r, KEYS["name"]), short=_first(r, KEYS["short"]),
                          team=team, pos=pos, price=float(price), selected=_first(r, KEYS["selected"]),
                          points=_first(r, KEYS["points"]), status=_first(r, KEYS["status"]), source="ucl_feed",
-                         as_of=pd.Timestamp.utcnow().date().isoformat(), note="",
+                         as_of=pd.Timestamp.now("UTC").date().isoformat(), note="",
                          **{c: r.get(k) for c, k in STATS.items()},
                          **{c: (str(r.get(k) or "").strip() or None) for c, k in TEXT.items()}))
     df = pd.DataFrame(rows)
@@ -162,6 +162,8 @@ def sync(md: int = 1) -> Path | None:
     _save_baseline(df)
     try:
         sync_md_points(url, latest=recs)
+        meta["md_points"] = {str(k): v for k, v in getattr(sync_md_points, "log", {}).items()}
+        (PROC / "feed_meta.json").write_text(json.dumps(meta))
     except Exception as e:                           # extra data: never fail the feed sync over it
         print(f"WARNING feed: matchday points not updated ({type(e).__name__}: {str(e)[:120]})", flush=True)
     return out
@@ -189,7 +191,7 @@ def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Pa
     mds = played_mds()
     if not mds:
         return None
-    rows = []
+    rows, log = [], {}
     for g in mds:
         if g != mds[-1] and (old.md == g).any():
             continue
@@ -201,12 +203,18 @@ def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Pa
                 r = get(u, headers={"Accept": "application/json", "Referer": "https://gaming.uefa.com/en/uclfantasy/"},
                         retries=2, timeout=60.0)             # a large file: the default 20 s was not always enough
                 data = r.json() if r.status_code == 200 else None
-        except Exception:
+                if data is None:
+                    log[g] = f"http {r.status_code}"
+        except Exception as e:
             data = None
+            log[g] = f"{type(e).__name__}"
         recs = _find_player_list(data) if data is not None else None
         if not recs or str(recs[0].get("mdId")) != str(g):      # the feed did not serve this matchday
+            log.setdefault(g, f"served mdId {recs[0].get('mdId')}" if recs else "no player list")
             continue
+        log[g] = f"ok ({len(recs)})"
         rows += [dict(feed_id=_first(r, KEYS["id"]), md=g, points=r.get("curGDPts")) for r in recs]
+    sync_md_points.log = log
     got = {r["md"] for r in rows}
     if latest and mds[-1] not in got and not (old.md == mds[-1]).any():
         # the latest matchday could not be fetched on its own: the main feed's "last matchday" points are the same numbers
@@ -215,8 +223,16 @@ def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Pa
     if not rows:
         return out if out.exists() else None
     new = pd.DataFrame(rows)
-    keep = pd.concat([old[~old.md.isin(set(new.md))], new], ignore_index=True).sort_values(["md", "feed_id"])
-    keep.to_csv(out, index=False)
+    keep = pd.concat([old[~old.md.isin(set(new.md))], new], ignore_index=True)
+    # one matchday still missing: it is the season total minus the others
+    missing = [g for g in mds if not (keep.md == g).any()]
+    if len(missing) == 1 and latest:
+        tot = {_first(r, KEYS["id"]): _first(r, KEYS["points"]) for r in latest}
+        have = keep.assign(points=pd.to_numeric(keep.points, errors="coerce").fillna(0.0)).groupby("feed_id").points.sum()
+        keep = pd.concat([keep, pd.DataFrame([dict(feed_id=i, md=missing[0], points=float(t or 0) - float(have.get(i, 0.0)))
+                                              for i, t in tot.items() if t is not None])], ignore_index=True)
+        log[missing[0]] = log.get(missing[0], "") + "; filled as season total minus the other matchdays"
+    keep.sort_values(["md", "feed_id"]).to_csv(out, index=False)
     return out
 
 
