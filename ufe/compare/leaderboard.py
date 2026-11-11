@@ -9,8 +9,9 @@ first date (today's code, the news and odds files saved before that matchday) an
              correlation, root-mean-square error, and the actual points of each model's 20
              highest-expected players
   matches    result log loss (home/draw/away) and total goals expected vs scored
-A matchday without line-ups on file is graded on the game feed's points (ball recoveries
-included on both sides) and the results only. A model is not graded on a matchday it cannot predict (the bookmaker model needs prices for at
+A matchday without line-ups or events on file is still graded on points and results. The model's
+constants (recoveries, assists by position, start cap) are refitted on the matchdays played, so
+those matchdays are in-sample for them. A model is not graded on a matchday it cannot predict (the bookmaker model needs prices for at
 least half the matches). Saved deadline forecasts (forecast.py) are scored against the points
 each manager reports (md{N}.points in the manager file).
 Writes data/processed/model_leaderboard.json.

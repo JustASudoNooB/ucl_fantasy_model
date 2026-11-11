@@ -109,8 +109,8 @@ tests/          pytest suite                                      schedule/  cro
 
 ## Comparing models
 
-Four models predict every matchday: **statistical** (the default), **neural network**, **bookmaker**
-(match goal rates from prices only) and **decision trees** (LightGBM). They share the simulation and
+Five models predict every matchday: **statistical**, **neural network**, **bookmaker**
+(match goal rates from prices only), **decision trees** (LightGBM) and **combined**. They share the simulation and
 optimiser, so they differ only in their inputs. The dashboard's Models section has one page per model
 (its player and match predictions, its pick for your squad, its accuracy) and a leaderboard.
 
@@ -118,7 +118,26 @@ optimiser, so they differ only in their inputs. The dashboard's Models section h
 python -m ufe models train      # decision trees on the Premier League rows (seconds)
 python -m ufe models eval       # leaderboard: every model rebuilt as of each played matchday
 python -m ufe models forecast   # every model's forecast for each saved team (before the deadline)
+python -m ufe calibrate         # refit recovery ratios and the assist split on UEFA's season numbers
 ```
+A fifth model, **combined**, averages the statistical, network and trees player predictions.
+`engine.model` in config/settings.yaml names the model behind the picks: combined since 11 Nov 2026
+(it predicted starts better than the statistical model on each of MD1-4), statistical as the fallback.
+
+## What the model learns from each matchday
+
+UEFA's game feed carries every player's season minutes, goals, assists, clean sheets, ball
+recoveries, awards, availability flag and points per matchday. Each sync keeps them
+(data/processed/players_feed.csv, feed_md_points.csv, and a copy saved before every deadline), and:
+- availability comes from UEFA's flags (injured, doubtful, suspended, not in the squad, unlikely to
+  start), refreshed daily, instead of a hand-kept status column;
+- an absence in a third-party predicted line-up file counts in full only when UEFA's feed flags the
+  player too; otherwise it cuts his start chance to 40% of what it was (settings: news.out_unconfirmed);
+- each player's own UCL minutes, goals, assists and recoveries move his rates a little
+  (settings: ucl_obs), more as the matches add up;
+- `ufe calibrate` (weekly workflow) refits the constants that were measurably wrong, bounded to 15%
+  a run; the report is data/processed/calibration.json and shows on the dashboard;
+- the leaderboard grades every model's expected points against UEFA's own points for each player.
 The weekly ML workflow runs the first two; the matchday workflow saves forecasts in the three hours
 before each deadline and never after it.
 

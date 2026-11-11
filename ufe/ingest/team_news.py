@@ -41,6 +41,7 @@ TIER_PRICE = {0: {"GK": 5.0, "DEF": 5.0, "MID": 6.5, "FWD": 7.0},
               2: {"GK": 4.0, "DEF": 4.0, "MID": 4.5, "FWD": 5.5}}
 
 DEFAULTS = dict(lr_start=6.0, lr_bench=0.17, doubt_in=0.62, doubt_out=0.15, p_max=0.95, carry_forward=0.5,
+                out_unconfirmed=0.4, susp_unconfirmed=0.85,
                 model="logistic", logit_a=-0.94, logit_b=0.5, logit_c=1.86)
 
 
@@ -303,8 +304,28 @@ def expand_pool(pool: pd.DataFrame, news: pd.DataFrame, extra: pd.DataFrame | No
 
 
 # ------------------------------------------------------------------------------------- applying
-def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Bayesian start-probability update. Returns (players, log of changes)."""
+def absence_mult(kinds: set, cfg: dict, uefa: float | None) -> float:
+    """What is left of a player's start chance when a news file lists him as out or suspended.
+
+    A file at full strength (UEFA's own predicted line-ups: 0 of 82 listed absentees started on
+    MD2) or an absence UEFA's game feed also flags (0 of 69 started on MD4) means out. A weaker
+    file whose absence the feed does not show counts for much less: on MD4 a third-party file
+    (strength 0.7) listed 45 players as out whom the feed showed as available and 7 started
+    (16%, against 29% without the listing); of 6 listed as suspended, 4 started. `uefa` is the
+    feed's availability multiplier for the player (1.0 = no flag), None when there is no feed to
+    check against; then the file's own strength decides."""
+    k = float(cfg.get("_k", 1.0))
+    if k >= 0.999 or (uefa is not None and uefa < 0.5):
+        return 0.0
+    if uefa is None:
+        return 1.0 - k
+    return float(cfg.get("out_unconfirmed", 0.4)) if "out" in kinds else float(cfg.get("susp_unconfirmed", 0.85))
+
+
+def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None,
+          uefa: dict | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Bayesian start-probability update. Returns (players, log of changes). `uefa`: the game
+    feed's availability multiplier per player id (players the feed lists), see absence_mult."""
     cfg = {**_cfg(), **(cfg or {})}
     players = players.copy()
     teams = set(news.team)
@@ -323,7 +344,8 @@ def apply(players: pd.DataFrame, news: pd.DataFrame, cfg: dict | None = None) ->
         if ("out" in s or "susp" in s) and cfg.get("_carried"):
             q, sub = min(p0, 0.25), float(r.p_sub) * 0.5          # out last time: likely still out
         elif "out" in s or "susp" in s:
-            q, sub = 0.0, 0.0
+            m = absence_mult(s, cfg, None if uefa is None else uefa.get(r.id))
+            q, sub = p0 * m, float(r.p_sub) * m
         else:
             c = conf.get(r.id, 1.0) if "start" in s else 1.0
             q = updated_start(p0, "start" in s, cfg if c >= 0.999 else _scaled(cfg, c))

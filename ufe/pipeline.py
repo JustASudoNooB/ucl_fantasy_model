@@ -562,12 +562,14 @@ class Engine:
         players = self.xi_players(md).copy()
         # 1) this matchday's predicted line-ups + injuries (Bayes update at full strength)
         news = team_news.load_for(md, players)
+        snap = self.feed_snapshot                         # UEFA's flags confirm (or not) a file's absences
+        uefa = None if snap is None or "status" not in snap else players[players.id.isin(snap.index)].set_index("id").avail.to_dict()
         logs, covered = [], set()
         if news is not None:
             k = float(news.attrs.get("strength", 1.0))
-            # weaker evidence counts for less, but this matchday's absences still mean out
+            # weaker evidence counts for less, including its absences unless UEFA's feed confirms them
             cfg = None if k >= 0.999 else team_news.softened(team_news._cfg(), k)
-            players, log = team_news.apply(players, news, cfg)
+            players, log = team_news.apply(players, news, cfg, uefa=uefa)
             logs.append(log)
             covered = set(news.team)
         # 2) clubs without news for this matchday reuse the latest earlier news, softened, unless

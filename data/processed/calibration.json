@@ -1,0 +1,132 @@
+{
+ "generated_at": "2026-11-11T05:04:39+00:00",
+ "applied": false,
+ "changes": {
+  "recovery_ratio.DEF": [
+   1.4,
+   1.396
+  ],
+  "recovery_ratio.FWD": [
+   0.64,
+   0.657
+  ],
+  "recovery_ratio.MID": [
+   0.78,
+   0.775
+  ],
+  "assist_pos_mult.DEF": [
+   0.92,
+   0.932
+  ],
+  "assist_pos_mult.FWD": [
+   1.6,
+   1.727
+  ],
+  "assist_pos_mult.MID": [
+   0.92,
+   0.896
+  ]
+ },
+ "players": 744,
+ "minutes": 141121,
+ "recoveries": {
+  "DEF": {
+   "minutes": 51598,
+   "recoveries": 2968,
+   "fitted": 1.396,
+   "current": 1.4,
+   "new": 1.396
+  },
+  "FWD": {
+   "minutes": 16657,
+   "recoveries": 257,
+   "fitted": 0.657,
+   "current": 0.64,
+   "new": 0.657
+  },
+  "GK": {
+   "minutes": 12961,
+   "recoveries": 0,
+   "fitted": 0.0,
+   "current": 0.0,
+   "new": 0.0
+  },
+  "MID": {
+   "minutes": 59905,
+   "recoveries": 2310,
+   "fitted": 0.775,
+   "current": 0.78,
+   "new": 0.775
+  }
+ },
+ "assists": {
+  "DEF": {
+   "actual": 52,
+   "expected": 50.6,
+   "ratio": 1.027,
+   "current": 0.92,
+   "new": 0.932
+  },
+  "FWD": {
+   "actual": 49,
+   "expected": 42.3,
+   "ratio": 1.159,
+   "current": 1.6,
+   "new": 1.727
+  },
+  "GK": {
+   "actual": 0,
+   "expected": 0.7,
+   "ratio": 0.0,
+   "current": 1.0
+  },
+  "MID": {
+   "actual": 132,
+   "expected": 139.3,
+   "ratio": 0.947,
+   "current": 0.92,
+   "new": 0.896
+  }
+ },
+ "slots": {
+  "lineups": 144,
+  "per_club": {
+   "MID": 4.73,
+   "DEF": 3.96,
+   "FWD": 1.24,
+   "GK": 1.0
+  }
+ },
+ "availability": [
+  {
+   "md": 4,
+   "flag": "D",
+   "players": 25,
+   "started": 8
+  },
+  {
+   "md": 4,
+   "flag": "I",
+   "players": 85,
+   "started": 0
+  },
+  {
+   "md": 4,
+   "flag": "NIS",
+   "players": 121,
+   "started": 1
+  },
+  {
+   "md": 4,
+   "flag": "S",
+   "players": 3,
+   "started": 0
+  },
+  {
+   "md": 4,
+   "flag": "none",
+   "players": 855,
+   "started": 350
+  }
+ ]
+}

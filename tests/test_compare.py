@@ -207,3 +207,20 @@ def test_normalising_starts_alone_does_not_move_goal_rates():
     f = pd.DataFrame(dict(home=["A"], away=["B"], lh=[1.7], la=[1.1]))
     out = e._lineup_adjust(5, f)
     assert abs(out.lh[0] - 1.7) < 1e-9 and abs(out.la[0] - 1.1) < 1e-9
+
+
+def test_unconfirmed_absences_from_a_weaker_file_are_partial():
+    """A third-party file's 'out' that UEFA's feed does not flag halves the chance at most; UEFA's
+    own file, or a flag in the feed, still means out."""
+    from ufe.ingest import team_news as tn
+    cfg = tn.softened(tn._cfg(), 0.7)
+    assert tn.absence_mult({"out"}, tn._cfg(), 1.0) == 0.0                 # full-strength file
+    assert tn.absence_mult({"out"}, cfg, 0.03) == 0.0                      # the feed flags him too
+    assert tn.absence_mult({"out"}, cfg, 1.0) == cfg["out_unconfirmed"]
+    assert tn.absence_mult({"susp"}, cfg, 1.0) == cfg["susp_unconfirmed"]
+    assert abs(tn.absence_mult({"out"}, cfg, None) - 0.3) < 1e-9           # no feed: the file's strength
+    players = pd.DataFrame(dict(id=["a", "b", "c"], name=["A", "B", "C"], team="XXX", p_start=[0.8, 0.8, 0.8], p_sub=[0.1, 0.1, 0.1]))
+    news = pd.DataFrame(dict(id=["a", "b"], team="XXX", name=["A", "B"], status=["out", "out"], conf=1.0))
+    out, _ = tn.apply(players, news, cfg, uefa={"a": 1.0, "b": 0.03, "c": 1.0})
+    p = out.set_index("id").p_start
+    assert abs(p["a"] - 0.8 * cfg["out_unconfirmed"]) < 1e-9 and p["b"] == 0.0

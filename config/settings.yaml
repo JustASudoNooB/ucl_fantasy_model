@@ -118,6 +118,12 @@ news:
   doubt_out: 0.15     # cap for a doubtful player left out
   p_max: 0.95         # even a named, fit regular misses ~5% of starts (late knocks, rotation); was 0.985
   carry_forward: 0.5  # matchdays without news reuse the latest earlier news at this fraction of log-odds
+  # A weaker file's absences that UEFA's game feed does not show (team_news.absence_mult). MD4, a
+  # third-party file at strength 0.7: 45 listed out but unflagged by UEFA, 7 started; 6 listed
+  # suspended, 4 started; the 69 the feed also flagged: 0 started. Start log loss on MD4
+  # 0.443 -> 0.370 (0.371 with the two numbers chosen on the other clubs); flat from 0.3 to 0.6.
+  out_unconfirmed: 0.4
+  susp_unconfirmed: 0.85
   # Start-probability model when news exists (scripts/calibrate_lineups.py, MD2 Tuesday, 144 players):
   #   logit P(start) = a + b * logit(prior) + c * named
   # Leave-one-club-out log loss: 0.567 with b fixed at 0.5 (0.553 with b free = 0.26) vs 0.678 for
@@ -174,4 +180,7 @@ ucl_obs:
 
 engine:
   # which model feeds the picks (python -m ufe plan / dashboard / livecall): statistical | combined
-  model: statistical
+  # combined since 11 Nov: on MD1-4 rebuilt with pre-deadline inputs its start log loss beat the
+  # statistical model's on every matchday (paired difference 0.007, 95% interval 0.001 to 0.013,
+  # clubs resampled), points error level or slightly better, top picks by position 752 v 725 points.
+  model: combined
