@@ -5,8 +5,9 @@ first date (today's code, the news and odds files saved before that matchday) an
   starts     log loss and Brier over every listed player of the clubs that played; actual
              starters among each club's 11 most likely starters
   goals      log loss and Brier of P(scores) against the match events
-  points     correlation between expected and actual points (ball recoveries left out on both
-             sides), and the actual points of each model's 20 highest-expected players
+  points     against UEFA's own points for every player in the matchday (feed_md_points.csv):
+             correlation, root-mean-square error, and the actual points of each model's 20
+             highest-expected players
   matches    result log loss (home/draw/away) and total goals expected vs scored
 A matchday without line-ups on file is graded on the game feed's points (ball recoveries
 included on both sides) and the results only. A model is not graded on a matchday it cannot predict (the bookmaker model needs prices for at
@@ -31,8 +32,8 @@ from . import registry
 from .forecast import MANAGERS, RUNS
 
 OUT = ROOT / "data" / "processed" / "model_leaderboard.json"
-LOWER_BETTER = {"start_ll", "start_brier", "goal_ll", "goal_brier", "result_ll", "goals_abs_err"}
-METRICS = ["start_ll", "top11_share", "goal_ll", "points_corr", "top20_points", "result_ll", "goals_abs_err"]
+LOWER_BETTER = {"start_ll", "start_brier", "goal_ll", "goal_brier", "result_ll", "goals_abs_err", "points_rmse"}
+METRICS = ["start_ll", "top11_share", "goal_ll", "points_corr", "points_rmse", "top20_points", "result_ll", "goals_abs_err"]
 
 
 def _match_scores(e, md: int, fx: pd.DataFrame) -> dict:
@@ -71,37 +72,40 @@ def grade_md(md: int, keys: list[str], n_sims: int = 6000, verbose: bool = True)
                     continue
             pl = e.players_for(md)
             pl = pl[pl.team.isin(teams)]
-            if grade.xis_path(md) is None:             # no line-ups on file: grade on the feed's points and results
-                r = dict(graded_on="game-feed points and results (no line-ups on file)")
-                pts = grade.feed_actual_points(md)
-                if pts is not None:
-                    pr = e.projections(md).set_index("id")
-                    pr = pr[pr.index.isin(pl.id) & pr.index.isin(pts.index)]
-                    a = pts.reindex(pr.index).astype(float)
-                    r["points_corr"] = round(float(np.corrcoef(pr.xpts, a)[0, 1]), 4)
-                    r["top20_points"] = int(a[pr.xpts.sort_values(ascending=False).index[:20]].sum())
-                    r["n_players"] = int(len(pr))
-                r.update(_match_scores(e, md, fx))
-                out[k] = r
-                if verbose:
-                    print(f"MD{md} {k}: {out[k]}", flush=True)
-                continue
-            started, scored, pts = _actual(md, e, pl)
-            y = pl.id.isin(started).astype(float)
-            n11 = int(sum(g.assign(y=y[g.index]).nlargest(11, "p_start").y.sum() for _, g in pl.groupby("team")))
-            r = dict(start_ll=round(_ll(pl.p_start, y), 4), start_brier=round(float(np.mean((pl.p_start - y) ** 2)), 4),
-                     top11=n11, starters=int(y.sum()), top11_share=round(n11 / max(int(y.sum()), 1), 4))
-            if scored or pts is not None:
-                pr = e.projections(md).set_index("id")
-                pr = pr[pr.index.isin(pl.id)]
+            r = {}
+            has_xi = grade.xis_path(md) is not None
+            started, scored, pts_ev = _actual(md, e, pl) if has_xi else (set(), set(), None)
+            if has_xi:
+                y = pl.id.isin(started).astype(float)
+                n11 = int(sum(g.assign(y=y[g.index]).nlargest(11, "p_start").y.sum() for _, g in pl.groupby("team")))
+                r.update(start_ll=round(_ll(pl.p_start, y), 4), start_brier=round(float(np.mean((pl.p_start - y) ** 2)), 4),
+                         top11=n11, starters=int(y.sum()), top11_share=round(n11 / max(int(y.sum()), 1), 4))
+            pr = e.projections(md).set_index("id")
+            pr = pr[pr.index.isin(pl.id)]
+            if scored:
                 ys = pr.index.isin(scored).astype(float)
                 r.update(goal_ll=round(_ll(pr.p_goal, ys), 4), goal_brier=round(float(np.mean((pr.p_goal - ys) ** 2)), 4),
                          scorers_exp=round(float(pr.p_goal.sum()), 1), scorers=int(ys.sum()))
-                if pts is not None:
-                    a = pts.reindex(pr.index).fillna(0.0)
-                    x = pr.xpts - ((pr.xrec / 3.0) if "xrec" in pr else 0.0)
-                    r["points_corr"] = round(float(np.corrcoef(x, a)[0, 1]), 4)
-                    r["top20_points"] = int(a[x.sort_values(ascending=False).index[:20]].sum())
+            # points: UEFA's own matchday points for every player when on file (recoveries and awards
+            # included on both sides), else the points the match events give (recoveries left out)
+            off = grade.feed_actual_points(md)
+            if off is not None:
+                q = pr[pr.index.isin(off.index)]
+                a = off.reindex(q.index).astype(float)
+                x = q.xpts
+                r["points_source"] = "UEFA matchday points"
+            elif pts_ev is not None:
+                a = pts_ev.reindex(pr.index).fillna(0.0)
+                x = pr.xpts - ((pr.xrec / 3.0) if "xrec" in pr else 0.0)
+                r["points_source"] = "match events (no ball recoveries)"
+            else:
+                a = x = None
+            if a is not None and len(a) > 20:
+                r["points_corr"] = round(float(np.corrcoef(x, a)[0, 1]), 4)
+                r["points_rmse"] = round(float(np.sqrt(np.mean((x - a) ** 2))), 4)
+                r["points_bias"] = round(float(np.mean(x - a)), 4)
+                r["top20_points"] = int(a[x.sort_values(ascending=False).index[:20]].sum())
+                r["n_players"] = int(len(a))
             r.update(_match_scores(e, md, fx))
             out[k] = r
         except Exception as ex:                       # one model failing must not stop the others

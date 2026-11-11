@@ -55,9 +55,12 @@ def base_pool() -> pd.DataFrame:
 
 OFFICIAL = SEED / "official_squads_2026_27.csv"
 # official availability flags -> start-probability multipliers when no fresher team news exists.
-# 'Suspended' on the mirror also covers unregistered players and stale one-match bans, so it is
-# discounted rather than zeroed; journalists' predicted XIs (team news) override all of these.
-STATUS_MULT = {"Available": 1.0, "Doubtful": 0.65, "Injured": 0.15, "Suspended": 0.4}
+# UEFA's own flags in the game feed, refreshed on every sync: status I (injured), D (doubtful),
+# S (suspended), NIS (not in the squad list) and the note "Unlikely to start next game".
+# Checked on MD4 with the copy saved before its deadline (33 clubs): 0 of 85 injured started (one
+# came off the bench), 1 of 121 not-in-squad, 0 of 3 suspended, 8 of 25 doubtful (32%; unflagged 41%).
+# Multipliers on the start and substitute probabilities are in settings.yaml (availability).
+STATUS_WORD = {"I": "Injured", "D": "Doubtful", "S": "Suspended", "NIS": "Not in squad"}
 
 
 def legacy_pool() -> pd.DataFrame:
@@ -138,6 +141,11 @@ def _overlay_feed(pool: pd.DataFrame) -> pd.DataFrame:
         pool.loc[on, "pts_to_date"] = pd.to_numeric(pool.loc[on, "id"].map(hit.points), errors="coerce").values
     pool.loc[on, "price_status"] = "verified"
     pool.loc[on, "source"] = "ucl_feed"
+    if "status" in hit:                               # UEFA's current flag replaces any older status
+        st = hit.status.fillna("").astype(str).str.strip().map(lambda x: STATUS_WORD.get(x, "Available" if x == "" else x))
+        if "trained" in hit:
+            st = st.where(~(hit.trained.fillna("").astype(str).str.startswith("Unlikely") & (st == "Available")), "Unlikely to start")
+        pool.loc[on, "status"] = pool.loc[on, "id"].map(st).values
     new = f[f.id.isna() & ~f.index.isin(near)].copy()
     if len(new):
         new["id"] = [f"{t}-{slug(n)}" for t, n in zip(new.team, new.name)]
@@ -262,15 +270,11 @@ class Engine:
         strength = {t: self.team_model.rating(t) for t in team_lookup()}
         use_form = bool((self.cfg.get("player_form") or {}).get("enabled", True))
         players, others = player_rates.build(self.pool, self.fpl, team_strength=strength, team_gpm=self.domestic_gpm,
-                                             use_current_form=use_form)
+                                             use_current_form=use_form, ucl_obs=self.ucl_obs())
         extra = [c for c in ("status", "own_pct", "pts_to_date", "start_pct", "g90", "a90") if c in self.pool]
-        players["avail"] = 1.0                 # status x availability multiplier, kept for _xi_history
-        if extra:
+        players["avail"] = 1.0                 # availability multiplier (UEFA's flags are applied per matchday
+        if extra:                              # in xi_players), kept for _xi_update
             players = players.merge(self.pool[["id"] + extra], on="id", how="left")
-            mult = players["status"].map(STATUS_MULT).fillna(1.0) if "status" in players else 1.0
-            players["p_start"] = players.p_start * mult
-            players["p_sub"] = players.p_sub * mult
-            players["avail"] = players.avail * mult
         av = PROC / "availability.csv"
         if av.exists():
             a = pd.read_csv(av).set_index("id")
@@ -431,10 +435,125 @@ class Engine:
         players["p_start"] = (num / den * av).clip(0, 1)
         return players
 
+    # ------------------------------------------------- the game feed as it was known at `as_of`
+    @cached_property
+    def md_at_as_of(self) -> int:
+        """The matchday still to be played (or being played) at `as_of`."""
+        last = self.fixtures.groupby("md").date.max()
+        nxt = last[last.astype(str).str.slice(0, 10) >= str(self.as_of)[:10]]
+        return int(nxt.index.min()) if len(nxt) else int(last.index.max()) + 1
+
+    @cached_property
+    def feed_snapshot(self) -> pd.DataFrame | None:
+        """UEFA's game feed per pool id. Live: the current feed. Backtests (frozen inputs): the copy
+        saved before the deadline of the matchday at `as_of`, or nothing when there is none."""
+        from .ingest.frozen import frozen_mode
+        path = PROC / (f"feed_pre_md{self.md_at_as_of}.csv" if frozen_mode() else "players_feed.csv")
+        if not path.exists():
+            return None
+        try:
+            f = pd.read_csv(path)
+        except Exception:
+            return None
+        if not {"name", "team"} <= set(f.columns) or f.empty:
+            return None
+        f = f[f.team.notna() & f.name.notna()]
+        ids, _ = _feed_ids(self.pool, f)
+        f = f.assign(id=[ids.get(i) for i in f.index])
+        return f.dropna(subset=["id"]).drop_duplicates("id").set_index("id")
+
+    def ucl_obs(self) -> pd.DataFrame | None:
+        """This season's UCL minutes, goals, assists and recoveries per player from the feed
+        snapshot, with the club's average expected goals in the matchdays already played."""
+        f = self.feed_snapshot
+        if f is None or "mins" not in f or not (self.cfg.get("ucl_obs") or {}).get("enabled", True):
+            return None
+        f = f[pd.to_numeric(f.mins, errors="coerce").fillna(0) > 0]
+        if f.empty:
+            return None
+        lam: dict[str, list] = {}
+        for k in sorted(self.fixtures.md.unique()):
+            if int(k) >= self.md_at_as_of:
+                break
+            try:
+                ft = self._base_fixture_table(int(k))
+            except Exception:
+                continue
+            for r in ft.itertuples():
+                lam.setdefault(r.home, []).append(float(r.lh))
+                lam.setdefault(r.away, []).append(float(r.la))
+        num = lambda c: pd.to_numeric(f[c], errors="coerce").fillna(0.0) if c in f else 0.0
+        return pd.DataFrame(dict(id=f.index, minutes=num("mins"), goals=num("goals"), assists=num("assists"),
+                                 recoveries=num("recoveries"),
+                                 team_lambda=[float(np.mean(lam.get(t, [1.4]))) for t in f.team])).reset_index(drop=True)
+
+    def availability(self, md: int) -> pd.Series:
+        """Multiplier on each player's start and substitute chances for matchday `md` from UEFA's
+        flags at `as_of`. Injuries and doubts fade for later matchdays; a suspension counts for the
+        next one only; a player outside the squad list stays out."""
+        f = self.feed_snapshot
+        if f is None or "status" not in f:
+            return pd.Series(dtype=float)
+        cfg = self.cfg.get("availability") or {}
+        gap = max(int(md) - self.md_at_as_of, 0)
+        fade = float(cfg.get("fade", 0.5)) ** gap
+        st = f.status.fillna("").astype(str).str.strip()
+        m = pd.Series(1.0, index=f.index)
+        m[st == "I"] = 1 - (1 - float(cfg.get("injured", 0.03))) * fade
+        m[st == "D"] = 1 - (1 - float(cfg.get("doubtful", 0.65))) * fade
+        m[st == "S"] = float(cfg.get("suspended", 0.0)) if gap == 0 else 1.0
+        m[st == "NIS"] = float(cfg.get("not_in_squad", 0.0))
+        if "trained" in f:
+            unl = f.trained.fillna("").astype(str).str.startswith("Unlikely") & (st == "")
+            m[unl] = 1 - (1 - float(cfg.get("unlikely", 0.4))) * fade
+        return m
+
+    def _normalise_starts(self, players: pd.DataFrame) -> pd.DataFrame:
+        """Exactly eleven start: every player's log-odds in a club move by the same amount until the
+        club's expected starters equal `team_total` (11 less the unlisted players' share), with
+        outfield players capped at `cap`. MD1-4: outfield players the model had at 90%+ started 83%
+        of the time, keepers 96%; start log loss 0.447 -> 0.438, better on each of the four
+        matchdays when the two numbers were chosen on the other three (scratch test, 10 Nov)."""
+        cfg = self.cfg.get("start") or {}
+        if not cfg.get("normalise", True):
+            return players
+        total, cap, cap_gk = float(cfg.get("team_total", 10.8)), float(cfg.get("cap", 0.87)), float(cfg.get("cap_gk", 0.97))
+        players = players.copy()
+        caps = np.where(players.pos.to_numpy() == "GK", cap_gk, cap)
+        p0 = np.minimum(players.p_start.to_numpy(float), caps)
+        out = p0.copy()
+        for team, idx in players.groupby("team").indices.items():
+            p, c = p0[idx], caps[idx]
+            live = p > 1e-4
+            if live.sum() < 11:                      # too few listed players to fill a line-up
+                continue
+            z = np.log(p[live] / (1 - np.minimum(p[live], 0.999)))
+            lo, hi = -8.0, 8.0
+            for _ in range(40):
+                mid = (lo + hi) / 2
+                if np.minimum(1 / (1 + np.exp(-(z + mid))), c[live]).sum() > total:
+                    hi = mid
+                else:
+                    lo = mid
+            q = p.copy()
+            q[live] = np.minimum(1 / (1 + np.exp(-(z + (lo + hi) / 2))), c[live])
+            out[idx] = q
+        players["p_start"] = out
+        return players
+
     def xi_players(self, md: int) -> pd.DataFrame:
-        """Player table after the XI-history update, before any team news (cached per matchday)."""
+        """Player table after UEFA's availability flags and the XI-history update, before any team
+        news (cached per matchday)."""
         if md not in self._xi:
-            self._xi[md] = self._xi_update(md, self.players)
+            base = self.players
+            a = self.availability(md)
+            if len(a):
+                base = base.copy()
+                m = base.id.map(a).fillna(1.0).to_numpy()
+                base["p_start"] = base.p_start * m
+                base["p_sub"] = base.p_sub * m
+                base["avail"] = base.avail * m
+            self._xi[md] = self._xi_update(md, base)
         return self._xi[md]
 
     def players_for(self, md: int) -> pd.DataFrame:
@@ -469,6 +588,7 @@ class Engine:
         if logs:
             unmatched = news[news.id.isna()] if news is not None else pd.DataFrame()
             self._news[md] = dict(log=pd.concat(logs, ignore_index=True), unmatched=unmatched, carried_from=carried_from)
+        players = self._normalise_starts(players)
         lp = PROC / f"lineups_md{md}.csv"                 # confirmed line-ups override predictions
         if lp.exists():
             lu = pd.read_csv(lp)

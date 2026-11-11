@@ -361,9 +361,45 @@ def snapshot_paths(md: int) -> dict[str, Path]:
     return out
 
 
+_FEED_IDS: dict = {}
+
+
+def _feed_pool_ids() -> dict:
+    """feed_id -> pool id for the current game feed (cached on the file's modification time)."""
+    from ..pipeline import _feed_ids, load_pool, slug
+    feed = PROC / "players_feed.csv"
+    key = feed.stat().st_mtime
+    if _FEED_IDS.get("key") != key:
+        f = pd.read_csv(feed)
+        f = f[f.team.notna() & f.name.notna()]
+        ids, _ = _feed_ids(load_pool(), f)
+        _FEED_IDS.update(key=key, map={fid: (ids.get(i) or f"{t}-{slug(n)}")
+                                       for i, fid, t, n in zip(f.index, f.feed_id, f.team, f.name)})
+    return _FEED_IDS["map"]
+
+
+def official_md_points(md: int) -> pd.Series | None:
+    """UEFA's own points for every player in matchday `md` (feed_md_points.csv), by pool id."""
+    p = PROC / "feed_md_points.csv"
+    if not p.exists() or not (PROC / "players_feed.csv").exists():
+        return None
+    mp = pd.read_csv(p)
+    mp = mp[mp.md == md]
+    if mp.empty:
+        return None
+    m = _feed_pool_ids()
+    s = pd.Series(pd.to_numeric(mp.points, errors="coerce").to_numpy(), index=[m.get(i) for i in mp.feed_id])
+    s = s[[i is not None for i in s.index]].dropna()
+    return s.groupby(level=0).max() if len(s) else None
+
+
 def feed_actual_points(md: int) -> pd.Series | None:
-    """Each player's fantasy points for matchday `md` from the game feed: the copy saved before the
-    next matchday's deadline (or the current feed) minus the copy saved before this one."""
+    """Each player's fantasy points for matchday `md` from the game feed: UEFA's per-matchday
+    points when they are on file, else the copy saved before the next matchday's deadline (or the
+    current feed) minus the copy saved before this one."""
+    off = official_md_points(md)
+    if off is not None:
+        return off
     from ..pipeline import feed_points, load_pool
     pre = PROC / f"feed_pre_md{md}.csv"
     post = PROC / f"feed_pre_md{md + 1}.csv"

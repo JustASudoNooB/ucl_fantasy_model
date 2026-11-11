@@ -31,7 +31,9 @@ from ..names import norm, ucl_team_id
 
 PL_CLUBS = {"ARS", "AVL", "LIV", "MCI", "MUN"}
 SQUAD_SIZE = {"GK": 3, "DEF": 8, "MID": 8, "FWD": 5}
-SLOTS = {"GK": 1.0, "DEF": 4.1, "MID": 3.6, "FWD": 2.3}
+# Starters per club by the game's own positions. UCL 2026/27 MD1-4 (144 line-ups): 3.96 DEF, 4.78 MID,
+# 1.26 FWD, because the game lists most wide forwards as midfielders (was 4.1 / 3.6 / 2.3).
+SLOTS = {"GK": 1.0, "DEF": 3.96, "MID": 4.78, "FWD": 1.26}
 BETA = {"GK": 3.0, "DEF": 2.2, "MID": 1.5, "FWD": 1.5}
 # listed players come from articles that mostly discuss regular starters; unlisted ones are weighted down
 PHANTOM_W = {"GK": 0.25, "DEF": 1.0, "MID": 0.6, "FWD": 0.5}
@@ -116,7 +118,8 @@ ASSISTS_PER_GOAL = 0.75
 
 def build(pool: pd.DataFrame, d: fpl_mod.FPLData | None = None, use_fpl_availability: bool = False,
           team_strength: dict[str, float] | None = None,
-          team_gpm: dict[str, float] | None = None, use_current_form: bool = True) -> tuple[pd.DataFrame, dict]:
+          team_gpm: dict[str, float] | None = None, use_current_form: bool = True,
+          ucl_obs: pd.DataFrame | None = None) -> tuple[pd.DataFrame, dict]:
     """Return (players, others): others[team] = phantom ('unlisted players') shares and minutes."""
     cfg = settings()
     sim = cfg["simulation"]
@@ -214,7 +217,8 @@ def build(pool: pd.DataFrame, d: fpl_mod.FPLData | None = None, use_fpl_availabi
     obs_rec = players.rec90_obs.to_numpy()
     prior_rec = np.maximum(np.array(prior_rec), 0.8)
     players["rec90"] = np.where(np.isfinite(obs_rec), wr * np.nan_to_num(obs_rec) + (1 - wr) * prior_rec, prior_rec)
-    players = apply_ucl_observations(players)
+    players["rec90_prior"] = players["rec90"]          # before this season's UCL numbers (used to refit the ratios)
+    players = apply_ucl_observations(players, obs=ucl_obs)
     players["p_sub"] = [_p_sub(ps, pos) for ps, pos in zip(players.p_start, players.pos)]
     players["ob_share"] = players.pos.map(sim["outside_box_share"]).astype(float)
     return players, others
@@ -295,6 +299,7 @@ def _attacking_shares(players: pd.DataFrame, others: dict) -> tuple[pd.DataFrame
     """Within-club allocation of team xG and xA, normalised so each club's expected on-pitch
     shares sum to TEAM_SHARE_TOTAL; observed shares (when known) are blended in log space."""
     players = players.copy()
+    a_mult = settings()["simulation"].get("assist_pos_mult") or {}
     feq = fpl_equivalent_price(players.price.to_numpy())
     pos = players.pos.to_numpy()
     players["xg_share"] = [min(XG_CAP[p], XG_BASE[p] * np.exp(XG_SLOPE[p] * (f - REF_FEQ[p]))) for p, f in zip(pos, feq)]
@@ -314,6 +319,8 @@ def _attacking_shares(players: pd.DataFrame, others: dict) -> tuple[pd.DataFrame
             wv = (g.w_obs if col == "xg_share" else g.get("w_obs_xa", g.w_obs)).to_numpy()
             have = np.isfinite(obs) & (obs > 0)
             vals[have] = np.exp(wv[have] * np.log(obs[have]) + (1 - wv[have]) * np.log(vals[have]))
+            if col == "xa_share":                 # the game's assists by position (see settings: assist_pos_mult)
+                vals = vals * g.pos.map(lambda q: float(a_mult.get(q, 1.0))).to_numpy()
             # renormalise keeping the phantom mass at its scaled level
             tot2 = float((g.p_start * vals).sum() + ph_mass * scale)
             scale2 = TEAM_SHARE_TOTAL / tot2 if tot2 > 0 else 1.0
@@ -324,44 +331,59 @@ def _attacking_shares(players: pd.DataFrame, others: dict) -> tuple[pd.DataFrame
     return players, others
 
 
-def apply_ucl_observations(players: pd.DataFrame, path=None) -> pd.DataFrame:
-    """Blend this season's UCL results (logged by the feedback loop) into the rates.
+def apply_ucl_observations(players: pd.DataFrame, path=None, obs: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Blend this season's UCL numbers per player (from the game feed: minutes, goals, assists,
+    ball recoveries) into the rates. `obs` has one or more rows per player id.
 
-    Goals and assists update the attacking shares through a Gamma-Poisson ratio:
-        multiplier = (observed + k) / (expected + k),  k = 2 pseudo-events
-    where expected = share * team expected goals * minutes/90 summed over logged matches.
-    Recoveries update rec90 the same way (converted back to the Opta scale), and observed
-    starts move the start probability. Small samples move little; a run of matches moves a lot.
+    Goals and assists move the attacking shares through a Gamma-Poisson ratio:
+        multiplier = (observed + k) / (expected + k)
+    with expected = share x the club's expected goals x minutes/90 (plus the taker's penalties),
+    and k pseudo-events of prior weight (settings: ucl_obs.k_goals / k_assists; more for players
+    with their own league history, whose share is better known). Recoveries move rec90 toward the
+    player's own UEFA rate with `rec_k[pos]` matches of prior weight: midfielders differ a lot from
+    each other (2 matches), defenders little (12). Small samples move little.
     """
     from ..config import ROOT
-    path = path or ROOT / "data" / "processed" / "player_obs.csv"
-    if not path.exists():
-        return players
-    obs = pd.read_csv(path)
-    if obs.empty or "id" not in obs:
+    cfg = settings().get("ucl_obs") or {}
+    if obs is None:
+        path = path or ROOT / "data" / "processed" / "player_obs.csv"
+        if not path.exists():
+            return players
+        obs = pd.read_csv(path)
+    if obs is None or obs.empty or "id" not in obs or not cfg.get("enabled", True):
         return players
     ratio = settings()["simulation"].get("recovery_ratio", {})
+    kg, ka = float(cfg.get("k_goals", 6.0)), float(cfg.get("k_assists", 6.0))
+    hist_extra = float(cfg.get("k_history_extra", 6.0))      # added for a player with full league history
+    rec_k = cfg.get("rec_k") or {"GK": 4.0, "DEF": 12.0, "MID": 3.0, "FWD": 6.0}
+    lo, hi = cfg.get("mult_range", [0.6, 1.8])
+    a_rate = float(settings()["simulation"].get("assist_rate", 0.86))
     players = players.copy().set_index("id")
     for pid, g in obs.groupby("id"):
         if pid not in players.index:
             continue
         r = players.loc[pid]
-        m90 = float(g.get("minutes", pd.Series([0])).sum()) / 90.0
-        lam = float(g.get("team_lambda", pd.Series([1.4] * len(g))).fillna(1.4).mean())
-        if m90 > 0 and "goals" in g:
-            exp_g = r.xg_share * lam * m90
-            players.at[pid, "xg_share"] = r.xg_share * (g.goals.sum() + 2.0) / (exp_g + 2.0)
-        if m90 > 0 and "assists" in g:
-            exp_a = r.xa_share * lam * m90 * 0.86
-            players.at[pid, "xa_share"] = r.xa_share * (g.assists.sum() + 2.0) / (exp_a + 2.0)
-        if m90 > 0 and "recoveries" in g:
-            k = 4.0                                   # four matches of prior weight
-            obs_rate = g.recoveries.sum() / m90 / max(ratio.get(r.pos, 1.0), 1e-6)
+        m90 = float(pd.to_numeric(g.get("minutes", pd.Series([0])), errors="coerce").fillna(0).sum()) / 90.0
+        if m90 <= 0:
+            continue
+        lam = float(pd.to_numeric(g.get("team_lambda", pd.Series([1.4] * len(g))), errors="coerce").fillna(1.4).mean())
+        w_hist = float(r.get("w_obs", 0.0) or 0.0)
+        if "goals" in g and kg > 0:
+            k = kg + hist_extra * w_hist
+            exp_g = r.xg_share * lam * m90 + (0.10 * m90 if int(r.get("pen_order", 9) or 9) == 1 else 0.0)
+            players.at[pid, "xg_share"] = r.xg_share * float(np.clip((float(g.goals.sum()) + k) / (exp_g + k), lo, hi))
+        if "assists" in g and ka > 0:
+            k = ka + hist_extra * w_hist
+            exp_a = r.xa_share * lam * m90 * a_rate
+            players.at[pid, "xa_share"] = r.xa_share * float(np.clip((float(g.assists.sum()) + k) / (exp_a + k), lo, hi))
+        if "recoveries" in g and ratio.get(r.pos, 1.0) > 0:
+            k = float(rec_k.get(r.pos, 4.0))
+            obs_rate = float(g.recoveries.sum()) / m90 / float(ratio[r.pos])
             players.at[pid, "rec90"] = (obs_rate * m90 + r.rec90 * k) / (m90 + k)
         if "started" in g and len(g):
             n = len(g)
             players.at[pid, "p_start"] = float(np.clip((g.started.sum() + 3 * r.p_start) / (n + 3), 0, 0.97))
-        players.at[pid, "rate_source"] = f"{r.rate_source} + UCL 26/27 ({len(g)} matches)"
+        players.at[pid, "rate_source"] = f"{r.rate_source} + UCL 26/27 ({m90 * 90:.0f} min)"
     return players.reset_index()
 
 

@@ -54,7 +54,14 @@ simulation:
   saves_per_xgc: 2.0           # keeper saves per opponent expected goal (PL 2025/26)
   red_card_per90: 0.0045
   outside_box_share: {GK: 0.0, DEF: 0.10, MID: 0.20, FWD: 0.08}   # priors; refit from feed stats
-  recovery_ratio: {GK: 0.35, DEF: 1.5, MID: 1.3, FWD: 1.1}         # UEFA vs Opta definition; refit after each MD
+  # UEFA ball recoveries per Opta-scale recovery, by position. Refit on the game feed's totals for
+  # MD1-4 (10 Nov; python -m ufe calibrate): the old values (0.35 / 1.5 / 1.3 / 1.1) had midfielders at
+  # 5.9 recoveries per 90 against 3.5 real, forwards 2.4 against 1.4, and keepers 2.9 against none.
+  recovery_ratio: {GK: 0.0, DEF: 1.40, MID: 0.78, FWD: 0.64}
+  # The game's assists by position, relative to the model's shares (within-club split, MD1-4:
+  # forwards 49 against 27 expected, midfielders 132 against 150, defenders 52 against 55). The game
+  # also credits rebounds and penalties won, which forwards collect. Shrunk toward 1.
+  assist_pos_mult: {GK: 1.0, DEF: 0.92, MID: 0.92, FWD: 1.6}
   others_floor: 0.08           # minimum unallocated goal share when the player pool is partial
 
 potm:
@@ -134,3 +141,29 @@ ml:
   # neural-network challenger (ufe/ml/): weight of its player priors in the engine's picks.
   # 0 until it has beaten the model on matchdays it never saw (python -m ufe ml eval).
   blend: 0.0
+
+availability:
+  # multipliers on start and substitute chances from UEFA's flags in the game feed (pipeline.availability)
+  injured: 0.03            # MD4: 0 of 85 started, 1 came off the bench
+  suspended: 0.0
+  not_in_squad: 0.0        # MD4: 1 of 121 started
+  doubtful: 0.65           # MD4: 8 of 25 started
+  unlikely: 0.4            # "Unlikely to start next game" with no status: no matchday to check it on yet
+  fade: 0.5                # per matchday further ahead, the effect of an injury or doubt halves
+
+start:
+  # players_for: club totals forced to eleven starters, outfield players capped (pipeline._normalise_starts)
+  normalise: true
+  team_total: 10.8
+  cap: 0.87
+  cap_gk: 0.97
+
+ucl_obs:
+  # this season's UCL numbers per player from the game feed, blended into the rates
+  # (player_rates.apply_ucl_observations)
+  enabled: true
+  k_goals: 6.0             # pseudo-goals of prior weight; + k_history_extra x the weight of the player's league history
+  k_assists: 6.0
+  k_history_extra: 6.0
+  mult_range: [0.6, 1.8]
+  rec_k: {GK: 4.0, DEF: 12.0, MID: 3.0, FWD: 6.0}     # matches of prior weight for the player's own recovery rate
