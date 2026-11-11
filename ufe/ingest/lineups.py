@@ -1,8 +1,7 @@
 """Confirmed line-ups (~60 minutes before kick-off) -> data/processed/lineups_md{N}.csv.
 
 Automatic: API-Football (free key, `ufe sync --lineups MD`, run by the scheduler from 75 minutes
-before each kick-off). Also: FotMob's public match JSON (unofficial; the endpoint and headers change from time to
-time, so failures are expected and handled). Fallback: paste the XI into a CSV
+before each kick-off). Fallback: paste the XI into a CSV
 (id or name, team, role = start | bench) or use `ufe lineup --md N --team XXX "Name, Name, ..."`.
 Whenever a line-up file changes, `ufe live` re-runs the simulation for the remaining fixtures.
 """
@@ -19,25 +18,6 @@ from ..names import best_player_match, ucl_team_id
 from .http import get
 
 PROC = ROOT / "data" / "processed"
-
-
-def fotmob_lineups(match_id: int) -> list[dict] | None:
-    try:
-        r = get(f"https://www.fotmob.com/api/matchDetails?matchId={match_id}", retries=1)
-        if r.status_code != 200:
-            return None
-        data = r.json()
-    except Exception:
-        return None
-    out = []
-    lu = (data.get("content") or {}).get("lineup") or {}
-    for side in ("homeTeam", "awayTeam"):
-        t = lu.get(side) or {}
-        for p in t.get("starters", []) or []:
-            out.append(dict(name=p.get("name"), team_name=t.get("name"), role="start"))
-        for p in t.get("subs", []) or []:
-            out.append(dict(name=p.get("name"), team_name=t.get("name"), role="bench"))
-    return out or None
 
 
 def from_text(players: pd.DataFrame, team: str, starters: str, bench: str = "") -> pd.DataFrame:

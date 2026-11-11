@@ -17,7 +17,6 @@ CHECKS = [
     ("The Odds API", lambda s: s["the_odds_api"]["url"], "UFE_ODDS_API_KEY"),
     ("Understat", lambda s: "https://understat.com/league/EPL/2026", None),
     ("BBC football RSS", lambda s: s["news_rss"]["feeds"][0], None),
-    ("FotMob", lambda s: "https://www.fotmob.com/api/leagues?id=42", None),
 ]
 
 

@@ -44,10 +44,6 @@ the_odds_api:
   key_env: UFE_ODDS_API_KEY
   markets: [h2h, totals]
   provides: bookmaker prices -> market-implied goal rates (strongest public signal)
-fotmob:
-  status: untested
-  url: https://www.fotmob.com/api/matchDetails?matchId={match_id}
-  provides: confirmed line-ups ~60 min before kick-off (unofficial; cache and fail gracefully)
 news_rss:
   status: untested
   feeds:
