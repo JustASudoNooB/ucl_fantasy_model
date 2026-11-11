@@ -354,8 +354,9 @@ class Engine:
         k = float(cfg.get("strength_adjust", 0.5))
         lo, hi = cfg.get("strength_clip", [0.88, 1.06])
         # baseline: the XI-history table without news, so only news and confirmed XIs move the
-        # rates (the team ratings already come from the matches those XIs played)
-        base = self.xi_players(md)
+        # rates (the team ratings already come from the matches those XIs played). It gets the same
+        # eleven-starters normalisation as the current table, or that step alone would move the rates.
+        base = self._normalise_starts(self.xi_players(md))
         prior = base.set_index("id")
         now = self.players_for(md).set_index("id")
         o0, o1 = self._others_given(base), self.others_for(md)

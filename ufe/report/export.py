@@ -319,7 +319,8 @@ def _models_block(engine, md: int, block: dict) -> dict:
         except Exception:
             continue
     details = dict(network=_load_json(PROC / "ml_metrics.json"), trees=_load_json(PROC / "trees_metrics.json"))
-    out = dict(md=md, models=[], leaderboard=_load_json(PROC / "model_leaderboard.json"), forecasts=[])
+    out = dict(md=md, models=[], leaderboard=_load_json(PROC / "model_leaderboard.json"), forecasts=[],
+               calibration=_load_json(PROC / "calibration.json"), picks_model=getattr(engine, "model_key", "statistical"))
     for k in registry.available():
         spec = registry.MODELS[k]
         m = dict(key=k, name=spec["name"], kind=spec["kind"], desc=spec["desc"])

@@ -715,7 +715,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
   <section id="models" aria-labelledby="mo-h" hidden>
     <div class="sec-head">
       <h2 id="mo-h">Models</h2>
-      <p id="mo-sub">Four models predict every matchday. Pick one to see only its numbers, or open the leaderboard to see which has been most accurate so far.</p>
+      <p id="mo-sub">Several models predict every matchday. Pick one to see only its numbers, or open the leaderboard to see which has been most accurate so far.</p>
     </div>
     <div class="seg" id="mo-pick" role="group" aria-label="Model"></div>
     <div class="panel" id="mo-box" style="padding:14px 16px; overflow-x:auto; margin-top:10px;"></div>
@@ -1399,6 +1399,7 @@ const D = /*__UFE_DATA__*/null;
     const LB = MB.leaderboard || {};
     let sel = "leaderboard", posF = "ALL";
     try { const s = localStorage.getItem("ufe-model"); if (s === "leaderboard" || byKey[s]) sel = s; } catch (e) {}
+    if (MB.picks_model && byKey[MB.picks_model]) $("#mo-sub").textContent += ` The picks on this page come from the ${byKey[MB.picks_model].name} model.`;
     const pct = x => x == null ? "–" : Math.round(x * 100) + "%";
     const f1 = x => x == null ? "–" : Number(x).toFixed(1);
     const fmt = (v, d) => v == null ? "–" : d === "pct" ? (v * 100).toFixed(1) + "%" : Number(v).toFixed(d);
@@ -1409,10 +1410,21 @@ const D = /*__UFE_DATA__*/null;
       log_n90: "minutes of history", has_att_hist: "has attacking history", rest_days: "rest days", home: "home match",
       pos_GK: "goalkeeper", pos_DEF: "defender", pos_MID: "midfielder", pos_FWD: "forward" };
     const SC = [["start_ll", "Start log loss", true, 3], ["top11_share", "Actual starters in its predicted XIs", false, "pct"],
-      ["goal_ll", "Goal log loss", true, 3], ["points_corr", "Expected vs actual points (correlation)", false, 3],
+      ["goal_ll", "Goal log loss", true, 3], ["points_corr", "Expected vs actual points (correlation)", false, 3], ["points_rmse", "Points error per player (RMSE)", true, 2],
       ["top20_points", "Actual points of its top 20 players", false, 0], ["result_ll", "Match result log loss", true, 3],
       ["goals_abs_err", "Total goals error", true, 1]];
     const th = () => keys.map(k => `<th class="r">${esc(byKey[k].name)}</th>`).join("");
+    function calibration() {
+      const C = MB.calibration; if (!C || !C.recoveries) return "";
+      const rec = Object.entries(C.recoveries).filter(([, r]) => r.minutes > 0).map(([p, r]) => `${p} ${r.recoveries.toLocaleString()} in ${r.minutes.toLocaleString()} min`).join("; ");
+      const ast = Object.entries(C.assists || {}).filter(([, r]) => r.actual > 0).map(([p, r]) => `${p} ${r.actual} against ${r.expected} expected`).join("; ");
+      const ch = Object.entries(C.changes || {}).map(([k, v]) => `${k.replace("recovery_ratio.", "recoveries ").replace("assist_pos_mult.", "assists ")} ${v[0]} → ${v[1]}`).join(", ");
+      const av = (C.availability || []).filter(r => r.flag !== "none").map(r => `${({I: "injured", D: "doubtful", S: "suspended", NIS: "not in squad", unlikely: "unlikely to start"})[r.flag] || r.flag}: ${r.started} of ${r.players} started (MD${r.md})`).join("; ");
+      return `<h4>What the model learns from each matchday</h4>
+        <p style="font-size:13px">After every matchday the model's constants are refitted on UEFA's own numbers for each player (last run ${esc((C.generated_at || "").slice(0, 10))}, ${(C.minutes || 0).toLocaleString()} player-minutes).
+        Ball recoveries: ${esc(rec)}. The game's assists by position: ${esc(ast)}. ${ch ? "Changed in the last run: " + esc(ch) + "." : "Nothing needed changing in the last run."}
+        ${av ? "UEFA's availability flags before the deadline: " + esc(av) + "." : ""}</p>`;
+    }
     function leaderboard() {
       if (!LB.mds) return `<p class="muted">No leaderboard yet: run <code>python -m ufe models eval</code>.</p>`;
       const S = LB.summary || {}, A = S.average || {}, best = S.best || {}, wins = S.wins || {};
@@ -1435,7 +1447,7 @@ const D = /*__UFE_DATA__*/null;
         <table class="caps"><thead><tr><th>Matchday</th>${th()}</tr></thead><tbody>${per}</tbody></table>
         ${fr ? `<h4>Deadline forecasts for saved teams <span class="muted" style="font-weight:400">(expected points with the between-day moves; actual minus expected in brackets)</span></h4>
         <table class="caps"><thead><tr><th>Matchday</th><th>Manager</th><th class="r">Actual</th>${th()}</tr></thead><tbody>${fr}</tbody></table>` : ""}
-        <p class="muted" style="font-size:12.5px">Updated ${esc((LB.generated_at || "").slice(0, 10))}: ${esc(LB.method || "")}.</p>`;
+        <p class="muted" style="font-size:12.5px">Updated ${esc((LB.generated_at || "").slice(0, 10))}: ${esc(LB.method || "")}.</p>${calibration()}`;
     }
     function modelPage(k) {
       const m = byKey[k], st = byKey.statistical;

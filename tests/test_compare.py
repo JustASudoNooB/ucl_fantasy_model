@@ -186,3 +186,24 @@ def test_availability_from_uefa_flags_fades():
     want = {"inj": 0.03, "dbt": 0.65, "sus": 0.0, "nis": 0.0, "unl": 0.4, "fit": 1.0}
     assert all(abs(a5[k] - v) < 1e-9 for k, v in want.items())
     assert abs(a6["inj"] - 0.515) < 1e-9 and a6["sus"] == 1.0 and a6["nis"] == 0.0 and abs(a6["unl"] - 0.7) < 1e-9
+
+
+def test_normalising_starts_alone_does_not_move_goal_rates():
+    """Without team news the line-up adjustment must leave every club's goal rate untouched."""
+    from ufe.pipeline import Engine
+    e = Engine(as_of="2026-11-01")
+    e.__dict__["cfg"] = {"start": {"normalise": True, "team_total": 10.8, "cap": 0.85, "cap_gk": 0.97}, "news": {}}
+    rng = np.random.default_rng(0)
+    rows = []
+    for t in ("A", "B"):
+        for i, pos in enumerate(["GK", "GK"] + ["DEF"] * 6 + ["MID"] * 7 + ["FWD"] * 3):
+            rows.append(dict(id=f"{t}{i}", team=t, pos=pos, p_start=float(rng.uniform(0.05, 0.97)), xg_share=float(rng.uniform(0, 0.3)),
+                             xa_share=float(rng.uniform(0, 0.2))))
+    pl = pd.DataFrame(rows)
+    e.xi_players = lambda md: pl
+    e.players_for = lambda md: e._normalise_starts(pl)
+    e._others_given = lambda now: {}
+    e.others_for = lambda md: {}
+    f = pd.DataFrame(dict(home=["A"], away=["B"], lh=[1.7], la=[1.1]))
+    out = e._lineup_adjust(5, f)
+    assert abs(out.lh[0] - 1.7) < 1e-9 and abs(out.la[0] - 1.1) < 1e-9
