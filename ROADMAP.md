@@ -95,3 +95,17 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
   events are in, then decide after MD6 which model (or accuracy-weighted blend) feeds the picks.
 - Kept free: GitHub Actions about 430 of the 2,000 free minutes a month (forecasts run only in the 3 hours before a
   deadline), dashboard artifacts kept 7 days, every library open source, every data source free.
+
+
+## v0.18.0 (11 Nov 2026, MD4 review)
+- Done: UEFA feed stats and per-matchday points kept; availability from UEFA's flags; start chances sum to eleven per club;
+  recovery, assist-split and position-slot constants refitted; `ufe calibrate`; combined model behind the picks;
+  unconfirmed absences in third-party files count for less. Numbers in DECISIONS.md (11 Nov).
+- First clean test: MD5 (24-25 Nov). Check then: start log loss and points RMSE of combined v statistical; start rate of
+  players UEFA marks "unlikely to start" (multiplier 0.4 is a guess); start rate of unconfirmed absences (0.4 from 45 players).
+- Open: total goals 8% under (revisit after MD6); players priced 8+ under-predicted by about a point a start (18 players);
+  doubts listed by third-party files that UEFA does not flag (MD4: 15 named, 14 started; 19 not named, 9 started);
+  starts are drawn independently per player in the simulation; a second predicted line-up source; goalscorer prices
+  (none in the saved rg.org pages).
+- Needs Zero: `UFE_API_FOOTBALL_KEY` GitHub secret (league form outside England, confirmed line-ups); league-table screenshot.
+

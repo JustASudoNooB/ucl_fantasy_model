@@ -269,3 +269,46 @@ Deadline forecasts for every manager's saved team, from every model, are written
 hours before each deadline and frozen after it (forecast_{manager}.json); MD4's was computed just
 after the deadline from inputs frozen before it, and says so. Reverse if: after MD6 one model leads
 on most scores, then it (or a blend weighted by accuracy) feeds the picks.
+
+
+**2026-11-11 · Error audit on MD1-4 against UEFA's own numbers; combined model feeds the picks (v0.18.0).**
+UEFA's game feed gives each player's points per matchday and season totals of minutes, goals,
+assists, clean sheets, recoveries and awards. The statistical model was rebuilt as of each matchday
+with pre-deadline inputs and compared (scratch audit, 10-11 Nov). Found and fixed:
+1. Recoveries: 5.85 per 90 assumed for midfielders v 3.51 real, forwards 2.40 v 1.36, keepers 2.85
+   v 0. recovery_ratio refitted (MID 0.78, FWD 0.64, GK 0); each player's own rate now updates.
+2. Assists inside a club: forwards 49 v 27 expected, midfielders 132 v 150 (assist_pos_mult).
+   Starters per club by position 3.96 / 4.78 / 1.26, not 4.1 / 3.6 / 2.3 (player_rates.SLOTS).
+3. Outfield players at 90%+ to start started 83% of the time; expected starters per matchday ran
+   from 356 to 400 against 396. Each club's start chances now sum to 10.8, outfield capped at 0.85.
+4. The status column was a mid-October copy: 25 fit players marked injured, 59 UEFA-flagged injured
+   players treated as available. Availability now comes from UEFA's flags at each sync (MD4: 0 of
+   85 flagged injured started, 1 of 121 not in squad, 8 of 25 doubtful).
+5. Absences in a weaker predicted line-up file were treated as certain. MD4 (third-party file,
+   strength 0.7): 45 listed out but unflagged by UEFA, 7 started; 6 listed suspended, 4 started;
+   69 also flagged by UEFA, 0 started. team_news.absence_mult: unconfirmed out 0.4, suspended 0.85
+   of the prior chance (flat between 0.3 and 0.6; 0.443 -> 0.370 on MD4, 0.371 with the numbers
+   chosen on the other clubs). Players given under 0.5% who started: 15 of 242 before, 0 of 168 now.
+Measured on MD1-4, statistical model on 10 Nov -> combined model now: start log loss 0.447 -> 0.407
+(by matchday 0.529 / 0.359 / 0.433 / 0.469 -> 0.517 / 0.353 / 0.393 / 0.366); expected v official
+points, all players: correlation 0.521 -> 0.532, RMSE 2.345 -> 2.326; starters: correlation 0.363 ->
+0.400, bias +0.40 -> +0.06. Points scored by the 20 highest-rated players per matchday: 498 -> 490
+over four matchdays, no change (the two lists share 88% of names; noise is about 40 points).
+The constants in 1-3 and 5 were fitted on these four matchdays, so MD5 is the first clean test.
+Combined (mean of the statistical, network and trees player priors, weights fixed at a third
+each before grading) v statistical, same inputs: start log loss lower on all four matchdays (paired
+difference 0.0071, 95% interval 0.0015 to 0.0129, club-matchdays resampled); squared points error
+lower by 0.026 (interval -0.032 to 0.083); best four keepers, 12 defenders, 12 midfielders, 8
+forwards per matchday 750 v 722 points. engine.model: combined.
+Tested and not changed: (a) form: a starter's over- or under-performance against the model did not
+carry to his next match (958 player-matches, slope +0.016, s.e. 0.043), so UCL results move a
+player's rates slowly (ucl_obs, k 10 + 8 x history weight); (b) the predicted line-up labels: no
+set of weights beat the current one on MD4 (0.3699 to 0.3701 v 0.3704, worse leave-one-club-out);
+(c) players priced 8.0+: 6.1 expected v 7.1 scored per start, from 18 players: goals per 90 0.64 v
+0.68, assists 0.31 v 0.36, awards 8.1 v 14; start rate at the cap 0.82 v 0.85. No structural cause,
+left alone; (d) total goals 268 predicted v 291 (z about 1.3 with 72 matches; the bookmaker's
+totals are lower still), left alone; team clean sheets 28.9 v 27.
+`ufe calibrate` (weekly) refits 1-2 from the feed, at most 15% a run.
+Reverse if: after MD6 the statistical model's start log loss or points RMSE beats the combined
+model's on MD5 and MD6 both; then engine.model goes back to statistical.
+
