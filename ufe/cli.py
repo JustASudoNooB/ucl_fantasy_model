@@ -25,9 +25,9 @@ PROC = ROOT / "data" / "processed"
 
 
 def _engine(args):
-    from .pipeline import Engine
-    return Engine(as_of=getattr(args, "as_of", None) or pd.Timestamp.today().date().isoformat(),
-                  n_sims=getattr(args, "sims", None))
+    from .compare.registry import picks_engine
+    return picks_engine(getattr(args, "as_of", None) or pd.Timestamp.today().date().isoformat(),
+                        n_sims=getattr(args, "sims", None))
 
 
 def _live_md() -> int:
@@ -320,6 +320,24 @@ def cmd_models(args):
         print("forecasts: " + (", ".join(w) if w else "nothing to write (deadline passed, or outside the window)"))
 
 
+def cmd_calibrate(args):
+    """Refit the model's constants on the game feed's season numbers (compare/calibrate.py)."""
+    from .compare import calibrate
+    rep = calibrate.run(apply=not args.dry_run)
+    for pos, r in (rep.get("recoveries") or {}).items():
+        print(f"recoveries {pos}: {r['recoveries']} in {r['minutes']:,} min; ratio fitted {r['fitted']}, in use {r['current']}"
+              + (f" -> {r['new']}" if r.get("new") not in (None, r["current"]) else ""))
+    for pos, r in (rep.get("assists") or {}).items():
+        print(f"assists {pos}: {r['actual']} against {r['expected']} expected (x{r['ratio']}); multiplier in use {r['current']}"
+              + (f" -> {r['new']}" if r.get("new") not in (None, r["current"]) else ""))
+    if rep.get("slots"):
+        print(f"starters per club over {rep['slots']['lineups']} line-ups: {rep['slots']['per_club']}")
+    for r in rep.get("availability", []):
+        print(f"MD{r['md']} flag {r['flag']}: {r['started']} of {r['players']} started")
+    print(("applied: " + json.dumps(rep["changes"])) if rep.get("applied") else
+          ("changes not applied (dry run): " + json.dumps(rep["changes"]) if rep.get("changes") else "no constant changed"))
+
+
 def cmd_livecall(args):
     """Captain switch and manual subs for manager files, from the game feed's live points."""
     from .alerts.telegram import send
@@ -544,6 +562,9 @@ def main(argv=None):
     ml = sub.add_parser("ml", help="neural-network challenger: data | train | all | eval")
     ml.add_argument("action", choices=["data", "train", "all", "eval"])
     ml.set_defaults(fn=cmd_ml)
+    ca = sub.add_parser("calibrate", help="refit recovery ratios and assist split on the game feed's season numbers")
+    ca.add_argument("--dry-run", action="store_true", help="report only; do not write params.json")
+    ca.set_defaults(fn=cmd_calibrate)
     mo = sub.add_parser("models", help="model comparison: train (trees) | eval (leaderboard) | forecast | all")
     mo.add_argument("action", choices=["train", "eval", "forecast", "all"])
     mo.add_argument("--mds", help="eval: comma-separated matchdays (default: every matchday with actual XIs)")

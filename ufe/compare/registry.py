@@ -4,6 +4,7 @@
   network       neural network (ml/nn.py) for each player's start, goals and assists
   bookmaker     match goal rates from bookmaker prices only (compare/market.py)
   trees         gradient-boosted decision trees (ml/trees.py), same inputs as the network
+  combined      the average of the statistical, network and trees player predictions
 Everything after the player and match inputs (simulation, points, optimiser) is shared, so the
 models differ only where their descriptions say.
 """
@@ -31,7 +32,18 @@ MODELS = {
     "trees": dict(name="Decision trees", kind="learned",
                   desc="Gradient-boosted decision trees (LightGBM) on the same Premier League rows and inputs as the "
                        "network: a few hundred small trees per output. Match goal rates are the statistical model's."),
+    "combined": dict(name="Combined", kind="ensemble",
+                     desc="The average of the statistical, neural-network and decision-tree player predictions "
+                          "(weights in settings.yaml, ml.weights). Match goal rates are the statistical model's, "
+                          "which already blend bookmaker prices."),
 }
+
+
+def weights() -> dict:
+    """Weights of the learned models in the combined model (the statistical model keeps the rest)."""
+    from ..config import settings
+    w = dict((settings().get("ml") or {}).get("weights") or {"network": 1 / 3, "trees": 1 / 3})
+    return {k: float(v) for k, v in w.items() if k in ("network", "trees") and float(v) > 0}
 
 
 def available() -> list[str]:
@@ -40,7 +52,22 @@ def available() -> list[str]:
         out.insert(1, "network")
     if (PROC / "trees_model.json").exists():
         out.append("trees")
+    if all((PROC / f).exists() for f in ("ml_model.json", "trees_model.json")):
+        out.append("combined")
     return [k for k in MODELS if k in out]
+
+
+def picks_engine(as_of: str, n_sims: int | None = None, seed: int | None = None) -> Engine:
+    """The engine behind the picks: settings.yaml `engine.model` (statistical or combined). Falls
+    back to the statistical model if the learned models cannot be loaded."""
+    from ..config import settings
+    key = str((settings().get("engine") or {}).get("model", "statistical"))
+    if key != "statistical":
+        try:
+            return build(key, as_of, n_sims=n_sims, seed=seed)
+        except Exception as ex:
+            print(f"WARNING: model '{key}' not available ({type(ex).__name__}: {str(ex)[:100]}); using the statistical model", flush=True)
+    return build("statistical", as_of, n_sims=n_sims, seed=seed)
 
 
 def build(key: str, as_of: str, n_sims: int | None = None, seed: int | None = None, base: Engine | None = None) -> Engine:
@@ -60,6 +87,15 @@ def build(key: str, as_of: str, n_sims: int | None = None, seed: int | None = No
             if net is None:
                 raise FileNotFoundError("no tree model: run `python -m ufe models train` first")
         e = Challenger(as_of=as_of, n_sims=n_sims, seed=seed, blend=1.0, net=net)
+    elif key == "combined":
+        from ..ml.train import load_model as load_network
+        from ..ml.trees import load_model as load_trees
+        from ..ml.ucl import Challenger
+        models = {"network": load_network(), "trees": load_trees()}
+        w = weights()
+        if any(models[k] is None for k in w):
+            raise FileNotFoundError("combined model needs both learned models: run `python -m ufe ml train` and `python -m ufe models train`")
+        e = Challenger(as_of=as_of, n_sims=n_sims, seed=seed, nets={k: (models[k], w[k]) for k in w})
     else:
         raise KeyError(key)
     if base is not None:

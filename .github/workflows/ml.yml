@@ -22,6 +22,10 @@ jobs:
         run: |
           python -m ufe ml all 2>&1 | tee ml.txt
           sed 's/^/::notice::ml: /' ml.txt | tail -8
+      - name: Refit the model's constants on the game feed (recoveries, assists by position)
+        run: |
+          python -m ufe calibrate 2>&1 | tail -14 | sed 's/^/::notice::calibrate: /'
+        continue-on-error: true
       - name: Decision trees (LightGBM) on the same data
         run: |
           python -m ufe models train 2>&1 | tail -4 | sed 's/^/::notice::trees: /'
@@ -35,7 +39,8 @@ jobs:
           git config user.name "ucl-data-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/processed/ml_model.json data/processed/ml_metrics.json data/processed/ml_ucl_eval.json \
-            data/processed/trees_model.json data/processed/trees_metrics.json data/processed/model_leaderboard.json 2>/dev/null || true
+            data/processed/trees_model.json data/processed/trees_metrics.json data/processed/model_leaderboard.json \
+            data/processed/params.json data/processed/calibration.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "::notice::model unchanged"; else
             git commit -q -m "ml: weekly retrain $(date -u +%F)"
             git stash -u -q || true

@@ -98,30 +98,45 @@ def features(engine: Engine, md: int, players: pd.DataFrame) -> pd.DataFrame:
 
 
 class Challenger(Engine):
-    """The engine with the network's player priors (blend = weight on the network)."""
+    """The engine with learned player priors.
+
+    One model: `blend` is its weight (0 = current model, 1 = the learned model only).
+    Several: `nets` = {name: (model, weight)}; the current model keeps the rest of the weight."""
     blend: float = 1.0
 
-    def __init__(self, *a, blend: float = 1.0, net=None, **k):
+    def __init__(self, *a, blend: float = 1.0, net=None, nets: dict | None = None, **k):
         super().__init__(*a, **k)
         self.blend = float(blend)
-        self.net = net or load_model()
-        if self.net is None:
-            raise FileNotFoundError("no trained network: run `python -m ufe ml train` first")
+        self.nets = nets
+        if nets is None:
+            self.net = net or load_model()
+            if self.net is None:
+                raise FileNotFoundError("no trained network: run `python -m ufe ml train` first")
+
+    @staticmethod
+    def _priors(net, F: pd.DataFrame, players: pd.DataFrame) -> dict:
+        """One learned model's start probability and attacking shares for every player."""
+        pr = net.predict(F.to_numpy(float))
+        lam = np.clip(F.lam_for.to_numpy(float), 0.3, None)
+        av = (players["avail"] if "avail" in players else pd.Series(1.0, index=players.index)).to_numpy(float)
+        return dict(p_start=np.clip(pr["p_start"], 0, 0.98) * av,
+                    xg_share=np.clip(pr["g90"] / lam, 0.0, 0.8),
+                    xa_share=np.clip(pr["a90"] / (ASSISTS_PER_GOAL * lam), 0.0, 0.8))
 
     def _xi_update(self, md: int, players: pd.DataFrame) -> pd.DataFrame:
         cur = Engine._xi_update(self, md, players)          # the current model's priors (with XI history)
-        if self.blend <= 0:
+        parts = self.nets if self.nets is not None else ({"net": (self.net, self.blend)} if self.blend > 0 else {})
+        parts = {k: v for k, v in parts.items() if v[1] > 0}
+        if not parts:
             return cur
         F = features(self, md, players)
-        pr = self.net.predict(F.to_numpy(float))
-        lam = np.clip(F.lam_for.to_numpy(float), 0.3, None)
-        av = (players["avail"] if "avail" in players else pd.Series(1.0, index=players.index)).to_numpy(float)
-        nn = players.copy()
-        nn["p_start"] = np.clip(pr["p_start"], 0, 0.98) * av
-        nn["xg_share"] = np.clip(pr["g90"] / lam, 0.0, 0.8)
-        nn["xa_share"] = np.clip(pr["a90"] / (ASSISTS_PER_GOAL * lam), 0.0, 0.8)
-        w = self.blend
+        w0 = max(1.0 - sum(w for _, w in parts.values()), 0.0)
         out = cur.copy()
-        for c in ("p_start", "xg_share", "xa_share"):
-            out[c] = (1 - w) * cur[c].to_numpy(float) + w * nn[c].to_numpy(float)
+        acc = {c: w0 * cur[c].to_numpy(float) for c in ("p_start", "xg_share", "xa_share")}
+        for net, w in parts.values():
+            pri = self._priors(net, F, players)
+            for c in acc:
+                acc[c] = acc[c] + w * pri[c]
+        for c, v in acc.items():
+            out[c] = v
         return out

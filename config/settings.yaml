@@ -138,9 +138,11 @@ player_form:
   enabled: true
 
 ml:
-  # neural-network challenger (ufe/ml/): weight of its player priors in the engine's picks.
-  # 0 until it has beaten the model on matchdays it never saw (python -m ufe ml eval).
+  # learned models (ufe/ml/). `weights`: their share of the player predictions in the combined model
+  # (compare/registry.py); the statistical model keeps the rest. Equal thirds: with four matchdays
+  # graded, fitted weights would be noise.
   blend: 0.0
+  weights: {network: 0.3333, trees: 0.3333}
 
 availability:
   # multipliers on start and substitute chances from UEFA's flags in the game feed (pipeline.availability)
@@ -155,15 +157,21 @@ start:
   # players_for: club totals forced to eleven starters, outfield players capped (pipeline._normalise_starts)
   normalise: true
   team_total: 10.8
-  cap: 0.87
+  cap: 0.85
   cap_gk: 0.97
 
 ucl_obs:
   # this season's UCL numbers per player from the game feed, blended into the rates
   # (player_rates.apply_ucl_observations)
   enabled: true
-  k_goals: 6.0             # pseudo-goals of prior weight; + k_history_extra x the weight of the player's league history
-  k_assists: 6.0
-  k_history_extra: 6.0
-  mult_range: [0.6, 1.8]
+  # Kept slow on purpose: over MD1-4 a starter's over- or under-performance against the model did not
+  # carry over to his next match (958 player-matches, correlation +0.01), so four matches move a share little.
+  k_goals: 10.0            # pseudo-goals of prior weight; + k_history_extra x the weight of the player's league history
+  k_assists: 10.0
+  k_history_extra: 8.0
+  mult_range: [0.7, 1.5]
   rec_k: {GK: 4.0, DEF: 12.0, MID: 3.0, FWD: 6.0}     # matches of prior weight for the player's own recovery rate
+
+engine:
+  # which model feeds the picks (python -m ufe plan / dashboard / livecall): statistical | combined
+  model: statistical

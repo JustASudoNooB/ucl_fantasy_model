@@ -331,7 +331,8 @@ def _models_block(engine, md: int, block: dict) -> dict:
             if d.get("importance"):
                 m["importance"] = d["importance"]
         try:
-            e = engine if k == "statistical" else registry.build(k, engine.as_of, n_sims=engine.n_sims, seed=engine.seed, base=engine)
+            e = engine if k == getattr(engine, "model_key", "statistical") else \
+                registry.build(k, engine.as_of, n_sims=engine.n_sims, seed=engine.seed, base=engine)
             pr = e.projections(md).set_index("id")
             pl = e.players_for(md)
             m["players"] = {pid: [_r(float(pr.xpts[pid])), _r(float(pr.p_start_sim[pid]), 3), _r(float(pr.p_goal[pid]), 3),

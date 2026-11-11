@@ -144,3 +144,45 @@ def test_feed_keeps_stats_and_matchday_points(tmp_path, monkeypatch):
     out = uf.sync_md_points("https://x/players?gamedayId=1&language=en", fetch=fetch, latest=[dict(rec, lastGdPoints=13)])
     got = __import__("pandas").read_csv(out).sort_values("md")
     assert got[["md", "points"]].values.tolist() == [[1, 8], [2, 22], [3, 13]]     # 43 - 8 - 13 = 22
+
+
+def test_calibration_refits_ratios_and_split_within_bounds():
+    from ufe.compare import calibrate as c
+    d = pd.DataFrame(dict(team=["A"] * 4 + ["B"] * 2, pos=["DEF", "MID", "MID", "FWD", "MID", "FWD"],
+                          mins=[360, 360, 180, 360, 360, 360], rec90_prior=[4.0, 5.0, 5.0, 2.0, 5.0, 2.0],
+                          recoveries=[24, 14, 7, 4, 16, 6], xa_share=[0.1, 0.3, 0.3, 0.1, 0.4, 0.1],
+                          assists=[0, 2, 1, 3, 1, 1]))
+    r = c.recovery_ratios(d)
+    assert r["DEF"]["fitted"] == 1.5                      # 24 recoveries / (4.0 x 4 matches)
+    assert r["MID"]["fitted"] == round(37 / (5.0 * 10), 3)
+    a = c.assist_split(d)
+    assert a["FWD"]["actual"] == 4 and a["FWD"]["ratio"] > 1.5      # forwards out-assist their share
+    assert c._step(1.0, 2.0, 0.15) == 1.15 and c._step(1.0, 0.5, 0.15) == 0.85 and c._step(1.0, 1.05, 0.15) == 1.05
+
+
+def test_start_normalisation_gives_eleven_and_caps_outfield():
+    from ufe.pipeline import Engine
+    e = Engine(as_of="2026-11-01")
+    e.__dict__["cfg"] = {"start": {"normalise": True, "team_total": 10.8, "cap": 0.85, "cap_gk": 0.97}}
+    pl = pd.DataFrame(dict(team=["A"] * 16, pos=["GK", "GK"] + ["DEF"] * 5 + ["MID"] * 6 + ["FWD"] * 3,
+                           p_start=[0.95, 0.05] + [0.9, 0.9, 0.8, 0.6, 0.0] + [0.95, 0.9, 0.7, 0.5, 0.3, 0.1] + [0.9, 0.4, 0.2]))
+    out = e._normalise_starts(pl)
+    assert abs(out.p_start.sum() - 10.8) < 0.01
+    assert out.p_start[out.pos != "GK"].max() <= 0.85 + 1e-9 and out.p_start[0] > 0.9      # keeper above the outfield cap
+    assert out.p_start[6] == 0.0                                                           # a player ruled out stays out
+    mids = out.p_start.to_numpy()[7:13]
+    assert (np.diff(mids) <= 1e-12).all()                                                  # the order inside the club is kept
+
+
+def test_availability_from_uefa_flags_fades():
+    from ufe.pipeline import Engine
+    e = Engine(as_of="2026-11-10")
+    e.__dict__["cfg"] = {"availability": {"injured": 0.03, "doubtful": 0.65, "suspended": 0.0, "not_in_squad": 0.0, "unlikely": 0.4, "fade": 0.5}}
+    e.__dict__["md_at_as_of"] = 5
+    e.__dict__["feed_snapshot"] = pd.DataFrame(dict(status=["I", "D", "S", "NIS", None, None],
+                                                    trained=["Unlikely to start next game"] * 4 + ["Unlikely to start next game", "In contention to start next game"]),
+                                               index=["inj", "dbt", "sus", "nis", "unl", "fit"])
+    a5, a6 = e.availability(5), e.availability(6)
+    want = {"inj": 0.03, "dbt": 0.65, "sus": 0.0, "nis": 0.0, "unl": 0.4, "fit": 1.0}
+    assert all(abs(a5[k] - v) < 1e-9 for k, v in want.items())
+    assert abs(a6["inj"] - 0.515) < 1e-9 and a6["sus"] == 1.0 and a6["nis"] == 0.0 and abs(a6["unl"] - 0.7) < 1e-9
