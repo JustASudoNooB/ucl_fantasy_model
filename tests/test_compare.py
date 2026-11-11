@@ -136,3 +136,11 @@ def test_feed_keeps_stats_and_matchday_points(tmp_path, monkeypatch):
     out = uf.sync_md_points("https://x/players?gamedayId=1&language=en", fetch=fetch)
     got = __import__("pandas").read_csv(out)
     assert got[["md", "points"]].values.tolist() == [[1, 8]]            # the mismatched matchday is not stored
+    # with the main feed's records: the finished latest matchday comes from "last matchday" points,
+    # and a single matchday still missing is the season total minus the rest
+    monkeypatch.setattr(uf, "played_mds", lambda now=None: [1, 2, 3])
+    monkeypatch.setattr(uf, "_finished", lambda md: True)
+    served = {1: [dict(rec, mdId="1", curGDPts=8)], 2: [dict(rec, mdId="1")], 3: [dict(rec, mdId="1")]}
+    out = uf.sync_md_points("https://x/players?gamedayId=1&language=en", fetch=fetch, latest=[dict(rec, lastGdPoints=13)])
+    got = __import__("pandas").read_csv(out).sort_values("md")
+    assert got[["md", "points"]].values.tolist() == [[1, 8], [2, 22], [3, 13]]     # 43 - 8 - 13 = 22

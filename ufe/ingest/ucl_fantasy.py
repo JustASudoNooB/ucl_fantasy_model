@@ -178,6 +178,15 @@ def played_mds(now=None) -> list[int]:
     return sorted(int(r["md"]) for r in rules()["matchdays"] if deadline_for(r).astimezone(timezone.utc) <= now)
 
 
+def _finished(md: int) -> bool:
+    """Every match of the matchday was played before today (UTC)."""
+    from datetime import datetime, timezone
+    from ..pipeline import load_fixtures
+    fx = load_fixtures()
+    d = fx[fx.md == md].date
+    return bool(len(d)) and str(d.max())[:10] < datetime.now(timezone.utc).date().isoformat()
+
+
 def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Path | None:
     """Each player's official points in every matchday played: the feed returns one matchday's
     points (curGDPts) per gamedayId. Written to feed_md_points.csv (feed_id, md, points). Earlier
@@ -216,14 +225,14 @@ def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Pa
         rows += [dict(feed_id=_first(r, KEYS["id"]), md=g, points=r.get("curGDPts")) for r in recs]
     sync_md_points.log = log
     got = {r["md"] for r in rows}
-    if latest and mds[-1] not in got and not (old.md == mds[-1]).any():
-        # the latest matchday could not be fetched on its own: the main feed's "last matchday" points are the same numbers
+    if latest and mds[-1] not in got and _finished(mds[-1]):
+        # the latest matchday could not be fetched on its own: once it is over, the main feed's
+        # "last matchday" points are the same numbers (refreshed while it is the latest)
         rows += [dict(feed_id=_first(r, KEYS["id"]), md=mds[-1], points=r.get("lastGdPoints")) for r in latest
                  if r.get("lastGdPoints") is not None]
-    if not rows:
-        return out if out.exists() else None
-    new = pd.DataFrame(rows)
-    keep = pd.concat([old[~old.md.isin(set(new.md))], new], ignore_index=True)
+        log[mds[-1]] = log.get(mds[-1], "") + "; taken from the feed's last-matchday points"
+    new = pd.DataFrame(rows, columns=["feed_id", "md", "points"])
+    keep = pd.concat([old[~old.md.isin(set(new.md))], new], ignore_index=True) if len(new) else old.copy()
     # one matchday still missing: it is the season total minus the others
     missing = [g for g in mds if not (keep.md == g).any()]
     if len(missing) == 1 and latest:
@@ -232,6 +241,8 @@ def sync_md_points(url: str, fetch=None, latest: list[dict] | None = None) -> Pa
         keep = pd.concat([keep, pd.DataFrame([dict(feed_id=i, md=missing[0], points=float(t or 0) - float(have.get(i, 0.0)))
                                               for i, t in tot.items() if t is not None])], ignore_index=True)
         log[missing[0]] = log.get(missing[0], "") + "; filled as season total minus the other matchdays"
+    if keep.empty:
+        return out if out.exists() else None
     keep.sort_values(["md", "feed_id"]).to_csv(out, index=False)
     return out
 
