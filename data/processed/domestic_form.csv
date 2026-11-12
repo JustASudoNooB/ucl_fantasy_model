@@ -1,111 +1,111 @@
 team,player,comp,season,team_matches,m,minutes,starts,goals,assists,pk,xg,shots,sot,source,read_at
-ARS,David Raya Martín,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Gabriel dos Santos Magalhães,Premier League,2026-27,10,10,900,10,1,0,0,1.47,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Jurriën Timber,Premier League,2026-27,10,6,335,3,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Myles Lewis-Skelly,Premier League,2026-27,10,6,428,6,0,0,0,0.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Riccardo Calafiori,Premier League,2026-27,10,9,767,9,1,2,0,1.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Piero Hincapié,Premier League,2026-27,10,3,67,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Benjamin White,Premier League,2026-27,10,7,532,7,0,3,0,0.18,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Cristhian Mosquera,Premier League,2026-27,10,2,168,2,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Bukayo Saka,Premier League,2026-27,10,7,596,7,3,0,0,3.63,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Declan Rice,Premier League,2026-27,10,10,822,10,0,5,0,0.57,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Eberechi Eze,Premier League,2026-27,10,4,230,2,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Martin Ødegaard,Premier League,2026-27,10,10,823,10,3,0,0,2.4,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Noni Madueke,Premier League,2026-27,10,8,428,4,1,1,0,0.9,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Mikel Merino Zazón,Premier League,2026-27,10,6,202,1,0,0,0,0.82,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Martín Zubimendi Ibáñez,Premier League,2026-27,10,4,100,0,0,0,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Max Dowman,Premier League,2026-27,10,1,19,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Viktor Gyökeres,Premier League,2026-27,10,5,180,1,0,1,0,0.11,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Kai Havertz,Premier League,2026-27,10,9,731,9,3,0,0,2.78,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Ezri Konsa Ngoyo,Premier League,2026-27,10,10,731,8,1,0,0,0.64,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Bruno Guimarães Rodriguez Moura,Premier League,2026-27,10,6,386,4,2,0,0,0.36,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-ARS,Christos Tzolis,Premier League,2026-27,10,7,513,7,0,2,0,0.44,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Marco Bizot,Premier League,2026-27,10,1,90,1,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Matty Cash,Premier League,2026-27,10,9,656,7,0,0,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Tyrone Mings,Premier League,2026-27,10,8,441,4,0,0,0,0.2,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Pau Torres,Premier League,2026-27,10,6,470,6,0,0,0,0.34,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Lamare Bogarde,Premier League,2026-27,10,1,16,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Ian Maatsen,Premier League,2026-27,10,7,605,7,0,0,0,0.4,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Victor Lindelöf,Premier League,2026-27,10,10,900,10,0,0,0,0.44,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Emiliano Buendía Stati,Premier League,2026-27,10,7,583,7,1,1,0,1.59,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,John McGinn,Premier League,2026-27,10,10,790,9,2,4,0,3.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Ross Barkley,Premier League,2026-27,10,6,384,4,0,0,0,0.61,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Boubacar Kamara,Premier League,2026-27,10,10,881,10,0,1,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,George Hemmings,Premier League,2026-27,10,4,316,4,0,0,0,0.07,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Alysson Edward Franco da Rocha dos Santos,Premier League,2026-27,10,4,329,4,2,2,0,0.48,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Johan Manzambi,Premier League,2026-27,10,6,461,6,2,3,0,1.67,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Joao Gomes,Premier League,2026-27,10,5,402,5,0,1,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Tammy Abraham,Premier League,2026-27,10,3,71,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Alejandro Garnacho Ferreyra,Premier League,2026-27,10,1,34,0,0,0,0,0.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Nicolas Jackson,Premier League,2026-27,10,9,722,9,6,1,0,3.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Brian Madjo,Premier League,2026-27,10,0,12,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Matteo Ruggeri,Premier League,2026-27,10,2,158,2,0,0,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Zion Suzuki,Premier League,2026-27,10,10,810,9,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Aaron Wan-Bissaka,Premier League,2026-27,10,4,273,3,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Leon Goretzka,Premier League,2026-27,10,2,168,2,1,0,0,0.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Taylor Harwood-Bellis,Premier League,2026-27,10,1,90,1,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-AVL,Ibrahim Mbaye,Premier League,2026-27,10,6,144,0,0,1,0,0.35,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Alisson Becker,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Virgil van Dijk,Premier League,2026-27,10,10,900,10,0,0,0,0.42,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Jeremie Frimpong,Premier League,2026-27,10,3,199,2,0,0,0,0.01,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Milos Kerkez,Premier League,2026-27,10,10,822,9,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Joe Gomez,Premier League,2026-27,10,1,14,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Jeremy Jacquet,Premier League,2026-27,10,10,862,10,0,0,0,0.53,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Kostas Tsimikas,Premier League,2026-27,10,1,75,1,0,0,0,0.04,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Florian Wirtz,Premier League,2026-27,10,10,791,10,1,5,0,1.83,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Cody Gakpo,Premier League,2026-27,10,7,601,7,1,3,0,1.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Dominik Szoboszlai,Premier League,2026-27,10,7,571,7,1,1,0,1.54,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Rio Ngumoha,Premier League,2026-27,10,6,202,1,0,0,0,0.29,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Federico Chiesa,Premier League,2026-27,10,0,2,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Ryan Gravenberch,Premier League,2026-27,10,4,341,4,0,1,0,0.17,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Alexis Mac Allister,Premier League,2026-27,10,10,756,8,1,0,0,0.96,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Trey Nyoni,Premier League,2026-27,10,7,223,1,0,0,0,0.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Victor Munoz,Premier League,2026-27,10,6,455,5,2,1,0,0.79,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Alexander Isak,Premier League,2026-27,10,9,747,9,7,0,0,4.88,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Lewis Koumas,Premier League,2026-27,10,3,130,1,0,0,0,0.43,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Ronald Araujo,Premier League,2026-27,10,8,663,8,0,0,0,1.05,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-LIV,Bradley Barcola,Premier League,2026-27,10,7,579,7,0,3,0,1.41,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Enzo Fernández,Premier League,2026-27,10,8,620,7,1,0,0,1.56,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Iliman Ndiaye,Premier League,2026-27,10,9,766,9,0,4,0,1.74,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Gianluigi Donnarumma,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Nico O'Reilly,Premier League,2026-27,10,5,359,4,0,0,0,1.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Marc Guéhi,Premier League,2026-27,10,9,720,9,1,1,0,0.95,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Matheus Nunes,Premier League,2026-27,10,9,513,5,0,0,0,0.15,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Rúben dos Santos Gato Alves Dias,Premier League,2026-27,10,10,900,10,0,0,0,0.51,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Joško Gvardiol,Premier League,2026-27,10,9,700,8,1,4,0,0.8,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Abdukodir Khusanov,Premier League,2026-27,10,8,552,6,0,0,0,0.08,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Rico Lewis,Premier League,2026-27,10,2,101,1,0,0,0,0.17,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Vitor de Oliveira Nunes dos Reis,Premier League,2026-27,10,0,1,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Antoine Semenyo,Premier League,2026-27,10,8,553,6,2,3,0,0.34,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Phil Foden,Premier League,2026-27,10,5,361,4,1,2,0,2.31,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Rayan Cherki,Premier League,2026-27,10,7,562,7,5,2,0,1.92,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Jérémy Doku,Premier League,2026-27,10,6,395,4,1,2,0,0.86,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Mateo Kovačić,Premier League,2026-27,10,1,91,1,0,1,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Erling Haaland,Premier League,2026-27,10,10,889,10,9,0,0,7.06,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Elliot Anderson,Premier League,2026-27,10,10,786,9,0,1,0,0.3,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Ayyoub Bouaddi,Premier League,2026-27,10,2,176,2,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Ryan McAidoo,Premier League,2026-27,10,1,32,0,0,0,0,0.1,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Kaden Braithwaite,Premier League,2026-27,10,0,1,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MCI,Allan Andrade Elias,Premier League,2026-27,10,1,21,0,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Youri Tielemans,Premier League,2026-27,10,9,653,9,1,1,0,0.96,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Carlos Baleba,Premier League,2026-27,10,3,232,3,0,0,0,0.14,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Andrey Nascimento dos Santos,Premier League,2026-27,10,4,327,4,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Senne Lammens,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Patrick Dorgu,Premier League,2026-27,10,3,195,2,1,2,0,1.13,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Diogo Dalot Teixeira,Premier League,2026-27,10,9,712,8,0,0,0,0.28,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Harry Maguire,Premier League,2026-27,10,10,855,10,0,1,0,0.32,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Lisandro Martínez,Premier League,2026-27,10,7,582,7,0,0,0,0.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Leny Yoro,Premier League,2026-27,10,6,440,5,0,0,0,0.18,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Ayden Heaven,Premier League,2026-27,10,4,224,2,0,0,0,0.12,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Noussair Mazraoui,Premier League,2026-27,10,4,232,2,0,1,0,0.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Luke Shaw,Premier League,2026-27,10,5,425,5,0,1,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Bruno Borges Fernandes,Premier League,2026-27,10,10,810,9,4,2,0,3.94,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Bryan Mbeumo,Premier League,2026-27,10,10,892,10,4,1,0,4.63,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Matheus Santos Carneiro da Cunha,Premier League,2026-27,10,9,703,8,1,4,0,1.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Marcus Rashford,Premier League,2026-27,10,4,352,4,0,0,0,0.78,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Mason Mount,Premier League,2026-27,10,4,164,1,0,0,0,0.94,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Amad Diallo,Premier League,2026-27,10,5,366,5,0,0,0,1.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Kobbie Mainoo,Premier League,2026-27,10,8,566,6,0,1,0,0.42,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Shea Lacey,Premier League,2026-27,10,2,46,0,0,0,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Benjamin Sesko,Premier League,2026-27,10,3,76,0,1,0,0,0.39,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
-MUN,Joshua Zirkzee,Premier League,2026-27,10,4,89,0,1,0,0,0.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-11
+ARS,David Raya Martín,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Gabriel dos Santos Magalhães,Premier League,2026-27,10,10,900,10,1,0,0,1.47,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Jurriën Timber,Premier League,2026-27,10,6,335,3,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Myles Lewis-Skelly,Premier League,2026-27,10,6,428,6,0,0,0,0.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Riccardo Calafiori,Premier League,2026-27,10,9,767,9,1,2,0,1.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Piero Hincapié,Premier League,2026-27,10,3,67,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Benjamin White,Premier League,2026-27,10,7,532,7,0,3,0,0.18,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Cristhian Mosquera,Premier League,2026-27,10,2,168,2,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Bukayo Saka,Premier League,2026-27,10,7,596,7,3,0,0,3.63,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Declan Rice,Premier League,2026-27,10,10,822,10,0,5,0,0.57,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Eberechi Eze,Premier League,2026-27,10,4,230,2,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Martin Ødegaard,Premier League,2026-27,10,10,823,10,3,0,0,2.4,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Noni Madueke,Premier League,2026-27,10,8,428,4,1,1,0,0.9,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Mikel Merino Zazón,Premier League,2026-27,10,6,202,1,0,0,0,0.82,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Martín Zubimendi Ibáñez,Premier League,2026-27,10,4,100,0,0,0,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Max Dowman,Premier League,2026-27,10,1,19,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Viktor Gyökeres,Premier League,2026-27,10,5,180,1,0,1,0,0.11,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Kai Havertz,Premier League,2026-27,10,9,731,9,3,0,0,2.78,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Ezri Konsa Ngoyo,Premier League,2026-27,10,10,731,8,1,0,0,0.64,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Bruno Guimarães Rodriguez Moura,Premier League,2026-27,10,6,386,4,2,0,0,0.36,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+ARS,Christos Tzolis,Premier League,2026-27,10,7,513,7,0,2,0,0.44,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Marco Bizot,Premier League,2026-27,10,1,90,1,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Matty Cash,Premier League,2026-27,10,9,656,7,0,0,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Tyrone Mings,Premier League,2026-27,10,8,441,4,0,0,0,0.2,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Pau Torres,Premier League,2026-27,10,6,470,6,0,0,0,0.34,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Lamare Bogarde,Premier League,2026-27,10,1,16,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Ian Maatsen,Premier League,2026-27,10,7,605,7,0,0,0,0.4,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Victor Lindelöf,Premier League,2026-27,10,10,900,10,0,0,0,0.44,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Emiliano Buendía Stati,Premier League,2026-27,10,7,583,7,1,1,0,1.59,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,John McGinn,Premier League,2026-27,10,10,790,9,2,4,0,3.22,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Ross Barkley,Premier League,2026-27,10,6,384,4,0,0,0,0.61,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Boubacar Kamara,Premier League,2026-27,10,10,881,10,0,1,0,0.21,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,George Hemmings,Premier League,2026-27,10,4,316,4,0,0,0,0.07,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Alysson Edward Franco da Rocha dos Santos,Premier League,2026-27,10,4,329,4,2,2,0,0.48,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Johan Manzambi,Premier League,2026-27,10,6,461,6,2,3,0,1.67,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Joao Gomes,Premier League,2026-27,10,5,402,5,0,1,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Tammy Abraham,Premier League,2026-27,10,3,71,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Alejandro Garnacho Ferreyra,Premier League,2026-27,10,1,34,0,0,0,0,0.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Nicolas Jackson,Premier League,2026-27,10,9,722,9,6,1,0,3.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Brian Madjo,Premier League,2026-27,10,0,12,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Matteo Ruggeri,Premier League,2026-27,10,2,158,2,0,0,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Zion Suzuki,Premier League,2026-27,10,10,810,9,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Aaron Wan-Bissaka,Premier League,2026-27,10,4,273,3,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Leon Goretzka,Premier League,2026-27,10,2,168,2,1,0,0,0.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Taylor Harwood-Bellis,Premier League,2026-27,10,1,90,1,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+AVL,Ibrahim Mbaye,Premier League,2026-27,10,6,144,0,0,1,0,0.35,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Alisson Becker,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Virgil van Dijk,Premier League,2026-27,10,10,900,10,0,0,0,0.42,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Jeremie Frimpong,Premier League,2026-27,10,3,199,2,0,0,0,0.01,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Milos Kerkez,Premier League,2026-27,10,10,822,9,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Joe Gomez,Premier League,2026-27,10,1,14,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Jeremy Jacquet,Premier League,2026-27,10,10,862,10,0,0,0,0.53,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Kostas Tsimikas,Premier League,2026-27,10,1,75,1,0,0,0,0.04,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Florian Wirtz,Premier League,2026-27,10,10,791,10,1,5,0,1.83,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Cody Gakpo,Premier League,2026-27,10,7,601,7,1,3,0,1.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Dominik Szoboszlai,Premier League,2026-27,10,7,571,7,1,1,0,1.54,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Rio Ngumoha,Premier League,2026-27,10,6,202,1,0,0,0,0.29,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Federico Chiesa,Premier League,2026-27,10,0,2,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Ryan Gravenberch,Premier League,2026-27,10,4,341,4,0,1,0,0.17,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Alexis Mac Allister,Premier League,2026-27,10,10,756,8,1,0,0,0.96,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Trey Nyoni,Premier League,2026-27,10,7,223,1,0,0,0,0.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Victor Munoz,Premier League,2026-27,10,6,455,5,2,1,0,0.79,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Alexander Isak,Premier League,2026-27,10,9,747,9,7,0,0,4.88,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Lewis Koumas,Premier League,2026-27,10,3,130,1,0,0,0,0.43,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Ronald Araujo,Premier League,2026-27,10,8,663,8,0,0,0,1.05,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+LIV,Bradley Barcola,Premier League,2026-27,10,7,579,7,0,3,0,1.41,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Enzo Fernández,Premier League,2026-27,10,8,620,7,1,0,0,1.56,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Iliman Ndiaye,Premier League,2026-27,10,9,766,9,0,4,0,1.74,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Gianluigi Donnarumma,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Nico O'Reilly,Premier League,2026-27,10,5,359,4,0,0,0,1.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Marc Guéhi,Premier League,2026-27,10,9,720,9,1,1,0,0.95,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Matheus Nunes,Premier League,2026-27,10,9,513,5,0,0,0,0.15,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Rúben dos Santos Gato Alves Dias,Premier League,2026-27,10,10,900,10,0,0,0,0.51,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Joško Gvardiol,Premier League,2026-27,10,9,700,8,1,4,0,0.8,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Abdukodir Khusanov,Premier League,2026-27,10,8,552,6,0,0,0,0.08,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Rico Lewis,Premier League,2026-27,10,2,101,1,0,0,0,0.17,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Vitor de Oliveira Nunes dos Reis,Premier League,2026-27,10,0,1,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Antoine Semenyo,Premier League,2026-27,10,8,553,6,2,3,0,0.34,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Phil Foden,Premier League,2026-27,10,5,361,4,1,2,0,2.31,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Rayan Cherki,Premier League,2026-27,10,7,562,7,5,2,0,1.92,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Jérémy Doku,Premier League,2026-27,10,6,395,4,1,2,0,0.86,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Mateo Kovačić,Premier League,2026-27,10,1,91,1,0,1,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Erling Haaland,Premier League,2026-27,10,10,889,10,9,0,0,7.06,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Elliot Anderson,Premier League,2026-27,10,10,786,9,0,1,0,0.3,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Ayyoub Bouaddi,Premier League,2026-27,10,2,176,2,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Ryan McAidoo,Premier League,2026-27,10,1,32,0,0,0,0,0.1,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Kaden Braithwaite,Premier League,2026-27,10,0,1,0,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MCI,Allan Andrade Elias,Premier League,2026-27,10,1,21,0,0,0,0,0.02,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Youri Tielemans,Premier League,2026-27,10,9,653,9,1,1,0,0.96,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Carlos Baleba,Premier League,2026-27,10,3,232,3,0,0,0,0.14,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Andrey Nascimento dos Santos,Premier League,2026-27,10,4,327,4,0,0,0,0.19,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Senne Lammens,Premier League,2026-27,10,10,900,10,0,0,0,0.0,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Patrick Dorgu,Premier League,2026-27,10,3,195,2,1,2,0,1.13,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Diogo Dalot Teixeira,Premier League,2026-27,10,9,712,8,0,0,0,0.28,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Harry Maguire,Premier League,2026-27,10,10,855,10,0,1,0,0.32,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Lisandro Martínez,Premier League,2026-27,10,7,582,7,0,0,0,0.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Leny Yoro,Premier League,2026-27,10,6,440,5,0,0,0,0.18,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Ayden Heaven,Premier League,2026-27,10,4,224,2,0,0,0,0.12,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Noussair Mazraoui,Premier League,2026-27,10,4,232,2,0,1,0,0.24,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Luke Shaw,Premier League,2026-27,10,5,425,5,0,1,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Bruno Borges Fernandes,Premier League,2026-27,10,10,810,9,4,2,0,3.94,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Bryan Mbeumo,Premier League,2026-27,10,10,892,10,4,1,0,4.63,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Matheus Santos Carneiro da Cunha,Premier League,2026-27,10,9,703,8,1,4,0,1.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Marcus Rashford,Premier League,2026-27,10,4,352,4,0,0,0,0.78,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Mason Mount,Premier League,2026-27,10,4,164,1,0,0,0,0.94,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Amad Diallo,Premier League,2026-27,10,5,366,5,0,0,0,1.09,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Kobbie Mainoo,Premier League,2026-27,10,8,566,6,0,1,0,0.42,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Shea Lacey,Premier League,2026-27,10,2,46,0,0,0,0,0.03,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Benjamin Sesko,Premier League,2026-27,10,3,76,0,1,0,0,0.39,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
+MUN,Joshua Zirkzee,Premier League,2026-27,10,4,89,0,1,0,0,0.46,0,0,https://fantasy.premierleague.com/api/bootstrap-static/,2026-11-12
