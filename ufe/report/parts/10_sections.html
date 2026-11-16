@@ -25,6 +25,18 @@
     <div class="scroll-x"><table class="tk" id="tk-table"></table></div>
   </section>
 
+  <section id="hotcold" data-view="clubs" aria-labelledby="hc-h" hidden>
+    <div class="sec-head">
+      <h2 id="hc-h">Running hot and cold</h2>
+      <p>Goals scored and conceded against what the model expected before each deadline. Over a few matches most of the gap is luck, so the clubs at either end tend to drift back.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card"><h3>Goals scored v expected</h3><svg class="chart" id="hc-att" role="img" aria-label="Goals scored minus expected, by club"></svg></div>
+      <div class="card"><h3>Goals conceded v expected</h3><svg class="chart" id="hc-def" role="img" aria-label="Goals conceded minus expected, by club"></svg></div>
+    </div>
+    <div class="key" style="margin-top:12px"><span><i class="sq" style="background:var(--s2)"></i>More goals than expected</span><span><i class="sq" style="background:var(--s1)"></i>Fewer than expected</span><span class="muted" id="hc-note"></span></div>
+  </section>
+
   <section id="lab" data-view="lab" aria-labelledby="lab-h">
     <div class="sec-head">
       <h2 id="lab-h">The lab</h2>

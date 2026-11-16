@@ -45,6 +45,8 @@ def render(data: dict, out: Path, template: Path = TEMPLATE, standalone: bool = 
     """standalone=True adds the document skeleton for opening the file directly in a browser;
     the hosted (artifact) copy is published without it because the host adds its own."""
     html = assemble(template)
+    if public:                                           # its own name in the gallery, so the two are not confused
+        html = html.replace("<title>UCL Fantasy Engine</title>", "<title>UCL Fantasy Engine Public</title>", 1)
     if standalone:
         html = SKELETON + html
     payload = json.dumps(public_copy(data) if public else data, separators=(",", ":"), ensure_ascii=False).replace("</", "<\\/")

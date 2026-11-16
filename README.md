@@ -63,7 +63,7 @@ One self-contained page (`data/runs/dashboard.html`), in eight tabs:
 | Matchday | the engine's best XI on a pitch, captain options, coach's notes for between-day switches |
 | Players | every player's projection, sortable, with ownership and points so far |
 | Matches | win/draw/loss, expected goals, scoreline grid, likely scorers and predicted line-ups per match |
-| Clubs | club power map (attack v defence rating), league-phase table race, league form |
+| Clubs | club power map (attack v defence rating), fixture ticker, goals against the forecast, league-phase table race, league form |
 | My team | enter your 15 (kept in your browser): best XI, captain, transfers, chips |
 | Lab | scatter plot of any two numbers (value, differentials, floor v ceiling ...), head to head, reliability charts, model leaderboard |
 | League | saved teams and the mini-league (private edition only) |

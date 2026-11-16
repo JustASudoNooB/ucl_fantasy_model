@@ -163,3 +163,24 @@ table.tk td.tot { padding: 6px 9px; font-variant-numeric: tabular-nums; font-wei
 .sheet-head .acts .btn { font-size: 13px; padding: 6px 12px; }
 .sheet-head .acts .btn:disabled { opacity: .55; cursor: default; }
 dialog.sheet:focus { outline: none; }
+
+/* ---------- phone header: one line for the name and countdown, search stays in reach ---------- */
+@media (max-width: 720px) {
+  .bar-in { gap: 8px 12px; padding-block: 8px 6px; }
+  .brand { font-size: 21px; gap: 8px; }
+  .brand svg { width: 22px; height: 22px; }
+  .clock { order: 1; margin-left: auto; }
+  .clock > :first-child { display: none; }
+  .mds { order: 2; flex-basis: 100%; }
+  .clock { align-items: flex-end; }
+  .views a { padding: 8px 10px 7px; font-size: 13.5px; }
+  .views .find { position: sticky; right: 0; padding: 3px 0 5px 10px; margin-left: auto;
+    background: linear-gradient(90deg, transparent, var(--bg) 14px); }
+  .views .find input { width: 40px; padding: 6px 6px 6px 30px; transition: width .15s ease;
+    background: var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237d8a84' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6'/%3E%3C/svg%3E") 9px 50% / 17px no-repeat; }
+  .views .find input::placeholder { color: transparent; }
+  .views .find input:focus { width: 190px; }
+  .views .find input:focus::placeholder { color: var(--muted); }
+}
+@media (prefers-reduced-motion: reduce) { .views .find input { transition: none; } }
+@media (max-width: 720px) { main > section { scroll-margin-top: 146px; } }

@@ -271,6 +271,38 @@
     $$("#tk-table [data-club]").forEach(c => c.addEventListener("click", () => { $("#pl-team").value = c.dataset.club; $("#pl-team").dispatchEvent(new Event("change")); location.hash = "#players"; }));
   }
 
+  // ---------------------------------------------------------------- goals against the pre-deadline forecast, by club
+  function renderHotCold() {
+    const agg = {}, mds = [];
+    (D.graded || []).forEach(g => { let used = false; (g.rows || []).forEach(r => {
+      const m = /^(\d+)-(\d+)$/.exec(r.score || "");
+      if (!m || !r.xg) return;
+      used = true;
+      [[r.home, +m[1], r.xg[0], +m[2], r.xg[1]], [r.away, +m[2], r.xg[1], +m[1], r.xg[0]]].forEach(([t, gf, xf, ga, xa]) => {
+        const a = agg[t] || (agg[t] = { n: 0, gf: 0, xf: 0, ga: 0, xa: 0 });
+        a.n++; a.gf += gf; a.xf += xf; a.ga += ga; a.xa += xa;
+      });
+    }); if (used) mds.push(g.md); });
+    const teams = Object.keys(agg).filter(t => T[t]);
+    if (teams.length < 8) { $("#hotcold").hidden = true; return; }
+    $("#hotcold").hidden = false;
+    const draw = (id, got, exp, verb) => {
+      const rows = teams.map(t => ({ t, d: agg[t][got] - agg[t][exp], a: agg[t] })).sort((x, y) => y.d - x.d);
+      const W = 460, rh = 17, top = 20, L = 96, R = 44, H = top + rows.length * rh + 6, mx = Math.max(1, ...rows.map(r => Math.abs(r.d))), c = L + (W - L - R) / 2, sc = (W - L - R) / 2 / mx;
+      let g = `<line class="ax" x1="${c}" x2="${c}" y1="${top - 4}" y2="${H - 4}"/><text x="${c}" y="11" text-anchor="middle">as expected</text>`;
+      rows.forEach((r, i) => {
+        const y = top + i * rh, w = Math.max(Math.abs(r.d) * sc, 1), x = r.d >= 0 ? c : c - w;
+        g += `<text x="${L - 8}" y="${y + 12}" text-anchor="end">${esc(tShort(r.t))}</text>
+          <rect x="${x.toFixed(1)}" y="${y + 3}" width="${w.toFixed(1)}" height="${rh - 6}" rx="3" fill="var(${r.d >= 0 ? "--s2" : "--s1"})" data-tip="${esc(`<b>${esc(T[r.t].name)}</b><br>${verb} ${r.a[got]}, expected ${f1(r.a[exp])}<br>${r.a.n} matches`)}"/>
+          <text class="lab" x="${(r.d >= 0 ? c + w + 5 : c - w - 5).toFixed(1)}" y="${y + 12}" text-anchor="${r.d >= 0 ? "start" : "end"}">${r.d >= 0 ? "+" : "−"}${f1(Math.abs(r.d))}</text>`;
+      });
+      const svg = $(id); svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.innerHTML = g;
+    };
+    draw("#hc-att", "gf", "xf", "scored"); draw("#hc-def", "ga", "xa", "conceded");
+    const n = teams.reduce((a, t) => a + agg[t].n, 0) / 2;
+    $("#hc-note").textContent = `Matchday${mds.length > 1 ? "s" : ""} ${mds.sort((a, b) => a - b).join(", ")}: ${n} matches, forecasts as saved at each deadline.`;
+  }
+
   // ---------------------------------------------------------------- reliability
   function renderReliability() {
     const R = D.reliability || {}, M = R.models || {};
@@ -462,7 +494,7 @@
     box.addEventListener("change", go);
     box.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
-  setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderReliability(); renderGuide();
+  setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderHotCold(); renderReliability(); renderGuide();
   HOOKS.push(renderLab, renderH2H, renderTicker);
   if (PUBLIC) HOOKS.push(() => {                       // the shared edition gets a short notice in place of the price-list audit
     const g = new Date(D.meta.generated_at);
