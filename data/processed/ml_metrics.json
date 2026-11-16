@@ -1,5 +1,5 @@
 {
- "trained_at": "2026-11-16T13:33:30+00:00",
+ "trained_at": "2026-11-16T09:51:59+00:00",
  "features": [
   "pos_GK",
   "pos_DEF",
@@ -46,33 +46,33 @@
  },
  "results": {
   "network": {
-   "best_epoch": 20,
+   "best_epoch": 30,
    "val": {
     "n": 29757,
-    "start_ll": 0.28251,
-    "start_brier": 0.08634,
+    "start_ll": 0.28186,
+    "start_brier": 0.08613,
     "n_played": 11498,
-    "goal_poisson_ll": 0.25789,
+    "goal_poisson_ll": 0.25806,
     "goal_brier": 0.0661,
-    "goal_pred": 966.75592,
+    "goal_pred": 981.26071,
     "goal_actual": 1009.0,
-    "assist_poisson_ll": 0.26695,
-    "assist_brier": 0.06845,
-    "assist_pred": 925.91152,
+    "assist_poisson_ll": 0.2665,
+    "assist_brier": 0.06835,
+    "assist_pred": 908.11198,
     "assist_actual": 942.0
    },
    "test": {
     "n": 3883,
-    "start_ll": 0.34749,
-    "start_brier": 0.10544,
+    "start_ll": 0.34533,
+    "start_brier": 0.10458,
     "n_played": 1853,
-    "goal_poisson_ll": 0.27975,
-    "goal_brier": 0.07058,
-    "goal_pred": 145.63318,
+    "goal_poisson_ll": 0.27738,
+    "goal_brier": 0.07047,
+    "goal_pred": 149.07359,
     "goal_actual": 170.0,
-    "assist_poisson_ll": 0.27309,
-    "assist_brier": 0.0706,
-    "assist_pred": 144.11079,
+    "assist_poisson_ll": 0.27285,
+    "assist_brier": 0.07052,
+    "assist_pred": 140.36786,
     "assist_actual": 162.0
    }
   },
@@ -80,33 +80,33 @@
    "best_epoch": 12,
    "val": {
     "n": 29757,
-    "start_ll": 0.29473,
-    "start_brier": 0.08846,
+    "start_ll": 0.29474,
+    "start_brier": 0.08844,
     "n_played": 11498,
-    "goal_poisson_ll": 0.26016,
-    "goal_brier": 0.06655,
-    "goal_pred": 994.17826,
+    "goal_poisson_ll": 0.26025,
+    "goal_brier": 0.06654,
+    "goal_pred": 995.03342,
     "goal_actual": 1009.0,
-    "assist_poisson_ll": 0.26758,
+    "assist_poisson_ll": 0.26761,
     "assist_brier": 0.06856,
-    "assist_pred": 944.14222,
+    "assist_pred": 945.49194,
     "assist_actual": 942.0
    },
    "test": {
     "n": 3883,
-    "start_ll": 0.35449,
-    "start_brier": 0.10724,
+    "start_ll": 0.35451,
+    "start_brier": 0.10725,
     "n_played": 1853,
-    "goal_poisson_ll": 0.28216,
+    "goal_poisson_ll": 0.28219,
     "goal_brier": 0.07082,
-    "goal_pred": 160.64523,
+    "goal_pred": 160.54785,
     "goal_actual": 170.0,
-    "assist_poisson_ll": 0.27528,
+    "assist_poisson_ll": 0.27531,
     "assist_brier": 0.07141,
-    "assist_pred": 146.33356,
+    "assist_pred": 146.49881,
     "assist_actual": 162.0
    }
   }
  },
- "production_epochs": 20
+ "production_epochs": 30
 }

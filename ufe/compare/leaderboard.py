@@ -27,6 +27,7 @@ import yaml
 
 from ..config import ROOT
 from ..evaluate import grade
+from ..report import analytics
 from ..ml.evaluate import _actual, _ll
 from ..pipeline import Engine, load_fixtures
 from . import registry
@@ -81,6 +82,7 @@ def grade_md(md: int, keys: list[str], n_sims: int = 6000, verbose: bool = True)
                 n11 = int(sum(g.assign(y=y[g.index]).nlargest(11, "p_start").y.sum() for _, g in pl.groupby("team")))
                 r.update(start_ll=round(_ll(pl.p_start, y), 4), start_brier=round(float(np.mean((pl.p_start - y) ** 2)), 4),
                          top11=n11, starters=int(y.sum()), top11_share=round(n11 / max(int(y.sum()), 1), 4))
+                r["cal_start"] = analytics.bins(pl.p_start, y, analytics.START_EDGES)
             pr = e.projections(md).set_index("id")
             pr = pr[pr.index.isin(pl.id)]
             if scored:
@@ -107,6 +109,11 @@ def grade_md(md: int, keys: list[str], n_sims: int = 6000, verbose: bool = True)
                 r["points_bias"] = round(float(np.mean(x - a)), 4)
                 r["top20_points"] = int(a[x.sort_values(ascending=False).index[:20]].sum())
                 r["n_players"] = int(len(a))
+                r["cal_points"] = analytics.bins(x, a, analytics.POINTS_EDGES)
+                if has_xi and "xpts_if_start" in pr:          # starters by position: expected if he starts v official
+                    st = pr[pr.index.isin(started) & pr.index.isin(a.index)]
+                    r["pos_points"] = {p: [int(len(g)), round(float(g.xpts_if_start.sum()), 2), round(float(a.reindex(g.index).sum()), 2)]
+                                       for p, g in st.groupby("pos")}
             r.update(_match_scores(e, md, fx))
             out[k] = r
         except Exception as ex:                       # one model failing must not stop the others

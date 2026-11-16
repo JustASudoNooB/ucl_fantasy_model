@@ -1,0 +1,108 @@
+  <section id="welcome" data-view="matchday" hidden>
+    <div class="welcome">
+      <span><b>New here?</b> This page simulates every Champions League match 12,000 times and turns the results into fantasy points for every player. Tap any player's name for his full profile.</span>
+      <span class="go"><a class="btn" href="#my-team">Build your team</a><a class="btn" href="#lab">Open the lab</a><a class="btn" href="#guide">How it works</a><button class="btn" id="welcome-x">Got it</button></span>
+    </div>
+  </section>
+
+  <section id="clubmap" data-view="clubs" aria-labelledby="cm-h">
+    <div class="sec-head">
+      <h2 id="cm-h">Club power map</h2>
+      <p>Each club's attack and defence rating from the team model (league results weighted by recency and opponent, then adjusted for league strength). Up and to the right is better. Tap a club for its players.</p>
+    </div>
+    <div class="card">
+      <svg class="chart" id="cm-svg" viewBox="0 0 960 520" role="img" aria-label="Clubs by attack and defence rating"></svg>
+      <p class="read" id="cm-read"></p>
+    </div>
+  </section>
+
+  <section id="ticker" data-view="clubs" aria-labelledby="tk-h">
+    <div class="sec-head">
+      <h2 id="tk-h">Fixture ticker</h2>
+      <p>Each club's run from the selected matchday on, darker for a better game. Attackers want expected goals; defenders and keepers want clean-sheet chance. Sorted by the total across the run.</p>
+    </div>
+    <div class="filters"><div class="seg" id="tk-mode" role="group" aria-label="Measure"></div><span class="muted" id="tk-note" style="font-size:13px"></span></div>
+    <div class="scroll-x"><table class="tk" id="tk-table"></table></div>
+  </section>
+
+  <section id="lab" data-view="lab" aria-labelledby="lab-h">
+    <div class="sec-head">
+      <h2 id="lab-h">The lab</h2>
+      <p>Plot any two numbers against each other for the selected matchday. Hover or tap a dot for the player, tap again for his profile. Goalkeepers are grey; the other positions keep their colour everywhere.</p>
+    </div>
+    <div class="card">
+      <div class="presets" id="lab-presets" role="group" aria-label="Preset views"></div>
+      <div class="lab-controls">
+        <label for="lab-y">Up <select id="lab-y"></select></label>
+        <label for="lab-x">Across <select id="lab-x"></select></label>
+        <div class="seg" id="lab-pos" role="group" aria-label="Position"></div>
+        <label><input type="checkbox" id="lab-starters" checked> Likely starters only</label>
+        <label id="lab-mine-l" hidden><input type="checkbox" id="lab-mine"> Ring my team</label>
+        <input type="search" id="lab-find" placeholder="Find a player" aria-label="Find a player in the chart">
+      </div>
+      <div class="scatter-wrap"><svg class="chart" id="lab-svg" viewBox="0 0 960 540" role="img" aria-label="Scatter plot of players"></svg></div>
+      <div class="key" id="lab-legend"></div>
+      <p class="read" id="lab-read"></p>
+    </div>
+  </section>
+
+  <section id="h2h" data-view="lab" aria-labelledby="h2h-h">
+    <div class="sec-head">
+      <h2 id="h2h-h">Head to head</h2>
+      <p>Two players side by side for the selected matchday and the ones after it. The longer bar wins the row.</p>
+    </div>
+    <div class="card">
+      <div class="h2h-pick">
+        <input type="search" id="h2h-a" list="h2h-list" placeholder="First player" aria-label="First player">
+        <span>against</span>
+        <input type="search" id="h2h-b" list="h2h-list" placeholder="Second player" aria-label="Second player">
+        <datalist id="h2h-list"></datalist>
+      </div>
+      <div id="h2h-out"></div>
+    </div>
+  </section>
+
+  <section id="reliability" data-view="lab" aria-labelledby="rel-h" hidden>
+    <div class="sec-head">
+      <h2 id="rel-h">Does it mean what it says?</h2>
+      <p>Every forecast is rebuilt with only what was known before each deadline, then compared with what happened. Dots on the diagonal mean the numbers can be taken at face value.</p>
+    </div>
+    <div class="lab-controls"><label for="rel-model">Model <select id="rel-model"></select></label><span id="rel-note" class="muted"></span></div>
+    <div class="grid-3" style="margin-top:12px">
+      <div class="card"><h3>Start chance</h3><svg class="chart" id="rel-start" viewBox="0 0 320 300" role="img" aria-label="Predicted start chance against actual start rate"></svg><p class="fine" id="rel-start-n"></p></div>
+      <div class="card"><h3>Points</h3><svg class="chart" id="rel-points" viewBox="0 0 320 300" role="img" aria-label="Expected points against official points"></svg><p class="fine" id="rel-points-n"></p></div>
+      <div class="card"><h3>Starters by position</h3><svg class="chart" id="rel-pos" viewBox="0 0 320 300" role="img" aria-label="Expected and official points for starters by position"></svg><p class="fine" id="rel-pos-n"></p></div>
+    </div>
+  </section>
+
+  <section id="guide" data-view="guide" aria-labelledby="gd-h">
+    <div class="sec-head">
+      <h2 id="gd-h">How it works</h2>
+      <p>Four steps turn fixtures into a team. Everything on this page comes out of the same simulation, so the numbers agree with each other.</p>
+    </div>
+    <div class="steps">
+      <div><b>Rate the clubs</b>Attack and defence ratings from about 16,000 league and European matches, with recent games and stronger leagues counting for more. Bookmaker prices are blended in when they are on file.</div>
+      <div><b>Rate the players</b>Each player's share of his club's goals and assists (xG and xA per 90 where known), ball recoveries, and how likely he is to start, from line-up history, UEFA's availability flags and predicted line-ups.</div>
+      <div><b>Play every match 12,000 times</b>Scorelines, starters, substitutions, scorers, assisters, clean sheets, recoveries, cards and the player of the match are drawn together, then scored with the game's rules.</div>
+      <div><b>Pick the team</b>An optimiser finds the best 15 inside the budget and club limits, the starting XI and the captain, including when to switch captain or substitute between a matchday's days.</div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>Reading the numbers</h3>
+      <div class="gloss">
+        <div><b>Expected points (xPts)</b>The average of a player's points across all simulations, bench minutes and missed games included.</div>
+        <div><b>If he starts</b>His average in the simulations where he started. The gap to xPts is the price of rotation risk.</div>
+        <div><b>Start chance</b>How often he is in the XI. Outfield players are capped at 85%, because players who looked certain started 83% of the time.</div>
+        <div><b>10+ and blank</b>The chance of a double-figure score, and of 2 points or fewer. Captains are picked for the first, benches judged by the second.</div>
+        <div><b>Range</b>The 10th to 90th percentile of his points: four matchdays in five land inside it.</div>
+        <div><b>Value</b>Expected points per €1m of price.</div>
+        <div><b>Ownership</b>The share of managers who own him in the official game. Low ownership with high xPts is a differential.</div>
+        <div><b>Clean sheet</b>The chance his club concedes nothing while he plays 60 minutes: 4 points for keepers and defenders, 1 for midfielders.</div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:18px">
+      <div class="card"><h3>What it cannot know</h3><p>Line-ups are confirmed about an hour before kick-off, after the deadline. Until then every start chance is an estimate, and it is the largest source of error. A single matchday is also mostly luck: across four graded matchdays the forecast explains about a quarter of the variation in players' points. Use it to tilt decisions, never as a guarantee.</p></div>
+      <div class="card"><h3>Where the data comes from</h3><p id="gd-sources"></p></div>
+    </div>
+  </section>
+
+  <dialog id="pp" class="sheet" aria-labelledby="pp-name"></dialog>

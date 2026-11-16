@@ -28,6 +28,11 @@ MODEL = PROC / "ml_model.json"
 METRICS = PROC / "ml_metrics.json"
 TRAIN, VAL, TEST = ["2022-23", "2023-24", "2024-25"], ["2025-26"], ["2026-27"]
 HIDDEN = (32, 16)
+# Weight decay. Rolling-origin test, 16 Nov 2026 (train on every earlier season, test on 2024/25, 2025/26, 2026/27):
+# 1e-3 against 1e-4 gave goals 0.2615 v 0.2624 and assists 0.2670 v 0.2683 (better in all three seasons),
+# starts 0.2978 v 0.2977. Wider or deeper networks, eight random starts and a fourth season of data
+# all landed within 0.001 of this: the inputs, not the training, set the limit.
+L2 = 1e-3
 
 
 def tensors(df: pd.DataFrame):
@@ -66,14 +71,14 @@ def run(verbose: bool = False, hidden=HIDDEN, seeds: int = 3) -> dict:
     nets = {}
     for name, h in (("network", hidden), ("linear", ())):
         k = seeds if h else 1                               # the linear model has one optimum
-        ens = Ensemble([MultiTaskNet(len(FEATURES), h, seed=s).fit(Xtr, Ttr, Xva, Tva, verbose=verbose, seed=s)
+        ens = Ensemble([MultiTaskNet(len(FEATURES), h, l2=L2, seed=s).fit(Xtr, Ttr, Xva, Tva, verbose=verbose, seed=s)
                         for s in range(k)])
         nets[name] = ens
         res[name] = dict(best_epoch=ens.best_epoch, val=metrics(ens, va), test=metrics(ens, te))
     # production model: every season, the network's epoch count, the same number of random starts
     Xall, Tall = tensors(df)
     ep = int(nets["network"].best_epoch or 20)
-    final = Ensemble([MultiTaskNet(len(FEATURES), hidden, seed=s).fit(
+    final = Ensemble([MultiTaskNet(len(FEATURES), hidden, l2=L2, seed=s).fit(
         Xall, Tall, Xall[:5000], {c: v[:5000] for c, v in Tall.items()}, epochs=ep, patience=ep + 1, seed=s)
         for s in range(seeds)])
     MODEL.write_text(final.to_json())

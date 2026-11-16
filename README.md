@@ -54,6 +54,35 @@ Free keys that switch on extra layers (set as environment variables, all optiona
 
 `data/templates/` has a CSV template for every file above.
 
+## The dashboard
+
+One self-contained page (`data/runs/dashboard.html`), in eight tabs:
+
+| Tab | What it shows |
+|---|---|
+| Matchday | the engine's best XI on a pitch, captain options, coach's notes for between-day switches |
+| Players | every player's projection, sortable, with ownership and points so far |
+| Matches | win/draw/loss, expected goals, scoreline grid, likely scorers and predicted line-ups per match |
+| Clubs | club power map (attack v defence rating), league-phase table race, league form |
+| My team | enter your 15 (kept in your browser): best XI, captain, transfers, chips |
+| Lab | scatter plot of any two numbers (value, differentials, floor v ceiling ...), head to head, reliability charts, model leaderboard |
+| League | saved teams and the mini-league (private edition only) |
+| Guide | how the model works, a glossary, its limits, the model report card, the calendar |
+
+A player's name anywhere opens his profile: chance of each score, where his points come from, his season
+so far against what the model said before each deadline, percentile ranks in his position and the next
+matchdays. The search box in the tab bar finds any player.
+
+```bash
+python -m ufe dashboard --mds live-8 --public   # also writes data/runs/dashboard_public.html
+python -m ufe dashboard --rerender --public     # the page again from the saved data, no simulation (seconds)
+```
+
+The public edition is the same page without saved teams, the mini-league, live calls and deadline
+forecasts for saved teams (`ufe/report/render.py: PRIVATE`). It is the one to share.
+The page is built from `ufe/report/command_center.html` plus the files in `ufe/report/parts/`
+(styles, sections, script) placed at its markers.
+
 ## What is inside
 
 ```
@@ -69,7 +98,7 @@ ufe/optimize/   milp (HiGHS via SciPy), squad, transfers (multi-matchday), polic
 ufe/evaluate/   metrics, backtest, tune, feedback (the learning loop)
 ufe/ml/         learned challengers: training data (FPL archive), neural network (NumPy), decision trees (LightGBM)
 ufe/compare/    four models side by side: registry, bookmaker engine, leaderboard, deadline forecasts
-ufe/report/     export (snapshots, dashboard data), render, command_center.html
+ufe/report/     export (snapshots, dashboard data), analytics (profiles, reliability), render, command_center.html, parts/
 ufe/alerts/     Telegram                                          ufe/scheduler.py  the self-running loop
 tests/          pytest suite                                      schedule/  cron, Windows, GitHub Actions
 ```

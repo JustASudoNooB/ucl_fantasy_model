@@ -460,6 +460,14 @@ def cmd_dashboard(args):
     from .models.team_ratings import fit_kwargs
     from .report.export import dashboard_data, snapshot
     from .report.render import render
+    out = Path(args.out) if args.out else ROOT / "data" / "runs" / "dashboard.html"
+    if getattr(args, "rerender", False):                # the page again from the saved data: no simulation
+        data = json.loads((PROC / "dashboard_data.json").read_text(encoding="utf-8"))
+        render(data, out)
+        if getattr(args, "public", False):
+            print("public edition:", render(data, out.with_name("dashboard_public.html"), public=True))
+        print("dashboard (re-rendered):", out)
+        return
     eng = _engine(args)
     mds = _mds(args.mds)
     tm = settings()["team_model"]
@@ -470,8 +478,9 @@ def cmd_dashboard(args):
     data = dashboard_data(eng, mds, backtest=bt, standings=eng.league_table_projection())
     for md in mds:
         snapshot(eng, md)
-    out = Path(args.out) if args.out else ROOT / "data" / "runs" / "dashboard.html"
     render(data, out)
+    if getattr(args, "public", False):
+        print("public edition:", render(data, out.with_name("dashboard_public.html"), public=True))
     (PROC / "dashboard_data.json").write_text(json.dumps(data))
     print("dashboard:", out)
 
@@ -628,6 +637,8 @@ def main(argv=None):
     d = sub.add_parser("dashboard")
     d.add_argument("--mds", default="2-8")
     d.add_argument("--out")
+    d.add_argument("--public", action="store_true", help="also write dashboard_public.html (no saved teams or mini-league)")
+    d.add_argument("--rerender", action="store_true", help="rebuild the page from data/processed/dashboard_data.json")
     d.set_defaults(fn=cmd_dashboard)
     pl = sub.add_parser("players")
     pl.add_argument("--search")

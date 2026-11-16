@@ -10,3 +10,4 @@ data/raw/fpl/fpl_2022-23_*
 data/raw/fpl/fpl_2023-24_*
 data/raw/fpl/*_fixtures.csv
 data/processed/ml_train.csv.gz
+data/runs/dashboard_public.html

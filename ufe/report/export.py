@@ -176,12 +176,18 @@ def matchday_block(engine, md: int, all_formations: bool = True, with_checks: bo
             "p_play", "xpts_if_start", "p_goal", "p_assist", "xgoals", "xassists", "xrec", "p_cs", "p_potm", "day", "value"]
     src = players.set_index("id").rate_source
     pst = players.set_index("id").price_status if "price_status" in players else pd.Series(dtype=str)
+    from . import analytics
+    try:
+        extras = analytics.player_extras(sim, proj)      # where the points come from, and their spread
+    except Exception:
+        extras = {}
     plist = []
     for r in proj[cols].itertuples(index=False):
         d = {k: (_r(v) if isinstance(v, (float, np.floating)) else (int(v) if isinstance(v, (np.integer,)) else v))
              for k, v in r._asdict().items()}
         d["src"] = src.get(r.id, "")
         d["ps"] = pst.get(r.id, "verified")
+        d.update(extras.get(r.id, {}))
         plist.append(d)
     captains = proj.sort_values("xpts", ascending=False).head(12)
     return dict(
@@ -404,9 +410,10 @@ def _league(engine):
 
 
 def _extras(engine) -> dict:
-    from . import insights
+    from . import analytics, insights
     out = {}
-    for key, fn in (("grading", lambda: insights.grading(engine)), ("replan", insights.replans),
+    for key, fn in (("season", lambda: analytics.season(engine)), ("reliability", analytics.reliability),
+                    ("grading", lambda: insights.grading(engine)), ("replan", insights.replans),
                     ("live", lambda: insights.live_points(engine)), ("form_players", lambda: insights.player_form(engine)),
                     ("team_records", lambda: insights.team_records(engine)), ("form_tests", insights.backtests),
                     ("managers", lambda: _managers(engine)), ("league", lambda: _league(engine))):
