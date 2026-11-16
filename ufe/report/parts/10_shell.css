@@ -159,3 +159,7 @@ table.tk .c i { position: absolute; inset: 0; background: var(--s1); }
 table.tk .c span, table.tk .c b { position: relative; }
 table.tk .c b { font-variant-numeric: tabular-nums; }
 table.tk td.tot { padding: 6px 9px; font-variant-numeric: tabular-nums; font-weight: 700; }
+.sheet-head .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.sheet-head .acts .btn { font-size: 13px; padding: 6px 12px; }
+.sheet-head .acts .btn:disabled { opacity: .55; cursor: default; }
+dialog.sheet:focus { outline: none; }

@@ -109,3 +109,18 @@ Gates are measurable. A phase is done when its gate passes, not when its code ex
   (none in the saved rg.org pages).
 - Needs Zero: `UFE_API_FOOTBALL_KEY` GitHub secret (league form outside England, confirmed line-ups); league-table screenshot.
 
+
+## v0.19.0 (16 Nov 2026, the dashboard as a product)
+- Done: tabs, player profiles, lab, club map, fixture ticker, guide, search, public edition, analytics data
+  (season stats, points sources, score distributions, reliability bins); network weight decay; training
+  tests written up in DECISIONS.md (16 Nov).
+- Next for other users: (1) a public address that updates itself. The claude.ai page only changes when it is
+  republished by hand. Free route: a public GitHub repository holding only `dashboard_public.html` with
+  GitHub Pages on, pushed by the matchday workflow (needs a repository and a token secret from Zero).
+  (2) A share link for a squad. (3) Mini-leagues for other groups (today the League tab is Zero's league only).
+- Next for the nerds: expected v actual per club (goals for and against by matchday), a captaincy chart,
+  ownership-weighted "template" team against the model's team, a what-if slider for start chance.
+- Still the largest accuracy items: the API-Football key, a second predicted line-up source, goalscorer prices.
+- UEFA's terms: the page uses the game's prices, ownership and points. Sharing it with friends is one thing;
+  a public site with traffic should carry the "not affiliated" line (it does) and may draw a takedown request.
+

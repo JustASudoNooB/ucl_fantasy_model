@@ -32,7 +32,7 @@
     if (el) openPlayer(el.getAttribute("data-pid"));
   });
   document.addEventListener("keydown", e => {
-    if (e.key === "Enter" && e.target.getAttribute && e.target.getAttribute("data-pid") && !e.target.closest("dialog")) openPlayer(e.target.getAttribute("data-pid"));
+    if (e.key === "Enter" && e.target.getAttribute && e.target.getAttribute("data-pid") && !e.target.closest("dialog")) { e.preventDefault(); openPlayer(e.target.getAttribute("data-pid")); }
   });
 
   // ---------------------------------------------------------------- numbers
@@ -156,7 +156,7 @@
   function renderLab() {
     store.set("lab", lab);
     $("#lab-x").value = lab.x; $("#lab-y").value = lab.y; $("#lab-starters").checked = !!lab.starters; $("#lab-mine").checked = !!lab.mine;
-    const mine = new Set(Array.isArray(squad) ? squad : []);
+    const mine = new Set(!isExample && Array.isArray(squad) ? squad : []);
     $("#lab-mine-l").hidden = mine.size === 0;
     $$("#lab-presets button").forEach(b => { const p = PRESETS[+b.dataset.i]; b.setAttribute("aria-pressed", p[1] === lab.x && p[2] === lab.y); });
     $$("#lab-pos button").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === lab.pos));
@@ -395,8 +395,9 @@
     const kpi = (l, v, d, big) => `<div class="kpi${big ? " k1" : ""}"><span class="l">${l}</span><span class="v">${v}</span>${d ? `<span class="d">${d}</span>` : ""}</div>`;
     const next = MDS.map((m, i) => { const f = fixtureOf(p0.team, m), e = (D.ev[id] || [])[i]; return `<div class="${m === MD ? "on" : ""}"><small>MD${m}${f ? " · " + dayName(f.date) : ""}</small><b>${e != null ? f1(e) : "–"}</b><span>${f ? (f.home ? "v " : "at ") + esc(tShort(f.opp)) : "no match"}</span></div>`; }).join("");
     dlg.innerHTML = `<div class="sheet-head"><div><h2 id="pp-name">${esc(p0.name)}</h2>
-        <div class="sub"><span class="pos-tag" style="margin:0">${p0.pos}</span><span>${esc((T[p0.team] || {}).name || p0.team)}</span><span>${eurP(p0)}</span>${own != null ? `<span>owned by ${f1(own)}%</span>` : ""}${stLab ? `<span class="flag${FLAG_OUT.includes(st) ? " out" : ""}">${esc(stLab)}</span>` : ""}</div></div>
-        <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="pp-h2h">Compare</button><button class="sheet-x" id="pp-x" aria-label="Close">×</button></div></div>
+        <div class="sub"><span class="pos-tag" style="margin:0">${p0.pos}</span><span>${esc((T[p0.team] || {}).name || p0.team)}</span><span>${eurP(p0)}</span>${own != null ? `<span>owned by ${f1(own)}%</span>` : ""}${stLab ? `<span class="flag${FLAG_OUT.includes(st) ? " out" : ""}">${esc(stLab)}</span>` : ""}</div>
+        <div class="acts"><button class="btn" id="pp-add"></button><button class="btn" id="pp-h2h">Compare with another player</button></div></div>
+        <button class="sheet-x" id="pp-x" aria-label="Close">×</button></div>
       <div class="sheet-body">
         <div class="kpis">
           ${kpi(`Expected points, MD${MD}${fx ? ` (${fx.home ? "v" : "at"} ${esc(tShort(fx.opp))})` : ""}`, f1(p.xpts), p.xpts_if_start != null ? `${f1(p.xpts_if_start)} if he starts · ${rank ? `#${rank} of ${same.length} ${p0.pos}` : ""}` : "", true)}
@@ -415,6 +416,18 @@
         <div class="card"><h3>Next matchdays</h3><div class="nextfx">${next}</div>${p.src ? `<p class="fine">Rates from: ${esc(p.src)}.</p>` : ""}</div>
       </div>`;
     $("#pp-x").addEventListener("click", () => dlg.close());
+    const addBtn = $("#pp-add");
+    const addLabel = () => {
+      const mine = !isExample && squad.includes(id), full = !isExample && squad.length >= 15 && !mine;
+      addBtn.textContent = mine ? "Remove from my team" : full ? "Your squad is full" : "Add to my team";
+      addBtn.disabled = full;
+    };
+    addLabel();
+    addBtn.addEventListener("click", () => {
+      if (isExample) { squad = []; isExample = false; }          // the example squad makes way for a real one
+      squad = squad.includes(id) ? squad.filter(x => x !== id) : squad.concat([id]);
+      saveSquad(); renderTeam(); addLabel(); renderLab();
+    });
     $("#pp-h2h").addEventListener("click", () => {
       h2h = [id, h2h[0] === id ? h2h[1] : h2h[0]]; store.set("h2h", h2h);
       const l2 = i => `${P[i].name} (${tShort(P[i].team)})`;
@@ -422,6 +435,7 @@
       renderH2H(); dlg.close(); location.hash = "#h2h";
     });
     if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); }
+    dlg.focus();                                        // keep the Enter that opened it from pressing a button inside
     dlg.scrollTop = 0;
   }
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
@@ -446,7 +460,7 @@
       if (id) { box.value = ""; box.blur(); openPlayer(id); }
     };
     box.addEventListener("change", go);
-    box.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+    box.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
   setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderReliability(); renderGuide();
   HOOKS.push(renderLab, renderH2H, renderTicker);

@@ -312,3 +312,36 @@ totals are lower still), left alone; team clean sheets 28.9 v 27.
 Reverse if: after MD6 the statistical model's start log loss or points RMSE beats the combined
 model's on MD5 and MD6 both; then engine.model goes back to statistical.
 
+
+**2026-11-16 · "Train it more" tested; the dashboard becomes a product other people can use (v0.19.0).**
+Request: better results from more training, and a page fit for other users and for football nerds.
+Training, tested by rolling origin on Premier League player-matches (train on every earlier season, test
+on 2024/25, 2025/26 and 2026/27; log loss, lower is better; scratch scripts exp_trees.py and exp_nn.py):
+- More data of the same kind: trees trained on the last 1, 2, 3, 4 seasons scored starts 0.2880, 0.2866,
+  0.2871, 0.2869; goals 0.2646, 0.2625, 0.2626, 0.2624; assists 0.2712, 0.2685, 0.2681, 0.2680. Flat after two seasons.
+- Bigger or longer: network 32-16 with 3 random starts 0.2977 / 0.2624 / 0.2683 (starts / goals / assists);
+  8 starts 0.2975 / 0.2623 / 0.2679; 64-32 0.2980 / 0.2624 / 0.2673; 64-32-16 0.2970 / 0.2621 / 0.2678.
+- Trees: 18 settings (leaves 7-31, leaf size 100-400, rate 0.03-0.05) ran from 0.2933 to 0.2949 on starts
+  against 0.2938 for the current one.
+- Five squad-competition inputs (rank of start rate and price inside club and position, depth): 0.2934 to 0.2943.
+- Averaging network and trees: 0.2939 / 0.2630 / 0.2669 at 30:70, between the two on every score.
+Everything landed within 0.3% of the current models: the inputs set the limit, not the training. The one
+change kept is the network's weight decay, 1e-4 -> 1e-3: goals 0.2615 v 0.2624 and assists 0.2670 v 0.2683,
+better in each of the three test seasons, starts level. On the Champions League leaderboard (MD1-4 with
+pre-deadline inputs) the network moved from 0.5248 to 0.5279 points correlation and the combined model
+from 0.5301 to 0.5305, so nothing got worse.
+What would move accuracy is new information before the deadline: league form outside England and
+confirmed line-ups (the API-Football key, still not set), a second predicted line-up source, goalscorer prices.
+Dashboard: eight tabs in place of one scroll of fifteen sections; a profile for every player (chance of
+each score, where the points come from, season against the pre-deadline forecasts, percentile ranks,
+next matchdays); a lab (scatter of any two numbers, head to head, reliability charts); club power map
+and fixture ticker; a guide with glossary and limits; search for any player. Position colours were
+checked with the chart palette validator on both themes (blue, orange, aqua pass all pairs; keepers grey).
+Public edition: render.public_copy drops managers, league, replan, live, verification, deadline forecasts
+and each model's picks for saved teams. It is rendered on demand (`--public`), is git-ignored, and is the
+only copy meant for sharing: the private page embeds every saved team.
+Reliability charts (combined model, MD1-4): start chance off by 1.9 points of probability on average
+across nine groups; players forecast at 6+ points scored 8.9 against 6.7 expected (18 player-matches).
+Reverse if: on MD5 and MD6 the network's goal or assist log loss on the leaderboard is worse than the
+statistical model's by more than it was before this change; then weight decay goes back to 1e-4.
+
