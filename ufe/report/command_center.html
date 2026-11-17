@@ -447,11 +447,11 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
 /*__UFE_PARTS_CSS__*/
 </style>
 <script>
-/* the chosen look is applied before the page draws, and its fonts are requested only when it is used */
-window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800", "terminal": "family=VT323&family=JetBrains+Mono:wght@400;500;600;700", "broadcast": "family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700", "analyst": "family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700"};
+/* the chosen template is applied before the page draws, and its fonts are requested only when it is used */
+window.UFE_SKIN_FONTS = {"cards": "family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Instrument+Sans:wght@400;500;600;700", "night": "family=Big+Shoulders+Display:wght@500;700;800;900&family=DotGothic16&family=Work+Sans:wght@400;500;600;700", "poster": "family=Anybody:wdth,wght@50..150,300..900", "market": "family=VT323&family=JetBrains+Mono:wght@400;500;600;700"};
 (function () {
-  var k = "__UFE_SKIN__";
-  try { var v = JSON.parse(localStorage.getItem("ufe:skin") || "null"); if (v) k = v; } catch (e) {}
+  var k = "__UFE_SKIN__", ok = ["cards", "night", "poster", "market", "board"];
+  try { var v = JSON.parse(localStorage.getItem("ufe:skin") || "null"); if (ok.indexOf(v) >= 0) k = v; } catch (e) {}
   window.ufeSkin = function (name, fontsOnly) {
     if (!fontsOnly) document.documentElement.setAttribute("data-skin", name);
     var f = window.UFE_SKIN_FONTS[name];
@@ -472,7 +472,7 @@ window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Man
     </div>
     <div class="mds" id="mds" role="group" aria-label="Matchday"></div>
     <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
-    <button class="skin-btn" id="skin-btn" aria-haspopup="dialog"><i><b style="background:var(--bg)"></b><b style="background:var(--accent)"></b><b style="background:var(--ink)"></b></i>Style</button>
+    <button class="skin-btn" id="skin-btn" aria-haspopup="dialog"><i><b style="background:var(--bg)"></b><b style="background:var(--accent)"></b><b style="background:var(--ink)"></b></i>Template</button>
   </div>
   <nav class="views" id="views" aria-label="Views">
     <a href="#matchday" data-v="matchday">Matchday</a><a href="#players" data-v="players">Players</a><a href="#matches" data-v="matches">Matches</a><a href="#clubs" data-v="clubs">Clubs</a><a href="#my-team" data-v="my-team">My team</a><a href="#lab" data-v="lab">Lab</a><a href="#league" data-v="league" hidden>League</a><a href="#guide" data-v="guide">Guide</a>
@@ -487,6 +487,7 @@ window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Man
       <h1 id="hero-h">Matchday <span id="hero-md">–</span></h1>
       <p class="sub" id="hero-sub"></p>
     </div>
+    <div id="tpl-hero"></div>
     <div class="notice" id="pool-notice"></div>
     <div class="board-wrap">
       <div>
@@ -664,6 +665,7 @@ window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Man
       <p>Expected points from the joint match simulation. The range bar shows the 10th to 90th percentile, the tick the median, the dot the mean.</p>
     </div>
     <div class="filters">
+      <div class="seg" id="pl-viewseg" role="group" aria-label="View" hidden></div>
       <div class="seg" id="pos-filter" role="group" aria-label="Position"></div>
       <input type="search" id="pl-search" placeholder="Search a player or club" aria-label="Search players">
       <select id="pl-team" aria-label="Club"></select>
@@ -671,6 +673,7 @@ window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Man
       <label><input type="checkbox" id="pl-starters"> Likely starters only</label>
     </div>
     <div class="scroll-x"><table class="pl" id="pl-table"></table></div>
+    <div class="pcards" id="pl-cards" hidden></div>
     <div class="more"><button class="btn" id="pl-more">Show more</button></div>
   </section>
 
@@ -814,7 +817,14 @@ const D = /*__UFE_DATA__*/null;
     set(k, v) { try { localStorage.setItem("ufe:" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
   };
   const surname = n => { const s = String(n).split(" "); return s.length > 1 && s[s.length - 1].length > 2 ? s.slice(1).join(" ") : n; };
-  const shortName = n => { const s = surname(n); if (s.length <= 13) return s; const w = s.split(" "), last = w.pop(); return /^(j[uú]nior|jr\.?|filho|neto)$/i.test(last) && w.length ? w.pop() : last; };
+  const SUFFIX = /^(j[uú]nior|jr\.?|filho|neto|sobrinho)$/i;
+  const shortName = n => {
+    const all = String(n).split(" "), s = surname(n);
+    if (SUFFIX.test(s) && all.length > 1) return all[all.length - 2];   // "Vinícius Júnior" is Vinícius, never Júnior
+    if (s.length <= 13) return s;
+    const w = s.split(" "), last = w.pop();
+    return SUFFIX.test(last) && w.length ? w.pop() : last;
+  };
   const weekday = iso => new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
   const dayName = iso => iso ? new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" }) : "";
 
@@ -976,6 +986,7 @@ const D = /*__UFE_DATA__*/null;
       return `<button aria-pressed="${formation === f}" data-f="${f}" data-tip="${esc(`${f}: XI worth ${f1(s.ev_xi)} xPts incl. captain`)}">${f}</button>`;
     }).join("");
     $$("#formations button").forEach(x => x.addEventListener("click", () => { formation = formation === x.dataset.f ? null : x.dataset.f; boardMode = "best"; renderBoard(); renderReadout(); renderChecks(); }));
+    renderTplHero();
   }
 
   function renderReadout() {
@@ -1195,6 +1206,7 @@ const D = /*__UFE_DATA__*/null;
       plSort = { key, dir: plSort.key === key ? -plSort.dir : (key === "name" ? 1 : -1) };
       renderPlayers();
     }));
+    renderPlayerCards(rows);
     $("#pl-more").hidden = rows.length <= plLimit;
     $("#pl-more").textContent = `Show ${Math.min(60, rows.length - plLimit)} more of ${rows.length - plLimit}`;
   }

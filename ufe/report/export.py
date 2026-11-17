@@ -277,7 +277,8 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
                               chips_ok=chip_allowed("wildcard", r["md"]), manual=manual_actions_allowed(r["md"])))
     pool_src = engine.pool.get("source", pd.Series(["seed"])).value_counts().to_dict()
     return dict(
-        meta=dict(generated_at=_now(), as_of=engine.as_of, model_version=model_version(), skin=(settings().get("dashboard") or {}).get("skin", "board"),
+        kits=_kits(),
+        meta=dict(generated_at=_now(), as_of=engine.as_of, model_version=model_version(), skin=(settings().get("dashboard") or {}).get("skin", "cards"),
                   n_sims=int(engine.simulate(mds[0]).meta["n_sims"]), team_model_matches=tm.n_matches,
                   team_model_fitted_through=tm.fitted_through, hyper=tm.hyper, pool_size=int(len(engine.players)),
                   price_status=engine.players.get("price_status", pd.Series(["verified"])).value_counts().to_dict(),
@@ -407,6 +408,15 @@ def _league(engine):
     from .managers import next_md
     mds = list(getattr(engine, "_mds", []))
     return run(engine, next_md(), mds or [next_md()])
+
+
+def _kits() -> dict:
+    """Home-shirt colours per club for the collector cards (config/kits.yaml)."""
+    p = ROOT / "config" / "kits.yaml"
+    if not p.exists():
+        return {}
+    import yaml
+    return {k: list(v) for k, v in (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).items()}
 
 
 def _extras(engine) -> dict:

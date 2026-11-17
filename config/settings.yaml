@@ -186,6 +186,6 @@ engine:
   model: combined
 
 dashboard:
-  # the look the page opens in: board | floodlights | terminal | broadcast | analyst
+  # the template the page opens in: cards | night | poster | market | board
   # (each viewer can switch in the Style menu; the choice stays in their browser)
-  skin: board
+  skin: cards

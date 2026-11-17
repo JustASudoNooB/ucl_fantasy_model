@@ -345,3 +345,15 @@ across nine groups; players forecast at 6+ points scored 8.9 against 6.7 expecte
 Reverse if: on MD5 and MD6 the network's goal or assist log loss on the leaderboard is worse than the
 statistical model's by more than it was before this change; then weight decay goes back to 1e-4.
 
+
+**2026-11-17 · Collector cards become the default look; five templates in all (v0.20.0).**
+Zero chose the card concept from three first-screen designs (night match, collector cards, matchday poster)
+and asked for photos on the cards and 3-4 more templates. Built: templates cards (default), night, poster,
+market (a trading-terminal take on the retro look he liked for the NIFTY project) and board (the original),
+each a Matchday hero plus a token set for every tab (parts/30_templates.js, parts/90_templates.css).
+Photos: not used. The page holds no pictures of real people, copied or linked; each card shows a generic
+shirt in the club's two home colours (config/kits.yaml, no crests or kit patterns) with the player's initials.
+The five earlier re-skins (floodlights, terminal, broadcast, analyst) are gone: Zero found them unattractive,
+and a viewer who had chosen one gets the default.
+Also fixed: the pitch shows the saved team by default (manager file marked `me`), not the engine's own squad.
+

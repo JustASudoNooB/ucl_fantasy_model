@@ -69,6 +69,19 @@ One self-contained page (`data/runs/dashboard.html`), in eight tabs:
 | League | saved teams and the mini-league (private edition only) |
 | Guide | how the model works, a glossary, its limits, the model report card, the calendar |
 
+Five templates, chosen in the Template menu at the top right (each viewer's choice stays in their browser;
+the default is `dashboard.skin` in config/settings.yaml):
+
+| Template | Matchday hero |
+|---|---|
+| Collector cards (default) | your XI as collectible cards graded by expected points (foil 7+, gold, silver, bronze), each with the player's shirt drawn in his club's colours (config/kits.yaml); the captain's card is foil and tilts toward the pointer. The Players tab becomes a card grid and profiles show the card |
+| Night match | the XI on a floodlit 3D pitch, the top projections on an LED perimeter board |
+| Matchday poster | the expected points fill the screen on cobalt blue; the XI set as names sized by expected points |
+| Market terminal | players quoted like stocks: a ticker against the last forecast, positions with buy and sell signals, most bought and most sold |
+| Tactics board | the original whiteboard with magnets |
+
+Cards carry shirts in club colours, not photos: the page holds no pictures of real people.
+
 A player's name anywhere opens his profile: chance of each score, where his points come from, his season
 so far against what the model said before each deadline, percentile ranks in his position and the next
 matchdays. The search box in the tab bar finds any player.

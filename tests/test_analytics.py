@@ -56,10 +56,11 @@ def test_page_parts_are_placed_and_no_marker_is_left():
 
 
 def test_default_skin_is_set_and_unknown_names_fall_back(tmp_path):
-    data = dict(meta=dict(model_version="x", skin="terminal"), matchdays={})
-    out = render.render(data, tmp_path / "a.html", standalone=False)
-    html = out.read_text(encoding="utf-8")
-    assert '"terminal"' in html and "__UFE_SKIN__" not in html and 'data-skin="terminal"' in html
+    data = dict(meta=dict(model_version="x", skin="night"), matchdays={})
+    html = render.render(data, tmp_path / "a.html", standalone=False).read_text(encoding="utf-8")
+    assert 'var k = "night"' in html and "__UFE_SKIN__" not in html
     data["meta"]["skin"] = "nonsense"
     html = render.render(data, tmp_path / "b.html", standalone=False).read_text(encoding="utf-8")
-    assert 'var k = "board"' in html
+    assert 'var k = "cards"' in html
+    for t in render.SKINS[:-1]:                                    # every template has its fonts and its hero
+        assert f'"{t}":' in html and f':root[data-skin="{t}"]' in html
