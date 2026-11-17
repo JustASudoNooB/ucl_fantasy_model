@@ -13,6 +13,7 @@ SKELETON = ('<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
 
 
 PARTS = Path(__file__).with_name("parts")
+SKINS = ("board", "floodlights", "terminal", "broadcast", "analyst")   # parts/90_skins.css
 PART_MARKS = (("/*__UFE_PARTS_CSS__*/", "*.css"), ("<!--__UFE_PARTS_HTML__-->", "*.html"), ("/*__UFE_PARTS_JS__*/", "*.js"))
 # Left out of the public edition: saved teams, the mini-league, live calls and plans made for them
 PRIVATE = ("managers", "league", "replan", "live", "verification")
@@ -50,6 +51,8 @@ def render(data: dict, out: Path, template: Path = TEMPLATE, standalone: bool = 
     if standalone:
         html = SKELETON + html
     payload = json.dumps(public_copy(data) if public else data, separators=(",", ":"), ensure_ascii=False).replace("</", "<\\/")
+    skin = str((data.get("meta") or {}).get("skin") or "board")
+    html = html.replace("__UFE_SKIN__", skin if skin in SKINS else "board")
     if MARK not in html:
         raise ValueError("template is missing the data marker")
     out.parent.mkdir(parents=True, exist_ok=True)

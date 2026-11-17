@@ -43,7 +43,7 @@ def plan_manager(engine, cfg: dict, md: int, mds: list[int]) -> dict:
     by = players.set_index("id")
     squad, missing = _match(players, cfg.get("squad", []))
     out = dict(name=cfg.get("name"), team_name=cfg.get("team_name"), updated=str(cfg.get("updated", "")),
-               md=md, missing=missing, squad=squad)
+               md=md, missing=missing, squad=squad, me=bool(cfg.get("me")))
     if missing or len(squad) != 15:
         out["error"] = f"{len(squad)} of 15 players matched; check names: {', '.join(missing)}"
         return out

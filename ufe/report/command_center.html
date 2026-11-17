@@ -446,6 +446,23 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
 @media (prefers-reduced-motion: reduce) { .draw { stroke-dashoffset: 0; } }
 /*__UFE_PARTS_CSS__*/
 </style>
+<script>
+/* the chosen look is applied before the page draws, and its fonts are requested only when it is used */
+window.UFE_SKIN_FONTS = {"floodlights": "family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800", "terminal": "family=VT323&family=JetBrains+Mono:wght@400;500;600;700", "broadcast": "family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700", "analyst": "family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700"};
+(function () {
+  var k = "__UFE_SKIN__";
+  try { var v = JSON.parse(localStorage.getItem("ufe:skin") || "null"); if (v) k = v; } catch (e) {}
+  window.ufeSkin = function (name, fontsOnly) {
+    if (!fontsOnly) document.documentElement.setAttribute("data-skin", name);
+    var f = window.UFE_SKIN_FONTS[name];
+    if (f && !document.getElementById("skin-font-" + name)) {
+      var l = document.createElement("link"); l.rel = "stylesheet"; l.id = "skin-font-" + name;
+      l.href = "https://fonts.googleapis.com/css2?" + f + "&display=swap"; document.head.appendChild(l);
+    }
+  };
+  window.ufeSkin(k);
+})();
+</script>
 
 <header class="bar">
   <div class="bar-in">
@@ -455,6 +472,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
     </div>
     <div class="mds" id="mds" role="group" aria-label="Matchday"></div>
     <div class="clock" aria-live="polite"><span id="dl-label">Deadline</span><b id="dl-count">–</b></div>
+    <button class="skin-btn" id="skin-btn" aria-haspopup="dialog"><i><b style="background:var(--bg)"></b><b style="background:var(--accent)"></b><b style="background:var(--ink)"></b></i>Style</button>
   </div>
   <nav class="views" id="views" aria-label="Views">
     <a href="#matchday" data-v="matchday">Matchday</a><a href="#players" data-v="players">Players</a><a href="#matches" data-v="matches">Matches</a><a href="#clubs" data-v="clubs">Clubs</a><a href="#my-team" data-v="my-team">My team</a><a href="#lab" data-v="lab">Lab</a><a href="#league" data-v="league" hidden>League</a><a href="#guide" data-v="guide">Guide</a>
@@ -675,6 +693,7 @@ footer { max-width: 1440px; margin: 0 auto; padding-block: 24px 48px; padding-le
         </div>
         <div class="status-line" id="tm-status"></div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn" id="tm-mine" hidden>Load my saved team</button>
           <button class="btn" id="tm-example">Load example squad</button>
           <button class="btn" id="tm-clear">Clear squad</button>
         </div>
@@ -795,7 +814,7 @@ const D = /*__UFE_DATA__*/null;
     set(k, v) { try { localStorage.setItem("ufe:" + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
   };
   const surname = n => { const s = String(n).split(" "); return s.length > 1 && s[s.length - 1].length > 2 ? s.slice(1).join(" ") : n; };
-  const shortName = n => { const s = surname(n); return s.length > 13 ? s.split(" ").pop() : s; };
+  const shortName = n => { const s = surname(n); if (s.length <= 13) return s; const w = s.split(" "), last = w.pop(); return /^(j[uú]nior|jr\.?|filho|neto)$/i.test(last) && w.length ? w.pop() : last; };
   const weekday = iso => new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
   const dayName = iso => iso ? new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" }) : "";
 
@@ -804,7 +823,9 @@ const D = /*__UFE_DATA__*/null;
   const upcoming = MDS.find(m => Date.parse(D.matchdays[m].deadline_iso) > now) ?? MDS[MDS.length - 1];
   let MD = store.get("md", null);
   if (!MDS.includes(MD) || Date.parse(D.matchdays[MD].deadline_iso) < now - 7 * 864e5) MD = upcoming;
-  let boardMode = "best";
+  let boardMode = null;                             // null: "mine" when a real squad of 15 is loaded, else "best"
+  const hasMine = () => !isExample && Array.isArray(squad) && squad.length === 15 && !squadIssues(squad).length;
+  const mode = () => boardMode || (hasMine() ? "mine" : "best");
   let formation = null;
 
   // ---------------------------------------------------------------- tooltip
@@ -837,7 +858,7 @@ const D = /*__UFE_DATA__*/null;
       const lab = d.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" });
       return `<button class="md-btn" aria-pressed="${m === MD}" data-md="${m}">MD${m}<small>${lab}</small></button>`;
     }).join("");
-    $$("#mds .md-btn").forEach(b => b.addEventListener("click", () => { MD = +b.dataset.md; store.set("md", MD); formation = null; boardMode = "best"; renderAll(); }));
+    $$("#mds .md-btn").forEach(b => b.addEventListener("click", () => { MD = +b.dataset.md; store.set("md", MD); formation = null; boardMode = null; renderAll(); }));
   }
   function tickClock() {
     const b = D.matchdays[MD];
@@ -902,9 +923,18 @@ const D = /*__UFE_DATA__*/null;
       <text x="${p.x}" y="${p.y + 54}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="var(--f-body)">${esc(opts.compact ? pl.team : tShort(pl.team))}${dayLab ? " · " + dayName(dayLab) : ""}</text>
     </g>`;
   }
+  function mySol() {
+    const bx = bestXI(squad, MD);
+    if (!bx) return null;
+    const rest = squad.filter(id => !bx.xi.includes(id));
+    const bench = rest.filter(id => P[id].pos === "GK").concat(rest.filter(id => P[id].pos !== "GK").sort((a, c) => evOf(c, MD) - evOf(a, MD)));
+    return { xi: bx.xi, bench, captain: bx.cap, ev_xi: bx.ev, formation: bx.form, cost: squad.reduce((a, id) => a + (+P[id].price || 0), 0), squad: squad.slice() };
+  }
   function currentSquad() {
     const b = D.matchdays[MD];
-    if (boardMode === "limitless" && b.limitless) return { sol: b.limitless, label: "Limitless: no budget limit, this matchday only" };
+    const m = mode();
+    if (m === "mine" && !formation && hasMine()) { const s = mySol(); if (s) return { sol: s, label: ME && squad.every(id => ME.squad.includes(id)) ? `${ME.team_name || "My team"} (${s.formation}), best XI from your 15` : `Your 15 (${s.formation}), best XI` }; }
+    if (m === "limitless" && b.limitless) return { sol: b.limitless, label: "Limitless: no budget limit, this matchday only" };
     if (formation && b.by_formation[formation]) return { sol: b.by_formation[formation], label: `Best €${D.rules.budget.league_phase}m squad in a ${formation}` };
     return { sol: b.best, label: `Best €${D.rules.budget.league_phase}m squad (${b.best.formation})` };
   }
@@ -917,7 +947,7 @@ const D = /*__UFE_DATA__*/null;
     sol.xi.forEach(id => { const y = Math.round(pos[id].y); perLine[y] = (perLine[y] || 0) + 1; });
     let inner = sol.xi.map(id => magnet(id, pos[id], { captain: id === sol.captain, ev: evs[id], compact: perLine[Math.round(pos[id].y)] >= 5 })).join("");
     // marker arrow for the captain switch rule (recommended squad only)
-    const rule = (boardMode === "best" && !formation && b.best.policy) ? (b.best.policy.rules || []).find(r => r.kind === "captain") : null;
+    const rule = (mode() === "best" && !formation && b.best.policy) ? (b.best.policy.rules || []).find(r => r.kind === "captain") : null;
     if (rule && pos[rule.captain] && pos[rule.to]) {
       const a = pos[rule.captain], c = pos[rule.to];
       const top = Math.min(a.y, c.y);
@@ -938,8 +968,8 @@ const D = /*__UFE_DATA__*/null;
         <span class="who"><b>${esc(shortName(p.name))}</b><span>${esc(tShort(p.team))} · ${dd} · ${f1(evs[id])}</span></span></div>`;
     }).join("");
     $("#board-caption").textContent = `${label} · €${Number(sol.cost).toFixed(1)}m`;
-    const modes = [["best", "Recommended"]].concat(b.limitless ? [["limitless", "Limitless"]] : []);
-    $("#board-mode").innerHTML = modes.map(([k, l]) => `<button aria-pressed="${boardMode === k && !formation}" data-mode="${k}">${l}</button>`).join("");
+    const modes = (hasMine() ? [["mine", "My team"]] : []).concat([["best", "Best from scratch"]]).concat(b.limitless ? [["limitless", "Limitless"]] : []);
+    $("#board-mode").innerHTML = modes.map(([k, l]) => `<button aria-pressed="${mode() === k && !formation}" data-mode="${k}">${l}</button>`).join("");
     $$("#board-mode button").forEach(x => x.addEventListener("click", () => { boardMode = x.dataset.mode; formation = null; renderBoard(); renderReadout(); renderChecks(); }));
     $("#formations").innerHTML = Object.keys(b.by_formation).map(f => {
       const s = b.by_formation[f];
@@ -951,7 +981,7 @@ const D = /*__UFE_DATA__*/null;
   function renderReadout() {
     const b = D.matchdays[MD];
     const { sol } = currentSquad();
-    const pol = (boardMode === "best" && !formation) ? b.best.policy : null;
+    const pol = (mode() === "best" && !formation) ? b.best.policy : null;
     const evs = Object.fromEntries(b.players.map(p => [p.id, p]));
     const evXI = sol.ev_xi;
     $("#ev-big").textContent = f1(pol ? pol.ev_active : evXI);
@@ -986,7 +1016,17 @@ const D = /*__UFE_DATA__*/null;
       });
       rules.filter(r => r.kind === "autosub_cost" || r.kind === "info").forEach(r => notes.push([r.kind === "info" ? "·" : "!", r.text]));
       if (pol.uplift > 0.05) notes.push(["+", `Following the plan adds ${f1(pol.uplift)} expected points over doing nothing after the first day.`]);
-    } else if (boardMode === "limitless") {
+    } else if (mode() === "mine" && !formation && hasMine()) {
+      const same = ME && squad.every(id => ME.squad.includes(id));
+      const nm = id => P[id] ? shortName(P[id].name) : id;
+      if (same) {
+        const tx = (ME.transfers || []).filter(t => t.n > 0 && t.gain > 0.5).sort((a, c) => c.gain - a.gain)[0];
+        if (tx) notes.push(["⇄", `Best move for the next ${(ME.horizon || []).length || 3} matchdays: ${tx.sell.map(nm).join(" + ")} out, ${tx.buy.map(nm).join(" + ")} in (${tx.hits ? `−${4 * tx.hits} hit, ` : ""}+${f1(tx.gain)} expected points). ${ME.free_transfers != null ? `You have ${ME.free_transfers} free transfer${ME.free_transfers === 1 ? "" : "s"}, €${f1(ME.bank)}m in the bank.` : ""}`]);
+        else notes.push(["·", "No transfer adds more than half a point over the next matchdays. Keep the free transfer."]);
+        (ME.chip_advice || []).forEach(c => notes.push(["·", `${c.chip[0].toUpperCase() + c.chip.slice(1)}: ${c.use_now ? "play it now" : `hold; MD${c.best_md} looks better (+${f1(c.best_gain)} against +${f1(c.now_gain)} now)`}.`]));
+      }
+      notes.push(["·", `Captain ${nm(sol.captain)} on expected points. The My team tab shows every transfer option and lets you edit the squad.`]);
+    } else if (mode() === "limitless") {
       notes.push(["·", "Limitless lifts the budget for one matchday; your squad returns afterwards. Club cap still applies."]);
     } else {
       notes.push(["·", "Formation view: the best 15 if you commit to this shape. The switch plan is computed for the recommended squad."]);
@@ -1174,10 +1214,14 @@ const D = /*__UFE_DATA__*/null;
   // ---------------------------------------------------------------- my team (planner runs in the browser)
   const LEAGUE_BUDGET = D.rules.budget.league_phase;
   const CAP = 3;
-  let squad = store.get("squad", null);
+  // My team starts from, in order: what this browser saved, the manager file marked `me` (private edition), the engine's own pick
+  const ME = (!(D.meta && D.meta.public) && (D.managers || []).find(m => m.me && !m.error && (m.squad || []).length === 15 && m.squad.every(id => P[id]))) || null;
+  let squad = store.get("myteam", null);
   const exampleSquad = () => D.matchdays[MDS.includes(upcoming) ? upcoming : MDS[0]].best.squad.slice();
   let isExample = false;
-  if (!Array.isArray(squad) || !squad.every(id => P[id])) { squad = exampleSquad(); isExample = true; }
+  if (!Array.isArray(squad) || !squad.length || !squad.every(id => P[id])) {
+    if (ME) squad = ME.squad.slice(); else { squad = exampleSquad(); isExample = true; }
+  }
   const evOf = (id, md) => { const a = D.ev[id]; const i = MDS.indexOf(md); return a && i >= 0 ? (a[i] || 0) : 0; };
   function bestXI(ids, md) {
     const by = { GK: [], DEF: [], MID: [], FWD: [] };
@@ -1212,9 +1256,9 @@ const D = /*__UFE_DATA__*/null;
     squad.forEach(id => by[P[id].pos].push(id));
     const want = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
     $("#tm-squad").innerHTML = POS.map(p => `<div class="squad-row"><span>${p}</span><div class="ps">${by[p].map(id => `<span class="pp">${esc(shortName(P[id].name))} <small>${esc(tShort(P[id].team))} ${Number(P[id].price).toFixed(1)}</small><button aria-label="Remove ${esc(P[id].name)}" data-rm="${id}">×</button></span>`).join("")}${Array.from({ length: Math.max(0, want[p] - by[p].length) }, () => `<span class="pp empty">empty</span>`).join("")}</div></div>`).join("");
-    $$("#tm-squad [data-rm]").forEach(b => b.addEventListener("click", () => { squad = squad.filter(x => x !== b.dataset.rm); isExample = false; saveSquad(); renderTeam(); }));
+    $$("#tm-squad [data-rm]").forEach(b => b.addEventListener("click", () => { squad = squad.filter(x => x !== b.dataset.rm); isExample = false; saveSquad(); renderTeam(); renderBoard(); renderReadout(); }));
   }
-  function saveSquad() { store.set("squad", squad); }
+  function saveSquad() { store.set("myteam", squad); renderBoard(); renderReadout(); }
   function setupPicker() {
     const inp = $("#tm-search"), res = $("#tm-results");
     const show = () => {
@@ -1239,6 +1283,7 @@ const D = /*__UFE_DATA__*/null;
     inp.addEventListener("focus", show);
     document.addEventListener("click", e => { if (!e.target.closest(".picker")) res.hidden = true; });
     $("#tm-example").addEventListener("click", () => { squad = exampleSquad(); isExample = true; saveSquad(); renderTeam(); });
+    if (ME) { $("#tm-mine").hidden = false; $("#tm-mine").textContent = `Load ${ME.team_name || "my saved team"}`; $("#tm-mine").addEventListener("click", () => { squad = ME.squad.slice(); isExample = false; store.set("myteam", null); renderTeam(); renderBoard(); renderReadout(); }); }
     $("#tm-clear").addEventListener("click", () => { squad = []; isExample = false; saveSquad(); renderTeam(); });
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => $("#" + id).addEventListener("change", () => { store.set(id, $("#" + id).value); renderTeam(); }));
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => { const v = store.get(id, null); if (v != null) $("#" + id).value = v; });

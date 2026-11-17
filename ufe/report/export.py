@@ -277,7 +277,7 @@ def dashboard_data(engine, mds: list[int], backtest: dict | None = None, standin
                               chips_ok=chip_allowed("wildcard", r["md"]), manual=manual_actions_allowed(r["md"])))
     pool_src = engine.pool.get("source", pd.Series(["seed"])).value_counts().to_dict()
     return dict(
-        meta=dict(generated_at=_now(), as_of=engine.as_of, model_version=model_version(),
+        meta=dict(generated_at=_now(), as_of=engine.as_of, model_version=model_version(), skin=(settings().get("dashboard") or {}).get("skin", "board"),
                   n_sims=int(engine.simulate(mds[0]).meta["n_sims"]), team_model_matches=tm.n_matches,
                   team_model_fitted_through=tm.fitted_through, hyper=tm.hyper, pool_size=int(len(engine.players)),
                   price_status=engine.players.get("price_status", pd.Series(["verified"])).value_counts().to_dict(),

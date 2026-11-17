@@ -184,3 +184,8 @@ engine:
   # statistical model's on every matchday (paired difference 0.007, 95% interval 0.001 to 0.013,
   # clubs resampled), points error level or slightly better, top picks by position 752 v 725 points.
   model: combined
+
+dashboard:
+  # the look the page opens in: board | floodlights | terminal | broadcast | analyst
+  # (each viewer can switch in the Style menu; the choice stays in their browser)
+  skin: board

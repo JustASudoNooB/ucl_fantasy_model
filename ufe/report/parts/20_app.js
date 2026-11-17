@@ -494,6 +494,34 @@
     box.addEventListener("change", go);
     box.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); go(); } });
   }
+  // ---------------------------------------------------------------- the Style menu (parts/90_skins.css)
+  const SKINS = [
+    ["board", "Tactics board", "The coach's whiteboard: marker notes and magnets. Light by day, chalkboard at night.", ["#e7ece9", "#fafcfb", "#f0b400", "#142019"], "'Sofia Sans Extra Condensed', 'Arial Narrow', sans-serif"],
+    ["floodlights", "Floodlights", "A night match under the lights: deep navy, electric blue, glow and motion.", ["#070a12", "#0e1422", "#5b7cff", "#edf1fb"], "Sora, 'Segoe UI', sans-serif"],
+    ["terminal", "Terminal", "A retro trading terminal: phosphor green, amber highlights, scanlines.", ["#040705", "#08100b", "#ffb43a", "#c8f7d0"], "VT323, 'Courier New', monospace"],
+    ["broadcast", "Broadcast", "TV match graphics: condensed italic capitals and slanted red flashes.", ["#eceff5", "#ffffff", "#e3173e", "#0a0f22"], "'Barlow Condensed', 'Arial Narrow', sans-serif"],
+    ["analyst", "Analyst", "A plain research report: white page, hairlines, one blue.", ["#ffffff", "#f5f6f8", "#2f5bea", "#101318"], "'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif"]
+  ];
+  const skinDlg = document.createElement("dialog");
+  skinDlg.className = "skins"; skinDlg.setAttribute("aria-labelledby", "skins-h");
+  document.body.appendChild(skinDlg);
+  function renderSkins() {
+    const cur = document.documentElement.getAttribute("data-skin") || "board";
+    skinDlg.innerHTML = `<div class="skins-head"><h2 id="skins-h">Choose a style</h2><button class="sheet-x" aria-label="Close">×</button></div>
+      <div class="skins-grid">${SKINS.map(([k, n, d, c, f]) => `<button class="skin-opt" data-skin="${k}" aria-pressed="${k === cur}">
+        <span class="pv" style="background:${c[0]};color:${c[3]}"><span class="t" style="font-family:${f};${k === "broadcast" ? "font-style:italic;text-transform:uppercase;" : ""}${k === "terminal" ? "" : "font-weight:800;"}">Matchday 5</span>
+          <span class="k" style="background:${c[1]}">xPts<b style="color:${c[2]}">7.3</b></span><span class="k" style="background:${c[2]};color:${c[0] === "#ffffff" || c[0] === "#eceff5" ? "#fff" : c[0]}">Captain<b>Mbappé</b></span></span>
+        <strong>${esc(n)}</strong><span class="d">${esc(d)}</span></button>`).join("")}</div>
+      <p class="skin-foot">Only the look changes; every number stays the same. Your choice is kept in this browser.</p>`;
+    $(".sheet-x", skinDlg).addEventListener("click", () => skinDlg.close());
+    $$(".skin-opt", skinDlg).forEach(b => b.addEventListener("click", () => {
+      window.ufeSkin(b.dataset.skin); store.set("skin", b.dataset.skin);
+      $$(".skin-opt", skinDlg).forEach(x => x.setAttribute("aria-pressed", x === b));
+    }));
+  }
+  $("#skin-btn").addEventListener("click", () => { SKINS.forEach(x => window.ufeSkin(x[0], true)); renderSkins(); skinDlg.showModal ? skinDlg.showModal() : skinDlg.setAttribute("open", ""); });
+  skinDlg.addEventListener("click", e => { if (e.target === skinDlg) skinDlg.close(); });
+
   setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderHotCold(); renderReliability(); renderGuide();
   HOOKS.push(renderLab, renderH2H, renderTicker);
   if (PUBLIC) HOOKS.push(() => {                       // the shared edition gets a short notice in place of the price-list audit

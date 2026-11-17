@@ -53,3 +53,13 @@ def test_page_parts_are_placed_and_no_marker_is_left():
         assert mark not in html
     assert "function openPlayer" in html and 'id="lab-svg"' in html and "dialog.sheet" in html
     assert html.count(render.MARK) == 1
+
+
+def test_default_skin_is_set_and_unknown_names_fall_back(tmp_path):
+    data = dict(meta=dict(model_version="x", skin="terminal"), matchdays={})
+    out = render.render(data, tmp_path / "a.html", standalone=False)
+    html = out.read_text(encoding="utf-8")
+    assert '"terminal"' in html and "__UFE_SKIN__" not in html and 'data-skin="terminal"' in html
+    data["meta"]["skin"] = "nonsense"
+    html = render.render(data, tmp_path / "b.html", standalone=False).read_text(encoding="utf-8")
+    assert 'var k = "board"' in html
