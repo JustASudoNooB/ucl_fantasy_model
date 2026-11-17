@@ -357,3 +357,17 @@ The five earlier re-skins (floodlights, terminal, broadcast, analyst) are gone: 
 and a viewer who had chosen one gets the default.
 Also fixed: the pitch shows the saved team by default (manager file marked `me`), not the engine's own squad.
 
+
+**2026-11-17 · Night match redrawn; the shared page knows its owner (v0.20.1).**
+On an iPad in split view (about 520 px wide) the night pitch spilled past both touchlines, the keeper sat
+behind the LED board, and the CSS 3D tilt squashed every disc and name. The pitch is now drawn flat in SVG
+through a perspective projection (far end narrower, far half compressed), and the players are plain HTML
+placed with the same projection, so nothing is rotated: discs stay round, text stays sharp, and the frame
+is the container's own width at any size. Rows of five zig-zag so neighbouring names never touch; every
+formation was checked for overlaps at 390, 523, 1100 and 1440 px. The LED board sits below the pitch, the
+bench gets its own row, and the transfer value joins the "Your move" tile.
+The shared edition still carries no saved team in its source. When its owner opens it, the page asks who
+is viewing; for the owner only it reads the team from the page's own store under `owner/myteam`, which the
+db rules let nobody else read, and shows it in My team mode and on the My team tab. Everyone else sees the
+best possible squad for the matchday, labelled as such. The store copy is written by Claude after each
+team change (squad, bank, free transfers and the engine's transfer and chip advice), not by the page.

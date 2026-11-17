@@ -64,3 +64,11 @@ def test_default_skin_is_set_and_unknown_names_fall_back(tmp_path):
     assert 'var k = "cards"' in html
     for t in render.SKINS[:-1]:                                    # every template has its fonts and its hero
         assert f'"{t}":' in html and f':root[data-skin="{t}"]' in html
+
+
+def test_shared_page_reads_the_owners_team_from_its_private_store_only():
+    html = render.assemble()
+    # the owner's team comes from the page's store, behind an owner check, never from the page source
+    assert 'db.doc("owner/myteam")' in html and "isOwner()" in html
+    assert html.index("isOwner()") < html.index('db.doc("owner/myteam")')
+    assert "let ME =" in html and "function bindMine" in html

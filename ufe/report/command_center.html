@@ -697,7 +697,7 @@ window.UFE_SKIN_FONTS = {"cards": "family=Bricolage+Grotesque:opsz,wdth,wght@12.
         <div class="status-line" id="tm-status"></div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn" id="tm-mine" hidden>Load my saved team</button>
-          <button class="btn" id="tm-example">Load example squad</button>
+          <button class="btn" id="tm-example">Load the best squad</button>
           <button class="btn" id="tm-clear">Clear squad</button>
         </div>
       </div>
@@ -1227,7 +1227,8 @@ const D = /*__UFE_DATA__*/null;
   const LEAGUE_BUDGET = D.rules.budget.league_phase;
   const CAP = 3;
   // My team starts from, in order: what this browser saved, the manager file marked `me` (private edition), the engine's own pick
-  const ME = (!(D.meta && D.meta.public) && (D.managers || []).find(m => m.me && !m.error && (m.squad || []).length === 15 && m.squad.every(id => P[id]))) || null;
+  // On the shared edition ME stays null here; the owner's team arrives later from the page's private store (see 20_app.js)
+  let ME = (!(D.meta && D.meta.public) && (D.managers || []).find(m => m.me && !m.error && (m.squad || []).length === 15 && m.squad.every(id => P[id]))) || null;
   let squad = store.get("myteam", null);
   const exampleSquad = () => D.matchdays[MDS.includes(upcoming) ? upcoming : MDS[0]].best.squad.slice();
   let isExample = false;
@@ -1271,6 +1272,12 @@ const D = /*__UFE_DATA__*/null;
     $$("#tm-squad [data-rm]").forEach(b => b.addEventListener("click", () => { squad = squad.filter(x => x !== b.dataset.rm); isExample = false; saveSquad(); renderTeam(); renderBoard(); renderReadout(); }));
   }
   function saveSquad() { store.set("myteam", squad); renderBoard(); renderReadout(); }
+  function bindMine() {
+    const b = $("#tm-mine");
+    if (!ME || !b) return;
+    b.hidden = false; b.textContent = `Load ${ME.team_name || "my saved team"}`;
+    b.onclick = () => { squad = ME.squad.slice(); isExample = false; store.set("myteam", null); renderTeam(); renderBoard(); renderReadout(); };
+  }
   function setupPicker() {
     const inp = $("#tm-search"), res = $("#tm-results");
     const show = () => {
@@ -1295,7 +1302,8 @@ const D = /*__UFE_DATA__*/null;
     inp.addEventListener("focus", show);
     document.addEventListener("click", e => { if (!e.target.closest(".picker")) res.hidden = true; });
     $("#tm-example").addEventListener("click", () => { squad = exampleSquad(); isExample = true; saveSquad(); renderTeam(); });
-    if (ME) { $("#tm-mine").hidden = false; $("#tm-mine").textContent = `Load ${ME.team_name || "my saved team"}`; $("#tm-mine").addEventListener("click", () => { squad = ME.squad.slice(); isExample = false; store.set("myteam", null); renderTeam(); renderBoard(); renderReadout(); }); }
+    $("#tm-example").textContent = `Load the best squad for MD${upcoming}`;
+    bindMine();
     $("#tm-clear").addEventListener("click", () => { squad = []; isExample = false; saveSquad(); renderTeam(); });
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => $("#" + id).addEventListener("change", () => { store.set(id, $("#" + id).value); renderTeam(); }));
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => { const v = store.get(id, null); if (v != null) $("#" + id).value = v; });
@@ -1364,7 +1372,7 @@ const D = /*__UFE_DATA__*/null;
       return;
     }
     st.className = "status-line good";
-    st.textContent = `${isExample ? "Example squad: the engine's own pick. Replace it with yours. " : ""}Squad value €${c.toFixed(1)}m · ${15} players`;
+    st.textContent = `${isExample ? `Best possible squad for MD${upcoming}, picked by the engine. Replace it with your own 15 to plan for your team. ` : ""}Squad value €${c.toFixed(1)}m · ${15} players`;
     const b = bestXI(squad, MD);
     const md = D.matchdays[MD];
     $("#tm-xi-h").textContent = `Best XI for MD${MD}`;

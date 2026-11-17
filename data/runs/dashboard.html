@@ -821,31 +821,51 @@ dialog.sheet:focus { outline: none; }
 .nm-score .n { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 800; font-size: clamp(70px, 8.5vw, 124px); line-height: .8; color: var(--flood); text-shadow: 0 0 40px rgba(255, 251, 232, .35); font-variant-numeric: tabular-nums; }
 .nm-score .l { color: #9fb6a7; font-size: 15px; margin-top: 8px; }
 .nm-score .l b { color: #eaf2ec; }
-.nm-stadium { --pw: min(66vw, 700px); position: relative; margin: 14px auto 0; height: calc(var(--pw) * .84 + 30px); perspective: 2600px; perspective-origin: 50% 30%; }
-.nm-turf { position: absolute; left: 50%; top: 6px; width: var(--pw); aspect-ratio: 68 / 80; transform: translateX(-50%) rotateX(46deg); transform-origin: 50% 0%; transform-style: preserve-3d;
-  background: repeating-linear-gradient(to bottom, #1c5633 0 6.25%, #21633b 6.25% 12.5%); border-radius: 4px; box-shadow: 0 0 0 10px #12301f, 0 60px 120px rgba(0, 0, 0, .7); }
-.nm-turf svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.nm-glow { position: absolute; inset: 0; pointer-events: none; z-index: 2; mix-blend-mode: screen; }
-.nm-glow::before, .nm-glow::after { content: ""; position: absolute; top: -10%; width: 70%; height: 120%; filter: blur(6px);
-  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg 150deg, rgba(255, 251, 232, .14) 165deg, rgba(255, 251, 232, .26) 180deg, rgba(255, 251, 232, .14) 195deg, transparent 210deg 360deg); }
-.nm-glow::before { left: -12%; transform: rotate(-18deg); transform-origin: 50% 0; }
-.nm-glow::after { right: -12%; transform: rotate(18deg); transform-origin: 50% 0; }
-.nm-pl { position: absolute; transform: translate(-50%, -100%) rotateX(-46deg); transform-origin: 50% 100%; display: grid; justify-items: center; gap: 4px; cursor: pointer; }
-.nm-pl .disc { position: relative; width: clamp(44px, 5vw, 64px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: #0b1b12;
-  background: radial-gradient(circle at 35% 30%, #ffffff, #dfe7df 60%, #b8c6bb); font: 700 clamp(15px, 1.7vw, 21px)/1 "Work Sans", sans-serif; font-variant-numeric: tabular-nums;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, .5), 0 0 0 3px rgba(255, 255, 255, .25); }
-.nm-pl.cap .disc { background: radial-gradient(circle at 35% 30%, #fff3d6, #ffc246 55%, #e08a00); box-shadow: 0 0 0 4px rgba(255, 174, 26, .45), 0 0 40px rgba(255, 174, 26, .8), 0 10px 18px rgba(0, 0, 0, .5); }
-.nm-pl .who { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 800; font-size: clamp(15px, 1.6vw, 21px); line-height: 1; text-shadow: 0 2px 6px rgba(0, 0, 0, .9); white-space: nowrap; }
-.nm-pl .op { font-size: 12.5px; color: #cfe0d4; text-shadow: 0 2px 6px rgba(0, 0, 0, .9); white-space: nowrap; }
-.nm-pl .arm { position: absolute; top: -6px; right: -8px; width: 22px; height: 22px; border-radius: 50%; background: var(--led); color: #1a0f00; font: 800 12px/22px "Work Sans", sans-serif; text-align: center; }
-.nm-led { position: relative; z-index: 4; height: 54px; overflow: hidden; background: #050505; border-block: 2px solid #1a1a1a; box-shadow: 0 0 40px rgba(255, 174, 26, .16); margin: 4px calc(-1 * clamp(16px, 3vw, 36px)) 0; }
+.nm-stadium { position: relative; max-width: 980px; margin: 18px auto 0; container: nmp / inline-size; }
+.nm-pitch { position: relative; width: 100%; aspect-ratio: 1000 / 660; border-radius: 14px; overflow: hidden;
+  background: radial-gradient(90% 60% at 50% 0%, #0f2418, #050c08 70%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 30px 60px rgba(0, 0, 0, .45); }
+.nm-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.nm-glow { position: absolute; inset: 0; pointer-events: none; z-index: 6; mix-blend-mode: screen; overflow: hidden; border-radius: 14px; }
+.nm-glow::before, .nm-glow::after { content: ""; position: absolute; top: -30%; width: 60%; height: 140%; filter: blur(8px);
+  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg 156deg, rgba(255, 251, 232, .10) 168deg, rgba(255, 251, 232, .18) 180deg, rgba(255, 251, 232, .10) 192deg, transparent 204deg 360deg); }
+.nm-glow::before { left: -14%; transform: rotate(-24deg); transform-origin: 50% 0; }
+.nm-glow::after { right: -14%; transform: rotate(24deg); transform-origin: 50% 0; }
+.nm-pl { --d: calc(clamp(30px, 6.2cqw, 58px) * var(--s, 1)); position: absolute; width: max-content; max-width: 24cqw;
+  transform: translate(-50%, calc(4px - var(--d))); display: grid; justify-items: center; gap: 3px; cursor: pointer; border-radius: 10px; outline-offset: 3px; }
+.nm-pl .disc { position: relative; width: var(--d); height: var(--d); border-radius: 50%; display: grid; place-items: center; color: #0b1b12;
+  background: radial-gradient(circle at 35% 28%, #ffffff, #e4ebe4 58%, #b9c7bc); border: calc(3px * var(--s, 1)) solid var(--k1, #7d8a84);
+  box-shadow: 0 0 0 1.5px var(--k2, #ffffff), 0 0 0 3px rgba(0, 0, 0, .45), 0 calc(var(--d) * .18) calc(var(--d) * .3) rgba(0, 0, 0, .55); }
+.nm-pl .disc span { font: 800 calc(clamp(13px, 2.5cqw, 24px) * var(--s, 1))/1 "Big Shoulders Display", Impact, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.nm-pl.cap .disc { background: radial-gradient(circle at 35% 28%, #fff3d6, #ffc246 55%, #e08a00); color: #241400;
+  box-shadow: 0 0 0 1.5px var(--k2, #ffffff), 0 0 0 4px rgba(255, 174, 26, .45), 0 0 calc(var(--d) * .7) rgba(255, 174, 26, .75), 0 calc(var(--d) * .18) calc(var(--d) * .3) rgba(0, 0, 0, .55); }
+.nm-pl .arm { position: absolute; top: calc(var(--d) * -.12 - 4px); right: calc(var(--d) * -.18 - 6px); width: calc(var(--d) * .4); height: calc(var(--d) * .4); min-width: 15px; min-height: 15px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--led); color: #1a0f00; font: 800 max(10px, calc(var(--d) * .22))/1 "Work Sans", sans-serif; font-style: normal; box-shadow: 0 0 0 2px #06100b; }
+.nm-pl .who { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 1px 6px; border-radius: 6px; background: rgba(3, 9, 6, .62);
+  font: 800 max(12px, calc(2.05cqw * var(--s, 1)))/1.1 "Big Shoulders Display", Impact, sans-serif; letter-spacing: .02em; color: #f2f7f0; }
+.nm-pl.cap .who { color: #ffd27a; }
+.nm-pl .op { font-size: max(11px, calc(1.25cqw * var(--s, 1))); color: #cfe0d4; text-shadow: 0 1px 4px rgba(0, 0, 0, .95); white-space: nowrap; }
+.nm-pl:hover .disc, .nm-pl:focus-visible .disc { transform: translateY(-2px); }
+.nm-pl .disc { transition: transform .15s ease; }
+.nm-pl:focus-visible { outline: 2px solid var(--led); }
+@container nmp (max-width: 700px) { .nm-pitch { aspect-ratio: 1000 / 780; } .nm-pl .op { display: none; } }
+@container nmp (max-width: 460px) { .nm-pitch { aspect-ratio: 1000 / 900; } }
+@container nmp (max-width: 380px) { .nm-pitch { aspect-ratio: 1; } }
+.nm-dug { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.nm-dug .lbl { font: 800 20px/1 "Big Shoulders Display", Impact, sans-serif; color: #9fb6a7; margin-right: 4px; }
+.nm-sub { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); cursor: pointer; font-size: 14px; }
+.nm-sub i { font-style: normal; font-size: 11px; font-weight: 700; color: #9fb6a7; }
+.nm-sub b { color: #eaf2ec; font-weight: 600; }
+.nm-sub span { font: 700 17px/1 "Big Shoulders Display", Impact, sans-serif; color: var(--led); }
+.nm-sub:hover, .nm-sub:focus-visible { border-color: rgba(255, 174, 26, .5); }
+.nm-led { position: relative; z-index: 4; height: 54px; overflow: hidden; background: #050505; border-block: 2px solid #1a1a1a; box-shadow: 0 0 40px rgba(255, 174, 26, .16); margin: 18px calc(-1 * clamp(16px, 3vw, 36px)) 0; }
 .nm-led::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 0 1.1px, rgba(0, 0, 0, .55) 1.3px) 0 0 / 4px 4px; pointer-events: none; }
 .nm-led .run { display: flex; gap: 60px; white-space: nowrap; height: 100%; align-items: center; font-family: "DotGothic16", monospace; font-size: 28px; color: var(--led);
   text-shadow: 0 0 8px rgba(255, 174, 26, .8); animation: nm-led 44s linear infinite; width: max-content; padding-left: 60px; }
 .nm-led .run b { color: #fff4d6; font-weight: 400; margin-left: 14px; }
 .nm-led:hover .run { animation-play-state: paused; }
 @keyframes nm-led { to { transform: translateX(-50%); } }
-.nm-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.nm-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; margin-top: 22px; }
+.nm-tile .gain { color: var(--led); font: 800 22px/1 "Big Shoulders Display", Impact, sans-serif; }
 .nm-tile { background: rgba(255, 255, 255, .045); border: 1px solid rgba(255, 255, 255, .09); border-radius: 16px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
 .nm-tile h3 { margin: 0; font: 800 24px/1 "Big Shoulders Display", Impact, sans-serif; color: #eaf2ec; }
 .nm-tile p { margin: 0; color: #9fb6a7; font-size: 14.5px; line-height: 1.5; }
@@ -857,15 +877,12 @@ dialog.sheet:focus { outline: none; }
 .nm-tile .big.light { color: var(--flood); }
 .nm .hmodes { background: rgba(255, 255, 255, .08); }
 #tpl-hero.boot .nm-glow { animation: nm-lights 1.6s steps(1) both; }
-#tpl-hero.boot .nm-turf { animation: nm-turfon 1.6s ease-out both; }
+#tpl-hero.boot .nm-pitch { animation: nm-turfon 1.6s ease-out both; }
 @keyframes nm-lights { 0% { opacity: 0; } 18% { opacity: .9; } 24% { opacity: .1; } 36% { opacity: 1; } 42% { opacity: .35; } 55%, 100% { opacity: 1; } }
 @keyframes nm-turfon { 0% { filter: brightness(.25); } 55% { filter: brightness(.55); } 100% { filter: brightness(1); } }
 @media (max-width: 760px) {
   .nm { border-radius: 16px; }
   .nm-head { grid-template-columns: 1fr; } .nm-score { text-align: left; }
-  .nm-tiles { grid-template-columns: 1fr; }
-  .nm-stadium { --pw: calc(100vw - 64px); perspective: 1600px; }
-  .nm-pl .op { display: none; }
   .nm-led { height: 44px; } .nm-led .run { font-size: 21px; }
 }
 
@@ -947,7 +964,7 @@ dialog.sheet:focus { outline: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .nm-led .run, .mk-tape .run, .mk-title::after { animation: none !important; }
-  #tpl-hero.boot .nm-glow, #tpl-hero.boot .nm-turf, #tpl-hero.boot .po-big { animation: none !important; }
+  #tpl-hero.boot .nm-glow, #tpl-hero.boot .nm-pitch, #tpl-hero.boot .po-big { animation: none !important; }
   .pcard, .ch-stage .pcard.lead { transition: none; }
 }
 
@@ -1360,7 +1377,7 @@ window.UFE_SKIN_FONTS = {"cards": "family=Bricolage+Grotesque:opsz,wdth,wght@12.
         <div class="status-line" id="tm-status"></div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn" id="tm-mine" hidden>Load my saved team</button>
-          <button class="btn" id="tm-example">Load example squad</button>
+          <button class="btn" id="tm-example">Load the best squad</button>
           <button class="btn" id="tm-clear">Clear squad</button>
         </div>
       </div>
@@ -1890,7 +1907,8 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
   const LEAGUE_BUDGET = D.rules.budget.league_phase;
   const CAP = 3;
   // My team starts from, in order: what this browser saved, the manager file marked `me` (private edition), the engine's own pick
-  const ME = (!(D.meta && D.meta.public) && (D.managers || []).find(m => m.me && !m.error && (m.squad || []).length === 15 && m.squad.every(id => P[id]))) || null;
+  // On the shared edition ME stays null here; the owner's team arrives later from the page's private store (see 20_app.js)
+  let ME = (!(D.meta && D.meta.public) && (D.managers || []).find(m => m.me && !m.error && (m.squad || []).length === 15 && m.squad.every(id => P[id]))) || null;
   let squad = store.get("myteam", null);
   const exampleSquad = () => D.matchdays[MDS.includes(upcoming) ? upcoming : MDS[0]].best.squad.slice();
   let isExample = false;
@@ -1934,6 +1952,12 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
     $$("#tm-squad [data-rm]").forEach(b => b.addEventListener("click", () => { squad = squad.filter(x => x !== b.dataset.rm); isExample = false; saveSquad(); renderTeam(); renderBoard(); renderReadout(); }));
   }
   function saveSquad() { store.set("myteam", squad); renderBoard(); renderReadout(); }
+  function bindMine() {
+    const b = $("#tm-mine");
+    if (!ME || !b) return;
+    b.hidden = false; b.textContent = `Load ${ME.team_name || "my saved team"}`;
+    b.onclick = () => { squad = ME.squad.slice(); isExample = false; store.set("myteam", null); renderTeam(); renderBoard(); renderReadout(); };
+  }
   function setupPicker() {
     const inp = $("#tm-search"), res = $("#tm-results");
     const show = () => {
@@ -1958,7 +1982,8 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
     inp.addEventListener("focus", show);
     document.addEventListener("click", e => { if (!e.target.closest(".picker")) res.hidden = true; });
     $("#tm-example").addEventListener("click", () => { squad = exampleSquad(); isExample = true; saveSquad(); renderTeam(); });
-    if (ME) { $("#tm-mine").hidden = false; $("#tm-mine").textContent = `Load ${ME.team_name || "my saved team"}`; $("#tm-mine").addEventListener("click", () => { squad = ME.squad.slice(); isExample = false; store.set("myteam", null); renderTeam(); renderBoard(); renderReadout(); }); }
+    $("#tm-example").textContent = `Load the best squad for MD${upcoming}`;
+    bindMine();
     $("#tm-clear").addEventListener("click", () => { squad = []; isExample = false; saveSquad(); renderTeam(); });
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => $("#" + id).addEventListener("change", () => { store.set(id, $("#" + id).value); renderTeam(); }));
     ["tm-bank", "tm-ft", "tm-horizon"].forEach(id => { const v = store.get(id, null); if (v != null) $("#" + id).value = v; });
@@ -2027,7 +2052,7 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
       return;
     }
     st.className = "status-line good";
-    st.textContent = `${isExample ? "Example squad: the engine's own pick. Replace it with yours. " : ""}Squad value €${c.toFixed(1)}m · ${15} players`;
+    st.textContent = `${isExample ? `Best possible squad for MD${upcoming}, picked by the engine. Replace it with your own 15 to plan for your team. ` : ""}Squad value €${c.toFixed(1)}m · ${15} players`;
     const b = bestXI(squad, MD);
     const md = D.matchdays[MD];
     $("#tm-xi-h").textContent = `Best XI for MD${MD}`;
@@ -3179,6 +3204,33 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
   }
   setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderHotCold(); renderReliability(); renderGuide();
   HOOKS.push(renderLab, renderH2H, renderTicker);
+
+  // The shared edition carries no saved team in its source, so rivals who open the link cannot see it.
+  // When the page's owner opens it, his team is read from the page's own store (readable by the owner
+  // only) and replaces the best squad. Everyone else keeps the best squad for the week.
+  if (PUBLIC && window.claude && typeof window.claude.use === "function") (async () => {
+    let timer;
+    try {
+      const user = await window.claude.use("user");
+      if (!user || !(await user.isOwner())) return;
+      const db = await window.claude.use("db");
+      if (!db) return;
+      const snap = await Promise.race([db.doc("owner/myteam").get(),
+        new Promise((_, no) => { timer = setTimeout(() => no(new Error("timed out")), 10000); })]);
+      const m = snap && snap.exists ? snap.data() : null;
+      if (!m || !Array.isArray(m.squad) || m.squad.length !== 15 || !m.squad.every(id => P[id])) return;
+      ME = Object.assign({}, m, { me: true });
+      // Edits made in this browser on top of the same saved version survive a reload; anything older
+      // (or made while the page still showed the best squad) gives way to the saved team.
+      const saved = store.get("myteam", null), base = store.get("mine_base", null), ver = String(m.updated || "");
+      if (!(base === ver && Array.isArray(saved) && saved.length && saved.every(id => P[id]))) { squad = ME.squad.slice(); store.set("myteam", null); }
+      store.set("mine_base", ver);
+      isExample = false; boardMode = null;
+      bindMine(); renderAll();
+    } catch (e) { console.warn("Saved team not loaded:", e); }
+    finally { clearTimeout(timer); }
+  })();
+
   if (PUBLIC) HOOKS.push(() => {                       // the shared edition gets a short notice in place of the price-list audit
     const g = new Date(D.meta.generated_at);
     $("#pool-notice").innerHTML = `<span aria-hidden="true">ⓘ</span><span><b>${Number(D.meta.pool_size).toLocaleString("en-GB")} players, ${Number(D.meta.n_sims).toLocaleString("en-GB")} simulations per match.</b> Updated ${g.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}. Prices and ownership are the official game's. Every number here is a probability or an average; the Guide tab says what each one means.</span>`;
@@ -3271,7 +3323,7 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
     const ms = (hasMine() ? [["mine", "My team"]] : []).concat([["best", "Best from scratch"]]).concat(b.limitless ? [["limitless", "Limitless"]] : []);
     return `<div class="hmodes" role="group" aria-label="Team shown">${ms.map(([k, l]) => `<button data-hm="${k}" aria-pressed="${mode() === k && !formation}">${l}</button>`).join("")}</div>`;
   }
-  let heroKey = "";
+  let heroKey = "", bootTimer = 0;
   function countUp(el, to) {
     if (!el) return;
     if (reduceMotion()) { el.textContent = f1(to); return; }
@@ -3307,29 +3359,78 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
   }
 
   // ---------------------------------------------------------------- 2. night match
+  // A broadcast view from behind our goal. The pitch is drawn flat in SVG through a perspective
+  // projection and the players are plain HTML placed with the same projection. Nothing is rotated in
+  // 3D, so discs stay round, names stay sharp and every player stays inside the frame at any width.
+  const NM = { W: 1000, H: 660, top: 40, bot: 580, wt: 600, wb: 960 };
+  NM.r = NM.wb / NM.wt;
+  function nmP(u, v) {                       // u: 0 left touchline to 1 right; v: 0 far goal line to 1 our goal line
+    const d = NM.r - (NM.r - 1) * v, t = (1 / d - 1 / NM.r) / (1 - 1 / NM.r), w = NM.wt + (NM.wb - NM.wt) * t;
+    return { x: NM.W / 2 + (u - .5) * w, y: NM.top + (NM.bot - NM.top) * t, k: w / NM.wb };
+  }
+  function nmPitch(spots) {
+    const L = 105, Wd = 68, c = Wd / 2, P = (x, y) => nmP(x / Wd, y / L), pt = q => `${q.x.toFixed(1)} ${q.y.toFixed(1)}`;
+    const quad = (x0, y0, x1, y1) => `M${pt(P(x0, y0))} L${pt(P(x1, y0))} L${pt(P(x1, y1))} L${pt(P(x0, y1))} Z`;
+    const arc = (cx, cy, r, a0, a1, n) => { let d = ""; for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; d += (i ? " L" : "M") + pt(P(cx + r * Math.cos(a), cy + r * Math.sin(a))); } return d; };
+    const h = Math.acos(5.5 / 9.15);         // half-angle of the penalty arc left outside the box
+    let turf = "";
+    for (let i = -1; i < 15; i++) turf += `<path d="${quad(-7, i * L / 14, Wd + 7, (i + 1) * L / 14)}" fill="${i % 2 ? "#1e5c37" : "#194f2f"}"/>`;
+    const lines = [quad(0, 0, Wd, L), `M${pt(P(0, L / 2))} L${pt(P(Wd, L / 2))}`, arc(c, L / 2, 9.15, 0, 2 * Math.PI, 64),
+      quad(c - 20.16, 0, c + 20.16, 16.5), quad(c - 9.16, 0, c + 9.16, 5.5), arc(c, 11, 9.15, Math.PI / 2 - h, Math.PI / 2 + h, 18),
+      quad(c - 20.16, L - 16.5, c + 20.16, L), quad(c - 9.16, L - 5.5, c + 9.16, L), arc(c, L - 11, 9.15, -Math.PI / 2 - h, -Math.PI / 2 + h, 18),
+      arc(0, 0, 1, 0, Math.PI / 2, 6), arc(Wd, 0, 1, Math.PI / 2, Math.PI, 6), arc(0, L, 1, -Math.PI / 2, 0, 6), arc(Wd, L, 1, Math.PI, 1.5 * Math.PI, 6)].join(" ");
+    const dot = (x, y) => { const q = P(x, y); return `<ellipse cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" rx="${(4 * q.k).toFixed(1)}" ry="${(2.6 * q.k).toFixed(1)}"/>`; };
+    const pools = spots.map(q => `<ellipse cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" rx="${(70 * q.k).toFixed(1)}" ry="${(22 * q.k).toFixed(1)}" fill="url(#${q.cap ? "nm-capspot" : "nm-spot"})"/>`).join("");
+    return `<svg class="nm-svg" viewBox="0 0 ${NM.W} ${NM.H}" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="nm-spot"><stop offset="0" stop-color="#f4ffe9" stop-opacity=".34"/><stop offset="1" stop-color="#f4ffe9" stop-opacity="0"/></radialGradient>
+        <radialGradient id="nm-capspot"><stop offset="0" stop-color="#ffc246" stop-opacity=".62"/><stop offset="1" stop-color="#ffae1a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="nm-flood" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#fffbe8" stop-opacity=".13"/><stop offset=".55" stop-color="#fffbe8" stop-opacity=".03"/><stop offset="1" stop-color="#020604" stop-opacity=".5"/></radialGradient>
+      </defs>
+      ${turf}
+      <rect width="${NM.W}" height="${NM.H}" fill="url(#nm-flood)"/>
+      <path d="${quad(c - 3.66, -2.2, c + 3.66, 0)} ${quad(c - 3.66, L, c + 3.66, L + 2.2)}" fill="rgba(238,246,234,.10)" stroke="rgba(238,246,234,.55)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+      <path d="${lines}" fill="none" stroke="rgba(238,246,234,.72)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <g fill="rgba(238,246,234,.8)">${dot(c, L / 2)}${dot(c, 11)}${dot(c, L - 11)}</g>
+      ${pools}
+    </svg>`;
+  }
   function heroNight(c) {
-    const lines = [["FWD", 22], ["MID", 47], ["DEF", 71], ["GK", 93]];
+    const ROW = { FWD: .2, MID: .5, DEF: .76, GK: .95 }, EDGE = { 2: .33, 3: .2, 4: .12, 5: .09 }, Z = { FWD: 2, MID: 3, DEF: 4, GK: 5 };
+    const spots = [];
     let pls = "";
-    lines.forEach(([k, y]) => { const row = c.xi.filter(p => p.pos === k), n = row.length; row.forEach((p, i) => {
-      const x = n === 1 ? 50 : n === 2 ? 34 + 32 * i : 12 + (76 * i) / (n - 1), f = fixtureOf(p.team, MD);
-      pls += `<div class="nm-pl${p.id === c.cap.id ? " cap" : ""}" data-pid="${p.id}" style="left:${x}%;top:${y}%"><div class="disc">${f1(p.xpts)}${p.id === c.cap.id ? '<span class="arm">C</span>' : ""}</div><div class="who">${esc(shortName(p.name))}</div><div class="op">${f ? `${f.home ? "v" : "at"} ${esc(tShort(f.opp))}, ` : ""}${pct(p.p_start_sim)} start</div></div>`;
-    }); });
-    const chalk = `<svg viewBox="0 0 680 800" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(238,246,234,.75)" stroke-width="3">
-      <rect x="10" y="10" width="660" height="780"/><line x1="10" y1="400" x2="670" y2="400"/><circle cx="340" cy="400" r="92"/>
-      <rect x="140" y="10" width="400" height="165"/><rect x="250" y="10" width="180" height="55"/><rect x="140" y="625" width="400" height="165"/><rect x="250" y="735" width="180" height="55"/>
-      <path d="M 268 175 A 92 92 0 0 0 412 175"/><path d="M 268 625 A 92 92 0 0 1 412 625"/></g><circle cx="340" cy="400" r="5" fill="rgba(238,246,234,.8)"/></svg>`;
+    ["FWD", "MID", "DEF", "GK"].forEach(k => {
+      const row = c.xi.filter(p => p.pos === k), n = row.length;
+      row.forEach((p, i) => {
+        const u = n === 1 ? .5 : EDGE[n] + (1 - 2 * EDGE[n]) * i / (n - 1);
+        // Rows of five zig-zag (second and fourth man drop back) so neighbouring names never collide;
+        // the outside men in a four push up a little, and the middle of three forwards leads the line.
+        const v = ROW[k] + (n === 5 && i % 2 ? .07 : 0) - (n === 4 && (i === 0 || i === 3) ? .035 : 0) - (n === 3 && k === "FWD" && i === 1 ? .035 : 0);
+        const q = nmP(u, v), cap = p.id === c.cap.id, f = fixtureOf(p.team, MD), kc = KITS[p.team] || ["#7d8a84", "#ffffff"];
+        spots.push(Object.assign({ cap }, q));
+        const s = (.84 + .16 * (q.k - 1 / NM.r) / (1 - 1 / NM.r)).toFixed(3);
+        pls += `<div class="nm-pl${cap ? " cap" : ""}" data-pid="${p.id}" tabindex="0" role="button" aria-label="${esc(p.name)}, ${f1(p.xpts)} expected points${cap ? ", captain" : ""}"
+          style="left:${(q.x / NM.W * 100).toFixed(2)}%;top:${(q.y / NM.H * 100).toFixed(2)}%;--s:${s};--k1:${kc[0]};--k2:${kc[1]};z-index:${Z[k]}">
+          <div class="disc"><span>${f1(p.xpts)}</span>${cap ? '<i class="arm">C</i>' : ""}</div>
+          <div class="who">${esc(shortName(p.name))}</div>
+          <div class="op">${f ? `${f.home ? "v" : "at"} ${esc(tShort(f.opp))}, ` : ""}${pct(p.p_start_sim)} start</div></div>`;
+      });
+    });
+    const bench = c.bench.map(p => `<div class="nm-sub" data-pid="${p.id}" tabindex="0" role="button"><i>${p.pos}</i><b>${esc(shortName(p.name))}</b><span>${f1(p.xpts)}</span></div>`).join("");
     const tick = c.top.slice(0, 16).map(p => `<span>${esc(shortName(p.name).toUpperCase())}<b>${f1(p.xpts)}</b></span>`).join("");
-    const tiles = c.tx
-      ? `<div class="nm-tile"><h3>Your move</h3><div class="swap"><span class="o">${c.tx.out.map(p => esc(shortName(p.name))).join(" + ")}</span> out, <span class="i">${c.tx.inn.map(p => esc(shortName(p.name))).join(" + ")}</span> in</div><p>${c.ft != null ? `Uses your <b>${c.ft} free transfer${c.ft === 1 ? "" : "s"}</b>, €${f1(c.bank)}m left in the bank.` : ""}</p></div>
-         <div class="nm-tile"><h3>Worth</h3><div class="big">+${f1(c.tx.gain)}</div><p>expected points over the next three matchdays</p></div>`
-      : `<div class="nm-tile"><h3>Bench</h3><p>${c.bench.map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>
-         <div class="nm-tile"><h3>Best outside</h3><p>${c.targets.slice(0, 3).map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>`;
+    const names = ps => ps.map(p => esc(shortName(p.name))).join(" + ");
+    const tiles = (c.tx
+      ? `<div class="nm-tile"><h3>Your move</h3><div class="swap"><span class="o">${names(c.tx.out)}</span> out, <span class="i">${names(c.tx.inn)}</span> in</div>
+         <p><b class="gain">+${f1(c.tx.gain)}</b> expected points over the next three matchdays. ${c.ft == null ? "" : c.tx.hits ? `${c.tx.out.length} transfers against ${c.ft} free; the −${4 * c.tx.hits} hit is already taken off.` : `Uses ${c.tx.out.length} of your ${c.ft} free transfer${c.ft === 1 ? "" : "s"}.`}</p></div>`
+      : `<div class="nm-tile"><h3>Best outside the XI</h3><p>${c.targets.slice(0, 3).map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>`)
+      + `<div class="nm-tile"><h3>Captain</h3><div class="big light">${esc(shortName(c.cap.name))}</div><p>${f1(c.cap.xpts)} expected, ${pct(c.cap.p_haul || 0)} chance of 10 or more</p></div>`;
     return `<div class="nm">
       <div class="nm-head"><div>${heroModes()}<h1 class="nm-title">Matchday ${MD}</h1><div class="nm-who"><b>${esc(c.name)}</b>, ${c.form}, <span class="hero-clock nm-clock">${leftTo(c.dl)}</span> to the deadline</div></div>
         <div class="nm-score"><div class="n" data-count="${c.ev}">${f1(c.ev)}</div><div class="l">expected points, <b>${esc(shortName(c.cap.name))}</b> captain</div></div></div>
-      <div class="nm-stadium"><div class="nm-turf">${chalk}${pls}</div><div class="nm-glow"></div></div>
+      <div class="nm-stadium"><div class="nm-pitch">${nmPitch(spots)}${pls}</div><div class="nm-glow" aria-hidden="true"></div></div>
+      <div class="nm-dug"><span class="lbl">Bench</span>${bench}</div>
       <div class="nm-led" aria-label="Top projections this matchday"><div class="run">${tick}${tick}</div></div>
-      <div class="nm-tiles">${tiles}<div class="nm-tile"><h3>Captain</h3><div class="big light">${esc(shortName(c.cap.name))}</div><p>${f1(c.cap.xpts)} expected, ${pct(c.cap.p_haul || 0)} chance of 10 or more</p></div></div>
+      <div class="nm-tiles">${tiles}</div>
     </div>`;
   }
 
@@ -3395,8 +3496,10 @@ const D = {"meta":{"generated_at":"2026-11-16T18:32:57+00:00","as_of":"2026-11-1
     if (key !== heroKey) {                                     // the one moment of motion per template and matchday
       heroKey = key;
       const n = $("[data-count]", box);
-      if (t === "night" && !reduceMotion()) { box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); setTimeout(() => countUp(n, +n.dataset.count), 1200); }
-      else if (t === "poster" && !reduceMotion()) { box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); }
+      // The class comes off once the sequence has played, so later re-renders (a new formation, a new mode) stay still.
+      const boot = () => { clearTimeout(bootTimer); box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); bootTimer = setTimeout(() => box.classList.remove("boot"), 2000); };
+      if (t === "night" && !reduceMotion()) { boot(); setTimeout(() => countUp(n, +n.dataset.count), 1200); }
+      else if (t === "poster" && !reduceMotion()) boot();
       else countUp(n, +n.dataset.count);
     }
   }

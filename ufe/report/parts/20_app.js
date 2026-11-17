@@ -496,6 +496,33 @@
   }
   setupLab(); setupH2H(); setupSearch(); renderClubMap(); renderHotCold(); renderReliability(); renderGuide();
   HOOKS.push(renderLab, renderH2H, renderTicker);
+
+  // The shared edition carries no saved team in its source, so rivals who open the link cannot see it.
+  // When the page's owner opens it, his team is read from the page's own store (readable by the owner
+  // only) and replaces the best squad. Everyone else keeps the best squad for the week.
+  if (PUBLIC && window.claude && typeof window.claude.use === "function") (async () => {
+    let timer;
+    try {
+      const user = await window.claude.use("user");
+      if (!user || !(await user.isOwner())) return;
+      const db = await window.claude.use("db");
+      if (!db) return;
+      const snap = await Promise.race([db.doc("owner/myteam").get(),
+        new Promise((_, no) => { timer = setTimeout(() => no(new Error("timed out")), 10000); })]);
+      const m = snap && snap.exists ? snap.data() : null;
+      if (!m || !Array.isArray(m.squad) || m.squad.length !== 15 || !m.squad.every(id => P[id])) return;
+      ME = Object.assign({}, m, { me: true });
+      // Edits made in this browser on top of the same saved version survive a reload; anything older
+      // (or made while the page still showed the best squad) gives way to the saved team.
+      const saved = store.get("myteam", null), base = store.get("mine_base", null), ver = String(m.updated || "");
+      if (!(base === ver && Array.isArray(saved) && saved.length && saved.every(id => P[id]))) { squad = ME.squad.slice(); store.set("myteam", null); }
+      store.set("mine_base", ver);
+      isExample = false; boardMode = null;
+      bindMine(); renderAll();
+    } catch (e) { console.warn("Saved team not loaded:", e); }
+    finally { clearTimeout(timer); }
+  })();
+
   if (PUBLIC) HOOKS.push(() => {                       // the shared edition gets a short notice in place of the price-list audit
     const g = new Date(D.meta.generated_at);
     $("#pool-notice").innerHTML = `<span aria-hidden="true">ⓘ</span><span><b>${Number(D.meta.pool_size).toLocaleString("en-GB")} players, ${Number(D.meta.n_sims).toLocaleString("en-GB")} simulations per match.</b> Updated ${g.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}. Prices and ownership are the official game's. Every number here is a probability or an average; the Guide tab says what each one means.</span>`;

@@ -184,31 +184,51 @@
 .nm-score .n { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 800; font-size: clamp(70px, 8.5vw, 124px); line-height: .8; color: var(--flood); text-shadow: 0 0 40px rgba(255, 251, 232, .35); font-variant-numeric: tabular-nums; }
 .nm-score .l { color: #9fb6a7; font-size: 15px; margin-top: 8px; }
 .nm-score .l b { color: #eaf2ec; }
-.nm-stadium { --pw: min(66vw, 700px); position: relative; margin: 14px auto 0; height: calc(var(--pw) * .84 + 30px); perspective: 2600px; perspective-origin: 50% 30%; }
-.nm-turf { position: absolute; left: 50%; top: 6px; width: var(--pw); aspect-ratio: 68 / 80; transform: translateX(-50%) rotateX(46deg); transform-origin: 50% 0%; transform-style: preserve-3d;
-  background: repeating-linear-gradient(to bottom, #1c5633 0 6.25%, #21633b 6.25% 12.5%); border-radius: 4px; box-shadow: 0 0 0 10px #12301f, 0 60px 120px rgba(0, 0, 0, .7); }
-.nm-turf svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.nm-glow { position: absolute; inset: 0; pointer-events: none; z-index: 2; mix-blend-mode: screen; }
-.nm-glow::before, .nm-glow::after { content: ""; position: absolute; top: -10%; width: 70%; height: 120%; filter: blur(6px);
-  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg 150deg, rgba(255, 251, 232, .14) 165deg, rgba(255, 251, 232, .26) 180deg, rgba(255, 251, 232, .14) 195deg, transparent 210deg 360deg); }
-.nm-glow::before { left: -12%; transform: rotate(-18deg); transform-origin: 50% 0; }
-.nm-glow::after { right: -12%; transform: rotate(18deg); transform-origin: 50% 0; }
-.nm-pl { position: absolute; transform: translate(-50%, -100%) rotateX(-46deg); transform-origin: 50% 100%; display: grid; justify-items: center; gap: 4px; cursor: pointer; }
-.nm-pl .disc { position: relative; width: clamp(44px, 5vw, 64px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: #0b1b12;
-  background: radial-gradient(circle at 35% 30%, #ffffff, #dfe7df 60%, #b8c6bb); font: 700 clamp(15px, 1.7vw, 21px)/1 "Work Sans", sans-serif; font-variant-numeric: tabular-nums;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, .5), 0 0 0 3px rgba(255, 255, 255, .25); }
-.nm-pl.cap .disc { background: radial-gradient(circle at 35% 30%, #fff3d6, #ffc246 55%, #e08a00); box-shadow: 0 0 0 4px rgba(255, 174, 26, .45), 0 0 40px rgba(255, 174, 26, .8), 0 10px 18px rgba(0, 0, 0, .5); }
-.nm-pl .who { font-family: "Big Shoulders Display", Impact, sans-serif; font-weight: 800; font-size: clamp(15px, 1.6vw, 21px); line-height: 1; text-shadow: 0 2px 6px rgba(0, 0, 0, .9); white-space: nowrap; }
-.nm-pl .op { font-size: 12.5px; color: #cfe0d4; text-shadow: 0 2px 6px rgba(0, 0, 0, .9); white-space: nowrap; }
-.nm-pl .arm { position: absolute; top: -6px; right: -8px; width: 22px; height: 22px; border-radius: 50%; background: var(--led); color: #1a0f00; font: 800 12px/22px "Work Sans", sans-serif; text-align: center; }
-.nm-led { position: relative; z-index: 4; height: 54px; overflow: hidden; background: #050505; border-block: 2px solid #1a1a1a; box-shadow: 0 0 40px rgba(255, 174, 26, .16); margin: 4px calc(-1 * clamp(16px, 3vw, 36px)) 0; }
+.nm-stadium { position: relative; max-width: 980px; margin: 18px auto 0; container: nmp / inline-size; }
+.nm-pitch { position: relative; width: 100%; aspect-ratio: 1000 / 660; border-radius: 14px; overflow: hidden;
+  background: radial-gradient(90% 60% at 50% 0%, #0f2418, #050c08 70%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 30px 60px rgba(0, 0, 0, .45); }
+.nm-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.nm-glow { position: absolute; inset: 0; pointer-events: none; z-index: 6; mix-blend-mode: screen; overflow: hidden; border-radius: 14px; }
+.nm-glow::before, .nm-glow::after { content: ""; position: absolute; top: -30%; width: 60%; height: 140%; filter: blur(8px);
+  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg 156deg, rgba(255, 251, 232, .10) 168deg, rgba(255, 251, 232, .18) 180deg, rgba(255, 251, 232, .10) 192deg, transparent 204deg 360deg); }
+.nm-glow::before { left: -14%; transform: rotate(-24deg); transform-origin: 50% 0; }
+.nm-glow::after { right: -14%; transform: rotate(24deg); transform-origin: 50% 0; }
+.nm-pl { --d: calc(clamp(30px, 6.2cqw, 58px) * var(--s, 1)); position: absolute; width: max-content; max-width: 24cqw;
+  transform: translate(-50%, calc(4px - var(--d))); display: grid; justify-items: center; gap: 3px; cursor: pointer; border-radius: 10px; outline-offset: 3px; }
+.nm-pl .disc { position: relative; width: var(--d); height: var(--d); border-radius: 50%; display: grid; place-items: center; color: #0b1b12;
+  background: radial-gradient(circle at 35% 28%, #ffffff, #e4ebe4 58%, #b9c7bc); border: calc(3px * var(--s, 1)) solid var(--k1, #7d8a84);
+  box-shadow: 0 0 0 1.5px var(--k2, #ffffff), 0 0 0 3px rgba(0, 0, 0, .45), 0 calc(var(--d) * .18) calc(var(--d) * .3) rgba(0, 0, 0, .55); }
+.nm-pl .disc span { font: 800 calc(clamp(13px, 2.5cqw, 24px) * var(--s, 1))/1 "Big Shoulders Display", Impact, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.nm-pl.cap .disc { background: radial-gradient(circle at 35% 28%, #fff3d6, #ffc246 55%, #e08a00); color: #241400;
+  box-shadow: 0 0 0 1.5px var(--k2, #ffffff), 0 0 0 4px rgba(255, 174, 26, .45), 0 0 calc(var(--d) * .7) rgba(255, 174, 26, .75), 0 calc(var(--d) * .18) calc(var(--d) * .3) rgba(0, 0, 0, .55); }
+.nm-pl .arm { position: absolute; top: calc(var(--d) * -.12 - 4px); right: calc(var(--d) * -.18 - 6px); width: calc(var(--d) * .4); height: calc(var(--d) * .4); min-width: 15px; min-height: 15px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--led); color: #1a0f00; font: 800 max(10px, calc(var(--d) * .22))/1 "Work Sans", sans-serif; font-style: normal; box-shadow: 0 0 0 2px #06100b; }
+.nm-pl .who { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 1px 6px; border-radius: 6px; background: rgba(3, 9, 6, .62);
+  font: 800 max(12px, calc(2.05cqw * var(--s, 1)))/1.1 "Big Shoulders Display", Impact, sans-serif; letter-spacing: .02em; color: #f2f7f0; }
+.nm-pl.cap .who { color: #ffd27a; }
+.nm-pl .op { font-size: max(11px, calc(1.25cqw * var(--s, 1))); color: #cfe0d4; text-shadow: 0 1px 4px rgba(0, 0, 0, .95); white-space: nowrap; }
+.nm-pl:hover .disc, .nm-pl:focus-visible .disc { transform: translateY(-2px); }
+.nm-pl .disc { transition: transform .15s ease; }
+.nm-pl:focus-visible { outline: 2px solid var(--led); }
+@container nmp (max-width: 700px) { .nm-pitch { aspect-ratio: 1000 / 780; } .nm-pl .op { display: none; } }
+@container nmp (max-width: 460px) { .nm-pitch { aspect-ratio: 1000 / 900; } }
+@container nmp (max-width: 380px) { .nm-pitch { aspect-ratio: 1; } }
+.nm-dug { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.nm-dug .lbl { font: 800 20px/1 "Big Shoulders Display", Impact, sans-serif; color: #9fb6a7; margin-right: 4px; }
+.nm-sub { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); cursor: pointer; font-size: 14px; }
+.nm-sub i { font-style: normal; font-size: 11px; font-weight: 700; color: #9fb6a7; }
+.nm-sub b { color: #eaf2ec; font-weight: 600; }
+.nm-sub span { font: 700 17px/1 "Big Shoulders Display", Impact, sans-serif; color: var(--led); }
+.nm-sub:hover, .nm-sub:focus-visible { border-color: rgba(255, 174, 26, .5); }
+.nm-led { position: relative; z-index: 4; height: 54px; overflow: hidden; background: #050505; border-block: 2px solid #1a1a1a; box-shadow: 0 0 40px rgba(255, 174, 26, .16); margin: 18px calc(-1 * clamp(16px, 3vw, 36px)) 0; }
 .nm-led::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, transparent 0 1.1px, rgba(0, 0, 0, .55) 1.3px) 0 0 / 4px 4px; pointer-events: none; }
 .nm-led .run { display: flex; gap: 60px; white-space: nowrap; height: 100%; align-items: center; font-family: "DotGothic16", monospace; font-size: 28px; color: var(--led);
   text-shadow: 0 0 8px rgba(255, 174, 26, .8); animation: nm-led 44s linear infinite; width: max-content; padding-left: 60px; }
 .nm-led .run b { color: #fff4d6; font-weight: 400; margin-left: 14px; }
 .nm-led:hover .run { animation-play-state: paused; }
 @keyframes nm-led { to { transform: translateX(-50%); } }
-.nm-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.nm-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 14px; margin-top: 22px; }
+.nm-tile .gain { color: var(--led); font: 800 22px/1 "Big Shoulders Display", Impact, sans-serif; }
 .nm-tile { background: rgba(255, 255, 255, .045); border: 1px solid rgba(255, 255, 255, .09); border-radius: 16px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
 .nm-tile h3 { margin: 0; font: 800 24px/1 "Big Shoulders Display", Impact, sans-serif; color: #eaf2ec; }
 .nm-tile p { margin: 0; color: #9fb6a7; font-size: 14.5px; line-height: 1.5; }
@@ -220,15 +240,12 @@
 .nm-tile .big.light { color: var(--flood); }
 .nm .hmodes { background: rgba(255, 255, 255, .08); }
 #tpl-hero.boot .nm-glow { animation: nm-lights 1.6s steps(1) both; }
-#tpl-hero.boot .nm-turf { animation: nm-turfon 1.6s ease-out both; }
+#tpl-hero.boot .nm-pitch { animation: nm-turfon 1.6s ease-out both; }
 @keyframes nm-lights { 0% { opacity: 0; } 18% { opacity: .9; } 24% { opacity: .1; } 36% { opacity: 1; } 42% { opacity: .35; } 55%, 100% { opacity: 1; } }
 @keyframes nm-turfon { 0% { filter: brightness(.25); } 55% { filter: brightness(.55); } 100% { filter: brightness(1); } }
 @media (max-width: 760px) {
   .nm { border-radius: 16px; }
   .nm-head { grid-template-columns: 1fr; } .nm-score { text-align: left; }
-  .nm-tiles { grid-template-columns: 1fr; }
-  .nm-stadium { --pw: calc(100vw - 64px); perspective: 1600px; }
-  .nm-pl .op { display: none; }
   .nm-led { height: 44px; } .nm-led .run { font-size: 21px; }
 }
 
@@ -310,7 +327,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .nm-led .run, .mk-tape .run, .mk-title::after { animation: none !important; }
-  #tpl-hero.boot .nm-glow, #tpl-hero.boot .nm-turf, #tpl-hero.boot .po-big { animation: none !important; }
+  #tpl-hero.boot .nm-glow, #tpl-hero.boot .nm-pitch, #tpl-hero.boot .po-big { animation: none !important; }
   .pcard, .ch-stage .pcard.lead { transition: none; }
 }
 

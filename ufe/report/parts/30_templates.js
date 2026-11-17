@@ -85,7 +85,7 @@
     const ms = (hasMine() ? [["mine", "My team"]] : []).concat([["best", "Best from scratch"]]).concat(b.limitless ? [["limitless", "Limitless"]] : []);
     return `<div class="hmodes" role="group" aria-label="Team shown">${ms.map(([k, l]) => `<button data-hm="${k}" aria-pressed="${mode() === k && !formation}">${l}</button>`).join("")}</div>`;
   }
-  let heroKey = "";
+  let heroKey = "", bootTimer = 0;
   function countUp(el, to) {
     if (!el) return;
     if (reduceMotion()) { el.textContent = f1(to); return; }
@@ -121,29 +121,78 @@
   }
 
   // ---------------------------------------------------------------- 2. night match
+  // A broadcast view from behind our goal. The pitch is drawn flat in SVG through a perspective
+  // projection and the players are plain HTML placed with the same projection. Nothing is rotated in
+  // 3D, so discs stay round, names stay sharp and every player stays inside the frame at any width.
+  const NM = { W: 1000, H: 660, top: 40, bot: 580, wt: 600, wb: 960 };
+  NM.r = NM.wb / NM.wt;
+  function nmP(u, v) {                       // u: 0 left touchline to 1 right; v: 0 far goal line to 1 our goal line
+    const d = NM.r - (NM.r - 1) * v, t = (1 / d - 1 / NM.r) / (1 - 1 / NM.r), w = NM.wt + (NM.wb - NM.wt) * t;
+    return { x: NM.W / 2 + (u - .5) * w, y: NM.top + (NM.bot - NM.top) * t, k: w / NM.wb };
+  }
+  function nmPitch(spots) {
+    const L = 105, Wd = 68, c = Wd / 2, P = (x, y) => nmP(x / Wd, y / L), pt = q => `${q.x.toFixed(1)} ${q.y.toFixed(1)}`;
+    const quad = (x0, y0, x1, y1) => `M${pt(P(x0, y0))} L${pt(P(x1, y0))} L${pt(P(x1, y1))} L${pt(P(x0, y1))} Z`;
+    const arc = (cx, cy, r, a0, a1, n) => { let d = ""; for (let i = 0; i <= n; i++) { const a = a0 + (a1 - a0) * i / n; d += (i ? " L" : "M") + pt(P(cx + r * Math.cos(a), cy + r * Math.sin(a))); } return d; };
+    const h = Math.acos(5.5 / 9.15);         // half-angle of the penalty arc left outside the box
+    let turf = "";
+    for (let i = -1; i < 15; i++) turf += `<path d="${quad(-7, i * L / 14, Wd + 7, (i + 1) * L / 14)}" fill="${i % 2 ? "#1e5c37" : "#194f2f"}"/>`;
+    const lines = [quad(0, 0, Wd, L), `M${pt(P(0, L / 2))} L${pt(P(Wd, L / 2))}`, arc(c, L / 2, 9.15, 0, 2 * Math.PI, 64),
+      quad(c - 20.16, 0, c + 20.16, 16.5), quad(c - 9.16, 0, c + 9.16, 5.5), arc(c, 11, 9.15, Math.PI / 2 - h, Math.PI / 2 + h, 18),
+      quad(c - 20.16, L - 16.5, c + 20.16, L), quad(c - 9.16, L - 5.5, c + 9.16, L), arc(c, L - 11, 9.15, -Math.PI / 2 - h, -Math.PI / 2 + h, 18),
+      arc(0, 0, 1, 0, Math.PI / 2, 6), arc(Wd, 0, 1, Math.PI / 2, Math.PI, 6), arc(0, L, 1, -Math.PI / 2, 0, 6), arc(Wd, L, 1, Math.PI, 1.5 * Math.PI, 6)].join(" ");
+    const dot = (x, y) => { const q = P(x, y); return `<ellipse cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" rx="${(4 * q.k).toFixed(1)}" ry="${(2.6 * q.k).toFixed(1)}"/>`; };
+    const pools = spots.map(q => `<ellipse cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" rx="${(70 * q.k).toFixed(1)}" ry="${(22 * q.k).toFixed(1)}" fill="url(#${q.cap ? "nm-capspot" : "nm-spot"})"/>`).join("");
+    return `<svg class="nm-svg" viewBox="0 0 ${NM.W} ${NM.H}" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="nm-spot"><stop offset="0" stop-color="#f4ffe9" stop-opacity=".34"/><stop offset="1" stop-color="#f4ffe9" stop-opacity="0"/></radialGradient>
+        <radialGradient id="nm-capspot"><stop offset="0" stop-color="#ffc246" stop-opacity=".62"/><stop offset="1" stop-color="#ffae1a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="nm-flood" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#fffbe8" stop-opacity=".13"/><stop offset=".55" stop-color="#fffbe8" stop-opacity=".03"/><stop offset="1" stop-color="#020604" stop-opacity=".5"/></radialGradient>
+      </defs>
+      ${turf}
+      <rect width="${NM.W}" height="${NM.H}" fill="url(#nm-flood)"/>
+      <path d="${quad(c - 3.66, -2.2, c + 3.66, 0)} ${quad(c - 3.66, L, c + 3.66, L + 2.2)}" fill="rgba(238,246,234,.10)" stroke="rgba(238,246,234,.55)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+      <path d="${lines}" fill="none" stroke="rgba(238,246,234,.72)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <g fill="rgba(238,246,234,.8)">${dot(c, L / 2)}${dot(c, 11)}${dot(c, L - 11)}</g>
+      ${pools}
+    </svg>`;
+  }
   function heroNight(c) {
-    const lines = [["FWD", 22], ["MID", 47], ["DEF", 71], ["GK", 93]];
+    const ROW = { FWD: .2, MID: .5, DEF: .76, GK: .95 }, EDGE = { 2: .33, 3: .2, 4: .12, 5: .09 }, Z = { FWD: 2, MID: 3, DEF: 4, GK: 5 };
+    const spots = [];
     let pls = "";
-    lines.forEach(([k, y]) => { const row = c.xi.filter(p => p.pos === k), n = row.length; row.forEach((p, i) => {
-      const x = n === 1 ? 50 : n === 2 ? 34 + 32 * i : 12 + (76 * i) / (n - 1), f = fixtureOf(p.team, MD);
-      pls += `<div class="nm-pl${p.id === c.cap.id ? " cap" : ""}" data-pid="${p.id}" style="left:${x}%;top:${y}%"><div class="disc">${f1(p.xpts)}${p.id === c.cap.id ? '<span class="arm">C</span>' : ""}</div><div class="who">${esc(shortName(p.name))}</div><div class="op">${f ? `${f.home ? "v" : "at"} ${esc(tShort(f.opp))}, ` : ""}${pct(p.p_start_sim)} start</div></div>`;
-    }); });
-    const chalk = `<svg viewBox="0 0 680 800" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="rgba(238,246,234,.75)" stroke-width="3">
-      <rect x="10" y="10" width="660" height="780"/><line x1="10" y1="400" x2="670" y2="400"/><circle cx="340" cy="400" r="92"/>
-      <rect x="140" y="10" width="400" height="165"/><rect x="250" y="10" width="180" height="55"/><rect x="140" y="625" width="400" height="165"/><rect x="250" y="735" width="180" height="55"/>
-      <path d="M 268 175 A 92 92 0 0 0 412 175"/><path d="M 268 625 A 92 92 0 0 1 412 625"/></g><circle cx="340" cy="400" r="5" fill="rgba(238,246,234,.8)"/></svg>`;
+    ["FWD", "MID", "DEF", "GK"].forEach(k => {
+      const row = c.xi.filter(p => p.pos === k), n = row.length;
+      row.forEach((p, i) => {
+        const u = n === 1 ? .5 : EDGE[n] + (1 - 2 * EDGE[n]) * i / (n - 1);
+        // Rows of five zig-zag (second and fourth man drop back) so neighbouring names never collide;
+        // the outside men in a four push up a little, and the middle of three forwards leads the line.
+        const v = ROW[k] + (n === 5 && i % 2 ? .07 : 0) - (n === 4 && (i === 0 || i === 3) ? .035 : 0) - (n === 3 && k === "FWD" && i === 1 ? .035 : 0);
+        const q = nmP(u, v), cap = p.id === c.cap.id, f = fixtureOf(p.team, MD), kc = KITS[p.team] || ["#7d8a84", "#ffffff"];
+        spots.push(Object.assign({ cap }, q));
+        const s = (.84 + .16 * (q.k - 1 / NM.r) / (1 - 1 / NM.r)).toFixed(3);
+        pls += `<div class="nm-pl${cap ? " cap" : ""}" data-pid="${p.id}" tabindex="0" role="button" aria-label="${esc(p.name)}, ${f1(p.xpts)} expected points${cap ? ", captain" : ""}"
+          style="left:${(q.x / NM.W * 100).toFixed(2)}%;top:${(q.y / NM.H * 100).toFixed(2)}%;--s:${s};--k1:${kc[0]};--k2:${kc[1]};z-index:${Z[k]}">
+          <div class="disc"><span>${f1(p.xpts)}</span>${cap ? '<i class="arm">C</i>' : ""}</div>
+          <div class="who">${esc(shortName(p.name))}</div>
+          <div class="op">${f ? `${f.home ? "v" : "at"} ${esc(tShort(f.opp))}, ` : ""}${pct(p.p_start_sim)} start</div></div>`;
+      });
+    });
+    const bench = c.bench.map(p => `<div class="nm-sub" data-pid="${p.id}" tabindex="0" role="button"><i>${p.pos}</i><b>${esc(shortName(p.name))}</b><span>${f1(p.xpts)}</span></div>`).join("");
     const tick = c.top.slice(0, 16).map(p => `<span>${esc(shortName(p.name).toUpperCase())}<b>${f1(p.xpts)}</b></span>`).join("");
-    const tiles = c.tx
-      ? `<div class="nm-tile"><h3>Your move</h3><div class="swap"><span class="o">${c.tx.out.map(p => esc(shortName(p.name))).join(" + ")}</span> out, <span class="i">${c.tx.inn.map(p => esc(shortName(p.name))).join(" + ")}</span> in</div><p>${c.ft != null ? `Uses your <b>${c.ft} free transfer${c.ft === 1 ? "" : "s"}</b>, €${f1(c.bank)}m left in the bank.` : ""}</p></div>
-         <div class="nm-tile"><h3>Worth</h3><div class="big">+${f1(c.tx.gain)}</div><p>expected points over the next three matchdays</p></div>`
-      : `<div class="nm-tile"><h3>Bench</h3><p>${c.bench.map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>
-         <div class="nm-tile"><h3>Best outside</h3><p>${c.targets.slice(0, 3).map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>`;
+    const names = ps => ps.map(p => esc(shortName(p.name))).join(" + ");
+    const tiles = (c.tx
+      ? `<div class="nm-tile"><h3>Your move</h3><div class="swap"><span class="o">${names(c.tx.out)}</span> out, <span class="i">${names(c.tx.inn)}</span> in</div>
+         <p><b class="gain">+${f1(c.tx.gain)}</b> expected points over the next three matchdays. ${c.ft == null ? "" : c.tx.hits ? `${c.tx.out.length} transfers against ${c.ft} free; the −${4 * c.tx.hits} hit is already taken off.` : `Uses ${c.tx.out.length} of your ${c.ft} free transfer${c.ft === 1 ? "" : "s"}.`}</p></div>`
+      : `<div class="nm-tile"><h3>Best outside the XI</h3><p>${c.targets.slice(0, 3).map(p => `<b>${esc(shortName(p.name))}</b> ${f1(p.xpts)}`).join(", ")}</p></div>`)
+      + `<div class="nm-tile"><h3>Captain</h3><div class="big light">${esc(shortName(c.cap.name))}</div><p>${f1(c.cap.xpts)} expected, ${pct(c.cap.p_haul || 0)} chance of 10 or more</p></div>`;
     return `<div class="nm">
       <div class="nm-head"><div>${heroModes()}<h1 class="nm-title">Matchday ${MD}</h1><div class="nm-who"><b>${esc(c.name)}</b>, ${c.form}, <span class="hero-clock nm-clock">${leftTo(c.dl)}</span> to the deadline</div></div>
         <div class="nm-score"><div class="n" data-count="${c.ev}">${f1(c.ev)}</div><div class="l">expected points, <b>${esc(shortName(c.cap.name))}</b> captain</div></div></div>
-      <div class="nm-stadium"><div class="nm-turf">${chalk}${pls}</div><div class="nm-glow"></div></div>
+      <div class="nm-stadium"><div class="nm-pitch">${nmPitch(spots)}${pls}</div><div class="nm-glow" aria-hidden="true"></div></div>
+      <div class="nm-dug"><span class="lbl">Bench</span>${bench}</div>
       <div class="nm-led" aria-label="Top projections this matchday"><div class="run">${tick}${tick}</div></div>
-      <div class="nm-tiles">${tiles}<div class="nm-tile"><h3>Captain</h3><div class="big light">${esc(shortName(c.cap.name))}</div><p>${f1(c.cap.xpts)} expected, ${pct(c.cap.p_haul || 0)} chance of 10 or more</p></div></div>
+      <div class="nm-tiles">${tiles}</div>
     </div>`;
   }
 
@@ -209,8 +258,10 @@
     if (key !== heroKey) {                                     // the one moment of motion per template and matchday
       heroKey = key;
       const n = $("[data-count]", box);
-      if (t === "night" && !reduceMotion()) { box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); setTimeout(() => countUp(n, +n.dataset.count), 1200); }
-      else if (t === "poster" && !reduceMotion()) { box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); }
+      // The class comes off once the sequence has played, so later re-renders (a new formation, a new mode) stay still.
+      const boot = () => { clearTimeout(bootTimer); box.classList.remove("boot"); void box.offsetWidth; box.classList.add("boot"); bootTimer = setTimeout(() => box.classList.remove("boot"), 2000); };
+      if (t === "night" && !reduceMotion()) { boot(); setTimeout(() => countUp(n, +n.dataset.count), 1200); }
+      else if (t === "poster" && !reduceMotion()) boot();
       else countUp(n, +n.dataset.count);
     }
   }
