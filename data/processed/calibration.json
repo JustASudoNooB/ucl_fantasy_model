@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-16T13:33:34+00:00",
+ "generated_at": "2026-11-23T15:53:51+00:00",
  "applied": true,
  "changes": {
   "assist_pos_mult.FWD": [
-   1.6,
-   1.727
+   1.727,
+   1.808
   ]
  },
  "players": 744,
@@ -13,14 +13,14 @@
   "DEF": {
    "minutes": 51598,
    "recoveries": 2968,
-   "fitted": 1.396,
+   "fitted": 1.397,
    "current": 1.4,
    "new": 1.4
   },
   "FWD": {
    "minutes": 16657,
    "recoveries": 257,
-   "fitted": 0.657,
+   "fitted": 0.659,
    "current": 0.64,
    "new": 0.64
   },
@@ -42,17 +42,17 @@
  "assists": {
   "DEF": {
    "actual": 52,
-   "expected": 50.6,
-   "ratio": 1.027,
+   "expected": 49.8,
+   "ratio": 1.044,
    "current": 0.92,
    "new": 0.92
   },
   "FWD": {
    "actual": 49,
-   "expected": 42.3,
-   "ratio": 1.159,
-   "current": 1.6,
-   "new": 1.727
+   "expected": 44.8,
+   "ratio": 1.094,
+   "current": 1.727,
+   "new": 1.808
   },
   "GK": {
    "actual": 0,
@@ -62,8 +62,8 @@
   },
   "MID": {
    "actual": 132,
-   "expected": 139.3,
-   "ratio": 0.947,
+   "expected": 137.7,
+   "ratio": 0.959,
    "current": 0.92,
    "new": 0.92
   }
@@ -72,8 +72,8 @@
   "lineups": 144,
   "per_club": {
    "DEF": 3.96,
-   "MID": 4.73,
    "FWD": 1.24,
+   "MID": 4.73,
    "GK": 1.0
   }
  },
