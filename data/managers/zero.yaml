@@ -2,9 +2,9 @@
 # bank: leave blank to compute it (budget minus squad cost at current prices).
 name: Zero
 team_name: ONETEAMONEDREAM
-updated: 2026-11-03
-free_transfers: 2          # MD4: three transfers, one -4 hit (Díaz, Tresoldi, Gvardiol out; Doué, Malen, Hakimi in), Zero's choice 3 Nov 22:44 IST
-bank: 0.2                  # after the MD4 transfers (0.7 + 20.5 - 21.0); confirm in the app
+updated: 2026-11-25
+free_transfers: 1          # MD5: three transfers, one -4 hit (Yamal, Doué, Cherki out; Raphinha, Nico Paz, Fabián Ruiz in), Zero's choice 24 Nov 23:08 IST
+bank: 2.7                  # after the MD5 transfers (0.2 + 25.5 - 23.0); confirm in the app
 chips_used: [wildcard]     # MD3
 me: true                   # this is your file (mini-league mode compares it with the rivals' files)
 league_points: 320        # mini-league table after MD3 (3rd: Prateek 267, Addi 261)
@@ -27,6 +27,12 @@ md4:
   points: 63               # final, after the -4 (67 in the app): Sommer 4, Jacquet 2, Dimarco 7, Hakimi 7, Bellingham 11,
                            # Yamal 8, Doué 9, Cherki 2, Isco 0, Mbappé 6 x2, Malen 5
   note: the deadline forecast (forecast_zero.json) was made for the XI assumed then, not the one played
+md5:
+  hits: -4
+  captain: Kylian Mbappé
+  xi: [Zion Suzuki, Grimaldo, Achraf Hakimi, Marc Guéhi, Raphinha, Nicolás Paz, Jude Bellingham, Isco,
+       Fabián Ruiz, Kylian Mbappé, Luis Suárez]
+  bench: [Federico Dimarco, Donyell Malen, Jeremy Jacquet, Yann Sommer]
 md3:
   chip: wildcard
   captain: Kylian Mbappé   # switched to him after day 1
@@ -39,10 +45,10 @@ squad:
   - {name: Federico Dimarco, team: INT}
   - {name: Jeremy Jacquet, team: LIV}
   - {name: Grimaldo, team: ATM}
-  - {name: Lamine Yamal, team: BAR}
-  - {name: Désiré Doué, team: PSG}
+  - {name: Raphinha, team: BAR}
+  - {name: Nicolás Paz, team: COM}
   - {name: Jude Bellingham, team: RMA}
-  - {name: Rayan Cherki, team: MCI}
+  - {name: Fabián Ruiz, team: PSG}
   - {name: Isco, team: BET}
   - {name: Kylian Mbappé, team: RMA}
   - {name: Luis Suárez, team: SCP}
