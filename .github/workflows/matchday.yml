@@ -62,11 +62,13 @@ jobs:
         env:
           UFE_MODELS: ${{ github.event.schedule == '7,37 15-19 * * 2,3' && '0' || '1' }}   # evening line-up runs skip the model comparison
         run: |
-          if ! python -m ufe dashboard --mds live-8; then
+          if ! python -m ufe dashboard --mds live-8 --public; then
             echo "::warning::dashboard failed on freshly synced data; retrying on the committed data"
             rm -f data/processed/players_feed.csv data/processed/domestic_form.csv data/processed/understat_players.csv data/processed/fixtures.csv
-            python -m ufe dashboard --mds live-8
+            python -m ufe dashboard --mds live-8 --public
           fi
+          # the public website (GitHub Pages serves docs/): the public edition only, no saved teams
+          mkdir -p docs && cp data/runs/dashboard_public.html docs/index.html
       - name: Every model's forecast for the saved teams (only in the 3 hours before a deadline)
         if: needs.gate.outputs.light != 'true'
         run: |
@@ -89,7 +91,8 @@ jobs:
           for f in data/processed/news_md$MD.txt data/processed/odds_md$MD.csv \
                    data/processed/news_md${MD}_pre.txt data/processed/odds_md${MD}_pre.csv data/processed/feed_pre_md*.csv data/processed/feed_md_points.csv \
                    data/processed/livecall_state.json data/processed/scheduler_state.json \
-                   data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json data/runs/md*/forecast_*.json; do
+                   data/runs/md$MD/snapshot.json data/runs/md*/live_*.json data/runs/md*/plan_*.json data/runs/md*/forecast_*.json \
+                   docs/index.html; do
             [ -e "$f" ] && git add "$f"
           done
           if git diff --cached --quiet; then
